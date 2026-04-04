@@ -1,0 +1,74 @@
+{
+  "skill": "marketing-social",
+  "description": "Binary assertions for Robinson's Remedies social media content quality",
+  "tests": [
+    {
+      "id": "facebook-endurance",
+      "prompt": "Write a Facebook post promoting the Lip Renew Endurance Cream for trumpet players",
+      "assertions": [
+        "Output does NOT contain em dashes (the character — or &mdash;)",
+        "Output contains 'Amazon Prime' or 'Available on Amazon' or 'amazon'",
+        "Output uses at least one musician-specific term (chops, embouchure, gig, mouthpiece, horn, rehearsal, session)",
+        "Total word count is under 300",
+        "Output does NOT use the phrase 'may help' or 'might help' or 'could help'",
+        "Output references a specific ingredient by name (Magnesium Glycinate, Kava, Caffeine, Arnica)",
+        "Output explains what at least one ingredient DOES mechanistically, not just lists it",
+        "Output does NOT use generic filler phrases (game-changer, revolutionary, cutting-edge, next-level)"
+      ]
+    },
+    {
+      "id": "instagram-recovery",
+      "prompt": "Write an Instagram caption for the Lip Renew Recovery Stick targeting brass players after a long rehearsal",
+      "assertions": [
+        "Output does NOT contain em dashes",
+        "Output is under 250 words",
+        "First line is a hook that stands alone (not part of a paragraph)",
+        "Output mentions wax-free as a differentiator",
+        "Output does NOT start with 'Introducing' or 'Meet' or 'Say hello to'",
+        "Output includes at least 3 relevant hashtags",
+        "Output does NOT use the word 'journey' or 'transform' or 'unlock'",
+        "Output contains a clear call to action"
+      ]
+    },
+    {
+      "id": "facebook-cold-sore",
+      "prompt": "Write a Facebook post for cold sore sufferers about the Lip Repair Lightning Stick",
+      "assertions": [
+        "Output does NOT contain em dashes",
+        "Output contains 'Amazon Prime' or 'Available on Amazon'",
+        "Output mentions at least one of the 5 antivirals by name (Lysine, Lemon Balm, St. John's Wort, Monolaurin, Docosanol)",
+        "Output does NOT make unsupported medical claims (does not say 'cures' or 'guaranteed to prevent')",
+        "Output uses empathetic language about the cold sore experience (not clinical/pharmaceutical tone)",
+        "Output is under 300 words",
+        "Output does NOT use the word 'suffer' more than once",
+        "Output differentiates from competitors (mentions wax-free, or multiple antivirals, or treats AND prevents)"
+      ]
+    },
+    {
+      "id": "educational-science",
+      "prompt": "Write an educational Facebook post explaining why wax-free lip care is better for wind musicians",
+      "assertions": [
+        "Output does NOT contain em dashes",
+        "Output explains the MECHANISM of why wax blocks absorption (not just 'wax is bad')",
+        "Output mentions specific muscles (orbicularis oris or buccinator) or the term 'embouchure'",
+        "Output does NOT read like a product ad in the first half (educational content first, product mention later)",
+        "Output references lactic acid or muscle fatigue",
+        "Output is between 100 and 350 words",
+        "Output does NOT use semicolons",
+        "Output ends with engagement prompt or CTA (question, link, or call to action)"
+      ]
+    },
+    {
+      "id": "twitter-quick",
+      "prompt": "Write a Twitter/X post about Robinson's Remedies for a general audience discovering the brand",
+      "assertions": [
+        "Output is under 280 characters OR clearly formatted as a thread with numbered posts",
+        "Output does NOT contain em dashes",
+        "Output does NOT use hashtags excessively (max 3)",
+        "Output mentions 'wax-free' or the founder story or a specific product benefit",
+        "Output does NOT sound clinical or pharmaceutical",
+        "Output has a clear hook in the first line"
+      ]
+    }
+  ]
+}

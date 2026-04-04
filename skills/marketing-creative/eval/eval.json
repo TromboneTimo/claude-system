@@ -1,0 +1,44 @@
+{
+  "skill": "marketing-creative",
+  "description": "Binary assertions for Robinson's Remedies creative design briefs",
+  "tests": [
+    {
+      "id": "instagram-carousel-brief",
+      "prompt": "Create a design brief for an Instagram carousel about the Recovery Stick for brass players",
+      "assertions": [
+        "Output specifies Robinson's Red (#E82028) for headlines or CTAs",
+        "Output specifies Robinson's Blue (#2060A8) for body text or subheadings",
+        "Output does NOT specify red for body text",
+        "Output does NOT specify black (#000000) for any element",
+        "Output specifies sharp corners (no border-radius) on CTA buttons",
+        "Output mentions 'Available on Amazon Prime' in the CTA slide",
+        "Output specifies Montserrat for headlines",
+        "Output recommends 1080x1350px (4:5 portrait) dimensions for Instagram"
+      ]
+    },
+    {
+      "id": "facebook-ad-brief",
+      "prompt": "Create a design brief for a Facebook ad promoting the Lightning Stick to cold sore sufferers",
+      "assertions": [
+        "Output uses Robinson's brand colors (specifies hex codes)",
+        "Output does NOT suggest stock photography without musical context",
+        "Output specifies Ice Blue (#C8E8F0) for card backgrounds or info panels",
+        "Output mentions 'Available on Amazon Prime'",
+        "Output recommends real product photography over AI-generated images",
+        "Output includes copy suggestions that do NOT contain em dashes"
+      ]
+    },
+    {
+      "id": "youtube-thumbnail-brief",
+      "prompt": "Create a design brief for a YouTube thumbnail for a video about embouchure care",
+      "assertions": [
+        "Output specifies 1280x720px dimensions",
+        "Output uses Robinson's Red or Blue as primary colors",
+        "Output recommends large, readable text (not small or cluttered)",
+        "Output suggests a face or product shot as the main visual element",
+        "Output does NOT recommend more than 5 words on the thumbnail",
+        "Output specifies Montserrat or a bold sans-serif font"
+      ]
+    }
+  ]
+}
