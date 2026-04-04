@@ -1,0 +1,17 @@
+{
+  "skill": "blog-repurpose",
+  "tests": [
+    {
+      "id": "repurpose-to-social",
+      "prompt": "Repurpose this blog excerpt for Twitter and Facebook: 'The Lip Renew Recovery Stick uses Ahiflower Oil for Omega-3 tissue repair, Manuka Honey for antibacterial protection, and Caffeine to reduce swelling. All wax-free.'",
+      "assertions": [
+        "Twitter output is under 280 characters OR formatted as a thread",
+        "Facebook output is under 300 words",
+        "Output does NOT contain em dashes",
+        "Output mentions at least one specific ingredient",
+        "Output includes 'Available on Amazon Prime' or similar CTA",
+        "Output adapts tone for each platform (not copy-paste)"
+      ]
+    }
+  ]
+}

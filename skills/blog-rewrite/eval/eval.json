@@ -1,0 +1,18 @@
+{
+  "skill": "blog-rewrite",
+  "tests": [
+    {
+      "id": "rewrite-cold-sore",
+      "prompt": "Rewrite this blog intro for better SEO: 'Cold sores are a common problem that many people face. There are many treatments available.'",
+      "assertions": [
+        "Output uses answer-first format (main answer in first paragraph)",
+        "Output does NOT contain em dashes",
+        "Output is between 750 and 1250 words or clearly scoped as a partial rewrite",
+        "Output does NOT fabricate statistics without sources",
+        "Output includes specific product/ingredient mentions, not generic advice",
+        "Output does NOT use 'may help' or 'might help'",
+        "Output has at least one H2 heading"
+      ]
+    }
+  ]
+}

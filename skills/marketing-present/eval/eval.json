@@ -1,0 +1,18 @@
+{
+  "skill": "marketing-present",
+  "tests": [
+    {
+      "id": "landing-page",
+      "prompt": "Create a landing page outline for Robinson's Remedies Lip Quench product",
+      "assertions": [
+        "Output uses Robinson's Red (#E82028) for CTAs",
+        "Output uses Robinson's Blue (#2060A8) for body/headings",
+        "Output does NOT use red for body text",
+        "Output includes 'Available on Amazon Prime'",
+        "Output has sharp CTA corners (no border-radius on buttons)",
+        "Output does NOT contain em dashes",
+        "Output includes a hero section, benefits, social proof, and CTA sections"
+      ]
+    }
+  ]
+}

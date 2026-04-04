@@ -1,0 +1,28 @@
+{
+  "skill": "marketing-research",
+  "tests": [
+    {
+      "id": "competitor-analysis",
+      "prompt": "Research ChopSaver's positioning and weaknesses compared to Robinson's Remedies Recovery Stick",
+      "assertions": [
+        "Output mentions ChopSaver uses beeswax (wax-based)",
+        "Output identifies at least 2 specific competitive weaknesses",
+        "Output references Robinson's wax-free differentiator",
+        "Output includes at least 1 source citation or URL",
+        "Output does NOT contain em dashes",
+        "Output provides actionable marketing recommendations, not just facts"
+      ]
+    },
+    {
+      "id": "trend-research",
+      "prompt": "Research current lip care market trends for 2026",
+      "assertions": [
+        "Output includes at least 2 specific statistics with sources",
+        "Output identifies trends relevant to Robinson's Remedies positioning",
+        "Output does NOT fabricate statistics without source attribution",
+        "Output provides at least 1 actionable insight for content creation",
+        "Output does NOT contain em dashes"
+      ]
+    }
+  ]
+}
