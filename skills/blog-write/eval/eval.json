@@ -1,47 +1,18 @@
 {
   "skill": "blog-write",
-  "description": "Binary assertions for Robinson's Remedies blog post quality",
   "tests": [
     {
       "id": "listicle-lip-balm",
-      "prompt": "Write a blog post: '5 Best Lip Balms for Trumpet Players in 2026'",
+      "prompt": "Write a blog post: 5 Best Lip Balms for Trumpet Players in 2026",
       "assertions": [
         "Output does NOT contain em dashes",
-        "Word count is between 750 and 1250",
-        "Uses listicle format with numbered items",
-        "Robinson's Remedies product is listed as #1 or featured prominently",
-        "Includes honest pros AND cons for each product (not just praise for RR)",
-        "Contains at least 2 H2 headings",
-        "Does NOT fabricate statistics (no 'studies show' without a source)",
-        "Includes 'Available on Amazon Prime' or similar CTA"
-      ]
-    },
-    {
-      "id": "comparison-cold-sore",
-      "prompt": "Write a blog post comparing cold sore treatments: Abreva vs Robinson's Remedies Lightning Stick",
-      "assertions": [
-        "Output does NOT contain em dashes",
-        "Word count is between 750 and 1250",
-        "Mentions specific ingredients for BOTH products (not just RR)",
-        "Does NOT make unsupported medical claims",
-        "Uses listicle or structured comparison format (not a direct attack ad)",
-        "Includes a FAQ section or addresses common questions",
-        "Contains at least one internal link suggestion or CTA",
-        "First paragraph answers the main question directly (answer-first format)"
-      ]
-    },
-    {
-      "id": "educational-embouchure",
-      "prompt": "Write a blog post: 'How to Take Care of Your Embouchure: A Complete Guide'",
-      "assertions": [
-        "Output does NOT contain em dashes",
-        "Word count is between 750 and 1250",
-        "Uses musician-specific language naturally (chops, embouchure, mouthpiece)",
-        "References specific muscles (orbicularis oris, buccinator)",
-        "Does NOT read like a product ad for the first 300 words",
-        "Contains actionable tips, not just product promotion",
-        "H2 and H3 headings follow a logical hierarchy",
-        "Includes Robinson's Remedies products as recommendations (not the entire focus)"
+        "Output is between 1500 and 2500 words",
+        "Output uses listicle format with numbered items",
+        "Output contains at least 2 H2 headings",
+        "Output does NOT contain fabricated statistics without named sources",
+        "Output includes a FAQ section",
+        "Output contains answer-first formatting in the opening paragraph",
+        "Output includes Key Takeaways or TL;DR summary"
       ]
     }
   ]
