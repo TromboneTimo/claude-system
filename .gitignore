@@ -1,0 +1,24 @@
+# Runtime / ephemeral - never track
+.prompt_count
+.gitignore_temp
+history.jsonl
+mcp-needs-auth-cache.json
+stats-cache.json
+settings.json
+
+# Directories that are runtime state
+backups/
+cache/
+debug/
+file-history/
+hooks/
+ide/
+plans/
+plugins/
+projects/
+sessions/
+shell-snapshots/
+statsig/
+telemetry/
+todos/
+tools/

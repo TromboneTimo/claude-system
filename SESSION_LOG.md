@@ -82,9 +82,20 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - Optimized all global MD files: CLAUDE.md (132->65), SOUL.md (129->44), PRIORITIES.md (95->43)
 - Fixed notify.sh SESSION_LOG spam
 
+- Built ADHD prompt counter (fires at 15/25/35/40+ prompts, all workspaces)
+- Copied user profile to all 5 workspaces
+- Built Harrison's Precision-Brass Claude Code workspace with full content system
+- Saved 19-prospect Deep Psychological Dive as context file
+- Saved Harrison's full personal profile (strengths, weaknesses, communication style)
+- Saved 7-section content creation SOP
+- Created eval.json for 8 skills total (was 3)
+- Initialized git repo in ~/.claude/ for scheduled agent access
+
 **Decisions saved:**
 - Research pipeline: ALWAYS Perplexity then NotebookLM. No exceptions.
 - CLAUDE.md best practice: under 60 lines, critical rules at top AND bottom, compaction orders
+- Harrison workspace: long-form ONLY enforced, ICP checklist mandatory, visual plan required
+- Future Harrison builds (Fathom, email, ads, DM) saved to memory as TODOs, not now
 - CLAUDE.md instructions only 70-80% followed - use hooks for 100% enforcement rules
 
 **Open threads:**
@@ -92,3 +103,21 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - Run /self-improve on marketing-social to test the Karpathy loop
 - Set up /schedule for weekly-review cron job
 - Record VSL (still the bottleneck for Hook Book)
+
+### Session 2 (RR Blog + Harrison Email System)
+**What happened:**
+- Built SEO blog system for RR Shopify (NotebookLM research, 2 sample posts, PAA keyword research for all products)
+- Built Harrison Precision Brass email system at ~/Desktop/precision-brass-emails/ (43 files: CLAUDE.md, 6 context files, 6 SOPs, 5 strategy brain files, 10 templates, 4 references, 4 feedback trackers, 4 transcript synthesis structures)
+- Architecture: strategy memo + angle scoring + cooldowns + self-improving feedback loop
+- NotebookLM research on coach email best practices running in background
+
+**Decisions saved:**
+- Blog: 750-1250 words, listicle format, never direct comparison ads
+- Harrison: Klaviyo over ConvertKit, 75/25 plain text/HTML, 14-day angle cooldown
+- Client commitments from 2026-04-03 call logged to memory
+
+**Open threads:**
+- Harrison: Install /email skills as Claude Code SKILL.md files
+- Harrison: Process 19 transcripts through analysis pipeline (Phase 2)
+- RR: Keyword methodology for blog SOP, 3 more blog posts
+- RR presentation due Tuesday 2026-04-07

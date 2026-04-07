@@ -64,3 +64,4 @@ When auto-compaction occurs, ALWAYS preserve:
 - 3 failure patterns above are NON-NEGOTIABLE. They came from real production bugs.
 - Never skip the deploy gate. Never skip NotebookLM in research. Never use em dashes.
 - Update SESSION_LOG.md and PRIORITIES.md silently after every task.
+- THINK END-TO-END before declaring anything done. Trace the full chain. If any link is broken, fix it first. Don't present ideal state as current state. Lead with caveats.

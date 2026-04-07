@@ -1,6 +1,6 @@
 # Priorities
 
-**Last updated:** 2026-04-04
+**Last updated:** 2026-04-07
 
 ## Tiers
 - **T1 ENGINE:** Trombone Timo (~$8.5K/mo, 15hrs/wk, daily posting) | Creator Conservatory ($1.5K/mo, 3 clients)
@@ -18,7 +18,7 @@
 | 3 | Client AI Systems | T2 | AI content systems for Harrison + Sohee. Fathom analyzer, email builder. | 2026-04-03 |
 | 4 | Training Content Suite | T2 | DaVinci tutorials, Adobe Podcast, thumbnail workshop, scripting. | 2026-04-03 |
 | 5 | Trombone Timo Content | T1 | Always-on. Daily shorts + long-form. | 2026-04-02 |
-| 6 | RR Presentation | T3 | DEADLINE: Tue 2026-04-07. March videos, results, April plan for Richard. | 2026-04-04 |
+| 6 | ~~RR Presentation~~ | T3 | COMPLETED. Delivered to Richard. | 2026-04-07 |
 
 **Deep Focus:** Hook Book -> then Client AI Systems
 
@@ -26,6 +26,12 @@
 | Project | Date | Outcome |
 |---------|------|---------|
 | Life Operating System | 2026-04-02 | SOUL, PRIORITIES, RHYTHM, SESSION_LOG, /ops skill |
+| RR Presentation | 2026-04-07 | March videos, results, April plan delivered to Richard |
+
+## To Do (not active yet, promote when ready)
+- Automate content posting schedule for Facebook page (Tim Maines consulting brand)
+- Make Skool an email capture point (free community as top-of-funnel)
+- Implement Portie's 62-67 day buying cycle into Skool/content cadence
 
 ## Backlog (promote when slot opens, T1/T2 only)
 1. Script Bot (T2) - scripting best practices for clients
