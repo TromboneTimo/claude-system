@@ -7,6 +7,12 @@ description: Control Chrome browser from the terminal. Open pages, click buttons
 
 Control Google Chrome programmatically from Claude Code. No API keys required.
 
+## IMPORTANT GUARDRAILS
+
+1. **Do NOT use browser-agent when curl, WebFetch, or API calls can accomplish the task.** This tool is for browser automation ONLY (clicking, form filling, screenshots, content behind login walls).
+2. **Do NOT close, quit, or restart Chrome without explicitly asking the user first.** They may have important tabs open.
+3. **For general web browsing, use Safari (open -a Safari).** Browser-agent is for programmatic automation, not casual browsing.
+
 ## Setup
 
 Before using any browser command, Chrome must be running with remote debugging:
@@ -19,7 +25,7 @@ node ~/.claude/tools/browser-agent/browser.js launch --own-profile
 node ~/.claude/tools/browser-agent/browser.js launch
 ```
 
-**The `--own-profile` flag is the default recommended mode.** It will:
+**The `--own-profile` flag is the default recommended mode.** WARN THE USER before running this as it will:
 1. Gracefully quit your running Chrome
 2. Relaunch it with remote debugging enabled
 3. Restore all your tabs automatically

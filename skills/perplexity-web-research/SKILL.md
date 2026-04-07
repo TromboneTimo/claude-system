@@ -13,6 +13,9 @@ allowed-tools: Bash(llm:*)
 
 Use the `llm` CLI with Perplexity plugin for web research, deep reasoning, and independent validation.
 
+## MANDATORY: Research Pipeline
+**After EVERY Perplexity research query, you MUST also run NotebookLM for synthesis.** Perplexity gathers. NotebookLM synthesizes. Never skip NotebookLM. No exceptions. No "seems clear enough."
+
 ## Quick Start
 
 ```bash
