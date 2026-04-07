@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains summary table with Post A, Post B, Shared Keywords, Severity","Each cluster has a recommendation of MERGE, DIFFERENTIATE, CANONICAL, or NO ACTION","Output extracts primary keywords from at least 2 blog files"]}

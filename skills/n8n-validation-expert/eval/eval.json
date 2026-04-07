@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output categorizes issues into Errors and Warnings","Each error has a specific fix recommendation","Output does NOT recommend ignoring Errors"]}

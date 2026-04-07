@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains a Health Overview table with score bands","Output contains a Prioritized Action Queue sorted by lowest score","Output contains per-post scores table","Output saves a report file"]}

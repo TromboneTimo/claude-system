@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","All expressions wrapped in double curly braces {{ }}","Node references use $node[Node Name].json.fieldName format","Webhook data uses $json.body not $json directly"]}

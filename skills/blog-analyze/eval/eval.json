@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains a score breakdown with 5 categories totaling 100 points","Output contains an AI Content Risk section with burstiness score","Output contains prioritized issues grouped by severity (Critical/High/Medium/Low)","Output contains a numeric total score out of 100"]}

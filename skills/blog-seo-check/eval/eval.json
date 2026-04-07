@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains results table with Check, Status, Details, Fix","Output includes checks for title tag, meta description, heading hierarchy, internal links, OG tags","Each check has Status of PASS, FAIL, WARN, or N/A","Output contains Priority Fixes section"]}

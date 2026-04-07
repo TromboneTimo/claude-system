@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output runs all 4 layers: Build+Lint, QA Agent, API Verify, Browser Verify","If Build fails output stops and does NOT proceed","Output includes open -a Safari for browser verification","Output includes results table with PASS/FAIL per layer"]}

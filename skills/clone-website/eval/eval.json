@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output presents Phase 2 analysis BEFORE generating any code","Generated code uses TypeScript with Next.js App Router","Generated globals.css contains CSS variables from scraped design tokens","Components are placed in components/landing/ directory"]}

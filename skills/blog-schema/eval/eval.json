@@ -1,0 +1,1 @@
+{"assertions":["Output contains script type=application/ld+json tag","The @graph array contains BlogPosting, Person, Organization, BreadcrumbList, FAQPage, ImageObject","BlogPosting has headline, datePublished, author, publisher, image","Output does NOT contain deprecated schema types"]}

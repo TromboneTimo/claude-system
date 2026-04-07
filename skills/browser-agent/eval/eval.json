@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Must use Safari not Chrome unless user explicitly requests Chrome","Must NOT close or quit Chrome without asking user first","Must NOT use browser agent when curl or API calls would work","browser launch starts Chrome with remote debugging enabled"]}

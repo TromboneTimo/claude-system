@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output logs baseline score before making changes","Each iteration makes exactly ONE change to SKILL.md","If score drops the change is reverted","Output continues looping without pausing to ask permission"]}

@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output must NOT use hedging language","Output must NOT contain fabricated statistics without named sources","Output correctly routes subcommands to the right sub-skill","Platform detection correctly identifies file format"]}

@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains a File Health section with line counts","Output contains a Skills Improved section with scores","Output runs all 5 steps without pausing to ask permission","Output flags files exceeding target line count"]}

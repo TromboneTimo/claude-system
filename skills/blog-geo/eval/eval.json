@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains AI Citation Readiness Score on 0-100 scale","Output contains platform-specific sections for ChatGPT, Perplexity, and Google AI Overviews","Output contains Generated Citation Capsules with 40-60 word capsules"]}

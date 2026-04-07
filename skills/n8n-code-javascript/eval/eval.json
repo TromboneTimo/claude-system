@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Generated code returns data in [{json: {...}}] format","Generated code uses $input.all() or $input.first() for data access","Generated code does NOT use require() or import statements","Webhook data accessed via $json.body not $json directly"]}

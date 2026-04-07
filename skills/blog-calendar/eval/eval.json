@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains a weekly calendar table","Output follows 60/30/10 content mix formula","Output assigns template names from the 12 valid templates","Output contains a Content Decay or Freshness section"]}

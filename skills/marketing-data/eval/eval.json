@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output is a single self-contained HTML file","Dashboard uses RR brand colors (#E82028 red, #2060A8 blue, #C8E8F0 ice blue)","Dashboard contains KPI cards with trend indicators","Dashboard includes at least one interactive Chart.js chart"]}

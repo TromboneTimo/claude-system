@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output follows progressive workflow: search_nodes then get_node then validate_node","Output recommends search_nodes as first step when searching","Output does NOT recommend tools that do not exist in n8n-mcp toolkit"]}

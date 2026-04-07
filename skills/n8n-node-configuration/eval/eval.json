@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Configuration is operation-aware with different fields per operation","Output recommends get_node with detail=standard as default","Output includes resource and operation fields in examples"]}

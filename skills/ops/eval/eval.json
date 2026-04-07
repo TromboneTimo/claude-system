@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","ops status reads PRIORITIES.md and shows tiers, projects, WIP limit","ops add appends to backlog NOT active projects","ops promote checks WIP limit and refuses if at max 3","Output uses bullet points not paragraphs"]}

@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","info command returns dimensions, format, and color mode","resize produces output with specified dimensions","convert changes file format and output is valid","compress produces smaller file than input"]}

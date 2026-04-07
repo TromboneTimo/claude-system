@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains Workspace Activity table","Output contains Cross-Workspace Lessons section","Output contains PRIORITIES Health table with staleness flags","Output auto-updates PRIORITIES.md Last Touched dates without asking"]}

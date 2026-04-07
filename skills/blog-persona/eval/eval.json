@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Saved persona JSON contains tone_dimensions with 4 keys","All tone_dimension values are between 0.0 and 1.0","Persona contains do list and dont list each with at least 3 items","Persona file saved to skills/blog/references/personas/ with kebab-case filename"]}

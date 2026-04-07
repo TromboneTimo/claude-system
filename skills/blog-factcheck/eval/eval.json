@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output contains verification table with Claim, Source URL, Score, Status","Every claim without a source URL is marked UNVERIFIED","Output contains summary counts of Verified, Not Found, Unverified","Output contains Recommended Actions section"]}

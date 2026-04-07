@@ -1,0 +1,1 @@
+{"assertions":["Output SVG contains role=img and aria-label attributes","Output SVG uses currentColor for text fills","Output SVG contains a source attribution text element","Output SVG does NOT contain a white background fill on root element"]}

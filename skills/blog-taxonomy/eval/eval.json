@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Tag suggestions contain ranked table with Rank, Tag, Score, Source","Output suggests a Primary category and at least one tag","Taxonomy audit flags tags with fewer than 5 posts as Thin"]}

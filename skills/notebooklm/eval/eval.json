@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output uses correct CLI syntax notebooklm command","Output verifies auth status before workflows","For parallel agents output recommends explicit notebook IDs"]}

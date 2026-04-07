@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output uses correct CLI syntax: llm -m model query","Default model is sonar for general queries","Output does NOT use Perplexity for local codebase questions","Research tasks must ALSO run NotebookLM after Perplexity"]}

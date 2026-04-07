@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Generated code returns data in [{json: {...}}] format","Generated code uses _input.all() or _input.first() with underscore prefix","Generated code does NOT import external packages","Output recommends JavaScript first when Python not required"]}

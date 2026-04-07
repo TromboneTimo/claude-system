@@ -1,0 +1,1 @@
+{"assertions":["Output must NOT contain em dashes","Output includes alt text between 10 and 125 characters","Output includes the image file path where generated image was saved","Output shows the full crafted 6-component prompt"]}
