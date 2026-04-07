@@ -32,6 +32,17 @@ For each skill:
 5. Keep change if score improved, revert if not
 6. Log result to eval-logs/YYYY-MM-DD.md
 
+## Reporting (MANDATORY)
+After all evals complete, write a summary to /Users/air/.claude/eval-logs/latest-report.md containing:
+1. Date and which batch of skills was run
+2. For each skill: name, score before, score after, what was changed (if anything)
+3. Any skills flagged as NEEDS ATTENTION (below 60%)
+4. Top 3 most common failure patterns across all skills
+5. What feedback assertions were newly added from feedback files
+6. Total skills improved vs total skills tested
+
+This report should be readable in 2 minutes. No fluff.
+
 ## Token Budget
 Max 50K tokens per skill. Skip to next skill if budget exceeded.
 Total session budget: 500K tokens (covers ~10 skills per run, rotates through all over multiple runs).
