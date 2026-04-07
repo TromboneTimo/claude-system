@@ -121,3 +121,28 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - Harrison: Process 19 transcripts through analysis pipeline (Phase 2)
 - RR: Keyword methodology for blog SOP, 3 more blog posts
 - RR presentation due Tuesday 2026-04-07
+
+## 2026-04-07
+
+### Session 1 (System Fix + Daily Briefing)
+**What happened:**
+- RR Presentation marked complete, WIP slot freed
+- Created private GitHub repo (TromboneTimo/claude-system) for remote agent access
+- Pushed full ~/.claude system to GitHub (skills, priorities, session log, soul, agents)
+- Upgraded morning-briefing remote agent: reads live repo, checks calendar, emails trombonetimo@gmail.com, includes "my take" direction
+- Fixed ADHD counter: now shows prompt count on EVERY prompt in ALL workspaces (was only visible at thresholds in non-RR workspaces)
+- Added auto-push hook (session-sync.sh): commits and pushes ~/.claude to GitHub on every session end
+- Fixed Daily Brain Fix remote agent: added repo source, fixed broken local paths
+- Fixed Weekly Deep Review remote agent: added repo source, fixed broken local paths
+- Added proactive task management to SOUL.md: surface open threads, ask about completion, track with TodoWrite
+
+**Decisions saved:**
+- GitHub repo for remote agents: TromboneTimo/claude-system (private, classic PAT)
+- Auto-sync on session end is now default behavior
+- Timo wants proactive task check-ins: ask if things are done, don't wait to be told
+- All 3 remote agents now read from live GitHub repo instead of hardcoded/local paths
+
+**Open threads:**
+- Test morning briefing email (first run tomorrow 8am JST)
+- Verify session-sync hook fires correctly on next session end
+- Record VSL (still the bottleneck for Hook Book)

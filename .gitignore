@@ -11,7 +11,6 @@ backups/
 cache/
 debug/
 file-history/
-hooks/
 ide/
 plans/
 plugins/
@@ -22,3 +21,6 @@ statsig/
 telemetry/
 todos/
 tools/
+
+# Hooks are local-only (contain tokens in git remote)
+hooks/
