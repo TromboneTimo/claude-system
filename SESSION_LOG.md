@@ -143,9 +143,28 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - All 3 remote agents now read from live GitHub repo instead of hardcoded/local paths
 
 **Open threads:**
-- Test morning briefing email (first run tomorrow 8am JST)
-- Verify session-sync hook fires correctly on next session end
 - Record VSL (still the bottleneck for Hook Book)
+- Verify session-sync hook fires correctly on next session end
+
+## 2026-04-09
+
+### Session 1 (Fix Automation System)
+**What happened:**
+- Diagnosed why ADHD tracker/daily briefings weren't working: both remote triggers were DISABLED
+- Re-enabled Daily Morning Briefing + Daily Brain Fix remote triggers
+- Built n8n workflow (Daily Morning Briefing) that reads GitHub repo, formats briefing, sends ACTUAL email via Gmail
+- Workflow is ACTIVE on timotrombone.app.n8n.cloud, fires daily at 8am JST
+- Flow: Schedule Trigger > Fetch PRIORITIES.md + SESSION_LOG.md from GitHub > Code node formats briefing > Gmail sends to trombonetimo@gmail.com
+
+**Decisions saved:**
+- n8n is the email delivery layer (Gmail MCP can only draft, not send)
+- Remote triggers stay enabled for Claude-side analysis; n8n handles email delivery
+- Two systems complement each other: Claude agents for smart analysis, n8n for reliable email
+
+**Open threads:**
+- Record VSL (bottleneck since Apr 2)
+- Verify n8n briefing email arrives tomorrow at 8am JST
+- Consider: should the Claude remote agent also push to a Google Sheet so n8n can pull richer data?
 
 ## 2026-04-08
 
