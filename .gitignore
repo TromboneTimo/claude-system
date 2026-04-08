@@ -1,5 +1,6 @@
 # Runtime / ephemeral - never track
 .prompt_count
+.session_meta
 .gitignore_temp
 history.jsonl
 mcp-needs-auth-cache.json
