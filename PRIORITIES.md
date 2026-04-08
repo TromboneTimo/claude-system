@@ -1,6 +1,6 @@
 # Priorities
 
-**Last updated:** 2026-04-07
+**Last updated:** 2026-04-08
 
 ## Tiers
 - **T1 ENGINE:** Trombone Timo (~$8.5K/mo, 15hrs/wk, daily posting) | Creator Conservatory ($1.5K/mo, 3 clients)
@@ -18,7 +18,7 @@
 | 3 | Client AI Systems | T2 | AI content systems for Harrison + Sohee. Fathom analyzer, email builder. | 2026-04-03 |
 | 4 | Training Content Suite | T2 | DaVinci tutorials, Adobe Podcast, thumbnail workshop, scripting. | 2026-04-03 |
 | 5 | Trombone Timo Content | T1 | Always-on. Daily shorts + long-form. | 2026-04-02 |
-| 6 | ~~RR Presentation~~ | T3 | COMPLETED. Delivered to Richard. | 2026-04-07 |
+| 6 | RR Systems & Content Buildout | T3 | Post-meeting action items. Comp proposal due before 4/22. See RR To-Do below. | 2026-04-08 |
 
 **Deep Focus:** Hook Book -> then Client AI Systems
 
