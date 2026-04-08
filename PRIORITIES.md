@@ -44,6 +44,47 @@
 8. Email/DM Performance Scanner (T2)
 9. PDF/Report Generator (T3)
 
+---
+
+## RR To-Do (Week of 2026-04-08)
+
+**Prime Directive:** Double sales from $124,800 to $260,000 in 12 months (+$11,300/mo new revenue).
+**Bottleneck:** Image library -- need consolidated folder from Betty/Richard before content scales.
+**Next meeting:** April 22, 7 PM ET with Richard.
+
+### HIGH PRIORITY -- Due by End of Week (4/11)
+- [ ] **Compensation Proposal** -- project-based pay (dashboard, blog infra) + performance-based (sales milestones: 2x, 4x revenue). Specific $ amounts/percentages per tier. Timeline for when comp kicks in.
+- [ ] Share comp proposal with Richard before 4/22 meeting
+- [ ] Send copy of presentation slides to Richard
+- [ ] **Dashboard & Data Access** -- Consult with Claude on what Amazon/Shopify data access is needed
+- [ ] Create document outlining specific data requirements (sales, organic vs blog traffic conversion)
+- [ ] Send data requirements doc to Richard so he can grant access
+- [ ] Begin dashboard framework: traffic sources, conversion rates by channel, sales aggregation
+- [ ] **Image Library** -- Request from Betty/Richard ALL images (product, Kenny repair/performance, endorser, historical 7-10yr)
+- [ ] Organize images in Claude's database for carousel/content generation
+- [ ] Work with Betty on carousel templates (endorser quote, landing page/product showcase, design tools)
+
+### MEDIUM PRIORITY -- This Week
+- [ ] **Blog System** -- Finalize publishing process with Betty (Shopify format, API token for direct uploads?)
+- [ ] Create review/approval workflow before publishing
+- [ ] Generate 2-3 sample blog posts (cold sores broad market, wax-free embouchure, product comparison/ingredients)
+- [ ] Set up content review dashboard/checklist for Richard, Betty, Kenny
+- [ ] **Video & Live Stream** -- Coordinate with Kenny on test live stream (playing + product talk, no repair needed)
+- [ ] Plan timing around NABA conference this weekend
+- [ ] Handle link promotion during live stream
+- [ ] Review Kenny's Dropbox video content -- ID clips for short-form, hooks, testimonial moments
+- [ ] **Carousels** -- Begin carousel templates once Betty provides design direction
+- [ ] Plan carousel types: endorser quotes, product benefits, educational (embouchure care)
+- [ ] ID existing images for carousel repurposing
+
+### LOWER PRIORITY -- Plan for Next Week (4/14+)
+- [ ] Email marketing audit: abandoned cart sequences, post-purchase emails, list segmentation
+- [ ] Plan Claude tutorial video for Richard (interfacing, skills, databases, custom prompts)
+- [ ] Draft small budget ad testing plan ($5-50/day) once blogs/landing pages ready
+- [ ] ID which video angles/messages perform best organically before scaling ads
+
+---
+
 ## Promote/Demote
 - Promote: slot open + T1/T2 + clear outcome defined
 - Demote: stalled 2+ weeks OR T3 stealing from T1

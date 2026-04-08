@@ -146,3 +146,26 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - Test morning briefing email (first run tomorrow 8am JST)
 - Verify session-sync hook fires correctly on next session end
 - Record VSL (still the bottleneck for Hook Book)
+
+## 2026-04-08
+
+### Session 1 (RR Meeting Action Items)
+**What happened:**
+- Added full RR to-do list from Fireflies meeting transcript to PRIORITIES.md (HIGH/MEDIUM/LOWER tiers)
+- Saved meeting decisions to memory: comp proposal, $260K revenue target, April 22 follow-up, image bottleneck
+- Flagged: RR scope expanding well beyond 5hr/wk T3 cap. Comp proposal is the gating item.
+
+**Decisions saved:**
+- RR revenue target: $124,800 -> $260,000 in 12 months (+$11,300/mo)
+- Next RR meeting: April 22, 7 PM ET
+- Key bottleneck: image library from Betty/Richard
+- Comp proposal: project-based + performance-based (sales milestones)
+- Content goal: 80% time reduction via AI, still needs human review/approval
+
+**Open threads:**
+- Comp proposal (due before 4/22)
+- Send presentation slides to Richard
+- Amazon/Shopify data access doc for Richard
+- Image library request to Betty/Richard
+- Blog publishing workflow with Betty
+- Kenny live stream coordination (NABA conference this weekend)
