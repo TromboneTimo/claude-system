@@ -119,3 +119,11 @@
 ## Promote/Demote
 - Promote: slot open + T1/T2 + clear outcome defined
 - Demote: stalled 2+ weeks OR T3 stealing from T1
+
+## Meeting Action Items
+- [Meeting 2026-04-07] Develop a detailed compensation proposal including project-based and performance-based pay within two weeks
+- [Meeting 2026-04-07] Organize and request AI-compatible images and create carousel templates using Photoshop or similar
+- [Meeting 2026-04-07] Set up access and integration to collect Shopify and Amazon sales data for dashboard monitoring with Richard’s assistance
+- [Meeting 2026-04-07] Lead implementation of blog content system for SEO-focused, story-driven marketing and coordinate small ad testing
+- [Meeting 2026-04-07] Initiate and manage test live stream recording and promotion, enabling Kenny to start live video marketing
+- [Meeting 2026-04-07] Prepare and share presentation materials and help coordinate collaborative content review process
