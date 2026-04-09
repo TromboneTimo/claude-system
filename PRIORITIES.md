@@ -1,6 +1,6 @@
 # Priorities
 
-**Last updated:** 2026-04-08
+**Last updated:** 2026-04-09
 
 ## Tiers
 - **T1 ENGINE:** Trombone Timo (~$8.5K/mo, 15hrs/wk, daily posting) | Creator Conservatory ($1.5K/mo, 3 clients)
@@ -48,6 +48,20 @@
 - [ ] Set up Calendly
 - [ ] Deploy landing page
 
+**Otto / Music System Japan**
+- [ ] Draft content creation proposal for Music System festival (end of month)
+- [ ] Plan Samurai Brass content session with Otto + Eijiro
+- [ ] Determine schedule: 29th consolidation day + Samurai next day
+- [ ] Content plan: ensemble groups at different times, showcase performances + fun content
+- [ ] Coordinate trip logistics (content creation covers travel costs)
+
+**Creator Conservatory Clients**
+- [ ] Harrison: Install /email skills as SKILL.md files
+- [ ] Harrison: Process 19 transcripts through analysis pipeline (Phase 2)
+- [ ] Harrison: Build AI content creation system (Fathom analyzer, email builder)
+- [ ] Sohee: Build AI content system (concerts not students focus)
+- [ ] Wilhelm: Check in (wedding May 16)
+
 ### MEDIUM PRIORITY -- This Week
 
 **RR: Blog Content System**
@@ -67,11 +81,9 @@
 - [ ] Plan carousel types: endorser quotes, product benefits, educational (embouchure care)
 - [ ] ID existing images that can be repurposed for carousel posts
 
-**Creator Conservatory**
-- [ ] 3 clients active (Harrison, Wilhelm, Sohee) -- see memory/project_client_commitments.md
-
-**Client AI Systems**
-- [ ] AI content systems for Harrison + Sohee (Fathom analyzer, email builder)
+**Tim Maines Consulting Brand**
+- [ ] Move domains to Porkbun
+- [ ] Automate content posting schedule for Facebook page
 
 ---
 
@@ -95,7 +107,6 @@
 ---
 
 ## Not Active Yet (promote when ready)
-- Automate content posting schedule for Facebook page (Tim Maines consulting brand)
 - Make Skool an email capture point (free community as top-of-funnel)
 - Implement Portie's 62-67 day buying cycle into Skool/content cadence
 
@@ -120,18 +131,3 @@
 - Promote: slot open + T1/T2 + clear outcome defined
 - Demote: stalled 2+ weeks OR T3 stealing from T1
 
-## Meeting Action Items
-- Develop a detailed compensation proposal including project-based and performance-based pay within two weeks
-- Organize and request AI-compatible images and create carousel templates using Photoshop or similar
-- Set up access and integration to collect Shopify and Amazon sales data for dashboard monitoring with Richard’s assistance
-- Lead implementation of blog content system for SEO-focused, story-driven marketing and coordinate small ad testing
-- Initiate and manage test live stream recording and promotion, enabling Kenny to start live video marketing
-- Prepare and share presentation materials and help coordinate collaborative content review process
-
-## Meeting Action Items
-- Develop a detailed compensation proposal including project-based and performance-based pay within two weeks
-- Organize and request AI-compatible images and create carousel templates using Photoshop or similar
-- Set up access and integration to collect Shopify and Amazon sales data for dashboard monitoring with Richard’s assistance
-- Lead implementation of blog content system for SEO-focused, story-driven marketing and coordinate small ad testing
-- Initiate and manage test live stream recording and promotion, enabling Kenny to start live video marketing
-- Prepare and share presentation materials and help coordinate collaborative content review process
