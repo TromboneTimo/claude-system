@@ -188,3 +188,27 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - Image library request to Betty/Richard
 - Blog publishing workflow with Betty
 - Kenny live stream coordination (NABA conference this weekend)
+
+### Session 2 (Full System Build + Cross-Session Sync)
+**What happened:**
+- Fixed repo visibility (private > public) so remote agents can clone
+- Built cross-workspace session tracking (cross-workspace-log.jsonl)
+- Added git pull to session-boot.sh -- every new session pulls latest from GitHub
+- Added git pull to session-sync.sh -- session end pulls before pushing
+- Cross-workspace activity summary injected into every session boot context
+- Upgraded morning briefing: cross-workspace stats, dynamic Top 3, dynamic My Take
+- Built Fireflies > Action Items n8n workflow (3 iterations to fix: string parsing, email independence, webhook POST)
+- Tested Fireflies pipeline end-to-end: execution 783 SUCCESS with real RR meeting data
+- Fixed RemoteTrigger run bug workaround (tool is broken, documented)
+
+**Decisions saved:**
+- Repo made public (no secrets, just priorities/skills/session log)
+- Cross-session sync via git pull/push on boot/end is the standard
+- n8n is the reliable email layer, Claude remote triggers are the maintenance layer
+- Fireflies webhook URL: https://timotrombone.app.n8n.cloud/webhook/fireflies-meeting
+
+**Open threads:**
+- Register Fireflies webhook URL in Fireflies settings (Timo action)
+- Record VSL (bottleneck since Apr 2)
+- Verify morning briefing email arrives tomorrow 8am JST
+- Verify Brain Fix remote trigger ran successfully (check claude.ai/code/scheduled)
