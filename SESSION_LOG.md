@@ -261,3 +261,31 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - [Kenneth Robinson] Provide and update endorser information and assist Betty in website endorser section refinement
 - [Kenneth Robinson] Schedule and participate in recordings/interviews with endorsers at upcoming events (e.g., ITG conference)
 - [Kenneth Robinson] Perform initial test live stream as directed by Tim to leverage video marketing
+
+## 2026-04-07
+
+### Meeting: trombonetimollc@gmail.com - Wed, 08 Apr 2026 08:04:24 JST - Untitled (2min)
+**Summary:** - **Sales Target:** Aim to double sales to **$260,000**; current revenue is **$124,800**, 48% of the target.  
+- **Traffic Challenge:** High conversion rates show demand; focus on increasing traffic to Amazon and the website.  
+- **Product Launch:** Lip Quench **4-pack** launching by end of April at **$21.59**, with a **10% discount** planned.  
+- **Content Strategy:** Use AI for rapid, SEO-optimi
+
+**Action Items (from meeting):**
+- [Richard Mukamal] Work with Tim to analyze and provide access to Amazon and Shopify sales data for AI integration dashboard
+- [Richard Mukamal] Support compensation discussion by reviewing Tim's forthcoming proposal and coordinate internal discussion with Betty and Kenny
+- [Richard Mukamal] Schedule and send calendar invite for follow-up meeting on April 22
+- [Bette Evans] Finalize Lip Quench 4-pack order details with Max and coordinate packaging/artwork timeline (12:32)
+- [Bette Evans] Provide and organize high-quality images for marketing content and assist Tim with carousel template creation
+- [Bette Evans] Work with Kenny and Tim to categorize endorser list and update the website endorser section accordingly
+- [Bette Evans] Address website mobile UX issues such as translation button overlay and continue improvement on image carousel (18:28)
+- [Bette Evans] Coordinate with Tim on blog publishing format and integration into Shopify
+- [Timothy Maines] Develop a detailed compensation proposal including project-based and performance-based pay within two weeks
+- [Timothy Maines] Organize and request AI-compatible images and create carousel templates using Photoshop or similar
+- [Timothy Maines] Set up access and integration to collect Shopify and Amazon sales data for dashboard monitoring with Richard’s assistance
+- [Timothy Maines] Lead implementation of blog content system for SEO-focused, story-driven marketing and coordinate small ad testing
+- [Timothy Maines] Initiate and manage test live stream recording and promotion, enabling Kenny to start live video marketing
+- [Timothy Maines] Prepare and share presentation materials and help coordinate collaborative content review process
+- [Kenneth Robinson] Continue producing and uploading video content to Dropbox with proper organization (44:02)
+- [Kenneth Robinson] Provide and update endorser information and assist Betty in website endorser section refinement
+- [Kenneth Robinson] Schedule and participate in recordings/interviews with endorsers at upcoming events (e.g., ITG conference)
+- [Kenneth Robinson] Perform initial test live stream as directed by Tim to leverage video marketing
