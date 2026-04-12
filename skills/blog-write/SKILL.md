@@ -21,6 +21,18 @@ allowed-tools:
   - Task
 ---
 
+## ANTI-HALLUCINATION PROTOCOL (MANDATORY)
+
+See `~/.claude/feedback_master_lessons.md` for the full 4 rules. Short version for content generation:
+
+1. **Auto-transcripts lie** — any proper name, credential, or unusual claim from a Fathom/Loom/Otter transcript needs cross-reference against primary source (press kit, LinkedIn, client confirmation) before shipping.
+2. **Client drafts aren't facts** — credentials from the user's own draft copy ("Featured in X") must be verified before propagation. Ask on first use.
+3. **Prospects != customers** — when pulling testimonials or quotes, verify the person is actually a paying customer with documented outcome. Don't present prospects as success stories.
+4. **Unusual → verify** — any claim that makes you pause on a cold read gets flagged. Cut or confirm.
+
+**Before shipping:** cold-read the output as a new reader. Any factual claim that makes you hesitate = verify or cut.
+
+
 # Blog Writer -- New Article Generation
 
 Writes complete blog articles from a topic, brief, or outline. Every article
