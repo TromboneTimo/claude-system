@@ -37,6 +37,55 @@ Before writing: scan brand.md for any claim that would make you go "huh?" on a c
 ### Rule 5: Label every person inline during draft
 In v1 of any email, annotate: "Karen (prospect)" or "Mike BMW (student)." Strip the labels before shipping. But write with them so the reviewer can audit attribution.
 
+### Rule 7: CONVERSION PRINCIPLES (from field test — Richard email, 2026-04-12)
+
+**The Richard email** (identity-loss story, "He turned down every band that called" subject) got high engagement — opens, reads, replies — and ZERO conversions to booked calls. Harrison reported this directly. That data reveals 7 specific rules about converting vs engaging.
+
+#### 7a. Engagement is NOT success. Conversion is.
+An email that gets read and felt but doesn't drive a strategy call booking is a failure with a silver lining. Don't celebrate opens. Don't celebrate replies. Count booked calls. If engagement is high but conversions are zero, the HOOK works but the CLOSE is broken.
+
+#### 7b. Never describe the solution in your own words. Link to Harrison's video.
+The Richard email said "he's a downstream player, nobody checked" — abstract, tells-don't-shows. A reader can't evaluate whether Harrison's fix is real from abstract description. Instead: tease the problem, then link to Harrison's own YouTube video demonstrating the diagnosis/fix.
+
+**Rule:** Every solution section in a pain-point email must EITHER link to a Harrison YouTube video that shows the fix, OR cite a verified student case with documented result. Never just describe the method.
+
+#### 7c. The CTA must match the emotional register of the body.
+Richard email body = heart-level (wife passed, identity loss, isolation). Richard email PS = technical (Brad fixed high C in 11 minutes). That's a tonal whiplash. The reader in the grief-zone gets yanked to a chops conversation and bounces.
+
+**Rule:** Emotional body needs an emotional bridge before the CTA. "If you've been saying no to things you used to say yes to, let's figure out what's actually going on" matches Richard's register. "Book a 45-min call to fix your chops" doesn't.
+
+#### 7d. Proof stack must match the story arc.
+Richard's arc: identity-loss, nobody-checked, turning down gigs. Brad (PS) had a range problem — different arc. Trevor's arc (self-taught church player who "never thought improvement was possible" → hit high E live) matches Richard. Mismatch between body pain and proof outcome dilutes belief.
+
+**Rule:** The student you cite in the PS/proof must have had the SAME TYPE of pain as the prospect in the hook. Not just any success story — a matching success story.
+
+#### 7e. Close with momentum, not reflection.
+Richard email ends with "It might be that nobody ever checked." That's a diagnosis — it holds the reader in the wound. A conversion close pulls them toward the exit: "Here's how to find out for YOU" + link.
+
+**Rule:** The last line before sign-off must face forward. Name the next action. Don't leave the reader in the feeling.
+
+#### 7f. Two-step CTA for emotional emails.
+Forcing every reader to the same commitment level (strategy call) loses the ones who aren't ready. A two-step CTA respects where the reader actually is:
+- **Step 1 (low friction, high fit for just-engaged reader):** Watch the video
+- **Step 2 (high friction, high fit for ready-to-decide):** Book the call
+
+The video also serves as qualification — readers who watch it show up to the call warmer.
+
+#### 7g. Bridge paragraph required between pain and CTA.
+Don't jump from "here's Richard's pain" to "watch this video." Insert a bridge that explicitly says: "here's why this is solvable for YOU specifically." Example: "Richard isn't unusual. Most players I work with have been taught the wrong physiology for their body. And here's the thing — once you know which type you are, the fix is fast. [video link]"
+
+---
+
+### Updated Review Checklist Additions (post-Richard lessons)
+17. Does the email link to a Harrison YouTube video that demonstrates the fix (not just describes it)?
+18. Does the PS/proof feature a student whose arc MATCHES the prospect's arc in the hook?
+19. Does the CTA match the emotional register of the body?
+20. Does the last line before sign-off create forward momentum (not reflection)?
+21. Is there a two-step CTA (video + call), not just one?
+22. Is there a bridge paragraph between the pain story and the CTA?
+
+---
+
 ### Rule 6: SOURCE FIDELITY — Students + Solutions
 
 **6a. Student names come from the TESTIMONIAL DATABASE only.**
