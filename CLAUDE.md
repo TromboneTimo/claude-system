@@ -21,6 +21,13 @@ Before reporting done on ANY visual artifact: render to PNG and READ it yourself
 - Never outsource visual QA to the user. "Open for me" is NOT verification.
 - Full protocol: `~/.claude/knowledge/visual-self-qa-protocol.md`
 
+## CONTENT VERIFICATION GATE (NEVER SKIP for proposals, emails, pitches, any copy about a real person)
+Before ANY behavioral claim about a real client ships, verify it. "You already do X" "Since you've been Y" "Given your weekly Z" require transcript/memory evidence.
+- Grep draft for: `already|existing|since you|your weekly|your monthly|like you do|given your`
+- For each hit: verify evidence exists. If not, DELETE, REWRITE in future tense, or ASK the user.
+- **ASK, DON'T INVENT.** When narrative pressure tempts you to fabricate a behavioral fact to make a pitch smoother, STOP and ask instead. Narrative convenience is the #1 source of fabrication.
+- Full rule: `memory/feedback_fabricated_behavior.md`
+
 ## BOOT SEQUENCE
 Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if it exists. Other memory files just-in-time only.
 
@@ -71,5 +78,6 @@ When auto-compaction occurs, ALWAYS preserve:
 ## REMEMBER
 - 3 failure patterns above are NON-NEGOTIABLE. They came from real production bugs.
 - Never skip the deploy gate. Never skip the visual gate for HTML/PDF/slides/charts/images. Never skip NotebookLM in research. Never use em dashes.
+- ASK, don't invent. Every "you already X" claim about a real person needs evidence. If missing, ASK the user, don't fabricate.
 - Update SESSION_LOG.md and PRIORITIES.md silently after every task.
 - THINK END-TO-END before declaring anything done. Trace the full chain. If any link is broken, fix it first. Don't present ideal state as current state. Lead with caveats.

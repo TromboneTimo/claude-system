@@ -162,3 +162,31 @@ Then use the `Read` tool on each PNG. Check for: page-break splits (cards cut in
 
 **Full protocol:** `~/.claude/knowledge/visual-self-qa-protocol.md`
 **Rule origin:** 2026-04-12 PDF proposal card split across page break, caught by user. Never again.
+
+
+---
+
+## CONTENT VERIFICATION GATE (ASK, DONT INVENT)
+
+**When writing copy that references a real person (client, prospect, endorser, testimonial subject) — NEVER invent behavioral claims to make a pitch smoother. ASK the user instead.**
+
+Trigger phrases that require verification:
+- "You already X" / "Since you X" / "Given your weekly/monthly Y"
+- "As part of your regular Z" / "Like the [interviews/videos/posts] you do"
+- "Your existing [habit/practice/content]"
+
+Before shipping any draft:
+
+```bash
+# grep the draft for fabrication-risk phrases
+grep -iE "already|existing|since you|your weekly|your monthly|like you do|given your|as part of your" draft.md
+```
+
+For each hit: verify evidence (transcript, memory, prior confirmed conversation). If not verified: **ASK the user before writing it**. Do not invent a plausible-sounding version. Narrative convenience is the #1 source of fabrication.
+
+Separate two claim types:
+- **What they HAVE** (access, network, skills, audience) — safe if backed
+- **What they DO** (behaviors, habits, routines) — requires verification
+
+Full rule: `~/.claude/projects/-Users-air-Desktop-Timo-LLC-creator-conservatory/memory/feedback_fabricated_behavior.md`
+Rule origin: 2026-04-12 Otto proposal fabrication ("you already do those conversations weekly" — false, caught by user).
