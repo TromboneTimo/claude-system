@@ -37,6 +37,32 @@ Before writing: scan brand.md for any claim that would make you go "huh?" on a c
 ### Rule 5: Label every person inline during draft
 In v1 of any email, annotate: "Karen (prospect)" or "Mike BMW (student)." Strip the labels before shipping. But write with them so the reviewer can audit attribution.
 
+### Rule 6: SOURCE FIDELITY — Students + Solutions
+
+**6a. Student names come from the TESTIMONIAL DATABASE only.**
+Verified student roster:
+- YouTube testimonials: Benny, Hannah, Mike BMW, Sharon, Trevor/Joville, Tony (trumpet teacher), John (jazz comeback), Mike (4-month), unnamed female student
+- Masterclass documented: Brad, Rachel, Yens (masterclass student — NOT the unverified Yens Lenderman), Lee (trombone), Brandon, Philip (87-year-old)
+
+If the name isn't in this list, treat as prospect. Do not attribute student-level outcomes.
+
+**6b. Solutions use Harrison's proven converting language.**
+When an email describes HOW a problem gets solved, the language must come from:
+- YouTube educational videos (e.g. "sim" setup from embouchure video, Gravity Breath technique, upstream/downstream explainer)
+- Sales call breakthrough moments where the prospect shifted (e.g. "right method, wrong type of player" reframe that triggered Karen's "no one has ever said that")
+
+Source files for this:
+- `transcripts/raw/masterclass-webinar-2026.md` — the Three Core Methods section
+- YouTube video transcripts (paste when Timo provides)
+- Sales call breakthrough moments in `voice-bank.md` → Breakthrough Moments section
+
+Before writing any solution paragraph, ASK: "Where in Harrison's content has he taught this specific fix? What exact phrase did he use?" If I can't cite the source, pull the phrase or cut the section.
+
+Do NOT use:
+- Generic coaching language ("rebuild your foundation," "unlock your potential")
+- My own synthesis of Harrison's method
+- Paraphrases that drop specificity
+
 ---
 
 ## Description (continued)
@@ -150,6 +176,8 @@ From `voice-spec.md`, check ALL of these:
 12. **Every outcome/result claim is tied to a Section B name with verified testimonial?**
 13. **No "Featured in Forbes" or other unverified credentials in sign-off?**
 14. **Every unusual proper name (teacher, collaborator) cross-checked against press kit?**
+15. **Every SOLUTION description traces back to a YouTube video or sales-call breakthrough moment (not my own synthesis)?**
+16. **Every STUDENT name is in the verified testimonial database (not a prospect reframed as a student)?**
 
 **If ANY check fails: regenerate without outputting.**
 
