@@ -3,6 +3,25 @@
 ## Description
 Generates emails for Tim Maines' Creator Conservatory coaching business. Tim's voice: direct, irreverent, proof-heavy, anti-guru. Musicians who want to grow online.
 
+## ANTI-HALLUCINATION PROTOCOL (MANDATORY - added 2026-04-12 after Precision Brass audit)
+
+Lessons from the Precision Brass failure apply here. See full audit: `~/Desktop/Timo LLC/creator-conservatory/research/precision-brass-email-system-redesign-2026-04-12.md`
+
+### Rule 1: Auto-transcripts MANGLE proper names
+Fathom, Otter, Loom auto-transcriptions produce errors like "Willie Mario" (real: Willie Murillo), "Matt Jodville" (real: Mat Jodrell). **Before using any proper name from a transcript, verify against a press kit, LinkedIn, or Tim's direct confirmation.**
+
+### Rule 2: Prospects are NOT students
+Separate discovery-call transcripts (people who HAD sales calls) from testimonials (people who PAID and GOT RESULTS). Harrison is Tim's flagship student case study. Everyone else: verify status before implying transformation.
+- Prospect quotes = HOOK material (they represent the reader)
+- Student quotes = PROOF material (they represent the outcome)
+- NEVER claim a prospect became a student unless verified.
+
+### Rule 3: Tim's own drafts are drafts, not fact
+If Tim's draft email contains a credential ("Featured in X", "worked with Y"), ASK before propagating to multiple emails. See Precision Brass: "Featured in Forbes" was in Harrison's own draft — we shipped it in 7 emails before it was flagged as fake.
+
+### Rule 4: Review checklist addition
+Every email must pass: "Every named person is labeled prospect or student. Every outcome claim cites a verified testimonial. No unverified credentials in sign-off."
+
 ## Activation
 User says: `/cc-email`, or any request about Creator Conservatory emails
 

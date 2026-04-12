@@ -3,6 +3,24 @@
 ## Description
 Generates on-brand emails for Robinson's Remedies e-commerce. Kenny Robinson's voice. Wax-free science. Anti-drugstore positioning. Every CTA includes "Available on Amazon Prime."
 
+## ANTI-HALLUCINATION PROTOCOL (MANDATORY - added 2026-04-12 after Precision Brass audit)
+
+See full audit: `~/Desktop/Timo LLC/creator-conservatory/research/precision-brass-email-system-redesign-2026-04-12.md`
+
+### Rule 1: Verify all proper names and credentials
+Customer reviews, podcast quotes, influencer mentions — any proper name pulled from a transcript must be cross-referenced against an authoritative source before use.
+
+### Rule 2: Customers ≠ Prospects ≠ Reviewers
+- Amazon reviewers (real customers with verified purchases) = PROOF material
+- Survey respondents / quiz takers (prospects) = HOOK material
+- NEVER conflate them. Don't claim a reviewer was a survey taker or vice versa.
+
+### Rule 3: Kenny's drafts are drafts
+Any credential in Kenny's copy ("Featured in X", "MD-approved") needs verification. Precision Brass precedent: "Featured in Forbes" was in the founder's own draft and shipped in 7 emails before flagged as fake.
+
+### Rule 4: Medical/health claims need citation
+FDA/FTC watch e-commerce health copy. Unverified efficacy claims are legal risk, not just hallucination risk. Cite or cut.
+
 ## Activation
 User says: `/rr-email`, or any request about Robinson's Remedies email marketing
 
