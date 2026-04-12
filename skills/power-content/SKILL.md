@@ -1,15 +1,16 @@
 ---
 name: power-content
 description: >
-  Generates Power Content ideas for Creator Conservatory ads using 5 specialized
-  personas that each hunt for a different type of angle (grievance, contrarian,
-  proof-stacking, pattern-matching, psychological). Each persona MUST cite sources
-  from both the web and Timo's personal database (audience.md, brand.md, voice
-  bank, Hook Book, client results, transcripts). Outputs ranked ideas with full
-  reasoning, not sparknotes. Use when Timo says "power content", "content ideas",
-  "ad ideas", "value bomb ideas", or "/power-content [topic]".
+  Generates Power Content ideas for Creator Conservatory by spawning one persona
+  per ICP segment (music coaches, business owners, AI lovers, view-rich musicians,
+  etc.). Default mode is ICP-FIRST, not angle-first. Each persona MUST cite sources
+  from both Timo's personal database (audience.md, brand.md, TIMO_PROFILE.md,
+  voice bank, Hook Book, client results) AND external sources (Portie framework,
+  Hormozi, behavioral science). Supports secondary angle filters (grievance,
+  contrarian, proof, psychological, pattern). Use when Timo says "power content",
+  "content ideas", "ad ideas", "value bomb ideas", or "/power-content [topic]".
 user-invokable: true
-argument-hint: "[topic or 'open' for fresh brainstorm]"
+argument-hint: "[topic] OR 'per-icp' OR 'icp:music-coach' OR 'angle:grievance'"
 allowed-tools:
   - Agent
   - Read
@@ -22,7 +23,19 @@ allowed-tools:
 
 # Power Content Idea Generator
 
-Multi-persona system that generates ranked Power Content ideas for Creator Conservatory. Built because generic brainstorming produces generic ideas. This enforces angle diversity and source citations.
+Multi-persona system that generates ranked Power Content ideas for Creator Conservatory. Default output is ONE idea per ICP SEGMENT, not angle variations on one topic.
+
+## CRITICAL LESSON (2026-04-12)
+
+Timo's audience is NOT monolithic. It spans 4+ distinct ICP segments, each with different psychology, different proof needs, different hooks:
+
+1. **Music Coaches** (Harrison-tier): status threat, hack coaches outselling them
+2. **Business Owners** (non-music): agency betrayal, in-house overwhelm, trust issues
+3. **AI Lovers**: identity-output dissonance, "early adopter" self-concept gap
+4. **View-Rich Cash-Poor Musicians**: monetization shame, free-content-as-identity trap
+5. **Escaping the Orchestra Artists**: sellout guilt, orchestra handcuffs, perfectionism
+
+When Timo says "5 power content ideas" the default is FIVE DIFFERENT ICPs, not five angle variations on one topic. Do not invert this.
 
 ## When to Use
 
@@ -32,220 +45,236 @@ Multi-persona system that generates ranked Power Content ideas for Creator Conse
 - Session ends with "what should I post this week"
 - Timo says "/power-content [topic]" or "power content ideas"
 
+## Mode Selection (Ask If Unclear)
+
+Before spawning personas, determine mode from Timo's request:
+
+**Mode A: Per-ICP (DEFAULT)**
+- Trigger: "power content ideas", "what should I film", no topic specified, or explicit ICP mention
+- Spawns 4-5 personas, ONE PER ICP SEGMENT
+- Each persona returns ONE fully-developed idea targeted at their specific ICP
+- Output: 4-5 ideas, each hitting a different audience
+
+**Mode B: Topic Deep-Dive**
+- Trigger: Specific topic mentioned ("/power-content the designer angle", "/power-content Harrison's results")
+- Spawns 5 angle-type personas (Grievance, Contrarian, Proof, Pattern, Psychological)
+- All 5 personas work on the SAME topic
+- Output: 15 ideas on one topic, ranked to top 5
+- ONLY use this mode when Timo explicitly wants depth on one topic
+
+**Mode C: Hybrid**
+- Trigger: "ideas for music coaches specifically" (ICP + topic implied)
+- Spawns 3-5 angle personas constrained to ONE specific ICP
+- Output: Multiple angles on one ICP
+
+**If ambiguous, ask ONE clarifying question:** "Do you want one idea per ICP (default) or multiple angles on one topic?"
+
 ## Non-Negotiables
 
-1. **Every idea must cite at least 2 sources.** One from Timo's personal database. One external (web research, Portie framework, adjacent niche example).
+1. **Every idea must cite at least 2 sources.** One from Timo's personal database. One external (web research, Portie framework, adjacent niche example, behavioral science).
 2. **No generic ideas.** If the idea could work for any coach, it's rejected. Must be specific to Timo's positioning.
-3. **Angle diversity enforced.** If two personas propose similar angles, the weaker one is dropped.
+3. **ICP-specific language, psychology, and proof.** A music coach idea should not feel interchangeable with a business owner idea. Different pain triggers, different proof points, different reframes.
 4. **Proof or skip.** Every idea must have a concrete proof point Timo can reference (client name, number, specific moment).
 5. **Psychology-first.** Every idea must name the cognitive bias, pain trigger, or identity threat it activates.
 
-## Process
+## Context Files (Read Before Spawning)
 
-### Step 1: Gather Context
-
-Read Timo's personal database BEFORE generating anything:
-
-**Required reads:**
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/audience.md` — ICP pain points, voice of customer
+**Always read:**
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/audience.md` — ICP tiers, voice of customer, psychographics
 - `/Users/air/Desktop/Timo LLC/creator-conservatory/context/brand.md` — Positioning, proof points, messaging pillars
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/offers.md` — Offer hierarchy, pricing
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/competitors.md` — Competitor gaps
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/references/laurel-portie-framework.md` — Portie principles
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/TIMO_PROFILE.md` — Full client list, results, voice
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/TIMO_PROFILE.md` — Client list, results, businesses
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/offers.md` — Offer hierarchy
 
-**Optional reads if topic is specific:**
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/skool-community-intelligence.md` — What community engages with
-- `/Users/air/Desktop/Timo LLC/creator-conservatory/email-system/strategy/angle-scores.md` — Scored email angles (same logic applies)
-- Hook Book database (if accessible)
-- Fireflies transcripts for verbatim prospect language
+**Read if exists:**
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/LAUREL_PORTIE_DATABASE.md` or `references/laurel-portie-framework.md`
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/competitors.md`
+- `/Users/air/Desktop/Timo LLC/creator-conservatory/context/skool-community-intelligence.md`
 
-If topic is "open", proceed with full database read.
-If topic is specific (e.g., "AI websites", "coaching for musicians"), focus reads on that area.
+## MODE A: Per-ICP Personas (DEFAULT)
 
-### Step 2: Spawn 5 Personas in Parallel
+Spawn 4-5 agents in parallel, ONE per ICP segment. Each returns ONE fully-developed idea.
 
-Launch ALL 5 personas simultaneously via Agent tool with subagent_type: Explore or general-purpose. Each gets the SAME context but a DIFFERENT mandate.
-
-**Persona 1: The Grievance Hunter**
+### Persona: Music Coach Specialist
 
 ```
-You are the Grievance Hunter. Your job is to find what Timo's ICP is ANGRY or FRUSTRATED about that nobody else is naming. Grievance-based hooks get the highest engagement because they validate a feeling the audience already has.
+You are generating ONE Power Content idea for Creator Conservatory targeted specifically at MUSIC COACHES.
 
-Context: Timo helps musicians build online businesses. His audience has been burned by expensive web designers, generic marketing gurus, coaches who teach viral content but not sales, and tech that's supposed to help but doesn't.
+TARGET ICP: Music Coaches
+- Already have online coaching program
+- Many run Facebook ads ($500-$5K/mo typical)
+- Revenue: $5K-$50K/mo
+- Harrison Ball is the ceiling example (Precision Brass, $50K/mo, 100% close rate)
+- Pain: Paid ads inconsistent. Organic is weak. Best competitors outsell them despite being worse teachers.
+- Identity: "I'm world-class but can't beat hack coaches with half my expertise."
 
-Your output: 3 Power Content ideas that activate a specific grievance. Each idea must include:
-- THE HOOK (first 3 seconds of the video, verbatim)
-- THE GRIEVANCE (what the audience is angry about — in their own words when possible)
-- THE REFRAME (the new way Timo teaches them to see it)
-- CITATIONS: At least one verbatim phrase from audience.md voice-of-customer OR Fireflies transcripts. At least one external reference (competitor gap, market trend, Portie principle).
-- PSYCHOLOGY: Name the cognitive trigger (e.g., "righteous anger", "sunk cost validation", "in-group validation")
+Topic focus: $ARGUMENTS (or "open" if no topic)
+
+Return ONE idea with: HOOK / SURFACE PAIN / REAL PAIN / REFRAME / SETUP / CTA / CITATIONS (internal + external) / PSYCHOLOGY.
+```
+
+### Persona: Business Owner Specialist
+
+```
+You are generating ONE Power Content idea for Creator Conservatory targeted specifically at BUSINESS OWNERS (non-musician).
+
+TARGET ICP: Business Owners
+- Small-to-mid business owners: e-commerce, local service, consultants, agency owners, SaaS founders
+- Revenue: $10K-$250K/mo
+- Stuck in traps: paying agency $3-10K/mo for mediocre output, drowning doing it themselves, or hiring a VA who produces generic crap
+- Pain: Want results without becoming a marketing operator. Know AI can do it but can't figure out how.
+- Proof arsenal: Robinson's Remedies tripled sales on $500/mo. Dallas Symphony 500% case study.
+- Identity: "I'm a business operator, not a marketer. But every agency I've hired has burned me."
 
 Topic focus: $ARGUMENTS
+
+Return ONE idea with full structure.
 ```
 
-**Persona 2: The Contrarian Insight Generator**
+### Persona: AI Lover Specialist
 
 ```
-You are the Contrarian. Your job is to find counterintuitive truths. "Everyone says X but actually Y." You reject conventional wisdom in marketing and coaching. You find the truth that makes gurus mad.
+You are generating ONE Power Content idea for Creator Conservatory targeted at AI LOVERS.
 
-Context: Timo's brand is anti-guru. He calls out BS in the coaching space. His content must challenge what the audience has been told by every other marketing coach they follow.
-
-Your output: 3 Power Content ideas that flip a common belief on its head. Each idea must include:
-- THE HOOK (verbatim)
-- THE BELIEF BEING FLIPPED (what the audience currently thinks)
-- THE REAL TRUTH (what Timo teaches instead)
-- WHY IT'S TRUE (the evidence)
-- CITATIONS: At least one from Timo's database (brand.md anti-guru pillars, competitors.md gaps, TIMO_PROFILE.md client results). At least one external (Portie principle, Hormozi/Gadzhi framework, industry study).
-- PSYCHOLOGY: Name the cognitive bias being disrupted (e.g., "authority bias", "social proof inversion", "status quo bias")
+TARGET ICP: AI Lovers
+- Tech-curious entrepreneurs, creators, knowledge workers
+- Use ChatGPT/Claude daily but workflow is 90% prompt-hacking, not production systems
+- Follow Karpathy, Matt Berman, Every.to
+- Know Claude Code, MCP, Cursor but treat as toys
+- Pain: Impressed by demos, haven't built a single revenue-generating system
+- Proof arsenal: /power-content skill, Hook Book, client AI systems (Harrison, Sohee, Wilhelm), Robinson's Remedies runs on AI
+- Identity: "I'm an early adopter. Why am I still typing into a chat window?"
 
 Topic focus: $ARGUMENTS
+
+Return ONE idea with full structure.
 ```
 
-**Persona 3: The Proof Stacker**
+### Persona: View-Rich Cash-Poor Musician
 
 ```
-You are the Proof Stacker. Your job is to take Timo's strongest concrete proof points and build angles around them. You refuse generic advice. Every idea must be anchored in a specific, citable, numerical result.
+You are generating ONE Power Content idea for Creator Conservatory targeted at MUSICIANS WITH STRONG FOLLOWINGS NOT MONETIZING.
 
-Context: Timo has massive proof most coaches don't have. Billion views. Million followers. $40K from one video. Harrison $50K/mo with 100% close rate. Steve Parker sold out 5 exhibitions. Big Wy's got an Applebee's brand deal. Robinson's Remedies tripled sales on $500/mo. Your job is to turn PROOF into HOOKS.
-
-Your output: 3 Power Content ideas anchored in concrete proof. Each idea must include:
-- THE HOOK (verbatim, leading with the number or result)
-- THE SPECIFIC PROOF (client name, number, exact moment)
-- THE LESSON (what Timo extracted from this result that the viewer can apply)
-- CITATIONS: The exact source of the proof (TIMO_PROFILE.md, brand.md, specific client story). At least one external (why this outperforms generic coach proof — reference viral hooks research or Hormozi's "$100M Offers" on specificity).
-- PSYCHOLOGY: Name the persuasion principle (e.g., "social proof", "specificity bias", "authority halo effect")
+TARGET ICP: View-Rich Cash-Poor Musicians
+- 10K-500K+ followers on IG/TikTok/YouTube
+- Get views, sometimes millions. Engagement looks great.
+- BUT: no email list, no offer, no funnel. AdSense mediocre. Brand deals infrequent.
+- Pain: Friends/family think they "made it." They know the checks aren't there.
+- Identity: "I built this audience but it's not paying me. I'm pretending."
+- Timo IS this ICP in Trombone Timo (1B views, 1M followers, $8.5K/mo AdSense)
+- Proof arsenal: Big Wy's (5M views to Applebee's deal), Victor (30K views to $3K program), Steve Parker (500K views to sold-out exhibitions)
 
 Topic focus: $ARGUMENTS
+
+Return ONE idea with full structure.
 ```
 
-**Persona 4: The Pattern-Matcher**
+### Persona: Escaping the Orchestra Artist (Primary ICP)
 
 ```
-You are the Pattern-Matcher. Your job is to find what's working in ADJACENT niches (business coaches, creators, real estate, finance) and adapt it to Timo's music niche. You study hooks that already went viral and rewire them for musicians.
+You are generating ONE Power Content idea for Creator Conservatory targeted at ESCAPING THE ORCHESTRA ARTISTS.
 
-Context: Timo's niche is musicians but his audience behaves like any online business buyer. Hooks that work for business coaches, fitness creators, real estate coaches can be adapted. The Hook Book has 325+ viral formulas. Portie's YouTube has proven content patterns.
-
-Your output: 3 Power Content ideas that adapt a proven viral pattern to Timo's niche. Each idea must include:
-- THE HOOK (verbatim)
-- THE SOURCE PATTERN (what creator/format/niche this is adapted from)
-- THE ADAPTATION (how Timo's version is different for his audience)
-- CITATIONS: At least one from Hook Book or documented viral hook. At least one external (the original creator/video/pattern with URL if possible).
-- PSYCHOLOGY: Name the pattern (e.g., "curiosity gap", "open loop", "pattern interrupt", "problem-agitation-solution")
+TARGET ICP: Primary CC ICP from audience.md
+- Professional musicians feeling trapped by "orchestra handcuffs" / "gig economy rat race"
+- World-class skills but zero digital footprint
+- Perfectionism stops them from posting
+- Already have a product but no audience to sell to
+- Voice of customer: "pain in the ass", "labor-intensive", "milk toast", "I'm not an influencer", "this diminishes my art"
+- Identity: "I became a musician to avoid being a salesman. If I have to sell online, did I fail?"
 
 Topic focus: $ARGUMENTS
+
+Return ONE idea with full structure.
 ```
 
-**Persona 5: The Psychologist**
+## MODE B: Topic Deep-Dive (5 Angle Personas)
+
+Only use when Timo explicitly wants depth on one topic. Spawns these 5:
+
+1. **Grievance Hunter** — Finds what the ICP is ANGRY about. Grievance-based hooks validate existing feelings.
+2. **Contrarian Insight Generator** — Flips common beliefs. "Everyone says X but actually Y."
+3. **Proof Stacker** — Anchors every idea in a specific, citable result.
+4. **Pattern-Matcher** — Adapts viral patterns from adjacent niches.
+5. **Psychologist** — Goes past surface pain to identity-level threats.
+
+Each returns 3 ideas = 15 total. Synthesizer ranks to top 5.
+
+## Scoring (Mode B only)
+
+Score each idea 1-10 on:
+1. Grievance/Pain Match (how sharply it hits specific pain)
+2. Proof Strength (how concrete/Timo-specific)
+3. Differentiation (uniquely Timo, not generic)
+4. Ad Viability (works as 3-5 min ad driving DMs)
+5. Psychological Depth (identity-level, not surface)
+
+## Output Format (Mode A - Default)
 
 ```
-You are the Psychologist. Your job is to find the HIDDEN PSYCHOLOGICAL DRIVERS the audience won't admit even to themselves. You go past surface pain to identity-level threats.
+# POWER CONTENT IDEAS BY ICP
 
-Context: Timo's ICP are "Escaping the Orchestra" artists. Surface pain: "I don't know what to post." Real pain: "I became a professional musician to avoid being a salesman. If I have to sell online, did I fail at my art?" That's identity-level. That's where the real conversion happens.
+## #1 — MUSIC COACHES: [Title]
+**Hook:** "[verbatim]"
+**Surface Pain / Real Pain / Reframe:** [3-4 sentences each]
+**Setup:** [body copy]
+**CTA:** "Comment [KEYWORD] and I'll send you [specific]."
+**Proof:** [client result or Timo proof]
+**Psychology:** [named trigger]
+**Sources:** [internal + external]
 
-Your output: 3 Power Content ideas that activate deep psychological drivers. Each idea must include:
-- THE HOOK (verbatim)
-- THE SURFACE PAIN (what the audience thinks their problem is)
-- THE REAL PAIN (the identity-level threat underneath)
-- THE REFRAME (how Timo resolves the identity conflict)
-- CITATIONS: At least one from audience.md psychographics or voice-of-customer. At least one external (behavioral science principle, Kahneman, Cialdini, Robert Greene, identity-based marketing research).
-- PSYCHOLOGY: Name the identity trigger (e.g., "professional identity threat", "status paradox", "sellout guilt", "mastery vs marketer tension")
+## #2 — BUSINESS OWNERS: [Title]
+[same structure]
 
-Topic focus: $ARGUMENTS
-```
+## #3 — AI LOVERS: [Title]
+[same structure]
 
-### Step 3: Wait for All 5 Personas to Return
+## #4 — VIEW-RICH MUSICIANS: [Title]
+[same structure]
 
-All in parallel. Each returns 3 ideas = 15 total ideas with full reasoning and citations.
-
-### Step 4: Synthesize and Rank
-
-After all 5 return, YOU (main Claude) do the synthesis. Rank all 15 ideas on these 5 criteria (1-10 each, 50 total):
-
-1. **Grievance/Pain Match** — How sharply does this hit a real, specific pain from audience.md? (1-10)
-2. **Proof Strength** — How concrete and Timo-specific is the proof behind this idea? (1-10)
-3. **Differentiation** — Could any other coach say this, or is it distinctly Timo? (1-10)
-4. **Ad Viability** — Will this work as a 3-5 min ad that drives DMs? (1-10)
-5. **Psychological Depth** — Does it hit identity, not just surface? (1-10)
-
-Return the TOP 5 ideas with:
-- Full hook script
-- The setup (what happens after the hook)
-- The CTA with specific keyword
-- The angle type (grievance / contrarian / proof / pattern / psychological)
-- The score breakdown (5 numbers)
-- Why it ranks where it does
-- All cited sources (personal database + external)
-
-### Step 5: Offer Next Action
-
-After presenting the top 5, ask:
-"Which of these do you want to develop into a full script? Or do you want me to run this again with a different topic focus?"
-
----
-
-## Output Format
-
-```
-# POWER CONTENT: [topic or "Open Brainstorm"]
-
-## TOP 5 IDEAS (ranked)
-
-### #1 — [Idea Title] (Score: X/50)
-**Angle type:** [Grievance / Contrarian / Proof / Pattern / Psychological]
-
-**The Hook (first 3 sec):**
-"[Verbatim hook]"
-
-**The Setup:**
-[What happens after the hook — 2-3 sentences]
-
-**The CTA:**
-"Comment [KEYWORD] and I'll send you [specific value bomb]."
-
-**Why it wins:**
-[Scoring rationale — what makes this a #1]
-
-**Sources cited:**
-- Personal database: [specific file + quote]
-- External: [specific source]
-- Psychology: [specific cognitive trigger]
-
----
-
-[Repeat for #2-5]
-
----
-
-## ALSO CONSIDERED (not top 5 but interesting)
-
-[Brief list of 2-3 runner-up ideas with one-line explanations]
+## #5 — ESCAPING THE ORCHESTRA: [Title]
+[same structure]
 
 ---
 
 ## WHAT TO DO NEXT
-
-[Specific recommendation: which to film first, why, what scripts to write]
+Which ICP do you want to film first? Which proof point is strongest this week?
 ```
 
 ## Guardrails
 
-- If a persona returns generic ideas without citations, the orchestrator REJECTS that persona's output and re-prompts them specifically for citations.
-- If all 5 ideas from different personas feel similar, re-run with instruction to increase angle diversity.
-- If Timo's topic is too vague, ask ONE clarifying question before spawning personas. Don't burn 5 agents on a bad brief.
-- Never propose ideas Timo has already filmed (check PRIORITIES.md content queue first if available).
+- **NEVER spawn 5 angle personas on one topic when Timo says "5 ideas" without specifying a topic.** Default is ICP-first.
+- If a persona returns a generic idea without ICP-specific citations, REJECT and re-prompt.
+- If two ICPs get similar ideas, re-run and force differentiation.
+- If Timo's request is ambiguous, ask ONE clarifying question: "Per-ICP (default) or topic deep-dive?"
+- NEVER default to website/designer angle across all ICPs. Each ICP has different pain.
 
-## Example Topics That Work
+## Example Invocations
 
-- "AI tools for musicians"
-- "Why websites aren't enough"
-- "Harrison's results"
-- "Content that converts vs content that goes viral"
-- "The gig economy trap"
-- "Open" (full brainstorm across Timo's positioning)
+**Per-ICP (Mode A):**
+- "power content ideas"
+- "5 ideas for this week"
+- "/power-content" (no args)
 
-## Example Topics That Need Clarification
+**Topic deep-dive (Mode B):**
+- "/power-content the designer angle"
+- "deep dive on Harrison's result as content"
+- "5 angles on the $47/mo library"
 
-- "Content" (too broad — is this organic, paid, a series, a single video?)
-- "Marketing" (too broad — for whom? about what?)
-- "Help me" (no topic — ask what's on his mind)
+**Hybrid (Mode C):**
+- "3 ideas just for music coaches"
+- "multiple angles on AI for business owners"
+
+## Sources Required Per Idea
+
+Every idea MUST cite:
+
+**Internal (Timo's database):**
+- Direct quote from audience.md, brand.md, TIMO_PROFILE.md, OR a specific client result
+- Must match the ICP being targeted (don't cite a music coach result for a business owner idea)
+
+**External:**
+- Portie framework principle (from LAUREL_PORTIE_DATABASE.md or laurel-portie-framework.md)
+- OR Hormozi framework ($100M Offers, $100M Leads)
+- OR behavioral science (Cialdini, Kahneman, Greene, Schwartz, Dweck)
+- OR documented viral pattern with URL
+
+No citations = rejected output.
