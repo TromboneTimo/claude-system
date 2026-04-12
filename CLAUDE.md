@@ -2,10 +2,11 @@
 
 <!-- CRITICAL RULES AT TOP — "lost in the middle" fix: Claude pays most attention to START and END -->
 
-## 3 FAILURE PATTERNS — HARD-WON, NEVER TRIM
+## 4 FAILURE PATTERNS — HARD-WON, NEVER TRIM
 1. Shared hooks break everything. After modifying shared state: test ALL features, not just the one changed.
 2. Same bug 3x = check the DATABASE (RLS, policies), not the code. (14 failed code fixes, 1 RLS policy fixed it.)
 3. Verify in BROWSER (Safari), not curl. Stale tokens fool curl. Use raw fetch() for smoke tests.
+4. **Auto-transcripts lie. Client drafts aren't facts. Prospects aren't customers.** (2026-04-12 Precision Brass: "Willie Mario" was actually Willie Murillo, "Featured in Forbes" was fake but in Harrison's own draft, sales call prospects were written into emails as students. 7 emails shipped before caught.) Rules: (a) every unusual proper name from a transcript = verify against press kit/LinkedIn before use; (b) every credential from a client draft = ASK before propagating; (c) voice-bank files must separate PROSPECTS from CUSTOMERS; (d) unusual-feeling claim = pause and verify. Applies to ALL client content work.
 
 ## 2-STRIKE RULE
 Same bug twice = STOP coding. Check the database. Don't iterate on code fixes.
