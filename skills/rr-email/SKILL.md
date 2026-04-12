@@ -136,3 +136,29 @@ That cycle is the whole problem with wax-based lip balm.
 | Musicians | Peer-to-peer. Use: chops, embouchure, gig, mouthpiece. | Endurance Cream + Recovery Stick | EC-01, EC-02, RS-01, ED-06 |
 | Cold Sore | Empathetic. They've been let down. Earn trust with science. | Lightning Stick | LS-01, LS-02, ED-02, ED-03 |
 | General | Accessible. No jargon. Focus on the dependency cycle. | Lip Quench | LQ-01, LQ-02, ED-05, ED-01 |
+
+
+---
+
+## VISUAL SELF-QA (MANDATORY before reporting done)
+
+**After generating any HTML, PDF, slide, chart, or image output, you MUST render it and READ the result with your vision tool BEFORE reporting done.** Never ask the user to verify what you can verify yourself. Running `open` to launch Preview is NOT verification.
+
+**Commands:**
+
+```bash
+# HTML -> PNG (no visible browser)
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+  --headless --disable-gpu \
+  --screenshot="/tmp/verify.png" --window-size=1440,1800 \
+  "file:///absolute/path/to/file.html"
+
+# PDF -> PNG, multi-page, 150 DPI (optimal for AI vision)
+pdftoppm -r 150 -png input.pdf page
+# produces page-1.png, page-2.png, page-3.png, ...
+```
+
+Then use the `Read` tool on each PNG. Check for: page-break splits (cards cut in half), text overflow, misaligned elements, missing images, color/contrast issues, wrong fonts, responsive regressions. If any issue found: fix source, re-render, re-verify. Only report done when rendered output is correct.
+
+**Full protocol:** `~/.claude/knowledge/visual-self-qa-protocol.md`
+**Rule origin:** 2026-04-12 PDF proposal card split across page break, caught by user. Never again.

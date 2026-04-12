@@ -14,6 +14,13 @@ Same bug twice = STOP coding. Check the database. Don't iterate on code fixes.
 ## DEPLOY GATE (NEVER SKIP)
 Build > QA Agent > API curl > Safari browser verify. All 4 steps. Every time.
 
+## VISUAL GATE (NEVER SKIP for HTML/PDF/slide/chart/image output)
+Before reporting done on ANY visual artifact: render to PNG and READ it yourself.
+- HTML: `chrome --headless --screenshot=/tmp/v.png --window-size=1440,1800 file:///path.html`
+- PDF: `pdftoppm -r 150 -png input.pdf page` then Read each `page-N.png`
+- Never outsource visual QA to the user. "Open for me" is NOT verification.
+- Full protocol: `~/.claude/knowledge/visual-self-qa-protocol.md`
+
 ## BOOT SEQUENCE
 Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if it exists. Other memory files just-in-time only.
 
@@ -63,6 +70,6 @@ When auto-compaction occurs, ALWAYS preserve:
 <!-- CRITICAL RULES REPEATED AT END — "lost in the middle" fix -->
 ## REMEMBER
 - 3 failure patterns above are NON-NEGOTIABLE. They came from real production bugs.
-- Never skip the deploy gate. Never skip NotebookLM in research. Never use em dashes.
+- Never skip the deploy gate. Never skip the visual gate for HTML/PDF/slides/charts/images. Never skip NotebookLM in research. Never use em dashes.
 - Update SESSION_LOG.md and PRIORITIES.md silently after every task.
 - THINK END-TO-END before declaring anything done. Trace the full chain. If any link is broken, fix it first. Don't present ideal state as current state. Lead with caveats.

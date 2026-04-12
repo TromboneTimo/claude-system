@@ -292,3 +292,29 @@ Chart generation is built-in - no external dependencies required for full functi
 | Use tier 4-5 sources | Low authority hurts E-E-A-T |
 | Generate without research | AI-generated consensus content is penalized |
 | Skip visual elements entirely | Blogs with images get 94% more views |
+
+
+---
+
+## VISUAL SELF-QA (MANDATORY before reporting done)
+
+**After generating any HTML, PDF, slide, chart, or image output, you MUST render it and READ the result with your vision tool BEFORE reporting done.** Never ask the user to verify what you can verify yourself. Running `open` to launch Preview is NOT verification.
+
+**Commands:**
+
+```bash
+# HTML -> PNG (no visible browser)
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+  --headless --disable-gpu \
+  --screenshot="/tmp/verify.png" --window-size=1440,1800 \
+  "file:///absolute/path/to/file.html"
+
+# PDF -> PNG, multi-page, 150 DPI (optimal for AI vision)
+pdftoppm -r 150 -png input.pdf page
+# produces page-1.png, page-2.png, page-3.png, ...
+```
+
+Then use the `Read` tool on each PNG. Check for: page-break splits (cards cut in half), text overflow, misaligned elements, missing images, color/contrast issues, wrong fonts, responsive regressions. If any issue found: fix source, re-render, re-verify. Only report done when rendered output is correct.
+
+**Full protocol:** `~/.claude/knowledge/visual-self-qa-protocol.md`
+**Rule origin:** 2026-04-12 PDF proposal card split across page break, caught by user. Never again.
