@@ -1,7 +1,45 @@
 # /email -- Precision Brass Email System
 
 ## Description
-Generates emails for Harrison Ball's Precision Brass coaching business that sound like Harrison wrote them, not like AI.
+Generates emails for Harrisson Ball's (DOUBLE S) Precision Brass coaching business that sound like Harrison wrote them, not like AI.
+
+## ANTI-HALLUCINATION PROTOCOL (MANDATORY - added 2026-04-12 after audit)
+
+**Hard-won lessons from past failures. Ignore at your peril.**
+
+### Rule 1: Every name is guilty until verified
+Auto-transcribed files (Loom, Otter, Fathom) MANGLE proper names. The 2026-04-05 masterclass transcript had these errors baked into brand.md:
+- "Willie Mario" → actually **Willie Murillo** (Harrison's mentor, per letter of rec)
+- "Matt Jodville" → actually **Mat Jodrell**
+- "Vanessa Perka" → actually **Vanessa Perica**
+- Unverified auto-transcript names: Yens Lenderman, Nadia Nordhouse, Rosco James Owen, Bones Malone, Larry (CTS)
+
+**Before using ANY proper name in an email, verify against:** `Press Kit.` folder, LinkedIn, or direct confirmation from Timo. If not verifiable, DO NOT USE.
+
+### Rule 2: Prospects ≠ Students. NEVER blend them.
+`context/voice-bank.md` has two sections. They have different email roles:
+- **SECTION A — SALES CALL PROSPECTS** (Michelle, Karen, Joe, Tom, Walter, Richard, Ron, Barry, Robert, David, Toby, Jason, Joel, Will, Dave, Sam, Ted, Robbie, Johannes, Kent, Michael, John-Denver, John-IN, John). Use quotes for **HOOKS**. NEVER claim they "became students," "got results," or "Harrison worked with them." They were on discovery calls. Many never enrolled.
+- **SECTION B — STUDENT TESTIMONIALS** (Benny, Hannah, Mike BMW, Sharon, Trevor/Joville, Tony, John-testimonial, Mike-4mo, Unnamed-female; plus masterclass students Brad, Rachel, Yens-masterclass, Lee, Brandon, Philip). Use quotes for **PROOF**. These are verified paying students with documented outcomes.
+
+**Language patterns:**
+- Diagnosing on a sales call? Say: "On our first call, I showed [prospect] that..." — accurate.
+- Claiming transformation? Only for SECTION B names with verified results.
+- NEVER: "We worked together and [prospect] improved." If you didn't witness it in their testimonial, don't write it.
+
+### Rule 3: Client drafts are drafts, not source of truth
+If Harrison's own email says "Featured in Forbes" and it can't be verified externally, ASK before propagating. "Featured in Forbes" was in Harrison's Email 1 — we copied it into 7+ emails before Timo confirmed it's not real. Lost credibility fast.
+
+**Always ask on first use:** "Is [specific claim] something we can verify, or a placeholder?"
+
+### Rule 4: "Unusual → Verify" filter
+Before writing: scan brand.md for any claim that would make you go "huh?" on a cold read. Unusual teacher names, obscure credentials, specific publications, numerical stats. Flag them. Ask Timo. Better to pause than to ship fiction.
+
+### Rule 5: Label every person inline during draft
+In v1 of any email, annotate: "Karen (prospect)" or "Mike BMW (student)." Strip the labels before shipping. But write with them so the reviewer can audit attribution.
+
+---
+
+## Description (continued)
 
 ## Activation
 User says: `/email`, or any request involving Harrison's email system
@@ -108,6 +146,10 @@ From `voice-spec.md`, check ALL of these:
 8. Subject under 50 chars?
 9. Zero em dashes, zero emoji, max 1 exclamation mark?
 10. Does it match the TONE of the annotated reference emails?
+11. **Every named person is correctly labeled in voice-bank Section A (prospect) or Section B (student)?**
+12. **Every outcome/result claim is tied to a Section B name with verified testimonial?**
+13. **No "Featured in Forbes" or other unverified credentials in sign-off?**
+14. **Every unusual proper name (teacher, collaborator) cross-checked against press kit?**
 
 **If ANY check fails: regenerate without outputting.**
 
