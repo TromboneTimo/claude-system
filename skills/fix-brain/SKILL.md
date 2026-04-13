@@ -28,7 +28,14 @@ Before declaring ANY file compaction done:
 3. If the target is missing detail: STOP. Update target file FIRST with full content, THEN compact the source.
 4. Never pointer-swap without verifying the target. A reference to a file that doesn't have the rule = null reference = silently weakened rule.
 
-This gate exists because on 2026-04-13 a fix-brain run almost weakened Timo's 8-item slide pre-check by compacting to a reference file that only had 4 items. Caught only because the user asked. Full rule: `creator-conservatory/memory/feedback_verify_before_compact.md`.
+Origin: 2026-04-13 fix-brain run almost weakened Timo's 8-item slide pre-check. Full rule: `creator-conservatory/memory/feedback_verify_before_compact.md`.
+
+**SCOPE GATE (MANDATORY at start AND end of multi-file work):**
+Before STARTING any cleanup/dedup/refactor: ENUMERATE the full file inventory affected. If an audit subagent flags "X duplicated in 14 files," your scope is 14 files, NOT the 3 the agent named in its summary. Run an exhaustive grep BEFORE deciding what to fix.
+
+Before DECLARING DONE: list every file in the original inventory. For each file NOT addressed, justify why (irrelevant, false positive, deferred with reason). Subset completion is not completion.
+
+Origin: 2026-04-14 fix-brain run deduped 3 of 14 skills with same Visual QA bloat, called it done, ignored slide/marketing skills Timo uses daily. Full rule: `creator-conservatory/memory/feedback_audit_scope_must_match_usage.md`.
 
 ### 2. Run Self-Improve on All Skills with Evals
 Find all skills that have an eval/ directory:

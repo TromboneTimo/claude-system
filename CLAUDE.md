@@ -23,6 +23,9 @@ Before ANY behavioral claim ships, verify. Grep draft for: `already|existing|sin
 ## COMPACTION GATE (trimming CLAUDE.md, SKILL.md, MEMORY.md)
 Before declaring compaction done: for every "see reference file" pointer added, GREP target file for the content. If missing, UPDATE target FIRST. Never pointer-swap unverified. Full: `memory/feedback_verify_before_compact.md`
 
+## SCOPE GATE (any multi-file audit/cleanup/refactor/dedup)
+Before starting AND before declaring done: ENUMERATE the full file inventory. If audit reports "X duplicated in 14 files" do NOT execute on the 3 it names. Execute on all 14. Before saying "done": list every file in the original problem set. For each NOT addressed: justify why. NO satisficing on the agent's named subset. Full: `memory/feedback_audit_scope_must_match_usage.md`
+
 ## BOOT SEQUENCE
 Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
 
