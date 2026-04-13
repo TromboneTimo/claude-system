@@ -104,51 +104,15 @@ Now he makes $50K/mo. All from YouTube.
 
 ## VISUAL SELF-QA (MANDATORY before reporting done)
 
-**After generating any HTML, PDF, slide, chart, or image output, you MUST render it and READ the result with your vision tool BEFORE reporting done.** Never ask the user to verify what you can verify yourself. Running `open` to launch Preview is NOT verification.
+After generating ANY HTML, PDF, slide, chart, or image output: render to PNG, READ with vision tool, fix issues, re-verify. Never outsource to user. `open` is NOT verification.
 
-**Commands:**
-
-```bash
-# HTML -> PNG (no visible browser)
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-  --headless --disable-gpu \
-  --screenshot="/tmp/verify.png" --window-size=1440,1800 \
-  "file:///absolute/path/to/file.html"
-
-# PDF -> PNG, multi-page, 150 DPI (optimal for AI vision)
-pdftoppm -r 150 -png input.pdf page
-# produces page-1.png, page-2.png, page-3.png, ...
-```
-
-Then use the `Read` tool on each PNG. Check for: page-break splits (cards cut in half), text overflow, misaligned elements, missing images, color/contrast issues, wrong fonts, responsive regressions. If any issue found: fix source, re-render, re-verify. Only report done when rendered output is correct.
-
-**Full protocol:** `~/.claude/knowledge/visual-self-qa-protocol.md`
-**Rule origin:** 2026-04-12 PDF proposal card split across page break, caught by user. Never again.
+**Full protocol (commands, examples, edge cases):** `~/.claude/knowledge/visual-self-qa-protocol.md`
 
 
 ---
 
 ## CONTENT VERIFICATION GATE (ASK, DONT INVENT)
 
-**When writing copy that references a real person (client, prospect, endorser, testimonial subject) — NEVER invent behavioral claims to make a pitch smoother. ASK the user instead.**
+When writing copy referencing a real person: NEVER invent behavioral claims. ASK the user. Grep draft for risk phrases (already, since you, your weekly/monthly, like you do, given your). For each hit: verify or ASK. Separate what they HAVE from what they DO.
 
-Trigger phrases that require verification:
-- "You already X" / "Since you X" / "Given your weekly/monthly Y"
-- "As part of your regular Z" / "Like the [interviews/videos/posts] you do"
-- "Your existing [habit/practice/content]"
-
-Before shipping any draft:
-
-```bash
-# grep the draft for fabrication-risk phrases
-grep -iE "already|existing|since you|your weekly|your monthly|like you do|given your|as part of your" draft.md
-```
-
-For each hit: verify evidence (transcript, memory, prior confirmed conversation). If not verified: **ASK the user before writing it**. Do not invent a plausible-sounding version. Narrative convenience is the #1 source of fabrication.
-
-Separate two claim types:
-- **What they HAVE** (access, network, skills, audience) — safe if backed
-- **What they DO** (behaviors, habits, routines) — requires verification
-
-Full rule: `~/.claude/projects/-Users-air-Desktop-Timo-LLC-creator-conservatory/memory/feedback_fabricated_behavior.md`
-Rule origin: 2026-04-12 Otto proposal fabrication ("you already do those conversations weekly" — false, caught by user).
+**Full rule (trigger phrases, grep command, HAVE/DO breakdown, origin):** `~/.claude/projects/-Users-air-Desktop-Timo-LLC-creator-conservatory/memory/feedback_fabricated_behavior.md`
