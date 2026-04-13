@@ -95,6 +95,90 @@ After generating ANY presentation, run this audit before declaring done:
 
 **Do NOT skip this. Do NOT declare done without running the audit.**
 
+### Images Must Be Evidence, Not Atmosphere (SALES DECKS — NON-NEGOTIABLE)
+
+For sales / persuasion / pitch decks, every image must LITERALLY SHOW the specific claim the slide is making. Atmospheric mood shots fail because they evoke without proving. 2026-04-13 leaking-business deck: five atmospheric images (burning money, diverging lines, search bar, chain link, stage) were rejected because they decorated the argument instead of making it.
+
+**The pause test** (apply to every image before shipping): Mute audio, pause the slide. Would a cold viewer know what's being argued? If no, the image is atmosphere. Regenerate as evidence.
+
+#### Three-Layer System (default for sales decks)
+
+| Layer | Job | Position | Example |
+|---|---|---|---|
+| `.hero-image` (background) | Atmosphere + mood | Full-bleed, 35% opacity, left gradient | Burning money photo, dark theater, chain link |
+| `.hero-foreground` (subject) | Literal evidence for the claim | Right-side, ~36vw square, drop shadow | Laptop with dashboard, phone with search, testimonial card |
+| `.slide-inner` (text) | Thesis / headline / subhead | Left half, max 56vw | Headline + subhead |
+
+#### DO
+
+- **Generate literal subjects as foregrounds:** a laptop showing the exact dashboard, a phone with the search result, a chained phone for dependency, a styled testimonial card for social proof.
+- **Shrink headline clamp on `.has-foreground` slides** to `clamp(1.75rem, 4.6vw, 4rem)`. Full-size headlines overflow the 56vw text zone.
+- **Use HTML-styled cards instead of AI-generated text panels** for testimonials, stats, comparisons. AI garbles small text; HTML is pixel-perfect.
+- **For hero slides where atmosphere IS the evidence** (e.g., "burning money on ads" with literal burning money), generate a stronger hero version as `.hero-foreground` AND keep atmospheric shot as `.hero-image`. Don't remove the foreground — promote it to subject-forward.
+- **Write behavioral threats, not category framings** in copy. "Your competitor just fired three people" beats "you're fighting a four-person agency."
+- **Add URL hash navigation** to every deck so `file://deck.html#7` jumps to slide 7. Enables sequential screenshot QA via `chrome --headless --screenshot file://deck.html#N`.
+- **Close old Safari tabs before opening fresh.** Use AppleScript to close tabs matching the URL, then reopen. Stale tabs confuse the user.
+
+#### DON'T
+
+- **Don't default to editorial / Apple-keynote aesthetic** for sales decks. That's for brand decks. Sales decks need forensic-evidence energy.
+- **Don't generate one image and assume you're done.** First pass is almost always atmosphere. Plan for a second pass that generates evidence.
+- **Don't stack a foreground on a slide where the background IS the literal subject.** Redundant.
+- **Don't let AI generate readable text inside foreground images** (dashboard numbers, chart labels, testimonial copy). It garbles. Generate containers (screens, devices, cards); overlay real text as HTML if needed.
+- **Don't spawn parallel Chrome headless instances** for multi-slide screenshot QA. Sequential or batches of 3-4 max. Parallel spawn hangs the bash tool.
+- **Don't fabricate business numbers.** Every stat must trace to real data or be explicitly hypothetical.
+- **Don't generate AI portraits of the presenter.** Uncanny, undermines credibility. Use real photos or atmospheric objects associated with them.
+
+#### CSS Scaffold (paste into any sales deck)
+
+```css
+.hero-image { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
+.hero-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.3) 100%);
+}
+.hero-foreground {
+    position: absolute; right: clamp(2rem, 5vw, 5rem); top: 50%;
+    transform: translateY(-50%);
+    width: clamp(280px, 36vw, 520px); aspect-ratio: 1 / 1;
+    z-index: 1; pointer-events: none;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8));
+    border-radius: 8px; overflow: hidden;
+}
+.hero-foreground img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slide.has-foreground .slide-inner {
+    max-width: min(56vw, 820px); margin-left: 0; margin-right: auto;
+}
+.slide.has-foreground .headline { font-size: clamp(1.75rem, 4.6vw, 4rem); }
+.slide.has-foreground .subhead { font-size: clamp(.9rem, 1.35vw, 1.2rem); max-width: 48ch; }
+```
+
+#### Hash Navigation (paste into deck JS)
+
+```js
+function fromHash() {
+    const n = parseInt((location.hash || '').replace('#',''), 10);
+    if (!isNaN(n) && n >= 1 && n <= slides.length) show(n - 1);
+}
+window.addEventListener('hashchange', fromHash);
+fromHash();
+```
+
+#### Nano Banana Foreground Subject Prompt Template
+
+```
+[Literal subject, e.g., "A sleek laptop showing a Facebook Ads Manager dashboard"],
+[Specific visible content, e.g., "red CPC graph spiking upward, '$47.82 CPC' in red, 'ROAS -18%' metric"],
+[Composition, e.g., "centered in frame, 45-degree angle"],
+[Lighting, e.g., "cinematic studio lighting, shallow depth of field, dramatic rim light"],
+[Background, e.g., "pure black void"],
+[Style, e.g., "35mm film aesthetic, square composition"],
+[Negative, e.g., "no text beyond what is naturally visible, no watermark, no real brand logos"]
+```
+
+Use 1024x1024 Nano Banana output. CSS handles fit via `aspect-ratio: 1/1` + `object-fit: cover`.
+
 ---
 
 ## Phase 0: Detect Mode
