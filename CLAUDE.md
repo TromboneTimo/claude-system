@@ -26,6 +26,9 @@ Before declaring compaction done: for every "see reference file" pointer added, 
 ## SCOPE GATE (any multi-file audit/cleanup/refactor/dedup)
 Before starting AND before declaring done: ENUMERATE the full file inventory. If audit reports "X duplicated in 14 files" do NOT execute on the 3 it names. Execute on all 14. Before saying "done": list every file in the original problem set. For each NOT addressed: justify why. NO satisficing on the agent's named subset. Full: `memory/feedback_audit_scope_must_match_usage.md`
 
+## SKILL ARCHITECTURE GATE (any SKILL.md write or update)
+Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
+
 ## BOOT SEQUENCE
 Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
 
