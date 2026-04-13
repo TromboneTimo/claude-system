@@ -61,6 +61,26 @@ These invariants apply to EVERY slide in EVERY presentation:
 
 **Content exceeds limits? Split into multiple slides. Never cram, never scroll.**
 
+### Typography Hierarchy Ratios (NON-NEGOTIABLE)
+
+ONE focal point per slide. Every supporting element must be 20-25% of the hero size, NOT 60-70%. Two elements at 60% of hero size do not read as "hero + support" -- they read as "two things competing." Lessons from 2026-04-13 deck failures where text overflowed viewports because stacked elements at similar sizes couldn't fit.
+
+| Element | Size relative to hero | Example clamp |
+|---------|----------------------|----------------|
+| Hero headline (1 per slide MAX) | 100% | `clamp(44px, 8vw, 120px)` |
+| Eyebrow label (uppercase, letterspaced) | 12-15% | `clamp(12px, 1.2vw, 16px)` |
+| Sub-headline / promise line | 20-25% | `clamp(14px, 1.5vw, 20px)` |
+| Body / caption text | 18-22% | `clamp(14px, 1.6vw, 22px)` |
+| Small proof text | 15-18% | `clamp(12px, 1.4vw, 18px)` |
+
+Hard rules:
+- ONE hero per slide. Not two. Not "hook + equally-sized sub-hook."
+- Eyebrow labels use letter-spacing 0.15-0.25em + uppercase. Make them read as "label," not "headline."
+- Supporting text opacity 0.7-0.85 on busy slides so it recedes.
+- Breathing room: minimum 24-36px gap between elements.
+- Math the overflow before shipping: if hero is at 20vw on 1440px = 288px per char, an 11-char number = 1980px = overflow. Calculate character count + average letter width * font size before using clamp maxes.
+- CTA + image + tagline + subtext cannot all be large simultaneously. One dominates, others support.
+
 ### Image Verification (MANDATORY)
 
 After generating ANY presentation, run this audit before declaring done:
