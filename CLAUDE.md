@@ -20,8 +20,8 @@ Render to PNG and READ it yourself before reporting done. Never outsource visual
 ## CONTENT VERIFICATION GATE (proposals, emails, pitches about real people)
 Before ANY behavioral claim ships, verify. Grep draft for: `already|existing|since you|your weekly|your monthly|like you do|given your`. For each hit: verify evidence or DELETE/REWRITE/ASK. ASK, don't invent. Full rule: `memory/feedback_fabricated_behavior.md`
 
-## COMPACTION GATE (never skip when trimming CLAUDE.md, SKILL.md, MEMORY.md)
-Before declaring any compaction done: for every "see reference file" pointer added, GREP the target file for the specific content. If detail missing, UPDATE target FIRST, then compact. Never pointer-swap without verifying. Full rule: `memory/feedback_verify_before_compact.md`
+## COMPACTION GATE (trimming CLAUDE.md, SKILL.md, MEMORY.md)
+Before declaring compaction done: for every "see reference file" pointer added, GREP target file for the content. If missing, UPDATE target FIRST. Never pointer-swap unverified. Full: `memory/feedback_verify_before_compact.md`
 
 ## BOOT SEQUENCE
 Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
@@ -30,10 +30,9 @@ Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/
 After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status changed). Pre-approved. Just do it.
 
 ## ENGINEERING
-- Plan first for 3+ step tasks. Build incrementally.
-- Subagents for isolated tasks. Main context = orchestration.
+- Plan first for 3+ step tasks. Build incrementally. Subagents for isolated tasks.
 - "Launch all agents" = Architect > Engineer > Reviewer > Optimizer > Verify.
-- Supabase public data: anon SELECT, raw fetch(), never getSession() first.
+- Supabase public: anon SELECT, raw fetch(), never getSession() first.
 
 ## SKILL TRIGGERS
 | Context | Skill |
