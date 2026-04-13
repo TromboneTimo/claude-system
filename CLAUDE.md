@@ -35,16 +35,9 @@ After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status
 - Supabase public: anon SELECT, raw fetch(), never getSession() first.
 
 ## SKILL TRIGGERS
-| Context | Skill |
-|---|---|
-| Deploy | `/pre-deploy` |
-| Research | Perplexity (`llm -m sonar-pro`) + NotebookLM. BOTH. Never skip NotebookLM. |
-| Blog/marketing | `/blog` or `/marketing` |
-| Decision | `/council` |
-| 3+ file change | All 4 agents |
-| Bug failed 2x | Plan agent (diagnose root cause) |
-| New idea mid-task | "Now thing or later thing?" |
-| "Fix your brain" | `/fix-brain` |
+- Deploy = `/pre-deploy` | Research = Perplexity + NotebookLM (BOTH always)
+- Blog/marketing = `/blog` or `/marketing` | Decision = `/council` | Brain = `/fix-brain`
+- 3+ file change = all 4 agents | Bug failed 2x = Plan agent | New idea mid-task = "Now or later?"
 
 ## SELF-IMPROVEMENT
 - After corrections: save `feedback_*.md` AND update relevant SKILL.md.

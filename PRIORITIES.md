@@ -39,8 +39,7 @@
 - RR ad testing strategy ($5-50/day)
 - Training content suite (DaVinci, Adobe Podcast, thumbnails, scripting)
 
-## Detailed Checklists
-`~/.claude/BACKLOG.md` has per-project checkbox items.
+**Detailed checklists:** `~/.claude/BACKLOG.md`
 
 ## Not Active Yet
 - Skool as email capture / top-of-funnel
@@ -48,9 +47,5 @@
 
 ## Backlog (promote when slot opens)
 Script Bot / Claude Hook Agent for Artists / Transcript Quote Finder / ICP-Content Mismatch Analyzer / Script Comparison Bot / Email Sequence Builder / Artist Profile Quiz / Email/DM Performance Scanner / PDF/Report Generator
-
-## Recent Completed
-- 2026-04-07: RR Presentation delivered
-- 2026-04-02: Life OS (SOUL, PRIORITIES, RHYTHM, SESSION_LOG, /ops)
 
 **Promote:** slot open + T1/T2 + clear outcome. **Demote:** stalled 2+ weeks OR T3 stealing from T1.
