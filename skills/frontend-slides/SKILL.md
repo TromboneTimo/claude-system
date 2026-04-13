@@ -367,6 +367,16 @@ This captures each slide as a screenshot and combines them into a PDF. Perfect f
 8. Explain WHY to non-technical audiences. Plain English.
 9. Organize endings: System Overview > Roadmap > Compensation > Close.
 10. Never fabricate quotes from real people.
+11. NEVER use generic icon placeholders (play-button rectangles, silhouette boxes, fake search results) when the slide cites a specific real-world visual AND an image generator (Gemini) is available. Generate the actual visual. Decision rule: generic UI element (button, browser frame) → CSS mockup OK; specific real-world content (a particular photo, brand page, product UI) → MUST generate.
+12. NEVER rebuild a slide from scratch in response to an ADD request. List existing elements first, decide keep/modify/remove for each with stated reason. ADD does not mean REPLACE. Deleting validated content because "the new thing covers it" is the #1 regression pattern.
+13. NEVER use a fake browser tab labeled with a company name as a stand-in for the brand's logo. The slide must show the actual brand mark (drawn inline as SVG if no fetch is possible).
+14. NEVER cite niche industry brands when household-name brands exist for the same proof point. For "small change → big lift" examples: Obama 2008, Microsoft Bing, Basecamp/37signals beat comScore, Veeam, etc.
+15. NEVER use marketing jargon ("CTA", "conversion rate") with non-marketer audiences. Plain English only: "sign-up button", "sign-ups", "people who clicked Buy".
+16. NEVER ship a "tiny color difference" / "subtle change" slide without prominent hex swatch chips visible AT THUMBNAIL SCALE. The change must be visible to the eye, not just described in text. Make the BEFORE swatch dim/desaturated and the AFTER swatch vibrant with an accent ring.
+17. NEVER spread credentials across 5+ slides when ONE compressed credibility slide hits harder. Pick the strongest 4-5 bullets, put them next to a portrait, move on.
+18. NEVER pass a sub-3KB file with a `.png` extension to the Read tool. It is an HTML error page from a failed fetch. Run `file path.png` first. If 2 image fetches fail, switch immediately to inline SVG/CSS mockups.
+19. NEVER spawn parallel headless Chrome instances for visual QA (>3-4 simultaneously). Hangs the bash tool. Run sequentially in a for-loop.
+20. NEVER outsource visual QA to the user. After ANY slide edit, render at 1920x1080 and READ the screenshot yourself. Check the SPECIFIC criterion the slide is making (e.g., for "tiny color difference" slide, check that the difference is visible — don't just check "looks professional").
 
 
 ---
