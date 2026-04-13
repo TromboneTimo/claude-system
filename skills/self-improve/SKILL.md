@@ -89,13 +89,21 @@ Failed assertions:
 ```
 
 ### Step 2: Make ONE Change
-Look at the failed assertions. Pick the most impactful one (the one that failed across the most tests). Make ONE targeted change to the SKILL.md to fix it.
+Look at the failed assertions. Pick the most impactful one (the one that failed across the most tests). Make ONE targeted change to fix it.
+
+**MANDATORY pre-flight before ANY SKILL.md write:**
+1. Is this rule cross-cutting (applies to 2+ skills)? Grep `~/.claude/skills/*/SKILL.md` for similar phrasing. If matches found in OTHER skills, the rule belongs in `~/.claude/knowledge/<rule>.md`, not in this SKILL.md. Update canonical and reference it from this SKILL.md in 1-2 lines.
+2. Is the SKILL.md already over 200 lines? If yes, before adding more, identify what can move to `references/<topic>.md` (commands, workflows, examples, edge cases).
+3. Is this rule specific to this skill's domain? Then inline it.
+
+Full architecture: `~/.claude/knowledge/skill-architecture.md`.
 
 Rules:
 - Change ONE thing at a time. Not two. Not three. ONE.
 - Add a specific, actionable rule (e.g., "NEVER use em dashes in any output")
 - Don't remove existing rules unless they directly conflict
-- Don't rewrite large sections - surgical edits only
+- Don't rewrite large sections, surgical edits only
+- NEVER inline a cross-cutting rule that already exists in another skill. Promote to canonical.
 
 ### Step 3: Retest
 Run all tests again with the modified SKILL.md. Calculate the new pass rate.

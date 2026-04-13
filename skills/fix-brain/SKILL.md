@@ -37,6 +37,19 @@ Before DECLARING DONE: list every file in the original inventory. For each file 
 
 Origin: 2026-04-14 fix-brain run deduped 3 of 14 skills with same Visual QA bloat, called it done, ignored slide/marketing skills Timo uses daily. Full rule: `creator-conservatory/memory/feedback_audit_scope_must_match_usage.md`.
 
+**SKILL ARCHITECTURE AUDIT (MANDATORY in step 2):**
+For each skill examined, check:
+1. **Size targets:** SKILL.md ideal ~60 lines, max 500. Anything beyond gets extracted to `references/` subfolders.
+2. **Cross-cutting duplication:** Grep for blocks that appear in 2+ SKILL.md files. Promote to `~/.claude/knowledge/<rule>.md`, replace with 1-2 line references in each consumer.
+3. **Reference verification:** For any "see reference" pointer, GREP target to confirm content present (Compaction Gate).
+
+The 3-part promotion test for a cross-cutting rule (from rules-distill reference impl):
+- Appears in 2+ skills
+- Actionable behavior change ("do X" or "don't do Y")
+- Not already covered by an existing canonical rule
+
+Full architecture: `~/.claude/knowledge/skill-architecture.md`. Failure mode: 2026-04-14 fix-brain found 14 skills with duplicated Visual QA block (308 wasted lines). Architecture rule prevents recurrence.
+
 ### 2. Run Self-Improve on All Skills with Evals
 Find all skills that have an eval/ directory:
 ```bash
