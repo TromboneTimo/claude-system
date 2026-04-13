@@ -461,7 +461,36 @@ This captures each slide as a screenshot and combines them into a PDF. Perfect f
 18. NEVER pass a sub-3KB file with a `.png` extension to the Read tool. It is an HTML error page from a failed fetch. Run `file path.png` first. If 2 image fetches fail, switch immediately to inline SVG/CSS mockups.
 19. NEVER spawn parallel headless Chrome instances for visual QA (>3-4 simultaneously). Hangs the bash tool. Run sequentially in a for-loop.
 20. NEVER outsource visual QA to the user. After ANY slide edit, render at 1920x1080 and READ the screenshot yourself. Check the SPECIFIC criterion the slide is making (e.g., for "tiny color difference" slide, check that the difference is visible — don't just check "looks professional").
+21. NEVER use a 3-column parallel triptych when the items share a causal/sequential/pattern-demonstrating relationship. Parallel columns hide causation. Use a roadmap grid (stage-column headers + per-instance rows + arrows between cells + highlighted outcome column). Decision rule: read the slide aloud — "and ALSO this" = triptych OK; "they ALL followed the same path" = roadmap required; "first X, then Y" = numbered timeline; "A vs B" = split-screen.
+22. NEVER attribute a verbatim quote to a real person without verifying against the actual source transcript. Perplexity fabricates URLs and conflates speakers (e.g., a podcast DISCUSSING Hormozi's frameworks is NOT Hormozi). Pipeline: (a) Perplexity → candidate, (b) `curl youtube.com/oembed?url=X&format=json` to verify the channel matches the claimed speaker, (c) `~/Library/Python/3.10/bin/yt-dlp --write-auto-sub --skip-download --sub-format vtt --sub-lang en URL` to download transcript, (d) grep transcript for keywords, (e) extract VERBATIM (no paraphrase). 2 failed source verifications → cut the quote slide entirely or write the principle in user's voice (no attribution).
+23. NEVER skip a "Why?" question raised by the prior slide. If slide N ends with "Why?", "How?", or any open question, the next slide MUST answer it explicitly before pivoting. Common failure: slide 3 asks "Why?" and slide 5 launches into "Three problems" without an answer slide between. Insert the bridge slide.
+24. NEVER write surface-symptom bullet lists for "problem" slides. "You forget to cross-post" is surface; "you ignore the DMs from people who actually commented, you don't track which platform converts, you don't study what's already working for competitors" is diagnosis. Diagnose the actual failure mode, not the obvious one.
+25. NEVER reach for the visually-safe layout when the argument needs a clarifying layout. Triptych is the cheapest layout for "3 things"; it costs argument clarity when items share meaning. Pre-ship test: does the visual structure SHOW the argument, or does it hide it behind text claims?
+26. NEVER use a generic stock-image placeholder when the slide's job is to be SPECIFIC proof. If the slide says "creators with millions of followers can't sell," the image must be a SPECIFIC documented case (e.g., the Arii/PerthNow headline screenshot), not a generic graphic. Same rule as #11 generalized to any "evidence" slide.
 
+---
+
+## PRE-SHIP LAYOUT CHECK (run BEFORE writing slide HTML)
+
+Before committing to a layout, answer these 4 questions out loud:
+
+1. **What is the slide's argument in one sentence?** ("Three creators all followed the same content → outcome path." / "Designer takes 6 weeks; marketer + AI takes 40 minutes." / "comScore added one element near a button and lift was 69%.")
+
+2. **What kind of argument is it?**
+   - Multiple instances of the SAME mechanism → roadmap grid (stage headers + per-instance rows + arrows)
+   - Comparison of TWO things → split-screen
+   - Sequential progression → numbered timeline with arrows
+   - Single-item with breakdown → hero + supporting bullets
+   - Truly parallel unrelated items → triptych OK
+
+3. **What single visual would PROVE the argument?**
+   - Specific real-world artifact (campaign photo, screenshot, brand mark) → generate via Gemini or fetch
+   - Generic diagram (icon, illustration of concept) → CSS/SVG inline
+   - Abstract atmospheric mood → use sparingly, only for transition slides
+
+4. **What's the ANTECEDENT?** Read the prior slide. Does this one bridge from it cleanly? If prior slide ended with a question, does this one answer it?
+
+If any of the 4 questions don't have a confident answer, STOP and ask the user before building.
 
 ---
 
