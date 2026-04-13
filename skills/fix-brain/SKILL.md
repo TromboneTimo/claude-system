@@ -21,6 +21,15 @@ Check line counts on all always-on files:
 
 If any file exceeds its target, flag it and propose a trim.
 
+**COMPACTION GATE (MANDATORY for every trim):**
+Before declaring ANY file compaction done:
+1. Identify every new "see reference file" pointer added (grep the compacted file for `feedback_`, `knowledge/`, `references/`, `see .*\.md`).
+2. For each pointer, GREP the target file for the specific content you claimed is there. Use specific keywords, not vague ones.
+3. If the target is missing detail: STOP. Update target file FIRST with full content, THEN compact the source.
+4. Never pointer-swap without verifying the target. A reference to a file that doesn't have the rule = null reference = silently weakened rule.
+
+This gate exists because on 2026-04-13 a fix-brain run almost weakened Timo's 8-item slide pre-check by compacting to a reference file that only had 4 items. Caught only because the user asked. Full rule: `creator-conservatory/memory/feedback_verify_before_compact.md`.
+
 ### 2. Run Self-Improve on All Skills with Evals
 Find all skills that have an eval/ directory:
 ```bash
