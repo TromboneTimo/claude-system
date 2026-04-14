@@ -112,6 +112,11 @@ Run all tests again with the modified SKILL.md. Calculate the new pass rate.
 - If pass rate IMPROVED or STAYED THE SAME: keep the change
 - If pass rate DROPPED: revert the change and try a different fix for the same assertion
 
+### Step 4.5: Reviewer Pass (MANDATORY before "keep")
+Before finalizing keep/revert: spawn a fresh general-purpose Agent to diff BEFORE and AFTER versions of the SKILL.md. Binary assertions can't detect rules that no assertion tests for. If reviewer reports any LOST items (rules present in BEFORE, missing in AFTER, not reachable through any pointer, not in canonical), treat as a FAIL regardless of assertion score. Restore or promote to canonical, then re-test.
+
+Full protocol: `~/.claude/knowledge/reviewer-pass-protocol.md`.
+
 ### Step 5: Loop
 Go back to Step 2. Pick the next failing assertion. Repeat.
 

@@ -21,7 +21,7 @@ Render to PNG and READ it yourself before reporting done. Never outsource visual
 Before ANY behavioral claim ships, verify. Grep draft for: `already|existing|since you|your weekly|your monthly|like you do|given your`. For each hit: verify evidence or DELETE/REWRITE/ASK. ASK, don't invent. Full rule: `memory/feedback_fabricated_behavior.md`
 
 ## COMPACTION GATE (trimming CLAUDE.md, SKILL.md, MEMORY.md)
-Before declaring compaction done: for every "see reference file" pointer added, GREP target file for the content. If missing, UPDATE target FIRST. Never pointer-swap unverified. Full: `memory/feedback_verify_before_compact.md`
+Before declaring compaction done: for every "see reference file" pointer added, GREP target file for the content. If missing, UPDATE target FIRST. Never pointer-swap unverified. THEN spawn fresh Agent to diff BEFORE vs AFTER and classify each rule as PRESERVED/MOVED/CONSOLIDATED/LOST. Any LOST count > 0 = FAIL. Full: `memory/feedback_verify_before_compact.md` + `knowledge/reviewer-pass-protocol.md`
 
 ## SCOPE GATE (any multi-file audit/cleanup/refactor/dedup)
 Before starting AND before declaring done: ENUMERATE the full file inventory. If audit reports "X duplicated in 14 files" do NOT execute on the 3 it names. Execute on all 14. Before saying "done": list every file in the original problem set. For each NOT addressed: justify why. NO satisficing on the agent's named subset. Full: `memory/feedback_audit_scope_must_match_usage.md`

@@ -37,6 +37,11 @@ Before DECLARING DONE: list every file in the original inventory. For each file 
 
 Origin: 2026-04-14 fix-brain run deduped 3 of 14 skills with same Visual QA bloat, called it done, ignored slide/marketing skills Timo uses daily. Full rule: `creator-conservatory/memory/feedback_audit_scope_must_match_usage.md`.
 
+**REVIEWER PASS GATE (MANDATORY after every compaction/dedup step):**
+After modifying any SKILL.md / CLAUDE.md / MEMORY.md / knowledge file, spawn a fresh general-purpose Agent to diff BEFORE vs AFTER and classify each rule as PRESERVED / MOVED / CONSOLIDATED / LOST. If LOST count > 0, do NOT declare step done. Restore or promote to canonical, re-verify. Binary evals and pointer checks miss silent rule deletion; reviewer pass catches it.
+
+Full protocol: `~/.claude/knowledge/reviewer-pass-protocol.md`. Workspace origin: `creator-conservatory/memory/feedback_reviewer_pass.md`.
+
 **SKILL ARCHITECTURE AUDIT (MANDATORY in step 2):**
 For each skill examined, check:
 1. **Size targets:** SKILL.md ideal ~60 lines, max 500. Anything beyond gets extracted to `references/` subfolders.
