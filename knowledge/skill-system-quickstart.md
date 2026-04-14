@@ -56,6 +56,8 @@ Then tell Claude: *"run the skill-reviewer subagent on the diff we just captured
 
 Automatic. The REVIEWER PASS GATE in [fix-brain/SKILL.md](~/.claude/skills/fix-brain/SKILL.md) and [self-improve/SKILL.md](~/.claude/skills/self-improve/SKILL.md) Step 4.5 invoke the reviewer pass before declaring any compaction done. You'll see the Reviewer Pass Report in the run output.
 
+**Note on agent registration:** New files in `~/.claude/agents/` are loaded at Claude Code session start. If you just added `skill-reviewer.md` in the current session, restart Claude Code once to register it. Until then, invocations fall back to the general-purpose agent (which works fine, just without the pre-loaded protocol context).
+
 ### Pattern C: Retrospective audit (did a past commit silently delete something?)
 
 ```bash
