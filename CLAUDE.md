@@ -49,6 +49,7 @@ After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status
 - After corrections: save `feedback_*.md` AND update relevant SKILL.md.
 - Corrections apply to ALL workspaces.
 - Use plain text file references, NOT @imports (@imports embed the whole file every run).
+- 4 meta-rules govern system maintenance: verify-before-done, match-rule-to-layer, YAGNI-new-agents, gates-from-fuckups. Full: `knowledge/system-maintenance-meta-rules.md`
 
 ## UNIVERSAL RULES
 - ALWAYS Safari. Memory-first (read before writing code).
