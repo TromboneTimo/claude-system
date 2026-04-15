@@ -40,11 +40,11 @@ Load `RemoteTrigger` first, then call `{action: "create", body: ...}` with this 
   "enabled": true,
   "job_config": {
     "ccr": {
-      "environment_id": "TIMO_ENV_ID_HERE",
+      "environment_id": "env_01MSLjBzwZA3cAG7pqkYwLM3",
       "session_context": {
         "model": "claude-sonnet-4-6",
         "sources": [
-          {"git_repository": {"url": "https://github.com/TIMO_ORG/TIMO_REPO"}}
+          {"git_repository": {"url": "https://github.com/TromboneTimo/claude-system"}}
         ],
         "allowed_tools": ["Bash", "Read", "Write", "Edit", "Glob", "Grep", "WebFetch", "WebSearch"]
       },
@@ -67,30 +67,33 @@ Load `RemoteTrigger` first, then call `{action: "create", body: ...}` with this 
 }
 ```
 
-### Timo-specific values (FILL IN BEFORE FIRST USE)
+### Timo's verified account values (extracted from existing routines 2026-04-14)
 
-These came from Nick's original skill and must be replaced with Timo's values before creating any routine:
-
-- **`environment_id`**: Get from https://claude.ai/code/environments. Default env is fine unless a custom one is needed for secrets. Looks like `env_01XXXXXXXXXXXXXXXXXX`.
-- **Default repo**: Timo's primary GitHub repo URL. Ask which repo to use if unclear. Examples: `https://github.com/timomaines/creator-conservatory` or a dedicated automation repo.
-- **Default model**: `claude-sonnet-4-6` (routines are research/automation, not heavy reasoning). Can use `claude-opus-4-6` for routines that need deep reasoning.
-- **Creator UUID**: Not needed in the body but may appear in responses. Timo's is unique to his account.
-- **Timezone**: Timo's local timezone (confirm with him). All cron is UTC, so convert from local.
+- **`environment_id`**: `env_01MSLjBzwZA3cAG7pqkYwLM3` (Default env, used by all 3 existing routines)
+- **Default repo**: `https://github.com/TromboneTimo/claude-system` (his ~/.claude config repo; use for system-maintenance routines. Create a separate repo for business automations that shouldn't touch the config.)
+- **Default model**: `claude-sonnet-4-6` (all existing routines use this)
+- **Account UUID**: `43ecfec1-0230-46bc-8c4f-44c3f909818e`
+- **Timezone**: JST (UTC+9). To convert local to UTC: subtract 9 hours. 9 AM JST = 0:00 UTC the same day. 7 AM JST = 22:00 UTC the previous day.
+- **Available MCP connectors for routines**: Google-Calendar (`d0b207fb-272c-415e-a873-d572ae92254a`), Gmail (`1eedb707-9ef0-45fb-bc8a-725dcb6aa0e2`). Attach via `mcp_connections` in the create body when the routine needs them.
 
 ## Cron conventions
 
-- **Cron is UTC**. Convert from Timo's local timezone and confirm with him before creating.
+- **Cron is UTC**. Timo is in JST (UTC+9). Subtract 9 hours from JST to get UTC.
 - **Minimum interval: 1 hour**. `*/30 * * * *` is rejected.
 - **Avoid minute 0 and 30**: every routine on the platform lands on those. Pick an off-minute (`:07`, `:17`, `:43`, `:51`).
 - **Stagger multiple daily routines** by 15+ min so they don't compete for resources.
 
-Examples (assuming Eastern Time for Timo, confirm):
-- Daily at 8 AM ET (EDT = UTC-4): `17 12 * * *`
-- Daily at 7 AM ET: `43 11 * * *`
-- Sunday 8 PM ET: `7 0 * * 1` (Monday UTC because of rollover)
+Examples (JST to UTC):
+- Daily at 8 AM JST: `17 23 * * *` (i.e. 23:17 UTC previous day)
+- Daily at 7 AM JST: `43 22 * * *`
+- Daily at 9 AM JST: `7 0 * * *` (midnight UTC, same day)
+- Sunday 9 PM JST: `0 12 * * 0` (existing Weekly Deep Review cadence)
 - Every 2 hours: `13 */2 * * *`
 
-Ask Timo to confirm his timezone at first use and note it in this skill.
+**Existing slots to avoid conflicting with:**
+- `57 22 * * *` (Daily Morning Briefing, 7:57 AM JST)
+- `0 12 * * 0` (Weekly Deep Review, 9 PM JST Sundays)
+- `0 0 * * *` (Daily Brain Fix, 9 AM JST, currently DISABLED)
 
 ## Allowed tools
 
@@ -103,7 +106,7 @@ Pick the smallest set the routine actually needs. Common combos:
 | Code review / PR work | `Bash, Read, Write, Edit, Glob, Grep` |
 | Data pull + report | `Bash, Read, Write, Edit, Glob, Grep, WebFetch` |
 
-Do **not** add MCP tools. Routines have no MCP connectors unless explicitly attached via `mcp_connections`. Timo currently has no MCP connections configured for routines (check if this changes).
+Do **not** add MCP tools to `allowed_tools`; MCP is attached separately via `mcp_connections` in the create body. Timo has Gmail and Google-Calendar connectors available (see verified values section). Attach them only when the routine actually needs to read/send email or calendar events.
 
 ## UUID generation
 
@@ -254,10 +257,10 @@ RemoteTrigger(action="create", body={
     "enabled": True,
     "job_config": {
         "ccr": {
-            "environment_id": "TIMO_ENV_ID_HERE",
+            "environment_id": "env_01MSLjBzwZA3cAG7pqkYwLM3",
             "session_context": {
                 "model": "claude-sonnet-4-6",
-                "sources": [{"git_repository": {"url": "https://github.com/TIMO_ORG/TIMO_REPO"}}],
+                "sources": [{"git_repository": {"url": "https://github.com/TromboneTimo/claude-system"}}],
                 "allowed_tools": ["Bash", "Read", "Write", "Edit", "Glob", "Grep", "WebFetch", "WebSearch"]
             },
             "events": [{
@@ -302,7 +305,7 @@ Check `RemoteTrigger({action: "list"})` for the current set. Past history is on 
 
 Timo needs to run these once and tell Claude the values, then this skill should be updated with them inline:
 
-1. **Get environment ID**: visit https://claude.ai/code/environments, copy the Default env ID (looks like `env_01...`), replace `TIMO_ENV_ID_HERE` in this file.
+1. **Get environment ID**: visit https://claude.ai/code/environments, copy the Default env ID (looks like `env_01...`), replace `env_01MSLjBzwZA3cAG7pqkYwLM3` in this file.
 2. **Get default repo URL**: pick which GitHub repo routines should clone (probably the creator-conservatory repo or a dedicated automation repo), replace `TIMO_ORG/TIMO_REPO`.
 3. **Confirm timezone**: tell Claude which timezone to use for cron conversion. Update examples section.
 4. **Enable Claude Code on the web**: required for routines. Check at https://claude.ai/settings.
