@@ -26,6 +26,9 @@ Before declaring compaction done: for every "see reference file" pointer added, 
 ## SCOPE GATE (any multi-file audit/cleanup/refactor/dedup)
 Before starting AND before declaring done: ENUMERATE the full file inventory. If audit reports "X duplicated in 14 files" do NOT execute on the 3 it names. Execute on all 14. Before saying "done": list every file in the original problem set. For each NOT addressed: justify why. NO satisficing on the agent's named subset. Full: `memory/feedback_audit_scope_must_match_usage.md`
 
+## AUDIT GATE (any reported problem before proposing a fix)
+Before proposing a fix or remediation workflow: test the assumption that defines the problem. Security: curl API with the leaked credential. Missing feature: WebFetch docs AND check available skills/tools. "X is broken": run X and read the actual error. Check ALL alternative success paths (parallel auth, fallbacks, caches). Present findings first, solution second. Full: `knowledge/audit-state-before-prescribing.md`
+
 ## SKILL ARCHITECTURE GATE (any SKILL.md write or update)
 Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
 

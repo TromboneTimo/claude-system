@@ -29,7 +29,12 @@ Before building a new subagent, skill, or orchestrator, grep existing tooling. `
 
 **Failure this prevents:** Over-engineering temptation. Every new artifact is forever-maintenance.
 
-### 4. Gates Come From Fuckups, Not Architecture
+### 4. Audit State Before Prescribing Action
+Before proposing a fix or remediation workflow for a reported problem, audit the actual state. Test the assumption that defines the problem: for leaked credentials, curl the API; for "feature does not exist," fetch docs AND check available tools/skills; for "broken X," run X and read the actual error. Check alternative success paths (parallel auth, fallbacks, caches). Present findings first, solution second. Companion to verify-before-done: that rule covers output-side verification, this covers input-side.
+
+**Failure this prevents:** Leaping from "problem reported" to "here is the fix workflow" creates busywork when the problem has already resolved (auto-revoked credential, parallel auth path working silently) or exists in a different shape than assumed.
+
+### 5. Gates Come From Fuckups, Not Architecture
 Every gate in CLAUDE.md, every canonical rule in `knowledge/`, and every feedback file traces to a specific incident. Do not invent gates from abstract reasoning. Do not delete gates because they seem redundant. The burden of proof for deletion is on the deleter: name the incident the gate prevents recurrence of. If you cannot find the incident, the gate is still probably load-bearing.
 
 Corollary: Timo's pushback is diagnostic, not resistance. "What about X?" either surfaces a new incident (which produces the next gate) or confirms an existing gate covered it.
