@@ -12,6 +12,18 @@ Docs: https://code.claude.com/docs/en/routines
 Fire API: https://platform.claude.com/docs/en/api/claude-code/routines-fire
 Web UI: https://claude.ai/code/scheduled
 
+## CAPABILITY PRECEDENT GATE (read before assuming limits)
+
+**Before claiming an MCP connector "can't do X" (send email, write event, post message, etc.), you MUST:**
+
+1. Call `RemoteTrigger({action: "list"})`
+2. Read existing routines' prompts for the capability in question
+3. If a working routine already does X with that connector, copy the pattern. Do NOT propose third-party workarounds (Resend, SMTP, SendGrid, Zapier).
+
+**Why:** Local claude.ai connector tool lists are a SUBSET of what cloud routines can access. The remote environment exposes more tools. `gmail_send_message` is not visible locally but works in cloud routines (proven by the Daily Morning Briefing). Treating the local tool list as authoritative has caused a wrong "can't send" claim and a proposed Resend workaround that was not needed (incident 2026-04-15).
+
+**Only after the precedent check comes up empty** may you propose external-service workarounds. Even then, try the capability once in a test-fire before proposing alternatives. Fail-and-see beats assume-and-redirect.
+
 ## When to use routines vs other scheduling
 
 | Need | Use |
