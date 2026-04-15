@@ -5088,3 +5088,47 @@ To prevent duplication of cross-cutting rules (visual QA, content verification, 
 - https://github.com/affaan-m/everything-claude-code/blob/main/skills/rules-distill/SKILL.md
 - https://www.firecrawl.dev/blog/best-claude-code-skills
 
+
+---
+
+### ADHD focus hooks for AI coding assistants: mechanical enforcement patterns + active engagement time measurement
+- **Date:** 2026-04-15
+- **Queries:** (1) proven mechanical enforcement patterns for AI coding assistants to interrupt long sessions. (2) measuring active engagement time to filter idle gaps.
+- **Model:** sonar-pro
+
+**Key findings (Q1 mechanical enforcement):**
+No prior art for ADHD focus hooks in AI coding assistants. Hook architectures proven for SECURITY (Cycode, Earthly Lunar, hoop.dev Access Guardrails). Pre-submission hooks (e.g., UserPromptSubmit) are the architecturally-correct layer: intercept before model exposure, deterministic, low token overhead. Gap: no research on instruction-following degradation in long AI sessions, no implementations of prompt-count or active-time thresholds documented in literature. Building something novel but with validated architectural analogy (security guardrails).
+
+**Key findings (Q2 active engagement time):**
+GA4 uses `engagement_time_msec` parameter measuring gap between last and current interaction. Pauses when user switches tabs/windows. Algorithm:
+1. Record timestamps for each user event
+2. Calculate inter-event gaps
+3. Filter gaps exceeding threshold (e.g., 5 min)
+4. Sum remaining active periods
+5. Emit engagement metrics
+
+Critical distinction: PRESENCE (session open) vs ATTENTION (active interaction). 2-5 min is "reasonable resolution time." No peer-reviewed research on optimal threshold for AI coding sessions specifically.
+
+**Sources cited (Q1):**
+- https://www.adhoc.team/2026/02/05/how-government-platforms-make-ai-coding-assistants-more-effective/
+- https://hoop.dev/blog/why-access-guardrails-matter-for-ai-policy-enforcement-ai-runtime-control
+- https://earthly.dev/ai-agent-guardrails/
+- https://cycode.com/blog/ai-guardrails-real-time-ide-security/
+- https://martinfowler.com/articles/reduce-friction-ai/
+- https://codescene.com/blog/implement-guardrails-for-ai-assisted-coding
+- https://fossa.com/solutions/ai-coding-guardrails/
+- https://www.sonatype.com/blog/guardrails-make-ai-assisted-development-safer-by-design
+
+**Sources cited (Q2):**
+- https://getstream.io/blog/chat-engagement/
+- https://www.o2ods.com/en/blog/14-must-have-metrics-for-measuring-user-interaction-with-ai-chatbots/
+- https://krmdigital.uk/blog/session-duration-v-engagement-time/
+- https://marketlytics.com/analytics-faq/difference-between-average-engagement-time-per-session-and-average-engagement-time-per-user-in-google-analytics/
+- https://louder.com.au/2025/02/12/ga-time-metrics/
+- https://www.assertiveyield.com/blog/tracking-the-metrics-that-matter-active-engagement-time-vs-time-spent-on-page/
+
+**Applied to Timo's ADHD hook design:**
+- Use UserPromptSubmit hook injection (proven architectural layer from security guardrails)
+- Apply GA4-style engagement time: timestamp per prompt, sum gaps < 5min as active engagement, gaps >= 5min treated as break (not counted)
+- Prompt-count thresholds (15/25/35) never had the broken-signal problem, restore as-is
+- Replace broken wall-clock time thresholds with engagement-time thresholds (same 45/90/120 min landmarks but measured in active engagement, not elapsed wall-clock)
