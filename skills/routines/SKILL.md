@@ -297,18 +297,22 @@ When Timo asks for a new routine:
 9. **Report back**: trigger ID, schedule in local time, session URL, any secrets Timo still needs to add
 10. **Add to active/todo.md if secrets are pending**
 
-## Reference: active routines (update as they change)
+## Existing routines (as of 2026-04-14)
 
-Check `RemoteTrigger({action: "list"})` for the current set. Past history is on claude.ai/code/scheduled.
+| Name | ID | Schedule (UTC / JST) | Enabled | Purpose |
+|------|-----|----------|---------|---------|
+| Daily Morning Briefing | trig_01LSUbvtYdKwPFroa3eC3qta | 57 22 * * * / 7:57 AM | YES | Reads PRIORITIES/SESSION_LOG/SOUL, checks Gcal, emails briefing to trombonetimo@gmail.com. Uses Gmail + Gcal MCP connectors. |
+| Weekly Deep Review | trig_01E4mAE8U8MS8fbY6eWykcYH | 0 12 * * 0 / 9 PM Sun | YES | System health audit, feedback analysis, skill audit, write report, commit+push |
+| Daily Brain Fix | trig_01Hxtr8JUqWCEHsmVqjGcaRQ | 0 0 * * * / 9 AM | **DISABLED** | File health, skill evals, priority staleness. Daily Morning Briefing covers most of this; re-enable only if you want separate deeper check. |
 
-## Setup TODO (do before first routine creation)
+**Commands:**
+- Full config: `RemoteTrigger({action: "get", trigger_id: "<id>"})`
+- Fire now: `RemoteTrigger({action: "run", trigger_id: "<id>"})`
+- Re-enable Daily Brain Fix: `RemoteTrigger({action: "update", trigger_id: "trig_01Hxtr8JUqWCEHsmVqjGcaRQ", body: {"enabled": true}})`
 
-Timo needs to run these once and tell Claude the values, then this skill should be updated with them inline:
+## Setup state
 
-1. **Get environment ID**: visit https://claude.ai/code/environments, copy the Default env ID (looks like `env_01...`), replace `env_01MSLjBzwZA3cAG7pqkYwLM3` in this file.
-2. **Get default repo URL**: pick which GitHub repo routines should clone (probably the creator-conservatory repo or a dedicated automation repo), replace `TIMO_ORG/TIMO_REPO`.
-3. **Confirm timezone**: tell Claude which timezone to use for cron conversion. Update examples section.
-4. **Enable Claude Code on the web**: required for routines. Check at https://claude.ai/settings.
-5. **Install Claude GitHub App** (only if using GitHub triggers): the trigger setup prompts for this.
-
-After these five steps, this skill can create routines end-to-end via `/routines`.
+All required values are filled in. Routines can be created end-to-end via `/routines` now. The only remaining dependencies are per-routine:
+- **Fresh UUID per event** (generate via `uuidgen | tr '[:upper:]' '[:lower:]'`)
+- **Secrets in env** (only for routines that need external APIs; add at https://claude.ai/code/environments)
+- **GitHub App install** (only for GitHub-triggered routines; prompted by the web UI)
