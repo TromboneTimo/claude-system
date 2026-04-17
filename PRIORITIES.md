@@ -19,14 +19,17 @@
 ## This Week (2026-04-13 onward)
 
 ### HIGH PRIORITY (time-ordered)
-- **RR Comp Proposal** (DUE 4/22, 5 DAYS) -- project-based + performance-tiered draft to Richard. NOT STARTED. Biggest time risk.
 - **Harrison pilot launch** -- dashboard + data pipeline built 4/17. NEXT: get YouTube API key + channel ID, test pipeline, send pitch (keep $500 base, $750/sale at $30K milestone, testimonial as deliverable)
+- **Otto + Samurai Brass shot list** -- NEW 4/17. Create content capture plan for both (festival content Otto, Samurai Brass positioning content)
 - **Hook Book VSL** -- record (still blocking entire funnel)
 - **Trombone Timo** -- daily shorts + long-form (always-on)
 - **Otto / Music System Japan** -- content creation proposal for festival
 - **RR Dashboard/Data Access** -- scope data requirements doc for Richard (blocks dashboard build)
 - **RR Image Library** -- request consolidated folder from Betty/Richard (unblocks everything)
 - **Creator Conservatory other clients** -- Sohee (AI content system), Wilhelm (check-in before May 16 wedding)
+
+### COMPLETED 2026-04-17
+- **RR Comp Proposal** -- SENT to Richard. Ahead of 4/22 deadline. [Timo confirmed 4/17]
 
 ### MEDIUM PRIORITY
 - RR blog content system (Betty publishing workflow)
@@ -56,9 +59,11 @@ Script Bot / Claude Hook Agent for Artists / Transcript Quote Finder / ICP-Conte
 ## Session 2026-04-17 (JST)
 
 ### Shipped
+- **RR comp proposal sent to Richard** (ahead of 4/22 deadline)
 - Built Precision Brass dashboard prototype: 6 HTML pages (index, email, youtube, instagram, facebook, revenue), sidebar nav, dark theme + brass accent, Chart.js visuals, per-page tracking explainers
 - Built YouTube data pipeline: fetch_youtube.py, mine_comments.py (AI classifier: gold/wound/friction), run_daily.sh orchestration, full setup README, Claude routine prompt
 - Established Harrison pilot terms: $500/mo base stays, $750 per attributed closed sale at month 4 after $30K HYROS milestone hit in 60 days, video testimonial required
+- New task added: Otto + Samurai Brass shot list
 
 ### Decisions made (not yet executed)
 - Architecture: YouTube-only phase 1 (no Harrison data access needed), email/HYROS phase 2 when he grants access
@@ -68,7 +73,7 @@ Script Bot / Claude Hook Agent for Artists / Transcript Quote Finder / ICP-Conte
 ### Blocked on
 - Harrison pitch not sent yet (Timo to review + send)
 - YouTube API key + channel ID (Timo to get from Google Cloud + Harrison)
-- RR comp proposal 5 days out and not started
+- Otto + Samurai Brass shot list: needs Timo to brief scope
 
 ### ONE thing before closing session
-Pick: Harrison pilot live (YT API + test pipeline + send pitch) OR RR comp draft. Cannot do both well in remaining time today.
+Pick: Harrison pilot live (YT API + test pipeline + send pitch) OR start Otto/Samurai shot list.
