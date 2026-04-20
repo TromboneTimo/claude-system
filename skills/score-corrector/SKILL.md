@@ -59,6 +59,8 @@ Split the page list into batches of 5. For 100 pages that's 20 batches. Spawn th
 
 For each batch, call the Agent tool with `subagent_type: general-purpose` and a prompt built from `references/subagent-prompt-template.md`. Replace `{{IMAGE_PATHS}}`, `{{PAGE_NUMBERS}}`, `{{TOTAL_PAGES}}`, and `{{SCORE_TITLE}}`.
 
+For scores over 50 pages, add `model: "haiku"` to the Agent call to run workers on Haiku 4.5. Haiku handles per-page engraving scans at equivalent quality to Opus for this task and costs ~5x less. See "Worker model selection" below for the rule.
+
 Tell each subagent to:
 - Read the error taxonomy at `~/.claude/skills/score-corrector/references/engraving-errors.md`
 - Visually inspect each PNG in the batch (this is where the subagent's Read tool consumes the images; main context never does)
@@ -148,10 +150,16 @@ You:
 
 ## Scaling math (worth memorizing)
 
-| Score size | Batches | Parallel waves | Rough runtime |
-|-----------|---------|----------------|---------------|
-| 20 pages  | 4       | 1              | 2 to 3 min    |
-| 100 pages | 20      | 5              | 8 to 12 min   |
-| 500 pages | 100     | 25             | 40 to 60 min  |
+Anthropic's official image token formula: `tokens ≈ width × height / 750`. At 1024×1024 that's ~1,400 tokens per image. A 5-page batch at 1024px is ~7k vision tokens plus the prompt scaffold. Plan for 8-10k total tokens per subagent call.
 
-At 1024px, each subagent uses ~3,400 tokens for 5 images plus the prompt. A 500-page run costs roughly 350k vision tokens plus subagent scaffolding, which is well within rate limits as long as you pace waves.
+| Score size | Batches | Parallel waves | Vision tokens | Rough runtime | Worker model |
+|-----------|---------|----------------|---------------|---------------|--------------|
+| 20 pages  | 4       | 1              | ~28k          | 2 to 3 min    | general-purpose (Opus default is fine) |
+| 100 pages | 20      | 5              | ~140k         | 8 to 12 min   | Haiku (5x cheaper, quality-equivalent for page-scan) |
+| 500 pages | 100     | 25             | ~700k         | 40 to 60 min  | Haiku (mandatory for cost) |
+
+## Worker model selection
+
+For scores over 50 pages, route the batch subagents to Haiku for ~5x cost savings. Anthropic's "Split-and-Merge fan-out" pattern assumes the orchestrator is Opus-class but workers are Haiku-class, because the per-page engraving scan is a well-constrained task that Haiku handles accurately. Pass `model: "haiku"` in the Agent tool call for each batch subagent. Keep the orchestrator (this thread) on whatever model is already running; it never sees images and does pure aggregation.
+
+For 20-50 page scores, default model is fine. The overhead of switching isn't worth it at that scale.
