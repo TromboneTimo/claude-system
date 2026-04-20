@@ -50,12 +50,18 @@ def make_overlay_page(page_w, page_h, errors_for_page):
         sev = err["severity"]
         c.setFillColor(SEVERITY_COLORS[sev])
         c.setStrokeColor(SEVERITY_STROKE[sev])
-        c.setLineWidth(1.5)
-        c.rect(x, y, w, h, fill=1, stroke=1)
+        c.setLineWidth(2.0)
+        # Ellipse circumscribing the error region, with 15% padding so it
+        # circles around (not crops) the defect. reportlab ellipse takes
+        # the bounding box (x1, y1, x2, y2) in PDF coords.
+        pad_x = w * 0.15
+        pad_y = h * 0.15
+        c.ellipse(x - pad_x, y - pad_y, x + w + pad_x, y + h + pad_y,
+                  fill=0, stroke=1)
 
-        # numbered badge in top-left of the box
-        badge_x = x
-        badge_y = y + h - 14
+        # numbered badge near the top-left of the circle
+        badge_x = x - pad_x
+        badge_y = y + h + pad_y - 14
         c.setFillColor(SEVERITY_STROKE[sev])
         c.circle(badge_x + 8, badge_y + 4, 9, fill=1, stroke=0)
         c.setFillColor(Color(1, 1, 1))
