@@ -90,30 +90,56 @@ def make_overlay_page(page_w, page_h, errors_for_page):
     buf = BytesIO()
     c = canvas.Canvas(buf, pagesize=(page_w, page_h))
 
-    # === RIGHT MARGIN RIBBON ===
-    # Draw a thin vertical guide line in the right margin, then place a small
-    # numbered severity dot at each error's staff vertical level.
-    ribbon_x = page_w - 18  # 18pt from right edge
-    dot_radius = 7
-    c.setStrokeColor(Color(0.85, 0.85, 0.85, alpha=0.5))
-    c.setLineWidth(0.5)
-    c.line(ribbon_x, 36, ribbon_x, page_h - 36)
+    # === SMALL NUMBERED CIRCLES ON THE PAGE ===
+    # Each error gets a small circle on the page. Y is from staff_position
+    # (reliable: the vision model knows which staff). X is from
+    # measure_position if present, otherwise we spread errors on the same
+    # staff horizontally by their order in the list so they don't stack.
+    dot_radius = 11
 
-    # Group dots that land at the same y to avoid stacking.
-    placed_y = []
+    # Group errors by staff so we can spread them horizontally within each staff.
+    by_staff = {}
     for err in errors_for_page:
-        y = staff_y(page_h, err.get("staff_position"))
-        # If another dot is within 16pt of this one, bump this one down.
-        while any(abs(y - py) < 16 for py in placed_y):
-            y -= 16
-        placed_y.append(y)
+        key = (err.get("staff_position") or "middle")
+        by_staff.setdefault(key, []).append(err)
+
+    placed = []
+    for staff_key, staff_errors in by_staff.items():
+        n = len(staff_errors)
+        for idx, err in enumerate(staff_errors):
+            y = staff_y(page_h, err.get("staff_position"))
+
+            # If the model provided measure_position, use it. Otherwise
+            # distribute this staff's errors evenly across the content area.
+            mp = err.get("measure_position")
+            if mp:
+                x = measure_x(page_w, mp)
+            else:
+                # Spread n errors across 15%-90% of page width.
+                if n == 1:
+                    x_frac = 0.5
+                else:
+                    x_frac = 0.15 + (idx / (n - 1)) * 0.75
+                x = page_w * x_frac
+
+            # De-collide if two circles still land too close.
+            while any(abs(x - px) < 24 and abs(y - py) < 24 for (px, py) in placed):
+                y -= 24
+            placed.append((x, y))
 
         sev = err.get("severity", "LOW")
-        c.setFillColor(SEVERITY_FILL.get(sev, SEVERITY_FILL["LOW"]))
-        c.circle(ribbon_x, y, dot_radius, fill=1, stroke=0)
-        c.setFillColor(Color(1, 1, 1))
-        c.setFont("Helvetica-Bold", 7)
-        c.drawCentredString(ribbon_x, y - 2.5, str(err.get("id", "")))
+        stroke_color = SEVERITY_FILL.get(sev, SEVERITY_FILL["LOW"])
+
+        # Outline-only circle so the music underneath stays visible.
+        c.setStrokeColor(stroke_color)
+        c.setFillColor(Color(1, 1, 1, alpha=0.85))  # pale white center for contrast
+        c.setLineWidth(2.0)
+        c.circle(x, y, dot_radius, fill=1, stroke=1)
+
+        # Numbered label in the center of the circle, in severity color.
+        c.setFillColor(stroke_color)
+        c.setFont("Helvetica-Bold", 9)
+        c.drawCentredString(x, y - 3, str(err.get("id", "")))
 
     # === FOOTER STRIP ===
     # One-line summary of all errors on this page, left-aligned at the bottom.
