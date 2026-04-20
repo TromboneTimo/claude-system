@@ -55,7 +55,6 @@ SEVERITY_LABEL = {
 }
 
 # Staff position to vertical fraction of the page (0=top, 1=bottom).
-# The music area is typically ~8% from top to ~88% from top.
 POSITION_Y_FRAC = {
     "top":           0.12,
     "upper-middle":  0.30,
@@ -65,11 +64,26 @@ POSITION_Y_FRAC = {
 }
 DEFAULT_Y_FRAC = 0.50
 
+# Measure position to horizontal fraction of the page (0=left, 1=right).
+# The music content area is typically ~12% from left edge to ~95% from left edge.
+POSITION_X_FRAC = {
+    "left":         0.20,
+    "center-left":  0.35,
+    "center":       0.52,
+    "center-right": 0.70,
+    "right":        0.88,
+}
+DEFAULT_X_FRAC = 0.52
+
 
 def staff_y(page_h, position):
     frac = POSITION_Y_FRAC.get((position or "").lower(), DEFAULT_Y_FRAC)
-    # Flip because PDF origin is bottom-left but our fractions read top-down.
     return page_h * (1.0 - frac)
+
+
+def measure_x(page_w, position):
+    frac = POSITION_X_FRAC.get((position or "").lower(), DEFAULT_X_FRAC)
+    return page_w * frac
 
 
 def make_overlay_page(page_w, page_h, errors_for_page):
