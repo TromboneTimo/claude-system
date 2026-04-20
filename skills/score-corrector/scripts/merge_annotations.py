@@ -52,13 +52,16 @@ def main():
         all_errors.extend(data.get("errors", []))
         higher_res_pages.update(data.get("pages_needing_higher_res", []))
 
-    # Sort: by page number, then by severity (BLOCKER first), then by y position
+    # Sort: by page number, then by severity (BLOCKER first), then by staff_position
+    position_rank = {"top": 0, "upper-middle": 1, "middle": 2, "lower-middle": 3, "bottom": 4}
     def sort_key(e):
         page = e.get("page", 0)
         if isinstance(page, str):
             page = 9999  # string pages like "throughout" go last
         sev = SEVERITY_RANK.get(e.get("severity", "LOW"), 99)
-        y = e.get("region", {}).get("y_pct", 0)
+        pos = position_rank.get((e.get("staff_position") or "middle").lower(), 2)
+        # Fallback: use old region.y_pct if present (for backward compat during transition)
+        y = e.get("region", {}).get("y_pct", pos * 20)
         return (page, sev, y)
 
     all_errors.sort(key=sort_key)
