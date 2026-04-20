@@ -1,0 +1,213 @@
+{
+  "score_title": "Lake - Orchestral Arrangement",
+  "arranger": "Austin Ali",
+  "analyzed_by": "score-corrector (vision batch pipeline)",
+  "total_pages": 3,
+  "severity_legend": {
+    "BLOCKER": "Must fix before sending to players. Will cause reading errors.",
+    "HIGH": "Should fix. Noticeable engraving defect.",
+    "MEDIUM": "Recommended fix. Improves clarity.",
+    "LOW": "Stylistic consistency. Fix if time allows."
+  },
+  "severity_counts": {
+    "BLOCKER": 0,
+    "HIGH": 3,
+    "MEDIUM": 7,
+    "LOW": 2
+  },
+  "pages_needing_higher_res": [],
+  "errors": [
+    {
+      "page": 1,
+      "measure": "1-2",
+      "staff": "Multiple",
+      "category": "spacing",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 10,
+        "y_pct": 18,
+        "w_pct": 20,
+        "h_pct": 78
+      },
+      "description": "Measure 1 is given similar horizontal width to the sparser measures 2-6 despite containing dense 32nd-note runs in Oboe, Clarinet, Piano RH, and Violin 1. Notes in the runs appear compressed.",
+      "fix": "Allocate proportionally more horizontal space to measure 1 to accommodate the dense run passages.",
+      "id": 1
+    },
+    {
+      "page": 1,
+      "measure": "1",
+      "staff": "Piano",
+      "category": "collision",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 12,
+        "y_pct": 50,
+        "w_pct": 20,
+        "h_pct": 10
+      },
+      "description": "Piano RH measure 1 has a dense ascending run with beam/notehead crowding near the start; noteheads and ledger-line accidentals are visually compressed.",
+      "fix": "Widen measure 1 in the Piano RH or respace the 32nd/run so noteheads and accidentals read clearly.",
+      "id": 2
+    },
+    {
+      "page": 1,
+      "measure": "1",
+      "staff": "Piano",
+      "category": "spacing",
+      "severity": "LOW",
+      "region": {
+        "x_pct": 10,
+        "y_pct": 55,
+        "w_pct": 10,
+        "h_pct": 8
+      },
+      "description": "Piano pedal marking '(Ped.)' placement slightly overlaps with the bass-clef staff bottom line in measure 1.",
+      "fix": "Drop the pedal marking further below the bass staff.",
+      "id": 3
+    },
+    {
+      "page": 2,
+      "measure": "10",
+      "staff": "Vibraphone",
+      "category": "layout",
+      "severity": "HIGH",
+      "region": {
+        "x_pct": 45,
+        "y_pct": 40,
+        "w_pct": 18,
+        "h_pct": 6
+      },
+      "description": "Inline staff sharing: 'Tamb.' and 'Sn. Dr.' text labels switch on the same Vibraphone staff mid-system (measures 9-12). The 'Tamb.' and 'Sn. Dr.' labels also visually crowd and nearly touch at measure 10, with 'Tam' and 'Sn. Dr.' running together.",
+      "fix": "Give Tambourine and Snare Drum their own staves (as done on page 3), or clearly separate the labels with adequate spacing and unambiguous instrument changes.",
+      "id": 4
+    },
+    {
+      "page": 2,
+      "measure": "10",
+      "staff": "Vibraphone",
+      "category": "collision",
+      "severity": "HIGH",
+      "region": {
+        "x_pct": 50,
+        "y_pct": 40,
+        "w_pct": 10,
+        "h_pct": 5
+      },
+      "description": "Text label collision: 'Tamb.' and 'Sn. Dr.' labels touch/overlap with insufficient horizontal space between them at measure 10.",
+      "fix": "Add horizontal spacing between the instrument labels or split onto separate staves.",
+      "id": 5
+    },
+    {
+      "page": 2,
+      "measure": "9",
+      "staff": "Header",
+      "category": "spacing",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 40,
+        "y_pct": 1,
+        "w_pct": 15,
+        "h_pct": 6
+      },
+      "description": "Rehearsal mark 'A' box sits very close to the top staff (Oboe), crowding the accent and tie on the Oboe entrance note at measure 9.",
+      "fix": "Increase vertical space between the rehearsal-mark box and the top staff, or nudge rehearsal mark slightly left of the barline.",
+      "id": 6
+    },
+    {
+      "page": 2,
+      "measure": "7",
+      "staff": "Multiple",
+      "category": "missing",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 6,
+        "y_pct": 5,
+        "w_pct": 8,
+        "h_pct": 90
+      },
+      "description": "New page (page 2, new system) does not repeat the tempo marking from page 1 (quarter=60). Though meter and key continue, tempo re-statement at the top of a new page is conventional.",
+      "fix": "Repeat the tempo marking at the top of page 2 (or at rehearsal A) for clarity.",
+      "id": 7
+    },
+    {
+      "page": 2,
+      "measure": "9",
+      "staff": "Vln 1, Vln 2",
+      "category": "collision",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 36,
+        "y_pct": 66,
+        "w_pct": 14,
+        "h_pct": 14
+      },
+      "description": "'pizz.' and 'arco' text switch rapidly above Vln 1 and Vln 2 at measures 9-10 and the text labels crowd the accents on the notes below.",
+      "fix": "Offset pizz./arco labels higher above the staff, or stagger them horizontally so they don't crowd articulations.",
+      "id": 8
+    },
+    {
+      "page": 2,
+      "measure": "7-8",
+      "staff": "Piano",
+      "category": "collision",
+      "severity": "LOW",
+      "region": {
+        "x_pct": 10,
+        "y_pct": 46,
+        "w_pct": 20,
+        "h_pct": 14
+      },
+      "description": "Piano 8va dashed line and the '(8)' label at the start of the system sit close to the Vibraphone staff above, and the dashed line runs near the top of the piano treble staff.",
+      "fix": "Raise the 8va line slightly so it clears the top staff line and doesn't abut the staff above.",
+      "id": 9
+    },
+    {
+      "page": 3,
+      "measure": "13",
+      "staff": "Tamb. 2, Sn. Dr. 2",
+      "category": "missing",
+      "severity": "HIGH",
+      "region": {
+        "x_pct": 8,
+        "y_pct": 36,
+        "w_pct": 15,
+        "h_pct": 14
+      },
+      "description": "Tamb. 2 and Sn. Dr. 2 enter on page 3 with no dynamic marking at the entrance (m.13). First dynamic ('p' on Tamb. 2) doesn't appear until measure 18.",
+      "fix": "Add an entrance dynamic (e.g., mp or p) at measure 13 for both percussion staves.",
+      "id": 10
+    },
+    {
+      "page": 3,
+      "measure": "13-18",
+      "staff": "Tamb. 2, Sn. Dr. 2",
+      "category": "consistency",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 8,
+        "y_pct": 36,
+        "w_pct": 90,
+        "h_pct": 14
+      },
+      "description": "Percussion instruments named 'Tamb. 2' and 'Sn. Dr. 2' on page 3, but on page 2 they appeared inline on the Vibraphone staff as 'Tamb.' and 'Sn. Dr.' (no number suffix). Abbreviation/numbering inconsistency across pages.",
+      "fix": "Standardize naming. If these are the same instruments from page 2, drop the '2' suffix. If they are a second tambourine/snare, introduce them with full names first and add a cue/explanation.",
+      "id": 11
+    },
+    {
+      "page": 3,
+      "measure": "17-18",
+      "staff": "Vln 1, Vln 2, Vla, Vc",
+      "category": "collision",
+      "severity": "MEDIUM",
+      "region": {
+        "x_pct": 70,
+        "y_pct": 62,
+        "w_pct": 25,
+        "h_pct": 32
+      },
+      "description": "'arco' text and 'f cantabile' dynamic stack closely above/below the string notes at measures 17-18, with 'arco' text nearly touching the accent marks and note stems on the entrance.",
+      "fix": "Increase vertical gap between 'arco' label and the staff, or move 'arco' slightly earlier so it doesn't collide with the entrance accent.",
+      "id": 12
+    }
+  ]
+}
