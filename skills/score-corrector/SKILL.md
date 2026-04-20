@@ -120,9 +120,11 @@ Then batch those at batch-size 2 (because higher res = more tokens) and merge fi
 5. **Proofread visual engraving only in this version.** Pitch / rhythm / harmonic errors are a v2 job that would use Audiveris to extract MusicXML first. Don't invent pitch errors from vision alone.
 6. **Zero errors is a valid result.** If a page is clean, the subagent returns `errors: []`. Don't pad findings.
 
-## When to offer Audiveris / MusicXML path
+## When to offer Audiveris / MusicXML path (v2)
 
-If the user asks for pitch or rhythm proofreading, tell them: this skill is vision-only for engraving defects. MusicXML-based pitch/rhythm proofreading is a different pipeline (Audiveris OMR, then text diff against reference). Offer to build the v2 path if that's what they actually need.
+If the user asks for pitch or rhythm proofreading, tell them: this skill is vision-only for engraving defects. The v2 pipeline is documented in `references/v2-musicxml-path.md`. Short version: Audiveris converts both files to MusicXML, music21 does a semantic diff (not xmldiff, which breaks on voice ordering), and only the ambiguous 5 to 15 percent of measures get escalated to a vision subagent for cropped-measure comparison. That brings a 500-page score cost from ~$2.35 image-only to ~$0.30 hybrid.
+
+Offer to build v2 when the user actually needs pitch/rhythm catches. Don't build it pre-emptively.
 
 ## Severity color legend (matches annotate_pdf.py)
 
