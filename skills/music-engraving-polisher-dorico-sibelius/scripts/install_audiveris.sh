@@ -32,8 +32,10 @@ TMP_DMG=$(mktemp -t audiveris).dmg
 echo "Downloading $LATEST_URL..."
 curl -L "$LATEST_URL" -o "$TMP_DMG"
 
-echo "Mounting dmg..."
-MOUNT_OUT=$(hdiutil attach "$TMP_DMG" -nobrowse -quiet)
+echo "Mounting dmg (auto-accepting AGPL license)..."
+# Audiveris ships with a GNU AGPL license agreement that hdiutil requires
+# acknowledgment for. Pipe 'yes' to auto-accept, suppress pager.
+MOUNT_OUT=$(yes | PAGER=cat hdiutil attach "$TMP_DMG" -nobrowse -noverify -noautoopen 2>&1)
 MOUNT_POINT=$(echo "$MOUNT_OUT" | grep "/Volumes/" | tail -1 | awk '{print $NF}')
 
 if [ -z "$MOUNT_POINT" ] || [ ! -d "$MOUNT_POINT" ]; then
