@@ -1,0 +1,39 @@
+{
+  "skill_name": "music-engraving-polisher-dorico-sibelius",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Polish this MusicXML score with the moderate style preset. Export Bach Chorale BWV 84.3 from music21's corpus as the test input.",
+      "expected_output": "polished.musicxml + polished.pdf + original.pdf + before-after.pdf + changes.json + residual_issues.json + dorico-instructions.md + sibelius-instructions.md. Content changes should be zero or near-zero (style-only re-engrave preserves music).",
+      "files": [],
+      "assertions": [
+        "All 8 output files exist in the output directory",
+        "changes.json reports zero note_content_changed entries",
+        "polished.pdf opens as a valid PDF",
+        "residual_issues.json total is reasonable (likely 0 for a clean Bach chorale)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A user exported MusicXML from Dorico with tight spacing and collisions. Polish with the strict preset.",
+      "expected_output": "All outputs present. before-after.pdf should show visible spacing improvements. residual_issues.json may flag missing tempos or cues.",
+      "files": [],
+      "assertions": [
+        "before-after.pdf has the same page count as the input",
+        "changes.json total is small (style polish shouldn't change content)",
+        "dorico-instructions.md references the strict preset"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Only a PDF is available. Polish it using Audiveris OMR fallback.",
+      "expected_output": "Audiveris auto-installs if missing, extracts MusicXML, polish proceeds. Output warns about OMR transcription uncertainty.",
+      "files": [],
+      "assertions": [
+        "Audiveris.app exists in ~/Applications or /Applications after run",
+        "polished.musicxml exists",
+        "OMR warning is visible in output"
+      ]
+    }
+  ]
+}
