@@ -1,8 +1,28 @@
 # Phase 2 Script-Writing Protocol
 
-Lessons learned from the 2026-04-25 iteration with Timo on the "Stop Buying Mouthpieces" script. When Timo picks an idea from the Phase 1 menu and asks for a script, follow these rules.
+Lessons learned from the 2026-04-25 iteration with Timo on the "Stop Buying Mouthpieces" and "$0 vs $7,200 Trumpet" scripts. When Timo picks an idea from the Phase 1 menu and asks for a script, follow these rules.
 
-## The 7-beat interleaved structure (default)
+## RULE ZERO. Scan input for verbatim content BEFORE drafting
+
+The single highest-cost rule to violate. Before writing any beat, re-read Timo's input twice. Find every line, hook, transition, CTA, visual cue, reference link, or specific phrasing he wrote. PRESERVE it character-for-character in the corresponding beat. Do not paraphrase. Do not consolidate. Do not "tighten" his lines. Even if it reads rough. Even if you think you can improve it. He has context you don't, and he can edit later. This rule fails first and costs the most iterations every time.
+
+## Workflow rule. Present in chat BEFORE writing files
+
+When Timo gives feedback that affects content, present the proposed change in chat first. Get sign-off. Then update the file. The "draft a PDF, get yelled at, fix it, re-render" loop is wasteful. Show in chat -> confirm -> ship.
+
+## Adapt structure to thesis
+
+The 7-beat mouthpieces template is the default, NOT mandatory. The mouthpieces video has an "Apparatus Reveal" beat because that's its thesis pivot. Other scripts may have a different structural pivot (e.g., the trumpet-comparison video uses "Demos -> Blind Test -> Reveal -> Funnel" without an apparatus beat). Match the structure to the content's actual logic, not the template.
+
+## Funnel framing default = additive, not contrastive
+
+When funneling between videos in a content chain, default to additive framing ("X matters AND Y matters"), not contrastive ("X doesn't matter, Y does"). Additive is stronger because it doesn't undersell either video and the funnel logic gets cleaner.
+
+## References go at the top, not buried in beats
+
+YouTube references / external links Harrison needs to watch before filming belong in a dedicated "Watch Before Filming" block at the top of the document, NOT inside a beat's action text. Use a dark card with gold heading, blue links, gray descriptions.
+
+## The 7-beat interleaved structure (default for mistake-driven videos)
 
 Use this default unless the topic genuinely needs a different shape:
 
