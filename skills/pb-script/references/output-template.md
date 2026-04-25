@@ -16,7 +16,7 @@ Use this exact structure when presenting the 5 ideas to Timo. No deviations.
 
 ## Idea 1: [Title]
 
-**Anchor:** YT-WINNER-PATTERN  *(or LENS-NAME for ideas 3-5)*
+**Anchor:** YT-WINNER-PATTERN | FB-WINNER-PATTERN | CROSS-WINNER-PATTERN  *(or LENS-NAME for ideas 3-5)*
 **Conversion trigger:** [one sentence naming the specific buying trigger this fires]
 **Limiting belief shattered:** [the single Domino belief, e.g., "I'm too old to recover my range"]
 **Identity outcome promised:** [who they become, not what they learn]

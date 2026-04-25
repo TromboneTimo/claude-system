@@ -1,6 +1,6 @@
 ---
 name: pb-script
-description: Phase 1 of Harrison Ball's Precision Brass YouTube content engine. Research-driven idea generator that spawns parallel subagents to read deeply across the full voice-of-customer corpus (sales calls, testimonials, YouTube winners database, lost-deal voice, objection library, deep psychological dive, persona files, quote banks) and returns 5 conversion-trigger-driven content ideas with verbatim quote evidence. 1-2 ideas anchored on the proven YouTube winner pattern, 3-4 ideas surfaced from other sources for variety. Use this skill whenever Timo or Harrison asks for content ideas, video ideas, what to film next, what Harrison should make, "give me angles", "youtube ideas for harrison", "next video for harrison", "precision brass content ideas", "/pb-script", or any variation. Also fire when the user mentions Harrison and content/video/script in the same breath. Do NOT generate the script itself. That is Phase 2 and lives in a future companion skill. This skill stops at the 5-idea menu and waits for Timo to pick one.
+description: Phase 1 of Harrison Ball's Precision Brass YouTube content engine. Research-driven idea generator that spawns parallel subagents to read deeply across the full voice-of-customer corpus (sales calls, testimonials, YouTube winners database, Facebook winning-ads database, lost-deal voice, objection library, deep psychological dive, persona files, quote banks) and returns 5 conversion-trigger-driven content ideas with verbatim quote evidence. 1-2 ideas anchored on the proven verified-winner pattern (YouTube winners + FB winning ads), 3-4 ideas surfaced from other sources for variety. Use this skill whenever Timo or Harrison asks for content ideas, video ideas, what to film next, what Harrison should make, "give me angles", "youtube ideas for harrison", "next video for harrison", "precision brass content ideas", "/pb-script", or any variation. Also fire when the user mentions Harrison and content/video/script in the same breath. Do NOT generate the script itself. That is Phase 2 and lives in a future companion skill. This skill stops at the 5-idea menu and waits for Timo to pick one.
 ---
 
 # pb-script. Phase 1: Conversion-Trigger Idea Generator
@@ -14,10 +14,12 @@ This is a **research-first skill**. Every invocation re-reads raw sources. No ca
 ## The 5-idea structure (NON-NEGOTIABLE)
 
 The output mix must be:
-- **1-2 ideas anchored on YouTube winners**, pattern-matched against videos in `youtube-database/` that have verified sales attribution
+- **1-2 ideas anchored on VERIFIED WINNERS**, pattern-matched against `youtube-database/` (status=winner videos) AND `facebook-ads-database/` (status=winner ads). Both are proven-conversion sources. Either one (or a synthesis of both) qualifies an idea for the anchor slot.
 - **3-4 ideas from variety lenses**, surfaced from sales calls, lost-deal voice, objection library, deep psychological dive, comments, won-deal voice, testimonials
 
 This split exists for a reason. Pure winner-cloning makes the channel narrow. Pure variety ignores what's actually proven to convert. The mix gives Timo a couple safe-bet angles plus fresh territory.
+
+**Empty-database handling:** If either winner database has zero entries (or no status=winner items), Agent A reads only the populated one. If BOTH are empty, Agent A returns "no verified-winner data yet" and the synthesizer pulls all 5 ideas from the variety lenses (Agents B/C/D/E). Note this in the output so Timo knows the anchor slot was skipped.
 
 ## How it works (workflow)
 
@@ -29,32 +31,52 @@ Tell Timo: "Spawning 5 research agents across the corpus. ~2-3 minutes." Then sp
 
 All 5 are `general-purpose` subagents. They read raw files directly, return findings to the main thread.
 
-#### Agent A. YouTube Winner Deconstruction (THE ANCHOR)
+#### Agent A. Verified Winner Deconstruction (THE ANCHOR)
+
+This agent reads BOTH proven-conversion sources: YouTube winners and Facebook winning ads. They are different formats but same signal: stuff that actually converted.
 
 Prompt:
 ```
-You are researching what converts on Harrison Ball's YouTube channel for Precision Brass.
+You are researching what verifiably converts for Harrison Ball's Precision Brass business across two channels: YouTube long-form and Facebook ads.
 
+PART 1. YouTube winners
 READ EVERY VIDEO in /Users/air/Desktop/Precision-Brass/youtube-database/ that is marked status=winner in index.json. For each winner, read:
 - analysis.md (what made it work)
 - transcript.md (full script content)
 - comments-top.md (what viewers said that proved emotional resonance)
 - metadata.json (view count, sales attribution, dates)
 
-Also read:
+If the YouTube winners list is empty, note that and continue to Part 2.
+
+PART 2. Facebook winning ads
+READ EVERY AD in /Users/air/Desktop/Precision-Brass/facebook-ads-database/ that is marked status=winner in index.json. For each winner, read:
+- analysis.md (why it worked)
+- creative/copy.md (primary text, headline, CTA)
+- performance.json (spend, ROAS, CPA, sales attributed)
+- comments-top.md if present (audience reaction)
+- metadata.json (audience targeting, dates)
+
+If the FB winners list is empty, note that and continue.
+
+PART 3. Reference materials (always read)
 - /Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md
 - /Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/project_proven_converter_template.md (the 12-move converter template)
 
-Your job: extract the PATTERN. What hook structure? What identity arc? What demonstration style? What comment-triggering phrases? What pain-to-payoff bridge? What length? What CTA cadence?
+PART 4. Extract the cross-channel PATTERN
+What hook structure works in BOTH long-form video AND short-form ad copy? What identity arc? What pain-to-payoff bridge? What words and phrases recur across winners (these are the highest-signal language)? What demonstration style proves the claim?
 
-Then propose 3 NEW video ideas that would match this proven pattern but cover different specific pain points. Each idea must:
-- Match the converter pattern element-by-element (specify which elements)
+Note that ads are short and videos are long, so structural elements differ. Look for what's COMMON: the emotional triggers, the identity framing, the language register, the pain points named, the proof-style.
+
+PART 5. Propose 3 NEW video ideas that would match this verified-winner pattern, each one targeting a different specific pain point. Each idea must:
+- Map to either YT-WINNER-PATTERN, FB-WINNER-PATTERN, or CROSS-WINNER-PATTERN (specify which) and explain how the new idea inherits its structure
 - Pass the ICP checklist (40-65, US, comeback player, business owner, addresses range/endurance/mouthpiece/age/comeback)
-- Cite at least 2 verbatim quotes (from comments or transcript) proving emotional resonance
+- Cite at least 2 verbatim quotes (from comments, transcripts, ad copy, or ad comments) proving emotional resonance
 - Name the limiting belief it shatters (Domino Effect Framework, one belief per video)
 - Sell identity, not technique
 
-Return: pattern summary (200 words), then 3 candidate ideas with the structure above.
+EMPTY-DATABASE handling: if both YT winners AND FB winners are empty, return: "No verified-winner data yet. Skip the anchor slot, pull all 5 ideas from variety lenses." Do NOT make up patterns. Do NOT propose anchored ideas without source data.
+
+Return: which databases had data, pattern summary (200 words across both channels), then 3 candidate ideas with the structure above.
 ```
 
 #### Agent B. Won-Deal Conversion Patterns

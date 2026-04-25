@@ -33,3 +33,23 @@ If the new idea doesn't structurally match the winner, label it as a variety-len
 ## When more winners get added to the database
 
 This skill is forward-compatible. As `youtube-database/index.json` accumulates more `status=winner` entries, Agent A reads ALL of them and extracts patterns common across multiple winners (not just the embouchure video). Cross-winner patterns are stronger signal than single-video patterns. Update this file's "Where the source files live" section as new winners come in.
+
+## Facebook winning ads (parallel proven-conversion source)
+
+Agent A also reads the Facebook ads database, mirrored against yt-vault structure.
+
+- **Database path:** `/Users/air/Desktop/Precision-Brass/facebook-ads-database/`
+- **Index:** `index.json` (filter by `status=winner`)
+- **Per-ad files:** `analysis.md`, `creative/copy.md`, `performance.json`, optionally `comments-top.md`, `metadata.json`
+- **Ingest skill:** `fb-vault` (reference only. don't invoke from pb-script)
+
+**Why both channels matter:** YouTube long-form converts through narrative arc and demonstration. FB ads convert through hook + identity collision in <100 words. The patterns that recur across BOTH (the language, the named pains, the identity arc) are the highest-confidence signal for what truly resonates. When Agent A finds a phrase or angle that appears in winners on both channels, that's a tier-1 anchor for the new idea.
+
+**Empty-database state (currently):** As of 2026-04-25, `facebook-ads-database/index.json` shows 0 ads. Agent A handles this gracefully (see SKILL.md Agent A prompt). When ads start landing, the agent automatically picks them up on the next run.
+
+## Anchor labeling
+
+When labeling an idea as anchored on a winner pattern, use the most specific label:
+- `YT-WINNER-PATTERN`: derived from one or more YouTube winners
+- `FB-WINNER-PATTERN`: derived from one or more FB ad winners
+- `CROSS-WINNER-PATTERN`: derived from elements that appear in BOTH (highest signal)
