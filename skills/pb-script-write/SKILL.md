@@ -72,10 +72,13 @@ Generate an HTML file with this design (full template lives in `Precision-Brass/
 - Script paragraphs flow with whitespace, no boxes
 - CSS: `break-inside: avoid` on `.script` paragraphs to prevent mid-paragraph page breaks
 
-Then convert to PDF via Chrome headless and save BOTH HTML+PDF to:
+Then convert to PDF via Chrome headless and save BOTH HTML+PDF to ALL THREE locations:
 
-1. `/Users/air/Desktop/Precision-Brass/output/<slug>-script.{html,pdf}`
-2. `~/Downloads/<slug>-script.{html,pdf}` (per `feedback_pdfs_to_downloads.md`)
+1. `/Users/air/Desktop/Precision-Brass/scripts/YYYY-MM-DD_<slug>.{html,pdf}` (CANONICAL ARCHIVE. always go here. see `project_scripts_archive.md` memory)
+2. `/Users/air/Desktop/Precision-Brass/output/YYYY-MM-DD_<slug>.{html,pdf}` (working copy)
+3. `~/Downloads/YYYY-MM-DD_<slug>.{html,pdf}` (fast handoff per `feedback_pdfs_to_downloads.md`)
+
+After saving, append a row to `Precision-Brass/scripts/README.md` index table with date / slug / topic / status.
 
 ## What goes where
 
