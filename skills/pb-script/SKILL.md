@@ -220,7 +220,7 @@ Use the exact template in `references/output-template.md`. Each idea includes:
 - Hook angle (money / problem / curiosity)
 - Why this converts (3-sentence rationale)
 
-End with: "Which one do you want to develop into a script? Reply with the number." Phase 2 (script generation) will be a separate skill, do NOT auto-continue into script writing.
+End with: "Which one do you want to develop into a script? Reply with the number." Phase 2 (script generation) lives in the companion skill `pb-script-write`, which auto-fires the moment Timo replies with a selection ("idea N", "go with #N", "the mouthpiece one", etc.). Do NOT manually continue into script writing inside this skill. Hand off to pb-script-write.
 
 ## Hard rules (do not break)
 
