@@ -16,10 +16,20 @@ Before drafting a single line, READ all of these:
 
 1. `references/example-mouthpieces-script.md`. Proven 7-beat structural template.
 2. `references/script-writing-protocol.md`. Full ruleset. 14 failure modes. Voice fingerprint. Funnel pattern.
-3. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_script_writing_lessons.md`. Project-level failure memory.
-4. `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`. Source-of-truth Harrison voice.
+3. `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec. Read this to confirm pain depth, identity load, CTA destination, and structural template based on the picked idea's layer.
+4. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_script_writing_lessons.md`. Project-level failure memory.
+5. `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`. Source-of-truth Harrison voice.
 
 Skipping these = repeating the 12-iteration mistake from 2026-04-25.
+
+## Funnel layer adaptation (mandatory)
+
+The picked idea carries a TOFU/MOFU/BOFU label from the pb-script menu. Read it. The layer determines:
+- **TOFU**: light pain depth, no comeback/age callout, broad curiosity hook, lighter 5-7 beat structure, CTA = subscribe / next video.
+- **MOFU**: specific named mistakes, comeback/age callout in hook, 7-beat interleaved template, CTA = next-deeper video.
+- **BOFU**: surgical pain depth (comeback grief, age anxiety, failed-method shame), maximum identity load, full 12-move converter template, CTA = strategy call.
+
+If the picked idea has no layer label (older menus or manual invocations), ask Timo for the layer BEFORE drafting. Don't assume.
 
 ## The 7-beat interleaved structure (default)
 

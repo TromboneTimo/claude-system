@@ -23,9 +23,25 @@ This split exists for a reason. Pure winner-cloning makes the channel narrow. Pu
 
 ## How it works (workflow)
 
+### Step 0. Ask the funnel layer FIRST (before any research)
+
+**Mandatory intake question.** Before spawning any research agents, ask Timo:
+
+> "What funnel layer is this for? **TOFU** (broad reach, problem-unaware audience), **MOFU** (problem-aware, exploring solutions), or **BOFU** (solution-aware, evaluating providers ready to book)?"
+
+Wait for an explicit answer. The funnel layer determines:
+- How deep the pain points get named (TOFU light, BOFU surgical)
+- What identity wounds surface (TOFU broad curiosity, BOFU comeback grief / age anxiety / failed-method shame)
+- What the funnel CTA points to (TOFU another video, MOFU strategy session content, BOFU strategy call)
+- Whether to use the proven 12-move converter template (BOFU only) or a lighter structure (TOFU/MOFU)
+
+See `references/funnel-layers.md` for the full spec.
+
+If Timo doesn't answer or says "all of them", default to MOFU and label it. Don't skip the question.
+
 ### Step 1. Acknowledge, then research
 
-Tell Timo: "Spawning 5 research agents across the corpus. ~2-3 minutes." Then spawn the 5 subagents below **in parallel in a single message** (multiple Agent tool calls in one turn).
+Tell Timo: "Layer locked: [TOFU/MOFU/BOFU]. Spawning 5 research agents across the corpus. ~2-3 minutes." Then spawn the 5 subagents below **in parallel in a single message** (multiple Agent tool calls in one turn). Inject the funnel layer into each agent's prompt so they tune their pain-point depth accordingly.
 
 ### Step 2. Spawn 5 parallel research subagents
 
@@ -246,6 +262,7 @@ End with: "Which one do you want to develop into a script? Reply with the number
 - `references/proven-template-pointer.md`. Where the 12-move converter template lives and how to apply it
 - `references/example-mouthpieces-script.md`. The proven 7-beat interleaved script structure (Phase 2 reference. READ when generating any new script)
 - `references/script-writing-protocol.md`. Phase 2 ruleset. failure modes to avoid + voice fingerprint + funnel pattern. READ before drafting any script
+- `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec. READ in Step 0 to inform research depth and idea framing
 
 ## What this skill is NOT
 
