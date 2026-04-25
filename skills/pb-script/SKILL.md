@@ -244,6 +244,8 @@ End with: "Which one do you want to develop into a script? Reply with the number
 - `references/output-template.md`. Exact format for the 5-idea menu
 - `references/conversion-triggers.md`. Taxonomy of triggers found in the corpus (read this before synthesizing)
 - `references/proven-template-pointer.md`. Where the 12-move converter template lives and how to apply it
+- `references/example-mouthpieces-script.md`. The proven 7-beat interleaved script structure (Phase 2 reference. READ when generating any new script)
+- `references/script-writing-protocol.md`. Phase 2 ruleset. failure modes to avoid + voice fingerprint + funnel pattern. READ before drafting any script
 
 ## What this skill is NOT
 
