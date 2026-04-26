@@ -47,9 +47,13 @@ Parse those sections into the schema. The `rationale` field is composed as style
 
 If any required field is missing, ask Timo. Never invent VOC quotes (4 failure patterns: prospects ≠ customers, auto-transcripts lie).
 
+## Funnel layer (REQUIRED)
+
+Every idea MUST include exactly one of `mofu`, `tofu`, `bofu` as the FIRST tag in `source_tags`. The dashboard renders this as a prominent funnel badge near the title and a small pill on the list row. If the proposal has a "Layer:" line, copy that value.
+
 ## Rationale HTML template (Mode B)
 
-Use exactly these 5 section classes in this order. Dashboard CSS colors them: brass / red / green / blue / purple.
+Use exactly 6 section classes in this order. Dashboard CSS colors them: brass / red / green / blue / purple / amber. The 6th synthesis block is REQUIRED whenever the proposal has a "What these quotes show together" section.
 
 ```html
 <div class="r-section concept">
@@ -75,6 +79,11 @@ Use exactly these 5 section classes in this order. Dashboard CSS colors them: br
 <div class="r-section channel">
   <span class="r-kicker">Channel Connection</span>
   <p>{How this connects to Harrison's existing channel.}</p>
+</div>
+<div class="r-section synthesis">
+  <span class="r-kicker">What These Quotes Show Together</span>
+  <p>{First paragraph: name each quote-giver and what they reveal.}</p>
+  <p><strong>The pattern:</strong> {The synthesis insight from the proposal.}</p>
 </div>
 ```
 
