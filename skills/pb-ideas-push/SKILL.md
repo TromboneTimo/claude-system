@@ -213,7 +213,22 @@ curl -X POST "${SUPABASE_URL}/rest/v1/ideas" \
   }'
 ```
 
-Use heredoc-style JSON, never shell-escape complex strings. Use `python3 -c` to JSON-encode if quotes get hairy.
+Use heredoc-style JSON, never shell-escape complex strings. Use `python3 -c` to JSON-encode if quotes get hairy, then write each idea to a temp JSON file and curl `--data-binary "@file.json"`.
+
+**Do NOT use Python's urllib/requests to POST.** macOS system Python often lacks linked CA certs and fails with `SSL: CERTIFICATE_VERIFY_FAILED`. Always POST via `curl` (which uses the system keychain). Pattern:
+
+```bash
+# Build JSON with python (safe quote handling), POST with curl (works through TLS)
+python3 build_payloads.py  # writes /tmp/pb-ideas/{0,1,2,3}.json
+for f in /tmp/pb-ideas/*.json; do
+  curl -s -X POST "${SUPABASE_URL}/rest/v1/ideas" \
+    -H "apikey: ${SUPABASE_KEY}" \
+    -H "Authorization: Bearer ${SUPABASE_KEY}" \
+    -H "Content-Type: application/json" \
+    -H "Prefer: return=representation" \
+    --data-binary "@${f}"
+done
+```
 
 ### Step 5. Confirm + open dashboard
 
