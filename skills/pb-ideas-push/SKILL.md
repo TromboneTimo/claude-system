@@ -67,10 +67,21 @@ Timo's proposals are the source of truth. **Every labeled section in his input M
 
 Run this check OUT LOUD to Timo (write it in chat) before pushing:
 
-1. **Enumerate**. List every labeled section heading in his proposal text. Examples: Layer, Idea origin, Concept, Rough flow, The wound we're naming, Why this will convert, Source evidence, What these quotes show together, ICP segment target, How this video connects to Harrison's existing channel.
-2. **Map**. For each enumerated section, name the destination in the schema (rationale section class, voc_quotes, source_tags, pain_point, hook_angle, etc.).
-3. **Account for every word**. If any section in the input has no mapping destination, STOP. Ask Timo where it should go or whether to add a new section. Do not push.
-4. **Show Timo the map**. Display the enumeration + mapping as a numbered checklist in chat. Wait for explicit "go" before curling.
+1. **Dedup check FIRST.** Before mapping anything, GET the current ideas table:
+   ```bash
+   source ~/.claude/secrets/precision-brass.env
+   curl -s "${SUPABASE_URL}/rest/v1/ideas?select=id,title" \
+     -H "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+     -H "Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}"
+   ```
+   For each new proposal, check:
+   - Exact id collision (same `i_YYYYMMDD_slug`)
+   - Title similarity (3+ overlapping non-stopword tokens with existing title, OR same core noun phrase)
+   - If either matches, STOP and ask Timo: "Looks like a duplicate of {existing title}. Skip / replace / push as v2 with new id?"
+2. **Enumerate**. List every labeled section heading in his proposal text. Examples: Layer, Idea origin, Concept, Rough flow, The wound we're naming, Why this will convert, Source evidence, What these quotes show together, ICP segment target, How this video connects to Harrison's existing channel.
+3. **Map**. For each enumerated section, name the destination in the schema (rationale section class, voc_quotes, source_tags, pain_point, hook_angle, etc.).
+4. **Account for every word**. If any section in the input has no mapping destination, STOP. Ask Timo where it should go or whether to add a new section. Do not push.
+5. **Show Timo the map**. Display dedup result + enumeration + mapping as a numbered checklist in chat. Wait for explicit "go" before curling.
 
 ### Example preflight (do this in chat)
 
