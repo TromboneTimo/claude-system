@@ -5,6 +5,14 @@ description: Phase 1.5 of Harrison Ball's Precision Brass YouTube content engine
 
 # pb-ideas-push. Phase 1.5: Push Ideas to Harrison's Dashboard
 
+## OPERATING PRINCIPLE: Ship right, never ship fast.
+
+Speed is never the priority for this skill. Timo writes proposals carefully. Each section he labels carries information Harrison needs. Dropping any section, summarizing instead of preserving, or shipping incomplete work and waiting for Timo to catch it is a contract violation more severe than any formatting bug or timing issue.
+
+If I am tempted to "just push and we will iterate," that is the failure mode. STOP and run the preflight enumeration below first. Asking Timo a clarifying question takes 5 seconds. Recovering from a silent drop takes 30 minutes of trust damage and is unacceptable.
+
+This principle is also stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_ship_right_not_fast.md` and loads on every session.
+
 ## What this does
 
 Bridges `pb-script` (Phase 1, brainstorm in chat) and `pb-script-write` (Phase 2, full filming script). Pushes Timo-approved ideas into the Supabase `ideas` table so Harrison sees them on `Precision-Brass/dashboard/scripts.html` in the "Ideas Pending" column.
