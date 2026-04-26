@@ -23,20 +23,71 @@ Trigger when Timo says (after a `pb-script` run):
 
 Do NOT fire if Timo has not yet seen ideas in chat. Run `pb-script` first.
 
-## Inputs
+## Two input modes
 
-From the conversation context (the prior `pb-script` output), pull for each greenlit idea:
+### Mode A: Casual chat ideas (post-`/pb-script` brainstorm)
+Pull each greenlit idea from prior conversation context. Map to the schema below.
+
+### Mode B: Structured script proposal (Timo pastes a "Script Proposal N" doc)
+The proposal has these labelled sections: Layer, Idea origin, Concept (with Rough flow), The wound we're naming, Why this will convert, Source evidence (with attributed quotes), ICP segment target, How this video connects to Harrison's existing channel.
+
+Parse those sections into the schema. The `rationale` field is composed as styled HTML with 5 colored section blocks (see template below).
+
+## Schema mapping
 
 | Field        | Source                                          | Required |
 |--------------|-------------------------------------------------|----------|
-| title        | The idea title from the menu                    | yes      |
-| pain_point   | The pain/identity tension named in the idea     | yes      |
+| id           | `i_{YYYYMMDD}_{slug}` from title                | yes      |
+| title        | The idea title                                  | yes      |
+| pain_point   | 1-line summary of "The wound" or pain named     | yes      |
 | hook_angle   | identity / failed-method / specific-result / curiosity / money | yes |
-| rationale    | 1 paragraph: why this video, what VOC backs it  | yes      |
-| voc_quotes   | array of `{text, source}` from the idea's evidence | yes  |
-| source_tags  | which corpus the idea came from                 | yes      |
+| rationale    | HTML with 5 colored sections (Mode B) OR 1 paragraph (Mode A) | yes |
+| voc_quotes   | array of `{text, source}`. Source line includes name + age + call type + conversion data when available | yes |
+| source_tags  | array of lowercase tags: layer (mofu/tofu/bofu) + corpus tags (won-deals, sales-calls, yt-comments, fb-winners, etc.) | yes |
 
-If any required field is missing from the chat output, ask Timo to fill it in before pushing. Never invent VOC quotes (4 failure patterns: prospects ≠ customers, auto-transcripts lie).
+If any required field is missing, ask Timo. Never invent VOC quotes (4 failure patterns: prospects ≠ customers, auto-transcripts lie).
+
+## Rationale HTML template (Mode B)
+
+Use exactly these 5 section classes in this order. Dashboard CSS colors them: brass / red / green / blue / purple.
+
+```html
+<div class="r-section concept">
+  <span class="r-kicker">The Promise</span>
+  <p>{Concept paragraph from proposal. End with the hook line as a separate <p> with <strong>Hook:</strong> prefix.}</p>
+</div>
+<div class="r-section wound">
+  <span class="r-kicker">The Wound</span>
+  <p>{The wound paragraph from proposal.}</p>
+</div>
+<div class="r-section why">
+  <span class="r-kicker">Why This Converts</span>
+  <ul>
+    <li>{Why-this-converts bullet 1}</li>
+    <li>{Why-this-converts bullet 2}</li>
+    <li>...</li>
+  </ul>
+</div>
+<div class="r-section icp">
+  <span class="r-kicker">ICP Target</span>
+  <p>{ICP segment target paragraph.}</p>
+</div>
+<div class="r-section channel">
+  <span class="r-kicker">Channel Connection</span>
+  <p>{How this connects to Harrison's existing channel.}</p>
+</div>
+```
+
+Important: write the rationale as a SINGLE-LINE JSON-safe HTML string. Inside JSON, escape inner `"` as `\"`. NEVER use em dashes (project rule). Replace any em dash with `,` or `.` or `:`.
+
+## VOC quote source attribution
+
+Every quote must trace to a real source. Format the `source` field richly:
+- Sales call quotes: `"{Name}, age {N}. Sales call {context}. Converted on ${amount}."` (or "Did not convert" / "Pending")
+- Public YouTube/FB comments: `"{Username}. Public YouTube comment."` or similar
+- DMs: `"{Name}. Instagram DM, {date}."`
+
+If the proposal's "Source evidence" section already includes attribution, copy it verbatim.
 
 ## Workflow
 
