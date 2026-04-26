@@ -77,7 +77,7 @@ Run this check OUT LOUD to Timo (write it in chat) before pushing:
    For each new proposal, check:
    - Exact id collision (same `i_YYYYMMDD_slug`)
    - Title similarity (3+ overlapping non-stopword tokens with existing title, OR same core noun phrase)
-   - If either matches, STOP and ask Timo: "Looks like a duplicate of {existing title}. Skip / replace / push as v2 with new id?"
+   - **DEFAULT: silently skip duplicates and proceed with the rest.** Per Timo's standing rule (2026-04-26): "always skip the duplicates, always, don't ask, remember that." Do NOT ask per-dup. Note the skip in the preflight summary and move on. Only ask if Timo has explicitly said earlier in the same session "ask me about dups this time."
 2. **Enumerate**. List every labeled section heading in his proposal text. Examples: Layer, Idea origin, Concept, Rough flow, The wound we're naming, Why this will convert, Source evidence, What these quotes show together, ICP segment target, How this video connects to Harrison's existing channel.
 3. **Map**. For each enumerated section, name the destination in the schema (rationale section class, voc_quotes, source_tags, pain_point, hook_angle, etc.).
 4. **Account for every word**. If any section in the input has no mapping destination, STOP. Ask Timo where it should go or whether to add a new section. Do not push.
