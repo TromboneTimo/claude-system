@@ -51,11 +51,58 @@ If any required field is missing, ask Timo. Never invent VOC quotes (4 failure p
 
 Every idea MUST include exactly one of `mofu`, `tofu`, `bofu` as the FIRST tag in `source_tags`. The dashboard renders this as a prominent funnel badge near the title and a small pill on the list row. If the proposal has a "Layer:" line, copy that value.
 
+## ZERO-DROP CONTRACT (READ BEFORE PUSHING)
+
+Timo's proposals are the source of truth. **Every labeled section in his input MUST appear on the dashboard.** Silent omission is the highest-severity failure mode for this skill, ranked above formatting issues, above timing, above everything.
+
+### Mandatory preflight before any curl POST
+
+Run this check OUT LOUD to Timo (write it in chat) before pushing:
+
+1. **Enumerate**. List every labeled section heading in his proposal text. Examples: Layer, Idea origin, Concept, Rough flow, The wound we're naming, Why this will convert, Source evidence, What these quotes show together, ICP segment target, How this video connects to Harrison's existing channel.
+2. **Map**. For each enumerated section, name the destination in the schema (rationale section class, voc_quotes, source_tags, pain_point, hook_angle, etc.).
+3. **Account for every word**. If any section in the input has no mapping destination, STOP. Ask Timo where it should go or whether to add a new section. Do not push.
+4. **Show Timo the map**. Display the enumeration + mapping as a numbered checklist in chat. Wait for explicit "go" before curling.
+
+### Example preflight (do this in chat)
+
+```
+Proposal sections found:
+1. Layer: MOFU                          → source_tags[0]
+2. Idea origin                          → rationale .origin
+3. Concept (incl. Rough flow + promise) → rationale .concept
+4. The wound we're naming               → rationale .wound
+5. Why this will convert                → rationale .why
+6. Source evidence (5 quotes)           → voc_quotes[]
+7. What these quotes show together      → rationale .synthesis
+8. ICP segment target                   → rationale .icp
+9. How this video connects              → rationale .channel
+
+Every section accounted for. Push? (y to proceed)
+```
+
+If Timo's proposal has a section not in this list (e.g. "Production notes", "B-roll requirements"), surface it: "I don't have a mapping for X. Add it as a new colored section, append it to an existing one, or skip?"
+
 ## Rationale HTML template (Mode B)
 
-Use exactly 6 section classes in this order. Dashboard CSS colors them: brass / red / green / blue / purple / amber. The 6th synthesis block is REQUIRED whenever the proposal has a "What these quotes show together" section.
+Use these 7 section classes in this order. Dashboard CSS colors them: cyan / brass / red / green / blue / purple / amber.
+
+**MANDATORY sections** (every proposal push includes ALL that are present in the input):
+1. `origin`    Idea Origin (where this came from, why the format works)
+2. `concept`   The Promise
+3. `wound`     The Wound
+4. `why`       Why This Converts
+5. `icp`       ICP Target
+6. `channel`   Channel Connection
+7. `synthesis` What These Quotes Show Together
+
+If the proposal includes ANY of these, push ALL of them. Dropping one without explicit Timo approval is a contract violation.
 
 ```html
+<div class="r-section origin">
+  <span class="r-kicker">Idea Origin</span>
+  <p>{Idea origin paragraph from proposal. Where this came from in the VOC corpus, why the title format works.}</p>
+</div>
 <div class="r-section concept">
   <span class="r-kicker">The Promise</span>
   <p>{Concept paragraph from proposal. End with the hook line as a separate <p> with <strong>Hook:</strong> prefix.}</p>
