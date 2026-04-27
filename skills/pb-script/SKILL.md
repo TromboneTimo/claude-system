@@ -1,6 +1,6 @@
 ---
 name: pb-script
-description: Phase 1 of Harrison Ball's Precision Brass YouTube content engine. Research-driven idea generator that spawns parallel subagents to read deeply across the full voice-of-customer corpus (sales calls, testimonials, YouTube winners database, Facebook winning-ads database, lost-deal voice, objection library, deep psychological dive, persona files, quote banks) and returns 5 conversion-trigger-driven content ideas with verbatim quote evidence. 1-2 ideas anchored on the proven verified-winner pattern (YouTube winners + FB winning ads), 3-4 ideas surfaced from other sources for variety. Use this skill whenever Timo or Harrison asks for content ideas, video ideas, what to film next, what Harrison should make, "give me angles", "youtube ideas for harrison", "next video for harrison", "precision brass content ideas", "/pb-script", or any variation. Also fire when the user mentions Harrison and content/video/script in the same breath. Do NOT generate the script itself. That is Phase 2 and lives in a future companion skill. This skill stops at the 5-idea menu and waits for Timo to pick one.
+description: Phase 1 of Harrison Ball's Precision Brass YouTube content engine. Research-driven idea generator that spawns 6 parallel specialist subagents (raw deep-dive, hidden pain hunter, objection dissolver, verified winner pattern, conversion trigger detector, fresh lens) plus a sequential voice-diversity auditor to read across the full voice-of-customer corpus and return 5 conversion-trigger-driven content ideas with verbatim quote evidence and FRESH voices each run. 1-2 ideas anchored on the proven verified-winner pattern (YouTube winners + FB winning ads), 3-4 ideas surfaced from raw transcripts, hidden pain framework, objection lenses, and rotating fresh angles. Voice diversity log prevents recycling the same speakers across runs. Use this skill whenever Timo or Harrison asks for content ideas, video ideas, what to film next, what Harrison should make, "give me angles", "youtube ideas for harrison", "next video for harrison", "precision brass content ideas", "/pb-script", or any variation. Also fire when the user mentions Harrison and content/video/script in the same breath. Do NOT generate the script itself. That is Phase 2 and lives in a future companion skill. This skill stops at the 5-idea menu and waits for Timo to pick one.
 ---
 
 # pb-script. Phase 1: Conversion-Trigger Idea Generator
@@ -14,12 +14,13 @@ This is a **research-first skill**. Every invocation re-reads raw sources. No ca
 ## The 5-idea structure (NON-NEGOTIABLE)
 
 The output mix must be:
-- **1-2 ideas anchored on VERIFIED WINNERS**, pattern-matched against `youtube-database/` (status=winner videos) AND `facebook-ads-database/` (status=winner ads). Both are proven-conversion sources. Either one (or a synthesis of both) qualifies an idea for the anchor slot.
-- **3-4 ideas from variety lenses**, surfaced from sales calls, lost-deal voice, objection library, deep psychological dive, comments, won-deal voice, testimonials
+- **1-2 ideas anchored on VERIFIED WINNERS** (Agent 4), pattern-matched against `youtube-database/` (status=winner videos) AND `facebook-ads-database/` (status=winner ads). Both are proven-conversion sources.
+- **3-4 ideas from variety lenses** (Agents 1, 2, 3, 5, 6), surfaced from raw deep-dive on a rotated corpus, hidden pain framework, objection lenses, conversion triggers from raw testimonials, and a fresh wildcard lens.
+- All 5 ideas pass the **Voice Diversity Auditor** (Agent 7) which enforces fresh voices vs. last 3 runs and rejects recycled speakers.
 
-This split exists for a reason. Pure winner-cloning makes the channel narrow. Pure variety ignores what's actually proven to convert. The mix gives Timo a couple safe-bet angles plus fresh territory.
+This split exists for a reason. Pure winner-cloning makes the channel narrow. Pure variety ignores what's actually proven to convert. The mix gives Timo a couple safe-bet angles plus fresh territory. The auditor is the structural fix for the recycled-voices problem (April 2026: same 12 voices across 4 dashboard pushes).
 
-**Empty-database handling:** If either winner database has zero entries (or no status=winner items), Agent A reads only the populated one. If BOTH are empty, Agent A returns "no verified-winner data yet" and the synthesizer pulls all 5 ideas from the variety lenses (Agents B/C/D/E). Note this in the output so Timo knows the anchor slot was skipped.
+**Empty-database handling:** If either winner database has zero entries (or no status=winner items), Agent 4 reads only the populated one. If BOTH are empty, Agent 4 returns "no verified-winner data yet" and the auditor pulls all 5 ideas from the variety pool (Agents 1, 2, 3, 5, 6). Note this in the output so Timo knows the anchor slot was skipped.
 
 ## How it works (workflow)
 
