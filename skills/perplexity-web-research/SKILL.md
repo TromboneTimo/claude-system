@@ -13,14 +13,47 @@ allowed-tools: Bash(llm:*)
 
 Use the `llm` CLI with Perplexity plugin for web research, deep reasoning, and independent validation.
 
-## MANDATORY: Research Pipeline
-**After EVERY Perplexity research query, you MUST also run NotebookLM for synthesis.** Perplexity gathers. NotebookLM synthesizes. Never skip NotebookLM. No exceptions. No "seems clear enough."
+## MANDATORY STEP 1: Cache check FIRST
 
-## Quick Start
+Before ANY query, run `/research check "<topic>"`. The cross-workspace cache at `~/.claude/research/perplexity/` has 312+ entries. If cache hit + not stale, USE CACHED. Direct `llm -m sonar*` calls are blocked by the cache-check hook unless wrapped via `/research query` or passed `--force`.
+
+```
+/research check "<topic keywords>"
+```
+
+Cache hit + fresh: read the cached file. Do NOT re-query. ZERO tokens spent.
+Cache miss: proceed to MANDATORY STEP 2.
+Cache hit + stale: re-query AND update existing entry (no duplicate).
+
+## MANDATORY STEP 2: Cache-aware query (only on cache miss)
+
+Use `/research query` instead of raw `llm -m sonar`. It wraps `llm` with auto-save to the DB.
+
+```
+/research query "<text>" --model sonar-pro --category "AI Agents & Self-Improvement" --tags multi-agent,anthropic
+```
+
+Or, if you genuinely need raw `llm` for a one-off (rare): pass `--force` to bypass the hook.
+
+## MANDATORY STEP 3: NotebookLM synthesis on substantive findings
+
+**After every cache-miss query that returned substantive findings, run NotebookLM.** Perplexity gathers. NotebookLM synthesizes. Never skip NotebookLM on real research. No exceptions. No "seems clear enough."
+
+```
+/research synthesize <hash>
+```
+
+## Quick Start (cache-first)
 
 ```bash
-llm -m sonar 'your question here'
+# Cache check
+python3 ~/.claude/research/scripts/check.py "your question"
+
+# If miss, query (saves automatically)
+python3 ~/.claude/research/scripts/save.py --query "your question" --result "$(llm -m sonar 'your question here' --force)" --category C --tags ...
 ```
+
+The `/research` skill handles all of this for you.
 
 ## Model Selection
 

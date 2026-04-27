@@ -32,8 +32,20 @@ Before proposing a fix or remediation workflow: test the assumption that defines
 ## SKILL ARCHITECTURE GATE (any SKILL.md write or update)
 Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
 
+## CACHE GATE (any Perplexity query OR research-driven skill edit)
+Before `llm -m sonar*`, `perplexity-*` MCP calls, OR before editing any SKILL.md based on "what does the literature say":
+1. Run `/research check "<topic>"` first.
+2. Cache hit + not stale: use cached. Do NOT re-query.
+3. Cache hit + stale: re-query AND update existing entry (no duplicate).
+4. Cache miss: run `/research query` (cache-aware wrapper, auto-saves).
+Burning credits on a covered topic is an explicit failure. Full: `~/.claude/research/INDEX.md`
+
+## RESEARCH TRIGGERS (auto-fire /research check)
+On phrases: "check the research", "what do we know about", "is this in the database", "use the research", "look it up first", "we already researched this", "have we covered X":
+Run `/research check "<topic>"` BEFORE answering or running any new query. Present cached findings before formulating new ones.
+
 ## BOOT SEQUENCE
-Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
+Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > `~/.claude/research/INDEX.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
 
 ## AUTO-UPDATE (MANDATORY, SILENT)
 After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status changed). Pre-approved. Just do it.
@@ -44,7 +56,7 @@ After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status
 - Supabase public: anon SELECT, raw fetch(), never getSession() first.
 
 ## SKILL TRIGGERS
-- Deploy = `/pre-deploy` | Research = Perplexity + NotebookLM (BOTH always)
+- Deploy = `/pre-deploy` | Research = `/research check` FIRST, then Perplexity + NotebookLM (BOTH always on miss)
 - Blog/marketing = `/blog` or `/marketing` | Decision = `/council` | Brain = `/fix-brain`
 - 3+ file change = all 4 agents | Bug failed 2x = Plan agent | New idea mid-task = "Now or later?"
 
@@ -57,7 +69,7 @@ After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status
 ## UNIVERSAL RULES
 - ALWAYS Safari. Memory-first (read before writing code).
 - Never use em dashes (enforced via hook).
-- Research = Perplexity THEN NotebookLM. No exceptions.
+- Research = `/research check` FIRST, then Perplexity THEN NotebookLM on cache miss. No exceptions.
 
 <!-- COMPACTION STANDING ORDERS -->
 ## WHEN COMPACTING
