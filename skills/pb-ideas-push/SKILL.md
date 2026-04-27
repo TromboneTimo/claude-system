@@ -106,14 +106,22 @@ If Timo's proposal has a section not in this list (e.g. "Production notes", "B-r
 
 Use these 7 section classes in this order (updated 2026-04-26 per Timo). Dashboard CSS colors them per section.
 
-**MANDATORY sections in this exact order** (every proposal push includes ALL that are present in the input):
+**MANDATORY sections in this exact order** (every proposal push includes ALL that are present in the input). Updated 2026-04-26 per Timo's correction.
+
+**Rationale top half (renders BEFORE the voc-quotes block):**
 1. `origin`    Idea Origin (where this came from, why the format works)
 2. `why`       Why This Converts
 3. `concept`   The Promise
 4. `wound`     The Wound
-5. `synthesis` What These Quotes Show Together (positioned beneath the quotes on the dashboard)
-6. `icp`       ICP Target (second-bottom)
-7. `channel`   Channel Connection (bottom)
+
+**Voc quotes render here** (auto-injected by dashboard between the two rationale halves).
+
+**Rationale bottom half (renders AFTER the voc-quotes block):**
+5. `synthesis` What These Quotes Show Together (sits directly under the quotes)
+6. `channel`   Channel Connection
+7. `icp`       ICP Target (LAST. final section in the card)
+
+The dashboard splits the rationale at the first `<div class="r-section synthesis"` tag, renders the top half, then renders the voc quotes, then renders the bottom half. Build the rationale HTML in the order above and the split happens automatically.
 
 If the proposal includes ANY of these, push ALL of them. Dropping one without explicit Timo approval is a contract violation.
 
