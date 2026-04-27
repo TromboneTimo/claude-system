@@ -40,189 +40,252 @@ See `references/funnel-layers.md` for the full spec.
 
 If Timo doesn't answer or says "all of them", default to MOFU and label it. Don't skip the question.
 
-### Step 1. Acknowledge, then research
+### Step 1. Pre-spawn rotation picks (Bash), then acknowledge
 
-Tell Timo: "Layer locked: [TOFU/MOFU/BOFU]. Spawning 5 research agents across the corpus. ~2-3 minutes." Then spawn the 5 subagents below **in parallel in a single message** (multiple Agent tool calls in one turn). Inject the funnel layer into each agent's prompt so they tune their pain-point depth accordingly.
+**Before** spawning agents, run two Bash blocks to pick the rotating slots:
 
-### Step 2. Spawn 5 parallel research subagents
+```bash
+# A. Pick the raw corpus for Agent 1 (avoiding last 3 runs)
+python3 - <<'PY'
+import json, os, random, pathlib
+log_path = pathlib.Path('/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl')
+all_corpora = ['sales-A','sales-B','sales-C','testimonials','yt-comments','unsorted-vtt','fb-ads','email-seq']
+recent = []
+if log_path.exists():
+    for line in log_path.read_text().splitlines()[-3:]:
+        try: recent.append(json.loads(line).get('corpus_picked'))
+        except: pass
+remaining = [c for c in all_corpora if c not in recent] or all_corpora
+print(random.choice(remaining))
+PY
 
-All 5 are `general-purpose` subagents. They read raw files directly, return findings to the main thread.
+# B. Pick the fresh lens for Agent 6 (avoiding last 3 runs)
+python3 - <<'PY'
+import json, random, pathlib
+log_path = pathlib.Path('/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl')
+all_lenses = ['dental-trigger','isolation-pattern','failed-method-grief','identity-aspiration','age-anxiety','mouthpiece-rabbit-hole','comeback-player-arc','section-leader-redemption','teacher-loyalty-grief','livelihood-vs-love','range-for-others','exhaustion-of-hope']
+recent = []
+if log_path.exists():
+    for line in log_path.read_text().splitlines()[-3:]:
+        try: recent.extend(json.loads(line).get('lenses', []))
+        except: pass
+remaining = [l for l in all_lenses if l not in recent] or all_lenses
+print(random.choice(remaining))
+PY
+```
 
-#### Agent A. Verified Winner Deconstruction (THE ANCHOR)
+Save both outputs as `CORPUS_ID` and `LENS_NAME`. Then tell Timo:
 
-This agent reads BOTH proven-conversion sources: YouTube winners and Facebook winning ads. They are different formats but same signal: stuff that actually converted.
+> "Layer locked: [TOFU/MOFU/BOFU]. Raw corpus this run: [CORPUS_ID]. Fresh lens: [LENS_NAME]. Spawning 6 research agents in parallel + voice diversity auditor. ~3-4 minutes."
+
+Then spawn Agents 1-6 below **in parallel in a single message** (multiple Agent tool calls in one turn). Inject the funnel layer, CORPUS_ID, and LENS_NAME into each agent's prompt as appropriate.
+
+### Step 2. Spawn 6 parallel research subagents
+
+All 6 are `general-purpose` subagents. They read raw files directly, return findings to the main thread.
+
+#### Agent 1. Raw Deep-Dive (ROTATING CORPUS)
+
+Inject CORPUS_ID. Reads ONE raw corpus end-to-end. See `references/raw-deep-dive-rotation.md` for the 8-corpus pool and per-corpus reading instructions.
+
+Prompt:
+```
+You are doing a deep-dive read of ONE raw corpus from Precision Brass's voice-of-customer database. Your corpus this run: [CORPUS_ID].
+
+Funnel layer for this run: [TOFU/MOFU/BOFU].
+
+Read `~/.claude/skills/pb-script/references/raw-deep-dive-rotation.md` first to see the per-corpus reading instructions. Then read EVERY file in your assigned corpus end-to-end. Do NOT read summary files (voice-bank.md, won-deals-voice-bank.md, etc.). Those are concentrated and you are mining fresh.
+
+Your job:
+1. Identify named speakers in your corpus. Note WHICH speakers appear (this feeds the voice-diversity log).
+2. Extract 5-10 verbatim quotes from speakers who are NOT in the recycled-12 list (Robbie, Mike, Heather, Phil, Joinville, Rachel, Konstantinos, Tom, Barry, Michael, Julian, Jason). Prefer fresh voices.
+3. Surface 2 candidate video ideas anchored in fresh voices and specific pain or identity arcs from this raw read.
+
+Each idea must:
+- Pass the ICP checklist (`references/icp-checklist.md`)
+- Cite 3+ verbatim quotes WITH source_file paths
+- Identify the primary voice (the speaker most heavily quoted)
+- Name a limiting belief (Domino) and an identity outcome (not a technique outcome)
+- Match the funnel layer's pain-point depth
+
+Return: corpus_id picked, "voices surfaced" list (named speakers + file paths), then 2 candidate ideas.
+```
+
+#### Agent 2. Hidden Pain Hunter
+
+Reads sales call transcripts and the deep psychological dive looking for SUBTEXT. See `references/hidden-pain-framework.md` for the 8 hidden problems (HP1-HP8) and detection patterns.
+
+Prompt:
+```
+You are hunting for HIDDEN PAIN in Harrison Ball's voice-of-customer corpus. Hidden pain is a wound prospects circle around in sales calls without ever naming directly. Naming the unnamed pain is the highest-converting hook pattern.
+
+Funnel layer for this run: [TOFU/MOFU/BOFU].
+
+Read `~/.claude/skills/pb-script/references/hidden-pain-framework.md` first for the 8 hidden problems (HP1-HP8) and detection patterns (compensation clauses, hypothetical distancing, excessive technical detail, apologizing for the goal, repeated reassurance-seeking).
+
+Then read these files for traces of subtext:
+- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 calls, prefer ones from speakers NOT in the recycled-12 list)
+- /Users/air/Desktop/Precision-Brass/voc/raw/research/2026-04-21_deep-psychological-dive_harrisson-ball_19-prospects.md
+- /Users/air/Desktop/Precision-Brass/context/prospect-psychology.md
+
+Your job:
+1. Pick 1-2 hidden problems (HP1-HP8) that are MOST under-addressed in `youtube-database/index.json` topic_tags.
+2. Find 3+ verbatim quotes where prospects CIRCLE the pain without naming it. Show the circling.
+3. Propose 1 video idea that NAMES THE UNNAMED PAIN explicitly as its hook.
+4. Show the reframe move (the line that grants permission to feel the wound + offers a new identity).
+
+The hook line MUST name the hidden pain with words the prospect would never say themselves. NO technique-only hooks.
+
+Return: which HP IDs picked, 3+ circling quotes with source files, then 1 candidate idea with hook line + reframe move.
+```
+
+#### Agent 3. Objection Dissolver
+
+Laser-focused on objections. See `references/objection-lenses.md` for the 8 objection lenses (OBJ1-OBJ8) and the pre-emption pattern.
+
+Prompt:
+```
+You are pre-empting Harrison Ball's most common sales-call objections. Pick ONE objection lens and propose a video that dismantles it BEFORE the prospect ever gets on a call.
+
+Funnel layer for this run: [TOFU/MOFU/BOFU].
+
+Read `~/.claude/skills/pb-script/references/objection-lenses.md` first for the 8 lenses (OBJ1-OBJ8) and the pre-emption pattern (HOOK / VALIDATION / DISMANTLE / DEMONSTRATION / RESOLUTION).
+
+Then read these files:
+- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 calls, search for HESITATION/PUSHBACK moments specifically)
+- /Users/air/Desktop/Precision-Brass/voc/personas/lost-deals-voice-bank.md
+- /Users/air/Desktop/Precision-Brass/voc/personas/objection-library.md
+- Facebook ad comments where present (`facebook-ads-database/*/comments-top.md`)
+
+Your job:
+1. Pick 1 objection lens (OBJ1-OBJ8) that is least-recently-used per `voices_used_log.jsonl` (the `lenses` field in last 3 runs).
+2. Find 3+ verbatim quotes from sales-call moments where this objection appeared, AND 2+ quotes from lost-deals-voice-bank.md.
+3. Propose 1 video idea using the pre-emption pattern.
+4. Specify the DISMANTLE LINE (the specific reframe that flips the objection) and the DEMONSTRATION (what Harrison shows on camera to falsify the objection).
+
+The video must address ONE objection, not three. The dismantle line MUST be falsifiable on camera.
+
+Return: which OBJ ID picked, 3+ pushback quotes with source files, then 1 candidate idea with dismantle line and demonstration.
+```
+
+#### Agent 4. Verified Winner Pattern (THE ANCHOR)
+
+Reads BOTH proven-conversion sources: YouTube winners and Facebook winning ads.
 
 Prompt:
 ```
 You are researching what verifiably converts for Harrison Ball's Precision Brass business across two channels: YouTube long-form and Facebook ads.
 
-PART 1. YouTube winners
-READ EVERY VIDEO in /Users/air/Desktop/Precision-Brass/youtube-database/ that is marked status=winner in index.json. For each winner, read:
-- analysis.md (what made it work)
-- transcript.md (full script content)
-- comments-top.md (what viewers said that proved emotional resonance)
-- metadata.json (view count, sales attribution, dates)
+Funnel layer for this run: [TOFU/MOFU/BOFU].
 
-If the YouTube winners list is empty, note that and continue to Part 2.
+PART 1. YouTube winners
+READ EVERY VIDEO in /Users/air/Desktop/Precision-Brass/youtube-database/ that is marked status=winner in index.json. For each winner: analysis.md, transcript.md, comments-top.md, metadata.json. If empty, note and continue.
 
 PART 2. Facebook winning ads
-READ EVERY AD in /Users/air/Desktop/Precision-Brass/facebook-ads-database/ that is marked status=winner in index.json. For each winner, read:
-- analysis.md (why it worked)
-- creative/copy.md (primary text, headline, CTA)
-- performance.json (spend, ROAS, CPA, sales attributed)
-- comments-top.md if present (audience reaction)
-- metadata.json (audience targeting, dates)
-
-If the FB winners list is empty, note that and continue.
+READ EVERY AD in /Users/air/Desktop/Precision-Brass/facebook-ads-database/ that is marked status=winner in index.json. For each: analysis.md, creative/copy.md, performance.json, comments-top.md if present, metadata.json. If empty, note and continue.
 
 PART 3. Reference materials (always read)
 - /Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md
-- /Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/project_proven_converter_template.md (the 12-move converter template)
+- /Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/project_proven_converter_template.md (12-move converter template)
 
-PART 4. Extract the cross-channel PATTERN
-What hook structure works in BOTH long-form video AND short-form ad copy? What identity arc? What pain-to-payoff bridge? What words and phrases recur across winners (these are the highest-signal language)? What demonstration style proves the claim?
+PART 4. Extract cross-channel PATTERN: hook structure, identity arc, pain-to-payoff bridge, recurring language, demonstration style.
 
-Note that ads are short and videos are long, so structural elements differ. Look for what's COMMON: the emotional triggers, the identity framing, the language register, the pain points named, the proof-style.
-
-PART 5. Propose 3 NEW video ideas that would match this verified-winner pattern, each one targeting a different specific pain point. Each idea must:
-- Map to either YT-WINNER-PATTERN, FB-WINNER-PATTERN, or CROSS-WINNER-PATTERN (specify which) and explain how the new idea inherits its structure
-- Pass the ICP checklist (40-65, US, comeback player, business owner, addresses range/endurance/mouthpiece/age/comeback)
-- Cite at least 2 verbatim quotes (from comments, transcripts, ad copy, or ad comments) proving emotional resonance
-- Name the limiting belief it shatters (Domino Effect Framework, one belief per video)
+PART 5. Propose 2-3 NEW video ideas matching this pattern, each targeting a different specific pain point. Each idea must:
+- Map to YT-WINNER-PATTERN, FB-WINNER-PATTERN, or CROSS-WINNER-PATTERN (specify) and explain inheritance
+- Pass ICP checklist
+- Cite 2+ verbatim quotes proving emotional resonance
+- Name limiting belief (Domino, one per video)
 - Sell identity, not technique
 
-EMPTY-DATABASE handling: if both YT winners AND FB winners are empty, return: "No verified-winner data yet. Skip the anchor slot, pull all 5 ideas from variety lenses." Do NOT make up patterns. Do NOT propose anchored ideas without source data.
+EMPTY-DATABASE: if both YT and FB winners empty, return: "No verified-winner data yet. Skip anchor slot, pull all 5 from variety pool." Do NOT make up patterns.
 
-Return: which databases had data, pattern summary (200 words across both channels), then 3 candidate ideas with the structure above.
+Return: which databases had data, pattern summary (200 words across both channels), then 2-3 candidate ideas.
 ```
 
-#### Agent B. Won-Deal Conversion Patterns
+#### Agent 5. Conversion Trigger Detector
+
+Reads RAW testimonials end-to-end (not the summary). Identifies the exact moment a prospect flipped to buyer.
 
 Prompt:
 ```
-You are researching WHY Harrison Ball's customers bought Precision Brass coaching.
+You are detecting CONVERSION TRIGGERS in Harrison Ball's customer corpus. A conversion trigger is the exact line, realization, or demonstration that flipped a prospect into a buyer.
 
-Read these files completely:
-- /Users/air/Desktop/Precision-Brass/voc/personas/won-deals-voice-bank.md
+Funnel layer for this run: [TOFU/MOFU/BOFU].
+
+Read RAW testimonial files end-to-end (these are CUSTOMERS who completed the program, not prospects):
+- /Users/air/Desktop/Precision-Brass/voc/raw/testimonials/ (all 11 files)
+
+Then for additional signal:
 - /Users/air/Desktop/Precision-Brass/voc/quotes/won-deals-quotes.jsonl
 - /Users/air/Desktop/Precision-Brass/voc/quotes/sales-call-outcomes.jsonl
-- /Users/air/Desktop/Precision-Brass/voc/raw/testimonials/ (read every testimonial file)
 
-Your job: identify the SPECIFIC moments, phrases, realizations, and demonstrations that flipped someone from interested to buying. Look for:
-- The exact frustration they were stuck on before Harrison
-- The "aha" moment they describe
-- The identity shift they articulate after working with him
-- Words/phrases that repeat across multiple converters (high-frequency = high-resonance)
+Reference the 8-trigger taxonomy in `~/.claude/skills/pb-script/references/conversion-triggers.md` (T1-T8).
 
-Then propose 3 video ideas that would activate those same conversion triggers in NEW prospects who haven't bought yet. Each idea must:
-- Pass the ICP checklist (40-65, US, comeback, business owner, specific pain)
-- Cite at least 3 verbatim quotes from converters
-- Identify the conversion trigger it activates by name
+Your job:
+1. For each testimonial, find the EXACT moment the customer describes flipping to buyer. Quote it verbatim.
+2. Map each moment to a trigger (T1-T8).
+3. Identify the trigger that is MOST UNDER-USED in recent dashboard pushes (cross-check `voices_used_log.jsonl` if present).
+4. Propose 1 video idea built around that under-used trigger.
+
+Each idea must:
+- Cite 3+ verbatim quotes from RAW testimonials with source_file paths
+- Identify the primary voice (most heavily quoted speaker, MUST be a customer)
+- Name the trigger by ID (T1-T8)
 - Sell identity, not technique
+- Per `feedback_master_lessons.md` rule 3: do NOT mix prospect language with customer language
 
-Return: trigger inventory (top 5 triggers ranked by frequency), then 3 candidate ideas.
+Return: trigger inventory ranked by under-use, then 1 candidate idea.
 ```
 
-#### Agent C. Lost-Deal Pain & Objection Surfacing
+#### Agent 6. Fresh Lens (ROTATING)
+
+Inject LENS_NAME picked in Step 1.
 
 Prompt:
 ```
-You are researching what stops Harrison Ball's prospects from buying, and what video content could break that resistance.
+You are researching the [LENS_NAME] angle for Harrison Ball's content. This lens was picked because it has NOT been used in the last 3 runs (per voices_used_log.jsonl).
 
-Read these files completely:
-- /Users/air/Desktop/Precision-Brass/voc/personas/lost-deals-voice-bank.md
-- /Users/air/Desktop/Precision-Brass/voc/personas/objection-library.md
-- /Users/air/Desktop/Precision-Brass/voc/quotes/lost-deals-quotes.jsonl
+Funnel layer for this run: [TOFU/MOFU/BOFU].
 
-Your job: identify the top objections, hesitations, and pain points that made prospects walk away. Then think: what kind of video would dissolve that objection BEFORE the sales call?
+The 12 possible lenses: dental-trigger, isolation-pattern, failed-method-grief, identity-aspiration, age-anxiety, mouthpiece-rabbit-hole, comeback-player-arc, section-leader-redemption, teacher-loyalty-grief, livelihood-vs-love, range-for-others, exhaustion-of-hope.
 
-Look for:
-- Failed-method history ("I've tried X for 20 years")
-- Identity threats ("I'm too old", "It's too late", "I'll never get range back")
-- Skepticism patterns ("how is this different from...")
-- Price/commitment fears
-- Specific technical fears (embouchure damage, mouthpiece swap fear, etc.)
-
-Then propose 3 video ideas. Each idea must:
-- Address one specific objection head-on (name it)
-- Pass the ICP checklist
-- Cite at least 2 verbatim quotes from lost deals
-- Use the "name the invisible problem" approach
-- Sell identity, not technique
-
-Return: top 5 objections ranked, then 3 candidate ideas.
-```
-
-#### Agent D. Comments + Deep Psychological Dive
-
-Prompt:
-```
-You are researching the deep psychological wiring of Harrison Ball's audience.
-
-Read these files completely:
-- /Users/air/Desktop/Precision-Brass/voc/personas/comments-voice-bank.md
-- /Users/air/Desktop/Precision-Brass/voc/quotes/comments-quotes.jsonl
-- /Users/air/Desktop/Precision-Brass/voc/raw/research/2026-04-21_deep-psychological-dive_harrisson-ball_19-prospects.md
-- /Users/air/Desktop/Precision-Brass/context/prospect-psychology.md
-
-Your job: identify the unspoken fears, secret aspirations, identity wounds, and emotional through-lines that show up across the 19 prospect deep-dives and the public commenter base.
-
-Look for:
-- Identity wounds ("I used to be good", grief over lost ability, comparison to past self)
-- Isolation patterns (no teacher, no community, embarrassment about asking)
-- Dental/age/physical anxieties they don't say out loud in public
-- Secret hopes (return to first chair, play with grandkids, prove something to former teacher, recover what they lost)
-- Curiosity-loop hooks (what they ALMOST understood but couldn't name)
-
-Then propose 3 video ideas that name an invisible emotional truth Harrison's audience already feels but doesn't say. Each idea must:
-- Pass the ICP checklist
-- Cite at least 3 verbatim quotes
-- Name the specific emotional truth being surfaced
-- Sell identity, not technique
-- Pass the "would someone OUTSIDE the ICP want this?" test (if yes, reject)
-
-Return: top 5 emotional through-lines, then 3 candidate ideas.
-```
-
-#### Agent E. Rotating Bonus Lens (FRESHNESS SLOT)
-
-Pick ONE lens at random from the list below using `python3 -c 'import random; print(random.choice(["dental-trigger", "isolation-pattern", "failed-method-grief", "identity-aspiration", "age-anxiety", "mouthpiece-rabbit-hole", "comeback-player-arc", "section-leader-redemption"]))'` (run this in a Bash call before spawning the agent so the lens is selected fresh each invocation).
-
-Then spawn this agent with the chosen lens injected:
-
-```
-You are researching the [LENS_NAME] angle for Harrison Ball's content.
-
-Read across these files for traces of this specific theme:
+Read across these files for traces of [LENS_NAME]:
 - /Users/air/Desktop/Precision-Brass/voc/quotes/all-quotes.jsonl
-- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 8-10 random calls)
+- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 random calls)
 - /Users/air/Desktop/Precision-Brass/voc/raw/email-sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md
 - /Users/air/Desktop/Precision-Brass/voc/personas/harrison-email-voice.md
 - /Users/air/Desktop/Precision-Brass/context/harrison-profile.md
-- /Users/air/Desktop/Precision-Brass/context/content-sop.md
 
-Your job: find the most NON-OBVIOUS angle on this lens. Not what Harrison already says publicly. Something the data shows is loaded with emotion but Harrison hasn't directly addressed in a video yet.
+Find the most NON-OBVIOUS angle on this lens. Not what Harrison already says publicly. Something the data shows is loaded with emotion but Harrison hasn't directly addressed in a video yet.
 
-Propose 2 video ideas through this lens. Each idea must:
-- Pass the ICP checklist
-- Cite at least 2 verbatim quotes
-- Be something Harrison has NOT already covered (cross-check against youtube-database/index.json topic_tags)
+Propose 1 wildcard video idea through this lens. Must:
+- Pass ICP checklist
+- Cite 3+ verbatim quotes with source files
+- Be something NOT covered in `youtube-database/index.json` topic_tags
 - Sell identity, not technique
+- Use a fresh primary voice (not in recycled-12 list)
 
-Return: lens insight (150 words on what's underneath this theme), then 2 candidate ideas.
+Return: lens insight (150 words on what's underneath this theme), then 1 candidate idea.
 ```
 
-### Step 3. Synthesize the 5
+### Step 3. Run Agent 7 (Voice Diversity Auditor) sequentially
 
-When all 5 agents return, do not just concatenate their outputs. Synthesize:
+After Agents 1-6 return, run the auditor as a sequential synthesizer step. See `references/voice-diversity-protocol.md` for the full protocol.
 
-1. **Pool all candidate ideas** (you'll have ~13: 3+3+3+3+2 minus duplicates).
-2. **Enforce the mix**: pick 1-2 from Agent A's pool (the YouTube-winner-anchored ones), and 3-4 from B/C/D/E pools combined. Total = 5.
-3. **Apply the ICP checklist** (see `references/icp-checklist.md`) to every survivor. If an idea fails any check, replace it.
-4. **Apply the Domino check**: each idea must shatter exactly ONE limiting belief. If an idea is too broad (covers 3 beliefs), narrow it or drop it.
-5. **Apply the identity check**: every idea must promise an identity outcome (who they become), not a technique outcome (what they learn).
-6. **Apply the freshness check**: cross-reference against `youtube-database/index.json` topic_tags. If an idea overlaps heavily with already-published content, flag it as "refresh" or replace.
-7. **Diversify**: of the final 5, no two ideas should target the same conversion trigger. If two collapse onto the same trigger, swap one out.
+The auditor performs 4 checks on the candidate pool (~9 ideas total: 2+1+1+2+1+1+overlap):
+
+1. **Voice freshness check**: reject any idea whose primary voice appears in last 2 runs (override allowed if agent flagged a genuinely new sub-pain for that speaker).
+2. **Final-5 voice diversity**: 5 distinct primary voices, 3+ NOT in last 3 runs, 1+ from raw sales call file, 1+ from raw testimonial file.
+3. **Quote-sourcing minimums**: 1+ testimonial quote AND 1+ sales call quote per idea (per `feedback_quote_sourcing_minimums.md`). Harrison-quotes need a `conversion_lens` field.
+4. **Plain-English rationale**: no internal jargon ("converter", "voice bank", "the corpus", invented market claims) (per `feedback_no_internal_jargon_in_rationale.md`).
+
+Then enforce the structure mandate: 1-2 ideas from Agent 4's pool (anchor), 3-4 from Agents 1, 2, 3, 5, 6 (variety). Apply ICP checklist + Domino check + identity check to every survivor.
+
+If the auditor cannot satisfy diversity from the pool, FAIL LOUD: report "insufficient fresh voices in pool, request agent re-run with stricter freshness lens" rather than silently shipping recycled voices.
+
+After locking the final 5, append one line to `/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl` with run_id, corpus_picked, idea_ids, primary_voices, secondary_voices, raw_files, lenses (see `references/voice-diversity-protocol.md` for exact format).
+
+Bootstrap: if voices_used_log.jsonl doesn't exist, create empty on first run.
 
 ### Step 4. Output the menu
 
@@ -259,11 +322,15 @@ End with: "Which one do you want to develop into a script? Reply with the number
 
 - `references/icp-checklist.md`. The 5-question ICP gate
 - `references/output-template.md`. Exact format for the 5-idea menu
-- `references/conversion-triggers.md`. Taxonomy of triggers found in the corpus (read this before synthesizing)
-- `references/proven-template-pointer.md`. Where the 12-move converter template lives and how to apply it
-- `references/example-mouthpieces-script.md`. The proven 7-beat interleaved script structure (Phase 2 reference. READ when generating any new script)
-- `references/script-writing-protocol.md`. Phase 2 ruleset. failure modes to avoid + voice fingerprint + funnel pattern. READ before drafting any script
-- `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec. READ in Step 0 to inform research depth and idea framing
+- `references/conversion-triggers.md`. Taxonomy of triggers (T1-T8) used by Agent 5
+- `references/proven-template-pointer.md`. Where the 12-move converter template lives
+- `references/example-mouthpieces-script.md`. Proven 7-beat structure (Phase 2 reference)
+- `references/script-writing-protocol.md`. Phase 2 ruleset (Phase 2 reference)
+- `references/funnel-layers.md`. TOFU/MOFU/BOFU spec. READ in Step 0
+- `references/raw-deep-dive-rotation.md`. Agent 1 corpus rotation pool + per-corpus reading instructions. READ before spawning Agent 1
+- `references/hidden-pain-framework.md`. Agent 2's 8 hidden problems (HP1-HP8) + subtext detection patterns. READ before spawning Agent 2
+- `references/objection-lenses.md`. Agent 3's 8 objection lenses (OBJ1-OBJ8) + pre-emption pattern. READ before spawning Agent 3
+- `references/voice-diversity-protocol.md`. Agent 7 auditor protocol + voices_used_log.jsonl format. READ in Step 3
 
 ## What this skill is NOT
 
