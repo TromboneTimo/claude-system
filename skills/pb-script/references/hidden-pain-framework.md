@@ -2,6 +2,14 @@
 
 Used by Agent 2 (Hidden Pain Hunter). Surfaces problems prospects feel but haven't named. Naming the unnamed pain is the highest-converting hook pattern in the corpus (see Agent A's verified-winner deconstruction).
 
+## Theoretical anchor
+
+This framework operationalizes Eugene Schwartz's "Five Levels of Awareness" from *Breakthrough Advertising* (1966): Completely Unaware, Problem Aware, Solution Aware, Product Aware, Most Aware. Schwartz argued that copy must meet prospects at their current awareness level and that the highest-leverage move is articulating the unnamed pain a Problem-Aware or Completely-Unaware prospect feels but cannot yet say. That is the move this framework targets.
+
+The 8 hidden problems below are Precision Brass-specific instantiations of Schwartz's "Problem Aware" and "Completely Unaware" tiers, derived from the 19-prospect deep psychological dive.
+
+Reference: Schwartz, E. M. (1966). *Breakthrough Advertising*. Boardroom Inc.
+
 ## The 8 hidden problems
 
 Sourced from `/Users/air/Desktop/Precision-Brass/context/prospect-psychology.md` (19 prospect dives). Each one is a real wound prospects circle around in sales calls without ever naming directly.
