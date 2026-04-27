@@ -138,7 +138,66 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
 
 ## Dashboard upload (step 9 detail)
 
-Build the script row payload. The `body` field is a JSON array, one entry per beat, each entry has `{kicker, time, heading, copy, visual}`.
+Two uploads happen: (1) the PDF goes to Supabase Storage so Harrison can download it, (2) the rich HTML body + PDF URL go into the script row so the dashboard renders the script in-modal AND shows a Download PDF button.
+
+### 9a. Upload the PDF to Supabase Storage
+
+```bash
+source ~/.claude/secrets/precision-brass.env
+PDF_PATH="/Users/air/Desktop/Precision-Brass/scripts/{filename}.pdf"
+PDF_REMOTE="{filename}.pdf"   # e.g. 2026-04-27_lip-bruise.pdf
+curl -s -X POST "${SUPABASE_URL}/storage/v1/object/scripts/${PDF_REMOTE}" \
+  -H "apikey: ${SUPABASE_SECRET_KEY}" \
+  -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}" \
+  -H "Content-Type: application/pdf" \
+  --data-binary @"${PDF_PATH}"
+PDF_URL="${SUPABASE_URL}/storage/v1/object/public/scripts/${PDF_REMOTE}"
+```
+
+If the file already exists, use PUT instead of POST (or DELETE first). Verify the URL responds 200 before continuing.
+
+### 9b. Build the script row payload
+
+The `body` field is a JSON array with **a single entry containing the full rich HTML AND the PDF URL** (so the dashboard renders the script in-modal AND shows a Download button):
+
+```json
+"body": [{
+  "type": "html_full",
+  "content": "<full <body> innerHTML of the script HTML file>",
+  "pdf_url": "https://YOUR-PROJECT.supabase.co/storage/v1/object/public/scripts/{filename}.pdf"
+}]
+```
+
+This is how Harrison sees the same colorful 7-beat layout (action blocks, script markers, color-coded beats) inside the dashboard modal that he'd see in the local PDF. Reference: `Precision-Brass/scripts/2026-04-25_stop-buying-mouthpieces.html` shows the exact structure to produce.
+
+To extract the body HTML for upload:
+```bash
+# Pull the inner HTML between <body> and </body> from the just-written script file
+HTML_BODY=$(awk '/<body>/,/<\/body>/' /Users/air/Desktop/Precision-Brass/scripts/{filename}.html | sed -e 's/<\/\?body[^>]*>//g')
+# Use python3 to JSON-encode it cleanly into the payload
+python3 -c "
+import json, sys
+with open('$HTML_PATH') as f:
+    body = f.read().split('<body>')[1].split('</body>')[0]
+payload = {
+  'id': '$SCRIPT_ID',
+  'idea_id': '$IDEA_ID',
+  'title': '$TITLE',
+  'delivered': '$TODAY',
+  'length': '$LENGTH',
+  'sections': 7,
+  'pain_point': '$PAIN',
+  'hook': '$HOOK',
+  'status': 'pending',
+  'body': [{'type': 'html_full', 'content': body}],
+  'history': [{'type':'delivered','who':'Timo','text':'<b>Script written</b> from idea','time':'$NOW'}]
+}
+with open('/tmp/script_payload.json','w') as f:
+    json.dump(payload, f)
+"
+```
+
+Then POST to Supabase:
 
 ```bash
 SCRIPT_ID="${idea_id/i_/s_}"
