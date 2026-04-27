@@ -133,8 +133,21 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
 6. Generate the HTML using the proven aesthetic spec
 7. Render PDF via Chrome headless, run visual QA on PNG export of each page
 8. Copy HTML+PDF to BOTH project output AND ~/Downloads/
-9. **Upload to Harrison's dashboard (REQUIRED in dashboard mode).** Build a script payload with the body filled in, POST to Supabase, then mark idea as scripted. See "Dashboard upload" below.
-10. Report file paths AND dashboard link to Timo. Offer to iterate on any beat.
+9. **MANDATORY DRAFT REVIEW IN CHAT (do NOT upload until Timo says go).** Show Timo a draft preview directly in the chat:
+   - Locked hook line (verbatim, beat 1)
+   - The 3 mistake names + 1-line description of the trap, mistake, and test for each
+   - The funnel CTA close line
+   - Total word count + length estimate
+   - Any [HARRISON FILLS] tags or knowledge gaps
+   - Local file paths (so Timo can open the PDF for full review)
+   - Explicit prompt: **"Review the PDF at {path}. Reply 'go' to upload to Harrison's dashboard, OR tell me which beat to revise."**
+   Do NOT do step 10 until Timo replies with explicit approval ("go", "ship it", "upload it", "looks good", or similar).
+10. **Upload to Harrison's dashboard (only AFTER Timo's go).** Build a script payload with the body filled in, POST to Supabase, then mark idea as scripted. See "Dashboard upload" below.
+11. Report dashboard link to Timo + confirmation idea moved to scripted.
+
+### Why the draft review step exists
+
+Before this rule existed, the skill auto-uploaded immediately after writing. Harrison would see scripts on his dashboard before Timo had a chance to QA them. Bad beats, missed VOC quotes, or weak hooks would land in production. Trust damage compounds fast in this loop. From now on: write locally, review in chat, upload only on explicit approval. Speed is never the priority for this skill (see "Operating principle" at top).
 
 ## Dashboard upload (step 9 detail)
 
