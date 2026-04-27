@@ -104,18 +104,20 @@ If Timo's proposal has a section not in this list (e.g. "Production notes", "B-r
 
 ## Rationale HTML template (Mode B)
 
-Use these 7 section classes in this order. Dashboard CSS colors them: cyan / brass / red / green / blue / purple / amber.
+Use these 7 section classes in this order (updated 2026-04-26 per Timo). Dashboard CSS colors them per section.
 
-**MANDATORY sections** (every proposal push includes ALL that are present in the input):
+**MANDATORY sections in this exact order** (every proposal push includes ALL that are present in the input):
 1. `origin`    Idea Origin (where this came from, why the format works)
-2. `concept`   The Promise
-3. `wound`     The Wound
-4. `why`       Why This Converts
-5. `icp`       ICP Target
-6. `channel`   Channel Connection
-7. `synthesis` What These Quotes Show Together
+2. `why`       Why This Converts
+3. `concept`   The Promise
+4. `wound`     The Wound
+5. `synthesis` What These Quotes Show Together (positioned beneath the quotes on the dashboard)
+6. `icp`       ICP Target (second-bottom)
+7. `channel`   Channel Connection (bottom)
 
 If the proposal includes ANY of these, push ALL of them. Dropping one without explicit Timo approval is a contract violation.
+
+**Plain-language standard for `why` (REQUIRED).** No internal jargon. No "converter", "the corpus", "the voice bank", "the database", "failed-method-grief", "BOFU floor", or similar dev-speak. No hallucinated market-positioning claims like "the X wars" without evidence. Every bullet must answer "what makes a viewer book a strategy call after watching this?" using plain English with concrete evidence (a real student, a real ad, a real testimonial, a real won deal amount). See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_no_internal_jargon_in_rationale.md`.
 
 ```html
 <div class="r-section origin">
