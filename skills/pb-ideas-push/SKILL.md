@@ -184,6 +184,21 @@ Every `voc_quotes` array MUST include at least:
 
 If either is missing, STOP and pull a real quote from the corpus before pushing. Do not skip this check.
 
+## FRESH-VOICE RULE (added 2026-04-26)
+
+Do not recycle the same 10-15 names across multiple proposals. The corpus has 28 sales calls and 11 testimonials. If every idea cites Robbie, Mike, Heather, Phil, the proposals start looking like Robbie's diary instead of voice-of-customer evidence.
+
+**Required workflow for every new idea pushed to the dashboard:**
+
+1. List the names already cited across previously-pushed ideas (read `id, voc_quotes` from the Supabase ideas table).
+2. Spawn at least one research subagent to mine the corpus through the lens of THIS specific idea, with explicit instructions to AVOID names already cited. Tell the agent which names are off-limits.
+3. The agent surfaces fresh quotes from at least 2-3 voices not yet used. Minimum: one testimonial and one sales call from new voices.
+4. Build the voc_quotes array from the agent's findings, mixing one or two recurring high-signal quotes if they truly fit, but defaulting to fresh voices.
+
+If the same idea is being PATCHed (not newly created), still run the fresh-voice pass before adding quotes.
+
+Skip this rule and the proposals start to feel repetitive to Harrison. Fresh voices = stronger evidence per proposal.
+
 ## Harrison-quote conversion-lens rule (added 2026-04-26)
 
 If a quote in the array has Harrison as the speaker (his own ad copy, his own video transcript, his own social post), the `source` field must do two things:

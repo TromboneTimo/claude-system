@@ -118,14 +118,67 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
 
 ## Workflow
 
-1. Confirm the picked idea title and conversion trigger (carry over from pb-script output)
-2. READ all 4 reference files (preconditions above)
-3. Outline the 7 beats. Name the 3 mistakes from the corpus or extend a Timo-approved pattern.
-4. Draft each beat in Harrison's voice with the locked-lines / riff-topics split
-5. Generate the HTML using the proven aesthetic spec
-6. Render PDF via Chrome headless, run visual QA on PNG export of each page
-7. Copy HTML+PDF to BOTH project output AND ~/Downloads/
-8. Report file paths to Timo. Offer to iterate on any beat.
+1. **Detect dashboard mode.** If invoked with `/pb-script-write i_YYYYMMDD_slug`, this is a dashboard-driven run. Fetch the originating idea from Supabase first:
+   ```bash
+   source ~/.claude/secrets/precision-brass.env
+   curl -s "${SUPABASE_URL}/rest/v1/ideas?id=eq.{idea_id}&select=*" \
+     -H "apikey: ${SUPABASE_SECRET_KEY}" \
+     -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}"
+   ```
+   Use the idea's title, pain_point, hook_angle, voc_quotes, source_tags as the conversion-trigger context. If status is not `idea_approved`, STOP and tell Timo (e.g. already scripted, or Harrison hasn't greenlit yet).
+2. Confirm the picked idea title and conversion trigger (carry over from pb-script output OR from fetched idea)
+3. READ all 4 reference files (preconditions above)
+4. Outline the 7 beats. Name the 3 mistakes from the corpus or extend a Timo-approved pattern.
+5. Draft each beat in Harrison's voice with the locked-lines / riff-topics split
+6. Generate the HTML using the proven aesthetic spec
+7. Render PDF via Chrome headless, run visual QA on PNG export of each page
+8. Copy HTML+PDF to BOTH project output AND ~/Downloads/
+9. **Upload to Harrison's dashboard (REQUIRED in dashboard mode).** Build a script payload with the body filled in, POST to Supabase, then mark idea as scripted. See "Dashboard upload" below.
+10. Report file paths AND dashboard link to Timo. Offer to iterate on any beat.
+
+## Dashboard upload (step 9 detail)
+
+Build the script row payload. The `body` field is a JSON array, one entry per beat, each entry has `{kicker, time, heading, copy, visual}`.
+
+```bash
+SCRIPT_ID="${idea_id/i_/s_}"
+# Construct /tmp/script_payload.json with title, body[], status="pending", idea_id, etc.
+# Then POST:
+curl -s -X POST "${SUPABASE_URL}/rest/v1/scripts" \
+  -H "apikey: ${SUPABASE_SECRET_KEY}" \
+  -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}" \
+  -H "Content-Type: application/json" \
+  -H "Prefer: return=representation" \
+  --data-binary @/tmp/script_payload.json
+# Then PATCH the idea to scripted (removes from Timo's "Ideas Approved" column):
+curl -s -X PATCH "${SUPABASE_URL}/rest/v1/ideas?id=eq.${idea_id}" \
+  -H "apikey: ${SUPABASE_SECRET_KEY}" \
+  -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}" \
+  -H "Content-Type: application/json" \
+  -d "{\"status\":\"scripted\"}"
+```
+
+### Script row schema
+
+| Field | Source |
+|---|---|
+| id | `s_YYYYMMDD_slug` (replace `i_` with `s_`) |
+| idea_id | The originating idea_id |
+| title | Idea title |
+| delivered | Today's date (YYYY-MM-DD) |
+| length | e.g. `8 min final. ~1,400 words` |
+| sections | Number of beats (typically 7) |
+| pain_point | From idea |
+| hook | The hook line from beat 1 |
+| status | `pending` |
+| body | JSON array of `{kicker, time, heading, copy, visual}` per beat |
+| history | `[{type:"delivered", who:"Timo", text:"<b>Script written</b> from idea", time:"..."}]` |
+
+### Dashboard-mode failure modes (do not repeat)
+
+- **Body MUST contain real content.** Never push an empty/stub body. Harrison opening an empty script kills trust. If you can't fill the 7 beats, do not push.
+- **Always do step 9b (mark idea scripted).** Otherwise the idea stays in Timo's "Ideas Approved" and confuses the kanban.
+- **If the idea is not in `idea_approved`, STOP.** Don't override Harrison's state.
 
 ## Reference files (in this skill)
 
