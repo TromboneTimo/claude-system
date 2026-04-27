@@ -168,11 +168,31 @@ Important: write the rationale as a SINGLE-LINE JSON-safe HTML string. Inside JS
 ## VOC quote source attribution
 
 Every quote must trace to a real source. Format the `source` field richly:
-- Sales call quotes: `"{Name}, age {N}. Sales call {context}. Converted on ${amount}."` (or "Did not convert" / "Pending")
+- Sales call quotes: `"{Name}, age {N}. Sales call {context}. Signed up for ${amount}."` (or "Did not sign up" / "Pending")
+- Testimonial quotes: `"{Name}. Video testimonial after working with Harrison, describing {context}."`
 - Public YouTube/FB comments: `"{Username}. Public YouTube comment."` or similar
 - DMs: `"{Name}. Instagram DM, {date}."`
 
 If the proposal's "Source evidence" section already includes attribution, copy it verbatim.
+
+## MANDATORY MINIMUM SOURCING (added 2026-04-26)
+
+Every `voc_quotes` array MUST include at least:
+1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/raw/testimonials/`.
+2. **One quote from a sales call** (someone Harrison did a discovery call with). Source: `voc/raw/sales-calls/`.
+3. Comments / DMs / ads are supplementary, not required.
+
+If either is missing, STOP and pull a real quote from the corpus before pushing. Do not skip this check.
+
+## Harrison-quote conversion-lens rule (added 2026-04-26)
+
+If a quote in the array has Harrison as the speaker (his own ad copy, his own video transcript, his own social post), the `source` field must do two things:
+1. Name the source (which ad, which video, which post).
+2. Explain WHY that language is causing people to convert. What permission does it grant? What reframe does it land? What audience reaction does it trigger?
+
+Without the conversion lens, Harrison-quotes are self-citation. Bad example: `"Harrison Ball's own Facebook ad copy. Hook line of currently-performing ads."` Good example: `"Harrison Ball's own Facebook ad copy. The reason this exact framing converts on cold traffic: it gives comeback players permission to stop blaming their own body for damage a teacher caused. That permission is the prerequisite for being open to a new program."`
+
+See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_quote_sourcing_minimums.md`.
 
 ## Workflow
 
