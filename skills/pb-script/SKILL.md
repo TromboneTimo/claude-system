@@ -42,39 +42,14 @@ If Timo doesn't answer or says "all of them", default to MOFU and label it. Don'
 
 ### Step 1. Pre-spawn rotation picks (Bash), then acknowledge
 
-**Before** spawning agents, run two Bash blocks to pick the rotating slots:
+**Before** spawning agents, run the two picker scripts to choose the rotating slots:
 
-```bash
-# A. Pick the raw corpus for Agent 1 (avoiding last 3 runs)
-python3 - <<'PY'
-import json, os, random, pathlib
-log_path = pathlib.Path('/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl')
-all_corpora = ['sales-A','sales-B','sales-C','testimonials','yt-comments','unsorted-vtt','fb-ads','email-seq']
-recent = []
-if log_path.exists():
-    for line in log_path.read_text().splitlines()[-3:]:
-        try: recent.append(json.loads(line).get('corpus_picked'))
-        except: pass
-remaining = [c for c in all_corpora if c not in recent] or all_corpora
-print(random.choice(remaining))
-PY
+- **Corpus picker** (Agent 1's raw corpus): see `references/raw-deep-dive-rotation.md` "Picking algorithm" block. Save output as `CORPUS_ID`.
+- **Lens picker** (Agent 6's fresh lens): see `references/voice-diversity-protocol.md` "Lens picker" block. Save output as `LENS_NAME`.
 
-# B. Pick the fresh lens for Agent 6 (avoiding last 3 runs)
-python3 - <<'PY'
-import json, random, pathlib
-log_path = pathlib.Path('/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl')
-all_lenses = ['dental-trigger','isolation-pattern','failed-method-grief','identity-aspiration','age-anxiety','mouthpiece-rabbit-hole','comeback-player-arc','section-leader-redemption','teacher-loyalty-grief','livelihood-vs-love','range-for-others','exhaustion-of-hope']
-recent = []
-if log_path.exists():
-    for line in log_path.read_text().splitlines()[-3:]:
-        try: recent.extend(json.loads(line).get('lenses', []))
-        except: pass
-remaining = [l for l in all_lenses if l not in recent] or all_lenses
-print(random.choice(remaining))
-PY
-```
+Both pickers read `voc/voices_used_log.jsonl` and exclude items used in the last 3 runs. Run them in parallel via two Bash calls.
 
-Save both outputs as `CORPUS_ID` and `LENS_NAME`. Then tell Timo:
+Then tell Timo:
 
 > "Layer locked: [TOFU/MOFU/BOFU]. Raw corpus this run: [CORPUS_ID]. Fresh lens: [LENS_NAME]. Spawning 6 research agents in parallel + voice diversity auditor. ~3-4 minutes."
 

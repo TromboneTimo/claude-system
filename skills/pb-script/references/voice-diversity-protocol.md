@@ -60,6 +60,27 @@ Run_id format: `{date}_run{N}` where N increments if multiple runs same day.
 
 If `voc/voices_used_log.jsonl` doesn't exist, create it empty on first run. The auditor treats an empty log as "no voice constraints from history yet" and only enforces Check 2 (final-5 diversity) and Check 3 (quote sourcing).
 
+## Lens picker (Bash, run in Step 1 of SKILL.md before spawning Agent 6)
+
+Picks one of 12 lenses, avoiding any used in the last 3 runs:
+
+```bash
+python3 - <<'PY'
+import json, random, pathlib
+log_path = pathlib.Path('/Users/air/Desktop/Precision-Brass/voc/voices_used_log.jsonl')
+all_lenses = ['dental-trigger','isolation-pattern','failed-method-grief','identity-aspiration','age-anxiety','mouthpiece-rabbit-hole','comeback-player-arc','section-leader-redemption','teacher-loyalty-grief','livelihood-vs-love','range-for-others','exhaustion-of-hope']
+recent = []
+if log_path.exists():
+    for line in log_path.read_text().splitlines()[-3:]:
+        try: recent.extend(json.loads(line).get('lenses', []))
+        except: pass
+remaining = [l for l in all_lenses if l not in recent] or all_lenses
+print(random.choice(remaining))
+PY
+```
+
+The corpus picker for Agent 1 lives in `raw-deep-dive-rotation.md`. Run both before spawning agents in parallel.
+
 ## Hard rules
 
 - Auditor runs AFTER agents 1-6 return. Not in parallel.
