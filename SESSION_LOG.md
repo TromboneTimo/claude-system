@@ -4,6 +4,21 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 
 ---
 
+## 2026-04-28
+
+### Session: Precision Brass email engine built end-to-end
+**What happened:** Shipped Harrison's email proposal + analytics system, parallel to the existing pb-script video pipeline. Two new skills (`pb-email`, `pb-email-push`), two dashboard pages (`emails.html` proposal queue, `email-analytics.html` performance tracking, renamed from `email.html`), 2 new Supabase tables (`email_proposals`, `email_sends`), updated sidebar nav across 6 dashboard pages, `/email` redirect in vercel.json for backwards compat, 2 new memory entries.
+
+**Architecture:** pb-email mirrors pb-script's 6-parallel-agent + 1-sequential-auditor design but compressed: each menu item is a complete DRAFT (subject + body + reasoning + VOC quotes), not just an idea. 4 audience modes: broadcast, reengagement, webinar-push, discovery-followup. Voice fidelity enforced via `voc/personas/harrison-email-voice.md` (recurring tagline verbatim, P.S. matches one of 5 types, real student names only, no Paul-template leakage from emails 8-12).
+
+**Phase 2 deferred:** AC + HYROS sync via `scripts/sync-email-stats.mjs` (CLI), AC publish-from-approved-draft step. Documented in `project_future_todos.md` items 6 and 7. Env vars set in `dashboard/setup/.env.example`.
+
+**Verification:** Visual QA passed via headless Chrome. Both pages render with full sidebar, brass styling, empty states, 5 analytics tabs (sales/assisted/replies/ctr/youtube), Log a Send form, action buttons. Schema not yet applied to Supabase. Action: paste `dashboard/setup/schema.sql` into Supabase SQL editor.
+
+**Plan file:** `~/.claude/plans/i-need-to-create-serene-truffle.md`
+
+---
+
 ## 2026-04-02
 
 ### Session 1 (System Setup)

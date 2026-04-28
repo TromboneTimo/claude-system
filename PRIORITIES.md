@@ -1,6 +1,6 @@
 # Priorities
 
-**Last updated:** 2026-04-17 (JST)
+**Last updated:** 2026-04-28 (JST)
 
 ## Tiers
 - **T1 ENGINE:** Trombone Timo (~$8.5K/mo, 15hrs/wk, daily posting) / Creator Conservatory ($1.5K/mo, 3 clients)
@@ -19,7 +19,7 @@
 ## This Week (2026-04-13 onward)
 
 ### HIGH PRIORITY (time-ordered)
-- **Harrison pilot launch** -- dashboard + data pipeline built 4/17. NEXT: get YouTube API key + channel ID, test pipeline, send pitch (keep $500 base, $750/sale at $30K milestone, testimonial as deliverable)
+- **Harrison pilot launch** -- dashboard + data pipeline built 4/17. Email engine (pb-email + pb-email-push + emails.html + email-analytics.html) built 4/28. NEXT: apply email schema in Supabase SQL editor, get YouTube API key + channel ID, test pipeline, wire AC + HYROS API keys (Phase 2 sync script), send pitch (keep $500 base, $750/sale at $30K milestone, testimonial as deliverable)
 - **Otto + Samurai Brass shot list** -- NEW 4/17. Create content capture plan for both (festival content Otto, Samurai Brass positioning content)
 - **Hook Book VSL** -- record (still blocking entire funnel)
 - **Trombone Timo** -- daily shorts + long-form (always-on)
