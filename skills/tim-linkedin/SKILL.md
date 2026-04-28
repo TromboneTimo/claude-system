@@ -21,8 +21,9 @@ user_invocable: false
 2. Load `tim-maines/linkedin/best-practices.md` (mandatory). Apply hook conventions (210 chars before "see more"), format-specific reach data, dwell-time-friendly structure, no external link in body (drop in comments).
 3. Load `tim-maines/config/zernio-accounts.json`. Confirm a `linkedin` account exists.
 4. Generate post body in Tim Maines voice. LinkedIn target: 3-line hook + body + soft CTA. Word count guidance per best-practices.md.
-5. Confirm with user (preview body) BEFORE `publish`. `draft` and `schedule` skip confirm.
-6. Call `tim-social/scripts/zernio_post.py --platform linkedin --account-id 69f01f19985e734bf3c7128a --content "..." --mode <mode>`.
+5. Show the full draft inline in chat. Wait for Timo's edits or explicit "go / push / ship" before any Zernio call. Applies to ALL modes (draft, schedule, publish). No exceptions. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Chat review section.
+5a. ASK Timo for the image or PDF carousel asset (file path or URL) BEFORE step 6. Never call Zernio without media for LinkedIn. If Timo has no asset ready, propose generating one (Gemini hero, Pixabay stock, screenshot, or PDF built from post bullets) and wait for confirmation.
+6. Call `tim-social/scripts/zernio_post.py --platform linkedin --account-id 69f01f19985e734bf3c7128a --content "..." --media-url "<asset>" --mode <mode>` ONLY after steps 5 + 5a approval.
 7. On success: write `tim-maines/linkedin/posts/YYYY-MM-DD-<slug>.md` from `tim-social/templates/post.md`. Capture `zernio_id` and status.
 
 ## LinkedIn request body shape
@@ -35,6 +36,9 @@ user_invocable: false
   // For draft mode: omit BOTH publishNow and scheduledFor (Zernio internal draft)
 }
 ```
+
+## Required media (text-only is banned)
+LinkedIn text posts MUST ship with an image, a PDF document carousel, or a native video. Document/PDF carousel is the highest-engagement format in 2026 (~6.6% vs ~2% for text). Never ship a LinkedIn draft without proposing media in the same chat reply. If no asset exists, propose: (a) generate Gemini hero image, (b) build PDF carousel from post bullets, or (c) extract clip from a paired YouTube/source video. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Required media section.
 
 ## Limits and caveats
 - LinkedIn body cap 3000 chars.

@@ -21,8 +21,9 @@ user_invocable: false
 2. Load `tim-maines/facebook/best-practices.md` (mandatory). This holds the deep-research FB algorithm rules to apply.
 3. Load `tim-maines/config/zernio-accounts.json`. Confirm a `facebook` account exists. If not, tell user to OAuth at zernio.com.
 4. Generate post body in Tim Maines voice, applying the FB best-practices rules (hook in first 100-125 chars, format-specific reach data, MSI-friendly engagement, no engagement bait).
-4. Confirm with user (preview the body) BEFORE calling Zernio for `publish` mode. `draft` and `schedule` skip confirm.
-5. Call `scripts/zernio_post.py` with platform=facebook, the FB account ID, and a `--draft` / `--publish` / `--schedule` flag.
+4. Show the full draft inline in chat. Wait for Timo's edits or explicit "go / push / ship" before any Zernio call. Applies to ALL modes (draft, schedule, publish). No exceptions. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Chat review section.
+4a. ASK Timo for the image asset (file path or URL) BEFORE step 5. Never call Zernio without media for Facebook. If Timo has no asset ready, propose generating one (Gemini hero, Pixabay stock, screenshot, or paired video clip) and wait for confirmation.
+5. Call `scripts/zernio_post.py` with platform=facebook, the FB account ID, `--media-url "<asset>"`, and a `--draft` / `--publish` / `--schedule` flag ONLY after steps 4 + 4a approval.
 6. On success: write a markdown file to `tim-maines/facebook/posts/YYYY-MM-DD-<slug>.md` using `tim-social/templates/post.md` frontmatter. Capture `zernio_id` and `status` from the response.
 7. Report back to user with the Zernio post ID and dashboard link.
 
@@ -36,6 +37,9 @@ user_invocable: false
   "facebookSettings": {"draft": true} // ONLY for draft mode
 }
 ```
+
+## Required media (text-only is banned)
+Facebook text posts MUST ship with an image attached or be paired with a native video / Reel. Text-only feed posts get <2% organic reach in 2026; Reels get 5-10x lift. Never ship a FB draft without proposing media in the same chat reply. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Required media section.
 
 ## Limits and caveats
 - Pages only. Personal FB profiles cannot post via API.
