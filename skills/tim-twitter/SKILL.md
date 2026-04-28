@@ -24,8 +24,9 @@ user_invocable: false
 1. Load voice spec / methodology fallback. Refuse if missing.
 2. Load `tim-maines/twitter/best-practices.md` (mandatory). Apply: bookmarks as top signal, threads 8-12 tweets, X Premium 2-4x reach multiplier (verify Premium status), link suppression (use in-app or text-only), SimClusters topic clustering (stay on-niche).
 3. Load accounts JSON, confirm `twitter` exists. Confirm handle identity per Identity Gate above.
-4. Generate hook tweet (curiosity gap / contrarian / list-promise). For threads: 8-12 tweets, hook + payload + payoff structure. Confirm before publish.
-5. Call `zernio_post.py --platform twitter --account-id 69f02d7f985e734bf3c76f9e --content "<text>" --mode <mode>`. For threads, the tweet array passes through Zernio's threadItems.
+4. Generate hook tweet (curiosity gap / contrarian / list-promise). For threads: 8-12 tweets, hook + payload + payoff structure. Show full draft inline in chat. Wait for Timo's edits or "go / push / ship" before any Zernio call. Applies to ALL modes (draft, schedule, publish). Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Chat review section.
+4a. NO IMAGE BY DEFAULT for X. Per Timo 2026-04-28: "X no picture". Do not attach media unless Timo explicitly provides a file and tells you to attach it.
+5. Call `zernio_post.py --platform twitter --account-id 69f02d7f985e734bf3c76f9e --content "<text>" --mode <mode>` ONLY after step 4 approval. For threads, the tweet array passes through Zernio's threadItems.
 6. Log to `tim-maines/twitter/posts/YYYY-MM-DD-<slug>.md`.
 
 ## Twitter/X request body shape

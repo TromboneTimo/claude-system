@@ -22,7 +22,7 @@ user_invocable: false
 3. Load `tim-maines/config/zernio-accounts.json`. Confirm a `facebook` account exists. If not, tell user to OAuth at zernio.com.
 4. Generate post body in Tim Maines voice, applying the FB best-practices rules (hook in first 100-125 chars, format-specific reach data, MSI-friendly engagement, no engagement bait).
 4. Show the full draft inline in chat. Wait for Timo's edits or explicit "go / push / ship" before any Zernio call. Applies to ALL modes (draft, schedule, publish). No exceptions. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Chat review section.
-4a. ASK Timo for the image asset (file path or URL) BEFORE step 5. Never call Zernio without media for Facebook. If Timo has no asset ready, propose generating one (Gemini hero, Pixabay stock, screenshot, or paired video clip) and wait for confirmation.
+4a. ASK Timo for the single image asset BEFORE step 5. Timo provides the file. Do NOT auto-generate. Do NOT offer to generate by default. Wait for him to drop a file path or URL. If he says he has nothing, then ask if he wants you to generate.
 5. Call `scripts/zernio_post.py` with platform=facebook, the FB account ID, `--media-url "<asset>"`, and a `--draft` / `--publish` / `--schedule` flag ONLY after steps 4 + 4a approval.
 6. On success: write a markdown file to `tim-maines/facebook/posts/YYYY-MM-DD-<slug>.md` using `tim-social/templates/post.md` frontmatter. Capture `zernio_id` and `status` from the response.
 7. Report back to user with the Zernio post ID and dashboard link.

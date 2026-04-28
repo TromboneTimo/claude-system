@@ -22,7 +22,7 @@ user_invocable: false
 3. Load `tim-maines/config/zernio-accounts.json`. Confirm a `linkedin` account exists.
 4. Generate post body in Tim Maines voice. LinkedIn target: 3-line hook + body + soft CTA. Word count guidance per best-practices.md.
 5. Show the full draft inline in chat. Wait for Timo's edits or explicit "go / push / ship" before any Zernio call. Applies to ALL modes (draft, schedule, publish). No exceptions. Per `~/.claude/knowledge/tim-maines-anti-hallucination.md` Chat review section.
-5a. ASK Timo for the image or PDF carousel asset (file path or URL) BEFORE step 6. Never call Zernio without media for LinkedIn. If Timo has no asset ready, propose generating one (Gemini hero, Pixabay stock, screenshot, or PDF built from post bullets) and wait for confirmation.
+5a. ASK Timo for the asset BEFORE step 6. LinkedIn accepts image, PDF, or hero image. Timo provides the file. Do NOT auto-generate. Do NOT offer to generate by default. Wait for him to drop a file path or URL. If he says he has nothing, then ask if he wants you to generate.
 6. Call `tim-social/scripts/zernio_post.py --platform linkedin --account-id 69f01f19985e734bf3c7128a --content "..." --media-url "<asset>" --mode <mode>` ONLY after steps 5 + 5a approval.
 7. On success: write `tim-maines/linkedin/posts/YYYY-MM-DD-<slug>.md` from `tim-social/templates/post.md`. Capture `zernio_id` and status.
 
