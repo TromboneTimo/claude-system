@@ -52,11 +52,10 @@ user_invocable: true
 - Never name specific clients in public Tim Maines posts (per `feedback_client_claims.md`).
 - Never confuse Tim Maines (personal brand authority) with Trombone Timo (entertainment) or Creator Conservatory (musician coaching).
 
-## Current connection status (2026-04-28)
-Run `/tim-social refresh` to update.
-- Connected via Zernio: Facebook (Tim Maines Page), LinkedIn, YouTube (timmaines), Instagram (timo.maines), TikTok (timo.maines), Twitter/X (TromboneTim0)
-- Pending OAuth: Reddit (when Timo connects)
-- Manual-only (Zernio doesn't support): Substack
+## Live connection state
+**Source of truth**: `/Users/air/Desktop/Timo LLC/creator-conservatory/tim-maines/config/zernio-accounts.json`. Read this file at runtime, never hardcode account state in this skill. Run `/tim-social refresh` to re-pull from Zernio after any OAuth change.
+
+Manual-only (not in Zernio at all): Substack.
 
 ## Failure modes
 - 401 on Zernio: env var loading bug, OR token rotated. Re-extract key from `~/.zshrc` per cheatsheet.

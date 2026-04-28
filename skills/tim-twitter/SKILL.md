@@ -50,7 +50,8 @@ user_invocable: false
 - Bad ratios (high follower-to-following imbalance, dormant first 30 mins) suppress. Don't post multiples rapidly.
 
 ## Anti-hallucination
-- No fabricated impression counts.
-- No fake credentials beyond TIMO_PROFILE.md.
-- No engagement bait, rage bait, or muted-keyword games (algorithm penalizes).
-- No em dashes, no guru language.
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- No rage bait or muted-keyword games. Grok ranking specifically penalizes.
+- Drop external links in a REPLY tweet, not the main thread (50-90% reach cut on links).
+- Don't post multiples rapidly. Velocity loss + first-30-min-dormant = SimClusters tank.

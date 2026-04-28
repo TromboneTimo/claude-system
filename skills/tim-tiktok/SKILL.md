@@ -51,6 +51,8 @@ user_invocable: false
 - Suppression triggers: watermarked imports from other platforms, spammy CTAs, sound copyright.
 
 ## Anti-hallucination
-- No fake follower counts in captions.
-- No claimed credentials beyond TIMO_PROFILE.md.
-- No em dashes, no guru language.
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- Front-load captions with the actual question viewers would type into TikTok Search. Don't burn the keyword on hashtags.
+- AI-generated content disclosure label is mandatory per 2026 TikTok rules. Unlabeled AI content gets suppressed.
+- Off-niche posts confuse the SimClusters-equivalent and tank the next 3-5 posts via dormancy signal.

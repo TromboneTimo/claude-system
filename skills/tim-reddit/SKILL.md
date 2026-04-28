@@ -60,8 +60,8 @@ user_invocable: false
 Per `best-practices.md`: r/Entrepreneur, r/SmallBusiness, r/marketing, r/SaaS, r/digitalnomad, r/PersonalFinance, r/indiehackers (niche-specific). Niche subs (smaller, focused) reward specificity (numbers, steps, mistakes). Larger subs (r/marketing) lean on volume.
 
 ## Anti-hallucination
-- No fabricated upvote/karma counts.
-- No fake credentials beyond TIMO_PROFILE.md.
-- No naming specific clients (per `feedback_client_claims.md`).
-- No undisclosed affiliations. ALWAYS disclose if recommending a Timo product/service.
-- No em dashes, no guru language.
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- ALWAYS disclose affiliation: "I work for/own [X], here's what we learned." Mods auto-remove undisclosed affiliates in r/Entrepreneur, r/SaaS, r/marketing.
+- AI-spam moderation in 2026 detects repetitive phrasing, low-effort posts, bot-like patterns. Write personally, share specific numbers/steps/mistakes.
+- 9-1 rule: 9 value-adding contributions per 1 self-promo. Track this across the account, not per subreddit.

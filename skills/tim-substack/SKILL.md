@@ -51,7 +51,8 @@ substack_url: null   # user fills after manual publish
 - Notes cadence: daily ish for top-of-funnel discovery. Essays: weekly or biweekly is typical for personal brands.
 
 ## Anti-hallucination
-- No fabricated subscriber counts or open rates.
-- No claimed credentials beyond TIMO_PROFILE.md.
-- No naming specific clients in essays unless they've publicly opted in.
-- No em dashes, no guru language ("leverage", "synergy"), no hedging ("might help", "could potentially").
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- AI-content-detection on Substack: generic AI prose gets indexing-deprioritized (Perplexity/ChatGPT won't cite it). Authentic depth is the antidote.
+- Recommendations require ORIGINAL commentary, not "great post". Generic restacks dilute audience-overlap signal and reduce mutual referrals.
+- Subject line variants must be GENUINELY different angles. Three reworded versions of the same hook = test failure.

@@ -15,10 +15,12 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 ZSHRC = os.path.expanduser("~/.zshrc")
 BASE = "https://zernio.com/api/v1"
 UA = "Mozilla/5.0 (creator-conservatory tim-social post)"
+RETRIES = 3
 
 
 def load_key():
@@ -73,6 +75,7 @@ def build_body(args):
 
 
 def post(body, key):
+    """POST with retry-with-backoff for transient connection resets."""
     payload = json.dumps(body)
     cmd = [
         "curl", "-4", "-sS", "-m", "30",
@@ -85,9 +88,25 @@ def post(body, key):
         "--data-binary", payload,
         f"{BASE}/posts",
     ]
-    out = subprocess.check_output(cmd, stderr=subprocess.STDOUT).decode()
-    body_text, _, code = out.rpartition("__HTTP__")
-    return body_text.strip(), int(code or 0)
+    last_err = None
+    for attempt in range(RETRIES):
+        try:
+            out = subprocess.check_output(cmd, stderr=subprocess.STDOUT, timeout=35).decode()
+            body_text, _, code = out.rpartition("__HTTP__")
+            code_int = int(code or 0)
+            # Retry only on connection resets (code=0) or 5xx; not on 4xx (client error, our fault)
+            if code_int == 0 or 500 <= code_int < 600:
+                last_err = f"HTTP {code_int}: {body_text.strip()[:200]}"
+                if attempt < RETRIES - 1:
+                    time.sleep(2 ** attempt)
+                    continue
+            return body_text.strip(), code_int
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            last_err = str(e)[:200]
+            if attempt < RETRIES - 1:
+                time.sleep(2 ** attempt)
+                continue
+    return f'{{"error":"all_retries_failed","detail":"{last_err}"}}', 0
 
 
 def main():
@@ -107,9 +126,16 @@ def main():
     p.add_argument("--force-self", action="store_true", help="Reddit only: force text/self post even if URL provided")
     # Twitter-specific
     p.add_argument("--thread-items", default=None, help="Twitter only: JSON-encoded array of follow-up tweets for threads")
+    # Safety
+    p.add_argument("--dry-run", action="store_true", help="Print the request body that WOULD be sent. No API call. Always run this before --mode publish on a real account.")
     args = p.parse_args()
 
     body = build_body(args)
+
+    if args.dry_run:
+        print(json.dumps({"dry_run": True, "platform": args.platform, "mode": args.mode, "body": body}, indent=2))
+        sys.exit(0)
+
     key = load_key()
     body_text, code = post(body, key)
 

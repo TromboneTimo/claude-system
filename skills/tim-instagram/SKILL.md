@@ -49,7 +49,8 @@ user_invocable: false
 - Watermarks from other platforms (TikTok logo) suppress reach.
 
 ## Anti-hallucination
-- No engagement bait ("comment X for the link"). Suppression trigger.
-- No invented engagement counts.
-- No claimed credentials beyond TIMO_PROFILE.md.
-- No em dashes, no guru language.
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- No watermarks from other platforms (TikTok logo) on Reels. Original-content boost penalizes detected reposts per Mosseri 2025.
+- DM-share is the new gold signal. Engineer the post for "would I send this to a friend?" not "would I like this?"
+- Carousel cover slide: bold visuals, minimal text. Over-text covers tank swipe-through.

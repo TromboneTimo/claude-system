@@ -50,6 +50,7 @@ user_invocable: false
 - Test & Compare title variants is YouTube-native, not exposed via Zernio API (do manually in Studio).
 
 ## Anti-hallucination
-- No fake view counts, no fabricated retention numbers in pinned comments.
-- No clickbait titles that don't deliver in the cold open (Mr Beast rule: title-thumbnail-hook triangle must agree).
-- No em dashes, no guru language.
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- Mr Beast rule: title-thumbnail-hook triangle must agree. No clickbait that doesn't deliver in the cold open (kills retention curve, kills Viewer Satisfaction Score).
+- AI-generated content needs disclosure label per YouTube 2025 rules. Don't omit.
