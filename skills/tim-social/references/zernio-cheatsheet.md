@@ -14,12 +14,18 @@ Always pass `-4` (force IPv4) and a browser User-Agent. Without these, you get T
 - Rate limit: 60/min Starter, 600/min Pro
 - Health probe: `GET https://zernio.com/api/health` (no auth)
 
-## Tim Maines IDs (as of 2026-04-28)
+## Tim Maines IDs (as of 2026-04-28, all 5 platforms + bonus X connected)
 - Tim Maines profile: `69f00d0379b453e8d8d2fa19`
 - Robinsons Remedies profile: `69f01cff6f0f75d7457d9367`
-- Facebook account (Tim Maines page selected): `69f015ba985e734bf3c6cf02`
-  - Connected FB user has 3 Pages: Tim Maines (selected, 20 fans), TromboneTimo (124K), Robinson's Remedies (54K)
-  - Token expires: 2026-06-17 (long-lived, ~7 weeks). Reconnect before then.
+
+| Platform | Account ID | Username | Notes |
+|---|---|---|---|
+| Facebook | `69f015ba985e734bf3c6cf02` | Tim Maines | FB Page (Tim Maines selected, also has admin on TromboneTimo + Robinson's Remedies). Token expires 2026-06-17. |
+| LinkedIn | `69f01f19985e734bf3c7128a` | Tim Maines | Personal profile. |
+| YouTube | `69f01f2f985e734bf3c712ff` | timmaines | Channel. |
+| Instagram | `69f02da5985e734bf3c77032` | timo.maines | Business or Creator account (verify via Zernio dashboard). |
+| TikTok | `69f034b8985e734bf3c79582` | timo.maines | Personal account. |
+| Twitter/X | `69f02d7f985e734bf3c76f9e` | TromboneTim0 | Bonus, not in original spec. No skill yet. |
 
 ## Refresh after OAuth
 After connecting/disconnecting any account on zernio.com:
