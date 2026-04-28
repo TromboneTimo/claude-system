@@ -17,9 +17,10 @@ user_invocable: false
 - `media`: optional image/video file path
 
 ## Workflow
-1. Load `tim-social/references/voice-spec.md`. If missing, refuse and tell user voice spec is required.
-2. Load `tim-maines/config/zernio-accounts.json`. Confirm a `facebook` account exists. If not, tell user to OAuth at zernio.com.
-3. Generate post body in Tim Maines voice. FB best-practice: 80-200 words, hook in first 125 chars (visible without "see more"), no clickbait, optional CTA.
+1. Load `tim-social/references/voice-spec.md` OR `voice-methodology-research.md` (Phase A discovery if voice-spec is empty). If both missing, refuse.
+2. Load `tim-maines/facebook/best-practices.md` (mandatory). This holds the deep-research FB algorithm rules to apply.
+3. Load `tim-maines/config/zernio-accounts.json`. Confirm a `facebook` account exists. If not, tell user to OAuth at zernio.com.
+4. Generate post body in Tim Maines voice, applying the FB best-practices rules (hook in first 100-125 chars, format-specific reach data, MSI-friendly engagement, no engagement bait).
 4. Confirm with user (preview the body) BEFORE calling Zernio for `publish` mode. `draft` and `schedule` skip confirm.
 5. Call `scripts/zernio_post.py` with platform=facebook, the FB account ID, and a `--draft` / `--publish` / `--schedule` flag.
 6. On success: write a markdown file to `tim-maines/facebook/posts/YYYY-MM-DD-<slug>.md` using `tim-social/templates/post.md` frontmatter. Capture `zernio_id` and `status` from the response.

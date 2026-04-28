@@ -7,10 +7,12 @@ user_invocable: true
 # Tim Maines social orchestrator
 
 ## Load order (Priority 1, every run)
-1. `references/voice-spec.md` (THE LAW for Tim Maines voice). If missing, STOP and tell user voice spec is required before generating.
-2. `references/zernio-cheatsheet.md` (env loading, auth, IDs, posting flow).
-3. `~/.claude/CLAUDE.md` rules (no em dashes, no guru language, no hedging).
-4. `/Users/air/Desktop/Timo LLC/creator-conservatory/CLAUDE.md` (this is Creator Conservatory workspace, NOT Trombone Timo; Tim Maines is its own personal-brand identity).
+1. `references/voice-spec.md` (THE LAW for Tim Maines voice, evolved from `voice-methodology-research.md`). If voice-spec is missing, fall back to discovery interview from voice-methodology Phase A before generating.
+2. `references/voice-methodology-research.md` (NotebookLM-synthesized cold-start + iteration framework with cited sources).
+3. **Platform best-practices** for whichever platform is being targeted: `tim-maines/<platform>/best-practices.md` (deep Perplexity research, 2026-04-28). Mandatory load when generating for that platform.
+4. `references/zernio-cheatsheet.md` (env loading, auth, IDs, posting flow).
+5. `~/.claude/CLAUDE.md` rules (no em dashes, no guru language, no hedging).
+6. `/Users/air/Desktop/Timo LLC/creator-conservatory/CLAUDE.md` (this is Creator Conservatory workspace, NOT Trombone Timo; Tim Maines is its own personal-brand identity).
 
 ## Commands
 
