@@ -44,6 +44,8 @@ user_invocable: false
 - "Broetry" white-space spam works on first impression but compounds AI-content suppression risk.
 
 ## Anti-hallucination
-- No fabricated stats, no fake credentials beyond TIMO_PROFILE.md (no Four Tops, no TED-talk-as-delivered).
-- Never name specific clients (per `feedback_client_claims.md`).
-- No em dashes, no guru language ("leverage", "synergy"), no hedging ("might help", "could potentially").
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- No comment-pod tactics. Per LinkedIn 2026 v2 research (van der Blom + Acosta), pods got de-amplified Q1 2026 and trigger spam-pattern flags in 360Brew.
+- No 2024-style "broetry" white-space stacking. The `feedback_break_dwell_hacks` lesson: micro-pauses now trigger spam filters.
+- "Document/PDF carousels (14-20 pages)" beats "photo carousels". 2025 sweet spot was 8-12 pages; 2026 is bigger.

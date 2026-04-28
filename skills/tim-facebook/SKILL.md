@@ -44,6 +44,7 @@ user_invocable: false
 - Analytics add-on is NOT enabled. To pull Page Insights, /tim-social log uses the connected token via Zernio's `/v1/analytics/facebook/page-insights` endpoint or falls back to "metrics: pending".
 
 ## Anti-hallucination
-- Do not invent FB Page link until Zernio returns it. If unsure, link to https://facebook.com/people/Tim-Maines/61580769787316 (verify before printing).
-- Do not name specific clients (per `feedback_client_claims.md`).
-- No em dashes, no guru language, no hedging (per project CLAUDE.md).
+Universal rules: load `~/.claude/knowledge/tim-maines-anti-hallucination.md`.
+Platform-specific additions:
+- Do not invent the FB Page URL until Zernio returns it in the post response.
+- MSI penalty on engagement bait is severe on FB. Stricter than other platforms.
