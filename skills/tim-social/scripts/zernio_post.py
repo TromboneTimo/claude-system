@@ -50,6 +50,25 @@ def build_body(args):
             body["tiktokSettings"] = {"draft": True}
     if args.media_url:
         body["mediaItems"] = [{"type": args.media_type, "url": args.media_url}]
+
+    # Reddit-specific settings
+    if args.platform == "reddit":
+        if not args.subreddit:
+            sys.exit("--subreddit required for reddit posts")
+        body["redditSettings"] = {
+            "subreddit": args.subreddit,
+            "title": args.title or args.content.split("\n", 1)[0][:300],
+        }
+        if args.flair_id:
+            body["redditSettings"]["flairId"] = args.flair_id
+        if args.url:
+            body["redditSettings"]["url"] = args.url
+        body["redditSettings"]["forceSelf"] = args.force_self
+
+    # Twitter/X thread support
+    if args.platform == "twitter" and args.thread_items:
+        body["twitterSettings"] = {"threadItems": json.loads(args.thread_items)}
+
     return body
 
 
@@ -73,13 +92,21 @@ def post(body, key):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--platform", required=True, choices=["facebook", "linkedin", "youtube", "tiktok", "instagram"])
+    p.add_argument("--platform", required=True, choices=["facebook", "linkedin", "youtube", "tiktok", "instagram", "twitter", "reddit"])
     p.add_argument("--account-id", required=True)
     p.add_argument("--content", required=True)
     p.add_argument("--mode", required=True, choices=["draft", "publish", "schedule"])
     p.add_argument("--scheduled-for", default=None)
     p.add_argument("--media-url", default=None)
     p.add_argument("--media-type", default="image", choices=["image", "video"])
+    # Reddit-specific
+    p.add_argument("--subreddit", default=None, help="Reddit only: target subreddit name without r/")
+    p.add_argument("--title", default=None, help="Reddit only: post title (max 300 chars). Defaults to first line of content.")
+    p.add_argument("--flair-id", default=None, help="Reddit only: flair ID if subreddit requires one")
+    p.add_argument("--url", default=None, help="Reddit only: URL for link posts")
+    p.add_argument("--force-self", action="store_true", help="Reddit only: force text/self post even if URL provided")
+    # Twitter-specific
+    p.add_argument("--thread-items", default=None, help="Twitter only: JSON-encoded array of follow-up tweets for threads")
     args = p.parse_args()
 
     body = build_body(args)

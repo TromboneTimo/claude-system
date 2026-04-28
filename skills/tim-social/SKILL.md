@@ -1,6 +1,6 @@
 ---
 name: tim-social
-description: Tim Maines social media orchestrator. Routes posting, scheduling, drafting, analytics, and content ideation across LinkedIn, YouTube, TikTok, Instagram, Facebook via Zernio. Also extends /blog for transcript-to-blog. Triggers on "/tim-social", "tim social", "post on linkedin as tim", "schedule a tiktok for tim", "draft an instagram", "log my post", "what's working on tim maines", "tim ideate", or any explicit reference to the Tim Maines channel + a posting/analytics action.
+description: Tim Maines social media orchestrator. Routes posting, scheduling, drafting, analytics, and content ideation across LinkedIn, YouTube, TikTok, Instagram, Facebook, Twitter/X, Reddit, and Substack via Zernio (Substack is manual-only). Also extends /blog for transcript-to-blog. Triggers on "/tim-social", "tim social", "post on linkedin as tim", "schedule a tiktok for tim", "draft an instagram", "tweet for tim", "tim x post", "tim twitter", "post on reddit as tim", "tim reddit", "draft a substack", "tim substack", "write a substack note", "log my post", "what's working on tim maines", "tim ideate", "tim analyze", or any explicit reference to the Tim Maines channel + a posting/analytics/research action.
 user_invocable: true
 ---
 
