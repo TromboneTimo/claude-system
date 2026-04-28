@@ -32,7 +32,10 @@ user_invocable: true
 - `youtube` -> `tim-youtube`
 - `tiktok` -> `tim-tiktok`
 - `instagram` -> `tim-instagram`
-- `facebook` -> `tim-facebook` (only platform connected as of 2026-04-28)
+- `facebook` -> `tim-facebook`
+- `twitter` | `x` -> `tim-twitter`
+- `reddit` -> `tim-reddit`
+- `substack` -> `tim-substack` (manual-only: Zernio does NOT support Substack; skill produces a draft markdown saved to `tim-maines/substack/posts/` for user to paste into Substack web UI)
 
 ## Database
 - Skill assets: `~/.claude/skills/tim-social/`
@@ -51,8 +54,9 @@ user_invocable: true
 
 ## Current connection status (2026-04-28)
 Run `/tim-social refresh` to update.
-- Connected: Facebook (Tim Maines Page)
-- Pending OAuth: LinkedIn, YouTube, TikTok, Instagram
+- Connected via Zernio: Facebook (Tim Maines Page), LinkedIn, YouTube (timmaines), Instagram (timo.maines), TikTok (timo.maines), Twitter/X (TromboneTim0)
+- Pending OAuth: Reddit (when Timo connects)
+- Manual-only (Zernio doesn't support): Substack
 
 ## Failure modes
 - 401 on Zernio: env var loading bug, OR token rotated. Re-extract key from `~/.zshrc` per cheatsheet.
