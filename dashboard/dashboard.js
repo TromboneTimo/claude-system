@@ -1,4 +1,4 @@
-// ADHD Dashboard. Reads state via <script> tag injection.
+// Task Dashboard. Reads state via <script> tag injection.
 // file:// fetch is blocked in most browsers, so we use script-tag state hydration.
 // derive.py writes state/tasks.js as `window.TASKS_STATE = {...}`.
 

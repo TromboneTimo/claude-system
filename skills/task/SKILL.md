@@ -1,11 +1,11 @@
 ---
 name: task
-description: Task state CLI. Add, complete, park, block, list, and view today's tasks. Source of truth for the ADHD dashboard. Use when user types /task, asks to add/complete/block a task, or asks what's on deck today. Also use silently to log state changes you infer from conversation (e.g., user says "sent the pitch" and you've confirmed the task they mean).
+description: Task state CLI. Add, complete, park, block, list, and view today's tasks. Source of truth for the task dashboard. Use when user types /task, asks to add/complete/block a task, or asks what's on deck today. Also use silently to log state changes you infer from conversation (e.g., user says "sent the pitch" and you've confirmed the task they mean).
 ---
 
 # /task
 
-Unified CLI for the task state layer backing the ADHD dashboard at `~/.claude/dashboard/index.html`.
+Unified CLI for the task state layer backing the task dashboard at `~/.claude/dashboard/index.html`.
 
 **All commands run:** `python3 ~/.claude/skills/task/task.py <subcommand> [args]`
 
