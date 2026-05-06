@@ -45,6 +45,22 @@ If the picked idea has no layer label (older menus or manual invocations), ask T
 
 **Interleaving is non-negotiable.** Each Mistake beat contains The Trap (named topic), The Mistake (named with "the first/second/third mistake"), and The Test (visual + riff) in one cycle. Never stack them as separate beats.
 
+## Curiosity loops must vary per beat (Ed Lawrence pattern, 2026-05-06)
+
+**Never use the same curiosity loop shape twice in one script.** Repeating "where 99% of players get this wrong" across 4 beats reads like a copy-paste and kills momentum. Ed Lawrence cycles through 5 distinct loop types. Default rotation:
+
+1. **Pre-empt objection.** "Before you think X, let me show you Y."
+2. **Pose the next obvious question.** "But how do you actually do X?"
+3. **Reveal a contradiction.** "This sounds like X, but it's actually Y."
+4. **Tease new info with stakes.** "Before I move on, here's the thing nobody tells you."
+5. **Bait an explanation with a why-question.** "But why did that work?"
+
+Assign one loop type per beat. Track which you've used so you don't repeat. Ed also names a specific (person, piece, exercise) BEFORE naming the pattern. Specificity first, label second.
+
+Bridges between beats follow the same rule. Each bridge picks a DIFFERENT loop type than the prior bridge. Same job (close prior + open next), different angle.
+
+Source: transcripts of Ed Lawrence YouTube videos `s5mkBXsBAF4` and `fhKgYGhLwKs` (mined 2026-05-06).
+
 ## Bullet anchors are intent, not text Harrison reads (2026-05-06)
 
 **Riff bullets must be 1 line of director's intent. Never write the sentences Harrison would say on camera.**
