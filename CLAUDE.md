@@ -32,6 +32,15 @@ Before proposing a fix or remediation workflow: test the assumption that defines
 ## SKILL ARCHITECTURE GATE (any SKILL.md write or update)
 Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
 
+## CREDENTIAL GATE (any API key, token, password, secret in user message)
+Master credentials file: `~/.claude/credentials/MASTER.md` (gitignored, cross-workspace).
+Boot: read it before answering anything that might need an API key.
+Trigger: ANY of these patterns in a user message: `sk-...`, `sbp_...`, `sb_secret_...`, `eyJ...` (JWT), `xoxb-...`, `Bearer ...`, `pat_...`, `glpat-...`, `gho_...`, `ghp_...`, `API-Key:`, `Api-Token:`, `password=`, `_KEY=`, raw 32+ char hex, OR the words "here's my key/token/secret/password".
+Action on trigger: BEFORE the next tool call that uses the credential, append the value to the appropriate section of `~/.claude/credentials/MASTER.md`. Include service name, auth header format, source notes. If the service is unclear, save anyway with a TODO and ask later. Better an unlabeled key than a lost one.
+After saving, confirm to user with the 4-char prefix only (e.g. "saved sbp_2cd8..."). Never echo the full value.
+Why: 2026-05-06 Timo pasted a Supabase service-role JWT and a Personal Access Token. I used them once and never persisted. Three turns later he had to paste again. He was rightfully furious.
+Full: `~/.claude/credentials/MASTER.md` + `memory/feedback_save_credentials_immediately.md`. Hook enforcement: `~/.claude/hooks/credential-gate.sh` (UserPromptSubmit).
+
 ## CACHE GATE (any Perplexity query OR research-driven skill edit)
 Before `llm -m sonar*`, `perplexity-*` MCP calls, OR before editing any SKILL.md based on "what does the literature say":
 1. Run `/research check "<topic>"` first.
