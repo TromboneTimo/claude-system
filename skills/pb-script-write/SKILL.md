@@ -277,38 +277,35 @@ If the file already exists, use PUT instead of POST (or DELETE first). Verify th
 
 ### 9b. Build the script row payload
 
-The `body` field is a JSON array with **a single entry containing the full rich HTML AND the PDF URL** (so the dashboard renders the script in-modal AND shows a Download button):
+The `body` field is a JSON array with **a single entry containing the FULL HTML DOCUMENT (head + style + body) AND the PDF URL**. The dashboard renders this content inside an iframe via `srcdoc`, so the `<style>` block in the `<head>` is REQUIRED. If you upload only the body innerHTML (without the head/style), the iframe gets unstyled HTML and Harrison sees a wall of plain text instead of the colored layout.
+
+**This was a bug fix on 2026-05-06.** Prior version of this skill said "extract body innerHTML." That was wrong. The dashboard at `dashboard/scripts.html` line 875 uses `srcdoc="${full content}"` and needs a complete HTML doc to apply styles.
 
 ```json
 "body": [{
   "type": "html_full",
-  "content": "<full <body> innerHTML of the script HTML file>",
+  "content": "<the ENTIRE HTML file contents, including <!DOCTYPE>, <html>, <head><style>...</style></head>, and <body>...</body>>",
   "pdf_url": "https://YOUR-PROJECT.supabase.co/storage/v1/object/public/scripts/{filename}.pdf"
 }]
 ```
 
-This is how Harrison sees the same colorful 7-beat layout (action blocks, script markers, color-coded beats) inside the dashboard modal that he'd see in the local PDF. Reference: `Precision-Brass/scripts/2026-04-25_stop-buying-mouthpieces.html` shows the exact structure to produce.
-
-To extract the body HTML for upload:
+To build the payload correctly:
 ```bash
-# Pull the inner HTML between <body> and </body> from the just-written script file
-HTML_BODY=$(awk '/<body>/,/<\/body>/' /Users/air/Desktop/Precision-Brass/scripts/{filename}.html | sed -e 's/<\/\?body[^>]*>//g')
-# Use python3 to JSON-encode it cleanly into the payload
 python3 -c "
-import json, sys
+import json
 with open('$HTML_PATH') as f:
-    body = f.read().split('<body>')[1].split('</body>')[0]
+    full_html = f.read()  # READ THE WHOLE FILE. Do NOT split on <body>.
 payload = {
   'id': '$SCRIPT_ID',
   'idea_id': '$IDEA_ID',
   'title': '$TITLE',
   'delivered': '$TODAY',
   'length': '$LENGTH',
-  'sections': 7,
+  'sections': 9,
   'pain_point': '$PAIN',
   'hook': '$HOOK',
   'status': 'pending',
-  'body': [{'type': 'html_full', 'content': body}],
+  'body': [{'type': 'html_full', 'content': full_html, 'pdf_url': '$PDF_URL'}],
   'history': [{'type':'delivered','who':'Timo','text':'<b>Script written</b> from idea','time':'$NOW'}]
 }
 with open('/tmp/script_payload.json','w') as f:
