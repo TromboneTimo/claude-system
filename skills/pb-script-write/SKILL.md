@@ -12,15 +12,50 @@ description: Phase 2 of Harrison Ball's Precision Brass YouTube content engine. 
 
 ## Hard preconditions (do not skip)
 
-Before drafting a single line, READ all of these:
+Before drafting a single line, you MUST do BOTH of the following:
 
-1. `references/example-mouthpieces-script.md`. Proven 7-beat structural template.
+### Precondition A: Read the reference files
+
+1. `references/example-mouthpieces-script.md`. Proven structural template.
 2. `references/script-writing-protocol.md`. Full ruleset. 14 failure modes. Voice fingerprint. Funnel pattern.
-3. `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec. Read this to confirm pain depth, identity load, CTA destination, and structural template based on the picked idea's layer.
+3. `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec.
 4. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_script_writing_lessons.md`. Project-level failure memory.
-5. `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`. Source-of-truth Harrison voice.
+5. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_pb_script_write_master_lessons.md`. **The 7 master lessons from 2026-05-06. Read these or repeat the 15-iteration mistake.**
+6. `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`. Source-of-truth Harrison voice.
 
-Skipping these = repeating the 12-iteration mistake from 2026-04-25.
+### Precondition B: 6-agent VOC vault sweep (MANDATORY, even on dashboard mode)
+
+**Source the script's pain from the database, not from pedagogy guesses.** Spawn 6 parallel mining agents against the FULL vault before drafting any beat content. This is the single highest-leverage step in the entire pipeline. A script with REAL prospect quotes converts. A script with invented objections does not.
+
+**The full vault (do NOT limit to sales calls):**
+- `voc/raw/sales-calls/` (28 files. Lost AND won deals.)
+- `voc/raw/testimonials/` (11 files. Before-state language.)
+- `voc/raw/research/` (deep psychological dive on 19 prospects.)
+- `voc/raw/converting-video-embouchure/` (transcript + comments.)
+- `voc/raw/winning-emails/` and `voc/raw/email-sequences/` (proven copy patterns.)
+- `voc/quotes/*.jsonl` (pre-tagged: all-quotes, comments-quotes, lost-deals, won-deals, sales-call-outcomes.)
+- `voc/personas/*.md` (voice banks: comments, lost-deals, won-deals, harrison-email-voice, voice-bank, objection-library.)
+- `youtube-database/` (per-video folders with transcripts, top 200 comments, sales attribution.)
+- `facebook-ads-database/` (per-ad folders with copy, performance, sales attribution.)
+
+**The 6 agents (parallel, each a different lens):**
+
+1. **Sales calls deep-dive:** all 28 sales calls. Verbatim physical descriptions of what prospects do wrong.
+2. **Testimonials before-state:** all 11 testimonials. What they were doing wrong BEFORE Harrison fixed them.
+3. **Pre-tagged quotes + objection library:** all .jsonl files + personas/objection-library.md + voice-banks. Pre-indexed material.
+4. **Failed-method emotional shame:** sales calls + testimonials + the deep psych dive. Find the EMOTIONAL underbelly. Self-blame, defending failed teachers, "I just need to try harder."
+5. **Specific physical-mistake spotter:** sales calls + testimonials + converting-video transcript. Concrete sensory descriptions. Body parts. Sensations.
+6. **Teacher-blame + bad-advice + YouTube/FB engagement:** sales calls + research + youtube-database comments + facebook-ads-database winning-ad comments. Specific bad advice prospects got. Specific reactions to Harrison's existing content.
+
+Each agent returns: verbatim quote + source file + which trap/beat it maps to. 2-5 quotes per beat. Empty section if no real quote exists. NEVER invent.
+
+**Then a sequential auditor pass:** select the strongest 1-2 quotes per beat. Tag the rest as alternates.
+
+If the topic is Phase-1-driven (idea_id starts with `i_`): the originating idea ALREADY has VOC quotes from pb-script's mining run. Inherit those AND run the 6-agent sweep on top. The sweep finds material the Phase 1 mining missed because it was filtered through the idea's lens.
+
+If the topic is manual (Timo pastes a brief): the 6-agent sweep is your ONLY source of real pain. Do not skip it.
+
+**Skipping the 6-agent sweep = repeating the 2026-05-06 mistake of inventing prospect objections that Timo had to call out and force you to redo.**
 
 ## Funnel layer adaptation (mandatory)
 
@@ -31,19 +66,34 @@ The picked idea carries a TOFU/MOFU/BOFU label from the pb-script menu. Read it.
 
 If the picked idea has no layer label (older menus or manual invocations), ask Timo for the layer BEFORE drafting. Don't assume.
 
-## The 7-beat interleaved structure (default)
+## Structure: each step gets its own shape, not a rigid template
 
-| Beat | Color | Title | Function |
-|---|---|---|---|
-| 01 | Coral #E63946 | Cold Open + Hook | Visual gag + locked hook + comeback/age callout + demo promise |
-| 02 | Blue #2563EB | The Demo | Part 1 (same content, multiple cups) + Part 2 (shitty setup) |
-| 03 | Green #059669 | Apparatus Reveal | Mouthpiece reframe -> BEAT -> apparatus reveal -> definition |
-| 04 | Mustard #D97706 | Mistake 1: [Name] | The Trap -> The Mistake -> The Test (woven inside one beat) |
-| 05 | Plum #7C3AED | Mistake 2: [Name] | Same woven structure |
-| 06 | Magenta #DB2777 | Mistake 3: [Name] | Same woven structure |
-| 07 | Teal #0891B2 | Funnel | Callback to tests + NEW provocation question + Hint pattern + embouchure video CTA |
+The 7-beat template is ONE valid structure. The 9-step Ed Lawrence chain is another. The right structure depends on the script's content.
 
-**Interleaving is non-negotiable.** Each Mistake beat contains The Trap (named topic), The Mistake (named with "the first/second/third mistake"), and The Test (visual + riff) in one cycle. Never stack them as separate beats.
+**Default options:**
+
+- **7-beat interleaved** (mistakes-first scripts): Hook → Demo → Apparatus Reveal → Mistake 1 woven → Mistake 2 woven → Mistake 3 woven → Funnel.
+- **9-step Ed Lawrence chain** (do-this scripts): Hook → Demo → Reframe → Action 1 + trap → Action 2 + trap → Action 3 + trap → Action 4 + trap → Payoff → Funnel.
+
+In BOTH structures: each step gets its own shape based on what serves it. One step might lead with VOC quotes. Another might pre-empt a denial. Another might be a brief intro. **Don't copy-paste the same bullet structure across all steps.** Confirmed 2026-05-06 in the famous-method-killing-embouchure script.
+
+Pick the structure based on the picked idea:
+- If the idea is "3 mistakes that..." or "the trap that..." use 7-beat.
+- If the idea is "the system to..." or "how to..." use 9-step Ed Lawrence chain.
+- If unclear, ask Timo before drafting.
+
+**Layer color palette (extends to 9):**
+| # | Color | Hex |
+|---|---|---|
+| 01 | Coral | #E63946 |
+| 02 | Blue | #2563EB |
+| 03 | Green | #059669 |
+| 04 | Mustard | #D97706 |
+| 05 | Plum | #7C3AED |
+| 06 | Magenta | #DB2777 |
+| 07 | Teal | #0891B2 |
+| 08 | Amber | #F59E0B |
+| 09 | Indigo | #4F46E5 |
 
 ## Instructions are directive TO Harrison, not abstract director-speak (2026-05-06)
 
