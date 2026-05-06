@@ -45,9 +45,17 @@ If the picked idea has no layer label (older menus or manual invocations), ask T
 
 **Interleaving is non-negotiable.** Each Mistake beat contains The Trap (named topic), The Mistake (named with "the first/second/third mistake"), and The Test (visual + riff) in one cycle. Never stack them as separate beats.
 
-## Curiosity loops must vary per beat (Ed Lawrence pattern, 2026-05-06)
+## Don't force a curiosity loop into every beat (Ed Lawrence pattern, 2026-05-06)
 
-**Never use the same curiosity loop shape twice in one script.** Repeating "where 99% of players get this wrong" across 4 beats reads like a copy-paste and kills momentum. Ed Lawrence cycles through 5 distinct loop types. Default rotation:
+**Curiosity loops are spent currency. Use them only where attention has to be re-bought.** Ed Lawrence does NOT loop every section. He uses loops at 4-5 specific moments per video: between the hook and the body, before a counterintuitive twist, before naming the system, and before the funnel. Most beats are clean statements + an objection answered + a transition. Forcing a loop into every beat reads like a copy-paste and kills the loops that earn their place.
+
+Default audit before writing: count your loops. If you have more than 5 in a 9-step script, cut the weakest. Statements and objection-answers can carry beats too.
+
+**Source objections from the VOC corpus, not from general pedagogy guesses.** The pb-script Phase 1 skill spawns 6 mining agents against `voc/raw/sales-calls/`, `voc/raw/testimonials/`, and FB comments. Phase 2 (this skill) is supposed to inherit those VOC quotes from the picked idea. If invoked WITHOUT a Phase 1 idea (manual run from a pasted brief), do not invent traps. Either spawn the 6 mining agents inline, or tag every trap as `[HARRISON FILLS]` so he writes from his own head. Never make up prospect objections.
+
+## Curiosity loop type rotation (when you DO use them)
+
+Cycle through 5 distinct loop types. Never repeat the same shape twice in one script:
 
 1. **Pre-empt objection.** "Before you think X, let me show you Y."
 2. **Pose the next obvious question.** "But how do you actually do X?"
