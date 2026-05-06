@@ -45,6 +45,19 @@ If the picked idea has no layer label (older menus or manual invocations), ask T
 
 **Interleaving is non-negotiable.** Each Mistake beat contains The Trap (named topic), The Mistake (named with "the first/second/third mistake"), and The Test (visual + riff) in one cycle. Never stack them as separate beats.
 
+## Bullet anchors are intent, not text Harrison reads (2026-05-06)
+
+**Riff bullets must be 1 line of director's intent. Never write the sentences Harrison would say on camera.**
+
+- Default bullet length: ~1 line. If it wraps to 2-3 lines, it's already too much.
+- Each bullet says WHAT this beat does and WHY (connection to previous beat or payoff for next).
+- Locked one-liners (verbatim quotes Harrison must say word-for-word) stay long if needed. Only exception.
+- Metaphors and reframes get a short LABEL (e.g. "drop the marathon-with-a-weight metaphor"), not the full speech.
+
+**Metaphor exception (CRITICAL): if a bullet references a metaphor by short label, the metaphor itself MUST be defined inline the first time it appears in the doc.** Harrison does not have your context. He cannot expand a label he hasn't seen the full version of. Pattern: in the FIRST step that uses the metaphor, write one sentence spelling out what the metaphor is, then in later steps you can use the short label. If the metaphor is in the script header (Backbone metaphor: X), still spell it out in the body the first time it lands.
+
+When in doubt, cut. Harrison improvises better than any draft can write for him. Long bullets kill his voice. Confirmed twice on the 2026-05-06 famous-method-killing-embouchure script. See `feedback_bullet_anchors_are_intent_not_text.md`.
+
 ## Voice rules
 
 Match Harrison's converter fingerprint. Examples in `references/example-mouthpieces-script.md`:
