@@ -118,6 +118,8 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
 
 ## Workflow
 
+**Order is non-negotiable: chat draft FIRST, files SECOND, upload THIRD. Never render HTML or PDF before Timo has read and approved the draft as plain text in the chat.**
+
 1. **Detect dashboard mode.** If invoked with `/pb-script-write i_YYYYMMDD_slug`, this is a dashboard-driven run. Fetch the originating idea from Supabase first:
    ```bash
    source ~/.claude/secrets/precision-brass.env
@@ -126,28 +128,32 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
      -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}"
    ```
    Use the idea's title, pain_point, hook_angle, voc_quotes, source_tags as the conversion-trigger context. If status is not `idea_approved`, STOP and tell Timo (e.g. already scripted, or Harrison hasn't greenlit yet).
-2. Confirm the picked idea title and conversion trigger (carry over from pb-script output OR from fetched idea)
-3. READ all 4 reference files (preconditions above)
+2. Confirm the picked idea title and conversion trigger (carry over from pb-script output OR from fetched idea).
+3. READ all 4 reference files (preconditions above).
 4. Outline the 7 beats. Name the 3 mistakes from the corpus or extend a Timo-approved pattern.
-5. Draft each beat in Harrison's voice with the locked-lines / riff-topics split
-6. Generate the HTML using the proven aesthetic spec
-7. Render PDF via Chrome headless, run visual QA on PNG export of each page
-8. Copy HTML+PDF to BOTH project output AND ~/Downloads/
-9. **MANDATORY DRAFT REVIEW IN CHAT (do NOT upload until Timo says go).** Show Timo a draft preview directly in the chat:
-   - Locked hook line (verbatim, beat 1)
-   - The 3 mistake names + 1-line description of the trap, mistake, and test for each
-   - The funnel CTA close line
-   - Total word count + length estimate
+5. Draft each beat in Harrison's voice with the locked-lines / bullet-riff split.
+6. **MANDATORY CHAT DRAFT (no files yet). Show Timo the FULL draft in chat as plain markdown:**
+   - Title + layer + funnel destination
+   - "How to use this doc" rules block (hook + funnel verbatim, everything else bullets, mistake callouts as locked one-liners)
+   - Beat 1: full Locked Hook verbatim + visual action note + EXAMPLES (specific exercise, notes, tempo)
+   - Beats 2-3: visual action notes + bullet riff topics + locked reveal line + EXAMPLES
+   - Beats 4-6: per-mistake bullets (Trap topic bullets, locked Mistake callout, mistake riff bullets, Test action, EXAMPLES box for the viewer's test with specific notes/tempo/duration)
+   - Beat 7 ("Your Journey: The N Steps"): numbered step ladder for the viewer
+   - Beat 8: full Locked Funnel Close verbatim
    - Any [HARRISON FILLS] tags or knowledge gaps
-   - Local file paths (so Timo can open the PDF for full review)
-   - Explicit prompt: **"Review the PDF at {path}. Reply 'go' to upload to Harrison's dashboard, OR tell me which beat to revise."**
-   Do NOT do step 10 until Timo replies with explicit approval ("go", "ship it", "upload it", "looks good", or similar).
-10. **Upload to Harrison's dashboard (only AFTER Timo's go).** Build a script payload with the body filled in, POST to Supabase, then mark idea as scripted. See "Dashboard upload" below.
-11. Report dashboard link to Timo + confirmation idea moved to scripted.
+   - Explicit prompt: **"Read the draft above. Reply 'render' to generate HTML+PDF, or tell me which beat to revise."**
 
-### Why the draft review step exists
+   Do NOT touch the Write tool. Do NOT call Chrome. Do NOT touch the filesystem. Until Timo says render / ship / looks good / approve / something equivalent.
+7. **On Timo's render approval:** generate the HTML using the proven aesthetic spec, then render PDF via Chrome headless, run visual QA on a PNG export of page 1, copy HTML+PDF to all 3 locations (`scripts/`, `output/`, `~/Downloads/`), update `scripts/README.md` index.
+8. **Second checkpoint in chat (do NOT upload yet).** Show Timo:
+   - File paths + screenshot of page 1 (visual QA confirmation)
+   - Explicit prompt: **"Open the PDF at {path}. Reply 'go' to upload to Harrison's dashboard, or tell me what to fix."**
+9. **Upload to Harrison's dashboard (only AFTER Timo's go).** Build a script payload with the body filled in, POST to Supabase, then mark idea as scripted. See "Dashboard upload" below.
+10. Report dashboard link to Timo + confirmation idea moved to scripted.
 
-Before this rule existed, the skill auto-uploaded immediately after writing. Harrison would see scripts on his dashboard before Timo had a chance to QA them. Bad beats, missed VOC quotes, or weak hooks would land in production. Trust damage compounds fast in this loop. From now on: write locally, review in chat, upload only on explicit approval. Speed is never the priority for this skill (see "Operating principle" at top).
+### Why this order exists (two checkpoints, not one)
+
+Before 2026-04-25 the skill auto-uploaded after writing. Trust damage. We added a chat checkpoint after rendering. That fixed dashboard surprises but kept the wasteful "draft a PDF, get yelled at, fix it, re-render, get yelled at again, re-render" loop. Timo flagged this on 2026-05-06: he wants the draft IN CHAT first, BEFORE any HTML or PDF is generated. Iteration on plain text is cheap. Iteration on rendered files is wasteful and slow. So the order is now: chat draft -> render approval -> render -> upload approval -> upload. Never compress the two checkpoints into one. Never render before the first approval.
 
 ## Dashboard upload (step 9 detail)
 
