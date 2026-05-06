@@ -45,6 +45,19 @@ If the picked idea has no layer label (older menus or manual invocations), ask T
 
 **Interleaving is non-negotiable.** Each Mistake beat contains The Trap (named topic), The Mistake (named with "the first/second/third mistake"), and The Test (visual + riff) in one cycle. Never stack them as separate beats.
 
+## Instructions are directive TO Harrison, not abstract director-speak (2026-05-06)
+
+Write all bullets and director notes as second-person instructions Harrison can act on. NOT third-person abstract intent.
+
+- BAD: "Harrison transitions from naming the problem to proving it on camera."
+- GOOD: "Cue the demo. Step into the next take."
+- BAD: "Tie back to Step 2. Reps don't matter if the system underneath is wrong."
+- GOOD: "Land the point of Step 2. Reps don't matter if the system is wrong."
+
+Trim every "Harrison X" to a verb the reader can do. Trim every "the viewer" reference unless the action genuinely requires the audience POV.
+
+Confirmed 2026-05-06: Timo flagged the v2 script for being too descriptive ("Harrison transitions...") instead of directive ("Cut to camera. Hit the next beat."). Rule applies to action blocks, bullets, bridges, and section labels.
+
 ## Don't force a curiosity loop into every beat (Ed Lawrence pattern, 2026-05-06)
 
 **Curiosity loops are spent currency. Use them only where attention has to be re-bought.** Ed Lawrence does NOT loop every section. He uses loops at 4-5 specific moments per video: between the hook and the body, before a counterintuitive twist, before naming the system, and before the funnel. Most beats are clean statements + an objection answered + a transition. Forcing a loop into every beat reads like a copy-paste and kills the loops that earn their place.
@@ -119,11 +132,11 @@ Generate an HTML file with this design (full template lives in `Precision-Brass/
 - Script paragraphs flow with whitespace, no boxes
 - CSS: `break-inside: avoid` on `.script` paragraphs to prevent mid-paragraph page breaks
 
-Then convert to PDF via Chrome headless and save BOTH HTML+PDF to ALL THREE locations:
+Then convert to PDF via Chrome headless and save:
 
-1. `/Users/air/Desktop/Precision-Brass/scripts/YYYY-MM-DD_<slug>.{html,pdf}` (CANONICAL ARCHIVE. always go here. see `project_scripts_archive.md` memory)
-2. `/Users/air/Desktop/Precision-Brass/output/YYYY-MM-DD_<slug>.{html,pdf}` (working copy)
-3. `~/Downloads/YYYY-MM-DD_<slug>.{html,pdf}` (fast handoff per `feedback_pdfs_to_downloads.md`)
+1. `/Users/air/Desktop/Precision-Brass/scripts/YYYY-MM-DD_<slug>.{html,pdf}` (CANONICAL ARCHIVE. both HTML and PDF.)
+2. `/Users/air/Desktop/Precision-Brass/output/YYYY-MM-DD_<slug>.{html,pdf}` (working copy. both HTML and PDF.)
+3. `~/Downloads/YYYY-MM-DD_<slug>.pdf` (PDF ONLY. Never copy HTML to Downloads. See `feedback_pdf_only_to_downloads.md`.)
 
 After saving, append a row to `Precision-Brass/scripts/README.md` index table with date / slug / topic / status.
 
