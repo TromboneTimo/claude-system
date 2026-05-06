@@ -32,6 +32,9 @@ Before proposing a fix or remediation workflow: test the assumption that defines
 ## SKILL ARCHITECTURE GATE (any SKILL.md write or update)
 Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
 
+## CLASSIFIER GATE (any code that buckets data into categories)
+Before declaring a categorizer correct (platform inference, content tagging, lead scoring, ad-vs-organic detection, audience segmentation, ANYTHING that buckets rows into labels): sample 5-10 rows per bucket, show the user source data + assigned label, ASK "does each row's bucket match reality?" Mirror tests (writing a Python copy of the JS rule and confirming they agree) prove zero. Two implementations of the same wrong rule will always agree. Always ask the user for the real-world naming convention BEFORE writing the classifier. "PASS" / "verified" / "no issues" requires a human confirmation, not internal consistency. Caught when $269K of paid Meta ads sat in a Facebook organic bucket for 90 minutes after I called the classifier verified. Full: `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_classifier_verification_must_use_ground_truth.md`
+
 ## CREDENTIAL GATE (any API key, token, password, secret in user message)
 Master credentials file: `~/.claude/credentials/MASTER.md` (gitignored, cross-workspace).
 Boot: read it before answering anything that might need an API key.
