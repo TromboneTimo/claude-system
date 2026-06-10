@@ -10,7 +10,7 @@ Use this exact structure when presenting the 5 ideas to Timo. No deviations.
 # 5 Content Ideas for Harrison. [YYYY-MM-DD]
 
 **Research lens used this run:** [name the rotating bonus lens that fired, e.g., "isolation-pattern"]
-**Sources read this run:** [list directories scanned, e.g., "youtube-database (1 winner), 28 sales calls, 11 testimonials, lost-deals voice bank, objection library, deep psychological dive (19 prospects), comments voice bank"]
+**Sources read this run:** [list directories scanned, e.g., "voc/youtube/raw (1 winner), 28 sales calls, 11 testimonials, lost-deals voice bank, objection library, deep psychological dive (19 prospects), comments voice bank"]
 
 ---
 
@@ -25,11 +25,11 @@ Use this exact structure when presenting the 5 ideas to Timo. No deviations.
 
 **Verbatim evidence (from corpus):**
 1. "[exact quote]"
-   `source: voc/raw/sales-calls/2026-03-23_salescall_michael_call-0.md`
+   `source: voc/sales-calls/raw/2026-03-23_salescall_michael_call-0.md`
 2. "[exact quote]"
-   `source: voc/personas/lost-deals-voice-bank.md`
+   `source: voc/sales-calls/extracts/lost-deals-voice-bank.md`
 3. "[exact quote]" *(optional third)*
-   `source: youtube-database/2026-04_embouchure-truth_O4a-q93ENAg/comments-top.md`
+   `source: voc/youtube/extracts/2026-04_embouchure-truth_O4a-q93ENAg/comments-top.md`
 
 **Hook angle:** [money / problem / curiosity]. [one sentence describing the hook]
 

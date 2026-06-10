@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Read ONE rotating sales call from `voc/raw/sales-calls/`. Surface the unnamed wound the prospect circled but never named. Draft an email that NAMES that wound on the subject line and walks the prospect through it.
+Read ONE rotating sales call from `voc/sales-calls/raw/`. Surface the unnamed wound the prospect circled but never named. Draft an email that NAMES that wound on the subject line and walks the prospect through it.
 
 ## Inputs (passed by orchestrator)
 
-- `voice_catalog`: contents of `voc/personas/harrison-email-voice.md`
+- `voice_catalog`: contents of `voc/emails/extracts/harrison-email-voice.md`
 - `voice_exemplars`: 3 FINAL emails from `output/`
 - `voice_sequence`: emails 1-7 of webinar sequence (NEVER 8-12)
 - `assigned_call`: path to ONE specific sales call file
@@ -21,7 +21,7 @@ Read ONE rotating sales call from `voc/raw/sales-calls/`. Surface the unnamed wo
 2. Read assigned sales call. Note: speaker name + age, what they paid (or did not), what wound they circled, what teacher-language failed them.
 3. Identify ONE specific unnamed wound. The prospect alluded to it but no one named it on the call.
 4. Pull at least 1 verbatim quote from this call.
-5. Pull at least 1 verbatim quote from a testimonial in `voc/raw/testimonials/` that thematically connects (different speaker, NOT in off_limits_voices).
+5. Pull at least 1 verbatim quote from a testimonial in `voc/testimonials/raw/` that thematically connects (different speaker, NOT in off_limits_voices).
 6. Draft the email per `email-voice-protocol.md` requirements:
    - Open with the unnamed-wound-named subject line
    - Body 250 to 600 words depending on audience

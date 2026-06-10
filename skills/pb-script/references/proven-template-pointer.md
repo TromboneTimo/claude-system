@@ -6,12 +6,13 @@ The "12-move converter" template comes from Harrison's April 2026 embouchure vid
 
 - **Memory pointer:** `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/project_proven_converter_template.md` (the 12-move template, distilled)
 - **Full transcript:** `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`
-- **YouTube database entry:** `/Users/air/Desktop/Precision-Brass/youtube-database/2026-04_embouchure-truth_O4a-q93ENAg/`
-  - `analysis.md`. What worked and why.
+- **YouTube database entry (raw):** `/Users/air/Desktop/Precision-Brass/voc/youtube/raw/2026-04_embouchure-truth_O4a-q93ENAg/`
   - `transcript.md`. Mirror of the transcript.
-  - `comments-top.md`. Highest-engagement comments. Look here for emotional resonance proof.
   - `metadata.json`. View count, sales attribution, like count.
   - `comments.json`. Full raw comment dump.
+- **YouTube database entry (extracts):** `/Users/air/Desktop/Precision-Brass/voc/youtube/extracts/2026-04_embouchure-truth_O4a-q93ENAg/`
+  - `analysis.md`. What worked and why.
+  - `comments-top.md`. Highest-engagement comments. Look here for emotional resonance proof.
 
 ## How Agent A applies this template
 
@@ -32,20 +33,20 @@ If the new idea doesn't structurally match the winner, label it as a variety-len
 
 ## When more winners get added to the database
 
-This skill is forward-compatible. As `youtube-database/index.json` accumulates more `status=winner` entries, Agent A reads ALL of them and extracts patterns common across multiple winners (not just the embouchure video). Cross-winner patterns are stronger signal than single-video patterns. Update this file's "Where the source files live" section as new winners come in.
+This skill is forward-compatible. As `voc/youtube/index.json` accumulates more `status=winner` entries, Agent A reads ALL of them and extracts patterns common across multiple winners (not just the embouchure video). Cross-winner patterns are stronger signal than single-video patterns. Update this file's "Where the source files live" section as new winners come in.
 
 ## Facebook winning ads (parallel proven-conversion source)
 
 Agent A also reads the Facebook ads database, mirrored against yt-vault structure.
 
-- **Database path:** `/Users/air/Desktop/Precision-Brass/facebook-ads-database/`
-- **Index:** `index.json` (filter by `status=winner`)
-- **Per-ad files:** `analysis.md`, `creative/copy.md`, `performance.json`, optionally `comments-top.md`, `metadata.json`
+- **Database path:** `/Users/air/Desktop/Precision-Brass/voc/meta-ads/`
+- **Index:** `index.json` at the channel root (filter by `status=winner`)
+- **Per-ad files:** `raw/<folder>/creative/copy.md`, `raw/<folder>/performance.json`, `raw/<folder>/metadata.json`, `extracts/<folder>/analysis.md`, optionally `extracts/<folder>/comments-top.md`
 - **Ingest skill:** `fb-vault` (reference only. don't invoke from pb-script)
 
 **Why both channels matter:** YouTube long-form converts through narrative arc and demonstration. FB ads convert through hook + identity collision in <100 words. The patterns that recur across BOTH (the language, the named pains, the identity arc) are the highest-confidence signal for what truly resonates. When Agent A finds a phrase or angle that appears in winners on both channels, that's a tier-1 anchor for the new idea.
 
-**Empty-database state (currently):** As of 2026-04-25, `facebook-ads-database/index.json` shows 0 ads. Agent A handles this gracefully (see SKILL.md Agent A prompt). When ads start landing, the agent automatically picks them up on the next run.
+**Empty-database state (currently):** As of 2026-04-25, `voc/meta-ads/index.json` shows 0 ads. Agent A handles this gracefully (see SKILL.md Agent A prompt). When ads start landing, the agent automatically picks them up on the next run.
 
 ## Anchor labeling
 

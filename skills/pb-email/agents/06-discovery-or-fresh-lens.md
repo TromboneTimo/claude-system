@@ -37,8 +37,8 @@ Same as Agent 1, plus:
 
 ## Workflow (Mode B: fresh-lens)
 
-1. Load inputs.
-2. Re-read Harrison's corpus through the assigned lens (e.g. "isolation", "age-anxiety"). Look for sales calls and testimonials that surface this specific lens.
+1. Load inputs. Also read `voc/synthesis/fresh-ad-pain-points.md` (agent-mined verbatim pain points NOT used in current winning ads; includes the hard constraint that Harrison is in his 20s, so the 40-65 wounds are the STUDENTS' wounds, never Harrison first-person).
+2. Re-read Harrison's corpus through the assigned lens (e.g. "isolation", "age-anxiety"). Look for sales calls and testimonials that surface this specific lens. Cross-check the lens against `fresh-ad-pain-points.md` for verbatim quote material the winning ads have not yet burned.
 3. Pick the freshest pair: 1 sales-call quote + 1 testimonial quote that BOTH speak to this lens, with neither speaker in off_limits_voices.
 4. Draft the email:
    - Body 300 to 600 words

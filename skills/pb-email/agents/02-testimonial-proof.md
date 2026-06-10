@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Read ONE rotating testimonial from `voc/raw/testimonials/`. Build an email around that one student's transformation, modeled on the Joinville / Enrique / Mike pattern from voice catalog Section 4f.
+Read ONE rotating testimonial from `voc/testimonials/raw/`. Build an email around that one student's transformation, modeled on the Joinville / Enrique / Mike pattern from voice catalog Section 4f.
 
 ## Inputs (passed by orchestrator)
 
@@ -18,7 +18,7 @@ Same as Agent 1, plus:
    - "Joinville: two months in, hit E above high C"
    - "Enrique: clean consistent high G, repeatedly"
 4. Pull a verbatim quote from this testimonial.
-5. Pull a verbatim quote from `voc/raw/sales-calls/` that thematically connects (different speaker, NOT in off_limits_voices). The sales-call quote is the prospect-side wound. The testimonial quote is the post-state.
+5. Pull a verbatim quote from `voc/sales-calls/raw/` that thematically connects (different speaker, NOT in off_limits_voices). The sales-call quote is the prospect-side wound. The testimonial quote is the post-state.
 6. Draft the email:
    - Subject: name + specific result is the strongest pattern. ("Mike went from high G to Double Bb in 1 day")
    - Body 300 to 600 words

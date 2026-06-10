@@ -49,7 +49,7 @@ That reframe handles BOTH HP1 (identity preservation) and HP3 (rekindle hope) in
 
 ## Required output (Agent 2)
 
-1. Pick 1-2 hidden problems (HP1 to HP8) that are most under-addressed in `youtube-database/index.json` topic_tags.
+1. Pick 1-2 hidden problems (HP1 to HP8) that are most under-addressed in `voc/youtube/index.json` topic_tags.
 2. Find 3+ verbatim quotes where prospects **circle** the pain without naming it.
 3. Propose 1 video idea that **names the unnamed pain explicitly** as its hook.
 4. Show the reframe move (the line that grants permission to feel the wound + offers a new identity).
@@ -58,4 +58,4 @@ That reframe handles BOTH HP1 (identity preservation) and HP3 (rekindle hope) in
 
 - The hook line in the proposed idea MUST name the hidden pain with words the prospect would never say themselves. ("You're not lazy. You've been doing the wrong work, faithfully, for 20 years.")
 - NO technique-only hooks. NO "5 tips to fix your range" framings. Identity wound first.
-- If a hidden pain is already covered in a YouTube winner (cross-check `youtube-database/index.json` topic_tags), pick a different one.
+- If a hidden pain is already covered in a YouTube winner (cross-check `voc/youtube/index.json` topic_tags), pick a different one.

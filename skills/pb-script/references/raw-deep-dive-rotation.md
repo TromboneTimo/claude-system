@@ -6,14 +6,14 @@ The Raw Deep-Dive agent (Agent 1) reads ONE raw corpus end-to-end per run. Rotat
 
 | ID | Corpus | Path | Size |
 |---|---|---|---|
-| `sales-A` | Sales calls batch A (1-9) | `voc/raw/sales-calls/*.md` (alphabetical first 9) | ~500KB |
+| `sales-A` | Sales calls batch A (1-9) | `voc/sales-calls/raw/*.md` (alphabetical first 9) | ~500KB |
 | `sales-B` | Sales calls batch B (10-18) | same dir, middle 9 | ~500KB |
 | `sales-C` | Sales calls batch C (19-28) | same dir, last 10 | ~500KB |
-| `testimonials` | All 11 testimonials | `voc/raw/testimonials/*.md` | 51KB |
-| `yt-comments` | YouTube comments JSON | `youtube-database/2026-04_embouchure-truth_O4a-q93ENAg/comments.json` | 32KB |
+| `testimonials` | All 11 testimonials | `voc/testimonials/raw/*.md` | 51KB |
+| `yt-comments` | YouTube comments JSON | `voc/youtube/raw/2026-04_embouchure-truth_O4a-q93ENAg/comments.json` | 32KB |
 | `unsorted-vtt` | 28 unsorted .vtt files | `sort this/*.vtt` | 500KB |
-| `fb-ads` | Facebook ad creative + performance | `facebook-ads-database/*/` | 55KB |
-| `email-seq` | Webinar opt-in to strategy session sequence | `voc/raw/email-sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md` | 34KB |
+| `fb-ads` | Facebook ad creative + performance | `voc/meta-ads/raw/*/` + `voc/meta-ads/extracts/*/` | 55KB |
+| `email-seq` | Webinar opt-in to strategy session sequence | `voc/emails/raw/sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md` | 34KB |
 
 ## Picking algorithm (run in Bash before spawning Agent 1)
 
@@ -66,11 +66,11 @@ The agent must read its assigned corpus **end-to-end**, not skim. For batched sa
 - Triage first: open each .vtt, identify what it is (sales call? webinar? testimonial? something else?). Auto-categorize.
 - Then deep-read 3-5 of the most promising files.
 - These are likely high-signal because they haven't been mined yet.
-- Recommend a destination folder for each file in the agent's report (e.g., "vtt-3.vtt looks like a sales call from 2026-02, suggest moving to voc/raw/sales-calls/").
+- Recommend a destination folder for each file in the agent's report (e.g., "vtt-3.vtt looks like a sales call from 2026-02, suggest moving to voc/sales-calls/raw/").
 
 ### fb-ads
-- Read every campaign folder (`hollywood-bowl-authority`, `studio-authority-comeback`, `they-told-me-vas-origin`, plus any new ones).
-- For each: metadata.json (audience), performance.json (CTR/ROAS/CPA), copy.md (creative), analysis.md.
+- Read every ad folder under `voc/meta-ads/raw/` (`hollywood-bowl-authority`, `studio-authority-comeback`, `they-told-me-vas-origin`, plus any new ones).
+- For each: raw/<folder>/metadata.json (audience), raw/<folder>/performance.json (CTR/ROAS/CPA), raw/<folder>/creative/copy.md, and extracts/<folder>/analysis.md.
 - Extract: ad copy that converted vs flopped, audience reactions, hooks that worked.
 
 ### email-seq

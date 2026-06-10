@@ -27,16 +27,16 @@ If primary voice appears in last 1 run only, allow but flag.
 The final 5 ideas combined must satisfy:
 - 5 distinct primary voices (no overlap across the 5).
 - 3 or more primary voices NOT in the last 3 runs.
-- At least 1 voice from a raw sales call file (file path matches `voc/raw/sales-calls/*.md`).
-- At least 1 voice from a raw testimonial file (file path matches `voc/raw/testimonials/*.md`).
+- At least 1 voice from a raw sales call file (file path matches `voc/sales-calls/raw/*.md`).
+- At least 1 voice from a raw testimonial file (file path matches `voc/testimonials/raw/*.md`).
 
 If any of these fail, swap candidates from the pool until they pass. If the pool can't satisfy the constraints, the auditor reports "insufficient fresh voices in pool, request agent re-run with stricter freshness lens".
 
 ### Check 3. Quote-sourcing minimums (per `feedback_quote_sourcing_minimums.md`)
 
 Every final idea must include:
-- 1+ testimonial quote (from `voc/raw/testimonials/*.md` or testimonial entries in quotes jsonl).
-- 1+ sales call quote (from `voc/raw/sales-calls/*.md` or sales call entries in quotes jsonl).
+- 1+ testimonial quote (from `voc/testimonials/raw/*.md` or testimonial entries in quotes jsonl).
+- 1+ sales call quote (from `voc/sales-calls/raw/*.md` or sales call entries in quotes jsonl).
 
 Harrison-quotes (from his own ad copy, transcripts, or DMs) require a `conversion_lens` field explaining WHY that line converts. Source field cannot just say "Harrison's ad". It must say something like "Harrison's ad copy that converted at ROAS 4.2x because it [reframe pattern]".
 
@@ -51,7 +51,7 @@ The rationale field cannot use internal jargon: "converter", "the corpus", "the 
 After all 4 checks pass and the final 5 are locked, append ONE line to `voices_used_log.jsonl`:
 
 ```json
-{"run_id": "2026-04-27_run1", "timestamp": "2026-04-27T10:30:00Z", "corpus_picked": "sales-B", "idea_ids": ["pb-2026-04-27-1","pb-2026-04-27-2","pb-2026-04-27-3","pb-2026-04-27-4","pb-2026-04-27-5"], "primary_voices": ["Speaker1","Speaker2","Speaker3","Speaker4","Speaker5"], "secondary_voices": ["Speaker6","Speaker7"], "raw_files": ["voc/raw/sales-calls/file1.md","voc/raw/testimonials/file2.md"], "lenses": ["age-anxiety","mouthpiece-rabbit-hole","HP3","OBJ4"]}
+{"run_id": "2026-04-27_run1", "timestamp": "2026-04-27T10:30:00Z", "corpus_picked": "sales-B", "idea_ids": ["pb-2026-04-27-1","pb-2026-04-27-2","pb-2026-04-27-3","pb-2026-04-27-4","pb-2026-04-27-5"], "primary_voices": ["Speaker1","Speaker2","Speaker3","Speaker4","Speaker5"], "secondary_voices": ["Speaker6","Speaker7"], "raw_files": ["voc/sales-calls/raw/file1.md","voc/testimonials/raw/file2.md"], "lenses": ["age-anxiety","mouthpiece-rabbit-hole","HP3","OBJ4"]}
 ```
 
 Run_id format: `{date}_run{N}` where N increments if multiple runs same day.

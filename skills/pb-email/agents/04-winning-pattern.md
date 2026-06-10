@@ -2,23 +2,25 @@
 
 ## Purpose
 
-Find proven hooks/structures from Harrison's actual winners (Facebook ads, eventually winning emails) and adapt one into a fresh email draft. The closest thing to a "safe bet" agent.
+Find proven hooks/structures from Harrison's actual winners (his ranked winning emails, plus winning Meta ads) and adapt one into a fresh email draft. The closest thing to a "safe bet" agent.
 
 ## Inputs (passed by orchestrator)
 
 Same as Agent 1, plus:
 - `winners_corpus`: path patterns:
-  - `voc/raw/winning-emails/` (currently empty as of 2026-04-21)
-  - `facebook-ads-database/*/` (filter to status=winner)
-- `youtube_winners`: path pattern `youtube-database/*/index.json` filter status=winner
+  - `voc/emails/raw/winning-emails/` (18 ranked winner broadcasts, `rank-001` through `rank-018`, ranked by unique link clicks DESC, Timo's winner metric)
+  - `voc/emails/performance/ranking.json` (dashboard-sent emails ranked by `unique_link_clicks`; same metric, fresher data)
+  - `voc/meta-ads/index.json` `ads[]` (filter to status=winner; ad files under `voc/meta-ads/`)
+  - `voc/synthesis/ad-winning-verbiage.jsonl` (revenue-proven ad lines, ranked, with trigger + evidence per line)
+- `youtube_winners`: `voc/youtube/index.json` `videos[]` filter status=winner
 
 ## Workflow
 
 1. Load all inputs.
-2. Scan `winners_corpus`:
-   - If `voc/raw/winning-emails/` has any files, those take priority. Read all. Identify common structures across winners.
-   - If empty (current state), fall back to `facebook-ads-database/*/` winners. Read 3-5 winning ad copies. Identify hook patterns.
-3. Pick ONE winning hook structure and one winning ad's structural backbone (open, tension, resolution, CTA).
+2. Mine `winners_corpus`:
+   - The winning-emails corpus takes priority. Read the top-ranked files (`rank-001` down) plus `voc/emails/performance/ranking.json`. Identify common structures across winners: subject patterns, beat order, length, CTA shape.
+   - Then layer in `voc/meta-ads/` winners (3-5 winning ad copies) and `voc/synthesis/ad-winning-verbiage.jsonl` for proven hook lines and triggers.
+3. Pick ONE winning hook structure and one winner's structural backbone (open, tension, resolution, CTA), from a winning email or a winning ad.
 4. Adapt to email format. The ad-to-email translation is:
    - Ad headline -> Subject line
    - Ad opening lines -> Email opening
@@ -46,6 +48,6 @@ Same fields plus `winner_source`. `primary_voice` = the testimonial speaker feat
 - Picking a winner solely on spend volume; some high-spend ads are flops. Confirm `status=winner` in the database index.
 - Ignoring the email format constraints. Ads have 1-2 sentences; emails need 250+ words. Expand without diluting.
 
-## Empty winners-emails fallback
+## Winners-emails corpus state
 
-If `voc/raw/winning-emails/` is empty, log a note in the rationale: "Adapted from FB ad winner '{ad name}'. Winner-emails corpus is empty; ingest performance-tagged emails to grow this corpus." This surfaces the corpus gap to Timo.
+The corpus is POPULATED (since 2026-05-15; previously empty). 18 ranked winner broadcasts live at `voc/emails/raw/winning-emails/` with a README and index.json, and `voc/emails/performance/ranking.json` ranks dashboard-sent emails by unique link clicks. Mine them; do not fall back to ads-only. If the directory is ever missing or empty, STOP and flag it to Timo instead of silently adapting from ads alone.

@@ -4,7 +4,7 @@ Used by Agent 3 (Objection Dissolver). Each lens is a specific objection that st
 
 ## The 8 objection lenses
 
-Sourced from coaching-db's `mine-angles.md` and Precision Brass's `voc/personas/objection-library.md`.
+Sourced from coaching-db's `mine-angles.md` and Precision Brass's `voc/synthesis/objection-library.md`.
 
 | ID | Lens | What the prospect actually says | What's underneath |
 |---|---|---|---|
@@ -38,7 +38,7 @@ RESOLUTION (180-end): "Now you know why [Y years] of [X] didn't work. The next m
 ## Required output (Agent 3)
 
 1. Pick 1 objection lens (OBJ1 to OBJ8).
-2. Find 3+ verbatim quotes from `voc/raw/sales-calls/` (sales call moments where the prospect raised the objection) AND 2+ quotes from `voc/personas/lost-deals-voice-bank.md`.
+2. Find 3+ verbatim quotes from `voc/sales-calls/raw/` (sales call moments where the prospect raised the objection) AND 2+ quotes from `voc/sales-calls/extracts/lost-deals-voice-bank.md`.
 3. Propose 1 video idea using the pre-emption pattern.
 4. Show the dismantle line (the specific reframe that flips the objection).
 
@@ -46,5 +46,5 @@ RESOLUTION (180-end): "Now you know why [Y years] of [X] didn't work. The next m
 
 - The video must address ONE objection, not three. Multi-objection videos dilute the conversion punch.
 - Cite the exact sales-call moment where the objection appeared. File path + speaker name + paraphrased context.
-- If the objection was already directly addressed in a YouTube winner, pick a different lens. (Cross-check `youtube-database/index.json` topic_tags.)
+- If the objection was already directly addressed in a YouTube winner, pick a different lens. (Cross-check `voc/youtube/index.json` topic_tags.)
 - The dismantle line MUST be falsifiable on camera (Harrison can DEMONSTRATE the reframe, not just claim it).

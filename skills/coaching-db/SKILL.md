@@ -64,6 +64,10 @@ When the user invokes `/coaching-db <sub>`, route as follows:
     └── winning-phrases.md         Optional language-that-converted file.
 ```
 
+### Precision Brass divergence (channel-first, 2026-05-24)
+
+Precision Brass diverges from this generic skeleton: it uses a channel-first layout (each channel owns its own `raw/` + `extracts/`, cross-channel rollups in `synthesis/`). Path map of record: `voc/config.yaml` source_paths + `voc/STRUCTURE.md`. Ingesting PB sources requires explicit `--output-dir` overrides to the channel paths; do NOT write to the generic `voc/raw/<source-type>/`, `voc/quotes/`, or `voc/personas/` defaults in that workspace.
+
 ## Quote entry schema
 
 Every quote written to `all-quotes.jsonl` must match this schema. See `templates/quote-entry.md` for the canonical example.

@@ -30,14 +30,18 @@ Usage:
     --cpa 103.13 \\
     --roas 2.4 \\
     --conversions 4 \\
-    --out-root /Users/air/Desktop/Precision-Brass/facebook-ads-database
+    --out-root /Users/air/Desktop/Precision-Brass/voc/meta-ads
 
 Required: --ad-id, --slug, --status, --out-root
+--out-root is the CHANNEL ROOT (voc/meta-ads). Channel-first layout per
+voc/STRUCTURE.md: the ad folder is written under <out-root>/raw/<folder>/,
+index.json stays at <out-root>/index.json, and <out-root>/extracts/<folder>/
+is pre-created for analysis.md.
 Everything else is optional; whatever is missing gets stored as null and
 flagged in metadata.json so the analysis can call it out.
 
 Updates index.json (appends or updates the row for this ad_id).
-Does NOT write analysis.md. Claude writes that by hand.
+Does NOT write analysis.md. Claude writes that by hand into extracts/.
 """
 import argparse
 import json
@@ -71,9 +75,13 @@ def process_ad(args):
     folder_name = f"{yyyymm}_{args.slug}_{args.ad_id}"
 
     out_root = Path(args.out_root)
-    out_dir = out_root / folder_name
+    # Channel-first layout (voc/STRUCTURE.md): raw source under raw/<folder>/,
+    # derived analysis under extracts/<folder>/, index.json at the channel root.
+    out_dir = out_root / "raw" / folder_name
+    extracts_dir = out_root / "extracts" / folder_name
     creative_dir = out_dir / "creative"
     out_dir.mkdir(parents=True, exist_ok=True)
+    extracts_dir.mkdir(parents=True, exist_ok=True)
     creative_dir.mkdir(parents=True, exist_ok=True)
 
     # ---- copy.md -------------------------------------------------------------
@@ -212,7 +220,7 @@ def process_ad(args):
     else:
         print(f"WARN no creative file provided")
     print(f"OK  index.json updated ({index['total_ads']} ads total)")
-    print(f"NEXT: write {out_dir}/analysis.md citing context/prospect-psychology.md + voc/personas/")
+    print(f"NEXT: write {extracts_dir}/analysis.md citing context/prospect-psychology.md + voc/synthesis/ + channel extracts voice banks")
 
 
 def main():

@@ -1,11 +1,11 @@
 ---
 name: fb-vault
-description: Ingest a Facebook ad into the Precision Brass ads database. Saves the creative file (mp4/jpg), ad copy (primary text, headline, description, CTA), performance numbers (spend, impressions, CTR, CPA, ROAS, conversions), audience targeting, and writes a structured analysis citing prospect-psychology.md and voc/personas/ files. Mirrors the structure of yt-vault. Tracks status (winner / flop / unrated, set by Harrison) and sales attribution. Use this skill any time Timo says "store this ad", "store this fb ad", "add to fb vault", "add to facebook ads database", "save this ad to the database", "ingest this facebook ad", or pastes ad copy / a creative file path / a Facebook Ad Library URL with the words winner, flop, sales, ROAS, or CPA attached. Also trigger when the user says "this ad converted N sales", "this ad bombed", "study why this ad worked / flopped". Currently fully manual ingestion. Future Meta Ad Library API hookup is planned (see project_future_todos.md). Always use this skill instead of handcrafting the folder structure.
+description: Ingest a Facebook ad into the Precision Brass ads database. Saves the creative file (mp4/jpg), ad copy (primary text, headline, description, CTA), performance numbers (spend, impressions, CTR, CPA, ROAS, conversions), audience targeting, and writes a structured analysis citing prospect-psychology.md and voc/synthesis/ + channel extracts files. Mirrors the structure of yt-vault. Tracks status (winner / flop / unrated, set by Harrison) and sales attribution. Use this skill any time Timo says "store this ad", "store this fb ad", "add to fb vault", "add to facebook ads database", "save this ad to the database", "ingest this facebook ad", or pastes ad copy / a creative file path / a Facebook Ad Library URL with the words winner, flop, sales, ROAS, or CPA attached. Also trigger when the user says "this ad converted N sales", "this ad bombed", "study why this ad worked / flopped". Currently fully manual ingestion. Future Meta Ad Library API hookup is planned (see project_future_todos.md). Always use this skill instead of handcrafting the folder structure.
 ---
 
 # fb-vault
 
-Ingest a Facebook ad into `Precision-Brass/facebook-ads-database/` so future ad scripts can study what worked (winners) and what didn't (flops). Outputs creative file, structured ad copy, performance data, metadata, and an analysis grounded in the project's voice-of-customer files.
+Ingest a Facebook ad into `Precision-Brass/voc/meta-ads/` (the paid FB+IG channel of the channel-first vault; layout per `voc/STRUCTURE.md`, path map of record `voc/config.yaml` source_paths) so future ad scripts can study what worked (winners) and what didn't (flops). Outputs creative file, structured ad copy, performance data, metadata, and an analysis grounded in the project's voice-of-customer files.
 
 Mirrors `yt-vault` for consistency. Major difference: there is no automated scraper for Facebook ads (yet). Ingestion is manual until the Meta Ad Library API is wired up.
 
@@ -51,7 +51,7 @@ The skill handles all three. Don't refuse if data is partial. Run the processor 
 
 ## What this skill produces
 
-Folder at `Precision-Brass/facebook-ads-database/<YYYY-MM>_<slug>_<adID>/` with:
+Raw folder at `Precision-Brass/voc/meta-ads/raw/<YYYY-MM>_<slug>_<adID>/` with:
 
 | File | Purpose |
 |---|---|
@@ -59,9 +59,10 @@ Folder at `Precision-Brass/facebook-ads-database/<YYYY-MM>_<slug>_<adID>/` with:
 | `creative/copy.md` | Primary text, headline, description, CTA, destination URL, all in markdown |
 | `creative/ad.mp4` or `creative/ad.jpg` | The actual creative file, copied from wherever Timo provided it |
 | `performance.json` | spend, impressions, CTR, CPA, ROAS, conversions, hook rate, hold rate (any combination) |
-| `analysis.md` | The whole point. 6-move structural breakdown citing `context/prospect-psychology.md` + `voc/personas/`. See `references/analysis-template.md` |
 
-Also updates `Precision-Brass/facebook-ads-database/index.json` (master list).
+Plus the analysis, which lives in the extracts side of the channel: `Precision-Brass/voc/meta-ads/extracts/<YYYY-MM>_<slug>_<adID>/analysis.md`. The whole point. 6-move structural breakdown citing `context/prospect-psychology.md` + the voc voice banks. See `references/analysis-template.md`.
+
+Also updates `Precision-Brass/voc/meta-ads/index.json` (master list, at the channel root).
 
 ## Workflow
 
@@ -101,7 +102,7 @@ python3 /Users/air/.claude/skills/fb-vault/scripts/process_ad.py \
   --cpa 103.13 \
   --roas 2.4 \
   --conversions 4 \
-  --out-root /Users/air/Desktop/Precision-Brass/facebook-ads-database
+  --out-root /Users/air/Desktop/Precision-Brass/voc/meta-ads
 ```
 
 For minimal entries, drop the optional flags:
@@ -113,18 +114,18 @@ python3 /Users/air/.claude/skills/fb-vault/scripts/process_ad.py \
   --status unrated \
   --sales 0 \
   --primary-text "$(cat /tmp/copy.txt)" \
-  --out-root /Users/air/Desktop/Precision-Brass/facebook-ads-database
+  --out-root /Users/air/Desktop/Precision-Brass/voc/meta-ads
 ```
 
 The processor:
-- Copies the creative file into the ad's `creative/` folder
+- Writes the ad folder under `voc/meta-ads/raw/<folder>/` and copies the creative file into its `creative/` subfolder
 - Writes `creative/copy.md`, `metadata.json`, `performance.json`
-- Updates `index.json`
+- Updates `voc/meta-ads/index.json` (channel root) and pre-creates `voc/meta-ads/extracts/<folder>/` for the analysis
 - Preserves `sales_history` on re-runs of the same `ad_id`
 
 ### Step 3. Write `analysis.md`
 
-The processor does NOT write `analysis.md`. You do. This is where the value is.
+The processor does NOT write `analysis.md`. You do. This is where the value is. It goes to `voc/meta-ads/extracts/<YYYY-MM>_<slug>_<adID>/analysis.md` (NOT inside the raw folder; raw is immutable source, extracts hold derived analysis).
 
 Read `/Users/air/.claude/skills/fb-vault/references/analysis-template.md` for the full structure. In short:
 
@@ -140,12 +141,12 @@ Read `/Users/air/.claude/skills/fb-vault/references/analysis-template.md` for th
 
 Sources to cite:
 - `Precision-Brass/context/prospect-psychology.md` (the central reference)
-- `Precision-Brass/voc/personas/won-deals-voice-bank.md`
-- `Precision-Brass/voc/personas/lost-deals-voice-bank.md` (especially for flops)
-- `Precision-Brass/voc/personas/objection-library.md`
-- `Precision-Brass/voc/personas/voice-bank.md`
-- `Precision-Brass/voc/personas/comments-voice-bank.md`
-- `Precision-Brass/voc/personas/harrison-email-voice.md`
+- `Precision-Brass/voc/sales-calls/extracts/won-deals-voice-bank.md`
+- `Precision-Brass/voc/sales-calls/extracts/lost-deals-voice-bank.md` (especially for flops)
+- `Precision-Brass/voc/synthesis/objection-library.md`
+- `Precision-Brass/voc/synthesis/voice-bank.md`
+- `Precision-Brass/voc/synthesis/comments-voice-bank.md`
+- `Precision-Brass/voc/emails/extracts/harrison-email-voice.md`
 
 ### Step 4. Confirm with Timo
 
@@ -184,7 +185,7 @@ Currently fully manual. When the Meta Ad Library API (or Marketing API for Harri
 - The processor already accepts `--ingestion-source api` for provenance tagging
 - See `Precision-Brass/memory/project_future_todos.md` for the full TODO
 
-This is also footnoted in `facebook-ads-database/README.md`.
+This is also footnoted in `voc/meta-ads/README.md`.
 
 ## Error handling
 
@@ -204,6 +205,6 @@ This is also footnoted in `facebook-ads-database/README.md`.
 
 ## Why this skill exists
 
-Same logic as `yt-vault`. Each ad in the vault makes the next ad smarter. When Harrison says "I want to run a new ad about endurance," Claude opens `facebook-ads-database/index.json`, finds existing endurance ads (winners + flops), reads the analyses, and proposes copy that replicates winner moves while avoiding flop traps.
+Same logic as `yt-vault`. Each ad in the vault makes the next ad smarter. When Harrison says "I want to run a new ad about endurance," Claude opens `voc/meta-ads/index.json`, finds existing endurance ads (winners + flops), reads the analyses, and proposes copy that replicates winner moves while avoiding flop traps.
 
 The vault is the substrate. Sloppy ingestion = sloppy next ad. So the analysis quality bar is high. See `references/analysis-template.md`.

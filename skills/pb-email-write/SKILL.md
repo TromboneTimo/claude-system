@@ -35,6 +35,8 @@ Do NOT fire on:
 
 ## Hard preconditions (do not skip)
 
+**Step 0: run `/pb-email-perf` and READ the performance brief before drafting.** The brief tells you what is actually clicking (CTA rung, destination mix, subject patterns) right now. Drafting without it means guessing at the WHAT.
+
 Before drafting a single line, READ all of these in this exact order:
 
 1. `~/.claude/skills/pb-email/references/email-voice-protocol.md`. Harrison's voice fingerprint, tagline rule, banned words, contraction rules.
@@ -47,6 +49,9 @@ Before drafting a single line, READ all of these in this exact order:
 8. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_zero_drop_ingestion.md`. Every section the idea provides MUST flow into the draft. No silent drops.
 9. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_no_internal_jargon_in_rationale.md`. Plain English rationale only.
 10. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_quote_sourcing_minimums.md`. Minimum 1 testimonial quote AND 1 sales call quote in the rationale evidence.
+11. `~/.claude/skills/pb-email-write/references/reader-facing-playbook.md`. THE email-writing method (proven, critic-validated 2026-06-09). Non-negotiable: write TO the reader in their scene, never ABOUT a third party they watch; cite a SPECIFIC named Harrison technique from his videos so the reader feels smart (tongue-arch "tar" not "tee", vertical alignment, amisha, 4 points of contact, place-breathe-play, etc.); lead with edge, not soft-cock energy; P.S. lives INSIDE the body. Section 9: VARY THE REFRAME TRANSITION across a batch (never reuse "Here's the truth nobody told you").
+12. `~/.claude/skills/pb-email-write/references/email-doctrine.md`. THE strategy + CTA-economics canon (the WHAT, canonized 2026-06-10 from the 18-winner corpus + 314-email swipe file). Precedence: doctrine wins on strategy/CTA questions, playbook wins on voice questions, most recent dated Timo/Harrison feedback beats both. Decide the CTA rung BEFORE drafting; a deadline-bound free asset is the proven click engine.
+13. `~/.claude/skills/pb-email-write/references/ed-style-and-revision-lessons.md`. The default structure model (Ed-Lawrence scaffold, read-full-source gate, don't-overstate gate, metrics pass, video block). Load with the voice protocol.
 
 Skipping the load order = repeating the Paul-template-leakage failure of 2026-04-28. The list above is the same enforced load order as `pb-email`, plus the chat-draft and zero-drop rules specific to this Phase 2 skill.
 
@@ -77,6 +82,7 @@ For the picked idea:
 
 Before any DB write or Chrome render or file touch:
 
+0. Run the EMAIL DRAFT GATE at `~/.claude/knowledge/email-draft-gate.md` (read swipe-file pacing THIS session, Q/A grammar flow, named-technique specificity, no pendulum) and print its 1-line `GATE:` proof block above the draft. No proof line = draft is not paste-able.
 1. Render the FULL draft in chat as plain markdown. Subject + 2 alts + preheader + body + P.S. + CTA + rationale (HTML rendered as plain markdown sections) + VOC quotes.
 2. Stop. Wait for Timo's explicit approval ("ship it", "push it", "looks good", "approved", "yes proposal it").
 3. Only after explicit approval, INSERT into `email_proposals` and update the source idea.
@@ -132,6 +138,9 @@ Tell Timo:
 5. Dropping a section the idea provides (e.g., the idea has 4 VOC quotes, draft proposal has only 2). Zero-drop ingestion.
 6. Inventing behavioral claims about Harrison's audience that aren't in the idea or VOC corpus. ASK, don't invent.
 7. Using a P.S. type or hook angle that was used in the most recent send. Honor rotation protocol.
+8. **Spectator voice ("soft-cock energy").** Telling the reader a third party's story and then commenting on it, instead of putting the READER in the scene. Talk to the person reading it. Per `reader-facing-playbook.md`.
+9. **Vague mechanism.** A "system nobody taught you" with no named, specific Harrison technique the reader can picture. Cite the real move from his videos so the reader feels smart. Per `reader-facing-playbook.md`.
+10. **Repeating the reframe transition.** Reusing "Here's the truth nobody told you" (or any single pivot) across a batch. Rotate the move. Per `reader-facing-playbook.md` Section 9.
 
 ## Output
 

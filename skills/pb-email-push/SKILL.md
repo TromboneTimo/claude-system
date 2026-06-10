@@ -106,8 +106,8 @@ If Timo says yes, curl. Otherwise ask what to fix.
 ## VOC quote sourcing minimums (per `feedback_quote_sourcing_minimums.md`)
 
 Every `voc_quotes` array MUST include at least:
-1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/raw/testimonials/`.
-2. **One quote from a sales call** (someone Harrison did a discovery call with). Source: `voc/raw/sales-calls/`.
+1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/testimonials/raw/`.
+2. **One quote from a sales call** (someone Harrison did a discovery call with). Source: `voc/sales-calls/raw/`.
 
 If either is missing in the draft, STOP. Tell Timo which is missing. Do not push.
 
@@ -180,7 +180,7 @@ Add a one-liner:
 
 ## Failure modes to avoid
 
-1. **Inventing VOC quotes.** Every quote must trace to a real file in `voc/raw/sales-calls/` or `voc/raw/testimonials/`. If you don't have it, ask. Never paraphrase a quote and pass it as verbatim.
+1. **Inventing VOC quotes.** Every quote must trace to a real file in `voc/sales-calls/raw/` or `voc/testimonials/raw/`. If you don't have it, ask. Never paraphrase a quote and pass it as verbatim.
 2. **Pushing drafts Timo did not pick.** Only push the ones Timo explicitly named. If Timo says "push the good ones", ASK which numbers.
 3. **Silent failures.** If curl returns 4xx/5xx, surface the full error to Timo. Don't pretend it worked.
 4. **Skipping the approval wait.** Do NOT auto-fire any AC publish step after pushing. Harrison has to approve first on the dashboard.

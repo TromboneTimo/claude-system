@@ -178,8 +178,8 @@ If the proposal's "Source evidence" section already includes attribution, copy i
 ## MANDATORY MINIMUM SOURCING (added 2026-04-26)
 
 Every `voc_quotes` array MUST include at least:
-1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/raw/testimonials/`.
-2. **One quote from a sales call** (someone Harrison did a discovery call with). Source: `voc/raw/sales-calls/`.
+1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/testimonials/raw/`.
+2. **One quote from a sales call** (someone Harrison did a discovery call with). Source: `voc/sales-calls/raw/`.
 3. Comments / DMs / ads are supplementary, not required.
 
 If either is missing, STOP and pull a real quote from the corpus before pushing. Do not skip this check.

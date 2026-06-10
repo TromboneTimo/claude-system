@@ -12,7 +12,14 @@ description: Phase 2 of Harrison Ball's Precision Brass YouTube content engine. 
 
 ## Hard preconditions (do not skip)
 
-Before drafting a single line, you MUST do BOTH of the following:
+Before drafting a single line, you MUST do ALL of the following:
+
+### Precondition 0: Hook brief gate (pb-hook-design)
+
+Check for `/Users/air/Desktop/Precision-Brass/voc/scripts/in-progress/<idea_id>/hook-brief.md`.
+
+- **Present:** read it. The locked hook is verbatim Beat 1 and the 6-beat body structure anchors the outline.
+- **Missing:** STOP. Tell Timo: "No hook brief for this idea. Run `/pb-hook-design <idea_id>` first, or tell me to proceed without one." Only continue without a brief on Timo's explicit OK, and note in the draft header that no hook brief was used.
 
 ### Precondition A: Read the reference files
 
@@ -27,25 +34,26 @@ Before drafting a single line, you MUST do BOTH of the following:
 
 **Source the script's pain from the database, not from pedagogy guesses.** Spawn 6 parallel mining agents against the FULL vault before drafting any beat content. This is the single highest-leverage step in the entire pipeline. A script with REAL prospect quotes converts. A script with invented objections does not.
 
-**The full vault (do NOT limit to sales calls):**
-- `voc/raw/sales-calls/` (28 files. Lost AND won deals.)
-- `voc/raw/testimonials/` (11 files. Before-state language.)
-- `voc/raw/research/` (deep psychological dive on 19 prospects.)
-- `voc/raw/converting-video-embouchure/` (transcript + comments.)
-- `voc/raw/winning-emails/` and `voc/raw/email-sequences/` (proven copy patterns.)
-- `voc/quotes/*.jsonl` (pre-tagged: all-quotes, comments-quotes, lost-deals, won-deals, sales-call-outcomes.)
-- `voc/personas/*.md` (voice banks: comments, lost-deals, won-deals, harrison-email-voice, voice-bank, objection-library.)
-- `youtube-database/` (per-video folders with transcripts, top 200 comments, sales attribution.)
-- `facebook-ads-database/` (per-ad folders with copy, performance, sales attribution.)
+**The full vault (do NOT limit to sales calls; channel-first layout, path map of record = `voc/config.yaml` source_paths):**
+- `voc/sales-calls/raw/` (28 files. Lost AND won deals.)
+- `voc/testimonials/raw/` (11 files. Before-state language.)
+- `voc/synthesis/deep-psychological-dive.md` (deep psychological dive on 19 prospects.)
+- `voc/masterclass/raw/transcript.md` + `voc/masterclass/extracts/` (masterclass-voice-bank.md, masterclass-quotes.jsonl. Harrison's highest-density locked-line teaching voice. EVERY sweep must read it, per `project_masterclass_corpus.md`.)
+- `voc/youtube/raw/2026-04_embouchure-truth_O4a-q93ENAg/` + `voc/youtube/extracts/2026-04_embouchure-truth_O4a-q93ENAg/` (converter transcript + comments.)
+- `voc/emails/raw/winning-emails/` and `voc/emails/raw/sequences/` (proven copy patterns.)
+- Pre-tagged quote jsonls: `voc/synthesis/*.jsonl` (all-quotes, comments-quotes, social-comments-quotes) + `voc/sales-calls/extracts/*.jsonl` (won-deals, lost-deals, sales-call-outcomes).
+- Voice banks: `voc/synthesis/voice-bank.md`, `voc/synthesis/comments-voice-bank.md`, `voc/synthesis/objection-library.md`, `voc/sales-calls/extracts/won-deals-voice-bank.md`, `voc/sales-calls/extracts/lost-deals-voice-bank.md`, `voc/emails/extracts/harrison-email-voice.md`.
+- `voc/youtube/` (per-video folders: raw/<folder>/ transcripts + comments, extracts/<folder>/ analysis + comments-top, index.json sales attribution.)
+- `voc/meta-ads/` (per-ad folders: raw/<folder>/ copy + performance, extracts/<folder>/analysis.md, index.json sales attribution.)
 
 **The 6 agents (parallel, each a different lens):**
 
 1. **Sales calls deep-dive:** all 28 sales calls. Verbatim physical descriptions of what prospects do wrong.
 2. **Testimonials before-state:** all 11 testimonials. What they were doing wrong BEFORE Harrison fixed them.
-3. **Pre-tagged quotes + objection library:** all .jsonl files + personas/objection-library.md + voice-banks. Pre-indexed material.
+3. **Pre-tagged quotes + objection library:** all .jsonl files + voc/synthesis/objection-library.md + the voice banks (synthesis, sales-calls extracts, emails extracts, masterclass extracts). Pre-indexed material.
 4. **Failed-method emotional shame:** sales calls + testimonials + the deep psych dive. Find the EMOTIONAL underbelly. Self-blame, defending failed teachers, "I just need to try harder."
-5. **Specific physical-mistake spotter:** sales calls + testimonials + converting-video transcript. Concrete sensory descriptions. Body parts. Sensations.
-6. **Teacher-blame + bad-advice + YouTube/FB engagement:** sales calls + research + youtube-database comments + facebook-ads-database winning-ad comments. Specific bad advice prospects got. Specific reactions to Harrison's existing content.
+5. **Specific physical-mistake spotter:** sales calls + testimonials + converting-video transcript + masterclass transcript (voc/masterclass/raw/transcript.md, lift Harrison's locked teaching lines verbatim). Concrete sensory descriptions. Body parts. Sensations.
+6. **Teacher-blame + bad-advice + YouTube/FB engagement:** sales calls + deep psychological dive + voc/youtube comments + voc/meta-ads winning-ad comments. Specific bad advice prospects got. Specific reactions to Harrison's existing content.
 
 Each agent returns: verbatim quote + source file + which trap/beat it maps to. 2-5 quotes per beat. Empty section if no real quote exists. NEVER invent.
 
@@ -114,7 +122,7 @@ Confirmed 2026-05-06: Timo flagged the v2 script for being too descriptive ("Har
 
 Default audit before writing: count your loops. If you have more than 5 in a 9-step script, cut the weakest. Statements and objection-answers can carry beats too.
 
-**Source objections from the VOC corpus, not from general pedagogy guesses.** The pb-script Phase 1 skill spawns 6 mining agents against `voc/raw/sales-calls/`, `voc/raw/testimonials/`, and FB comments. Phase 2 (this skill) is supposed to inherit those VOC quotes from the picked idea. If invoked WITHOUT a Phase 1 idea (manual run from a pasted brief), do not invent traps. Either spawn the 6 mining agents inline, or tag every trap as `[HARRISON FILLS]` so he writes from his own head. Never make up prospect objections.
+**Source objections from the VOC corpus, not from general pedagogy guesses.** The pb-script Phase 1 skill spawns 6 mining agents against `voc/sales-calls/raw/`, `voc/testimonials/raw/`, and FB comments. Phase 2 (this skill) is supposed to inherit those VOC quotes from the picked idea. If invoked WITHOUT a Phase 1 idea (manual run from a pasted brief), do not invent traps. Either spawn the 6 mining agents inline, or tag every trap as `[HARRISON FILLS]` so he writes from his own head. Never make up prospect objections.
 
 ## Curiosity loop type rotation (when you DO use them)
 
@@ -166,7 +174,7 @@ End the video with this exact structural move (modeled on the $36K converter):
 3. Hint line: "it's not where 99% of teachers tell you"
 4. CTA to embouchure video: "I broke it all down in this video right here. Make sure you watch that next."
 
-The funnel ALWAYS points to the embouchure video (`youtube-database/2026-04_embouchure-truth_O4a-q93ENAg/`) unless explicitly told otherwise.
+The funnel ALWAYS points to the embouchure video (`voc/youtube/raw/2026-04_embouchure-truth_O4a-q93ENAg/`) unless explicitly told otherwise.
 
 ## Output format
 
@@ -229,7 +237,7 @@ These come from the 2026-04-25 iteration. Each was flagged repeatedly:
    ```
    Use the idea's title, pain_point, hook_angle, voc_quotes, source_tags as the conversion-trigger context. If status is not `idea_approved`, STOP and tell Timo (e.g. already scripted, or Harrison hasn't greenlit yet).
 2. Confirm the picked idea title and conversion trigger (carry over from pb-script output OR from fetched idea).
-3. READ all 4 reference files (preconditions above).
+3. Run the hard preconditions above: hook brief gate (Precondition 0), reference files (Precondition A), 6-agent vault sweep (Precondition B).
 4. Outline the 7 beats. Name the 3 mistakes from the corpus or extend a Timo-approved pattern.
 5. Draft each beat in Harrison's voice with the locked-lines / bullet-riff split.
 6. **MANDATORY CHAT DRAFT (no files yet). Show Timo the FULL draft in chat as plain markdown:**

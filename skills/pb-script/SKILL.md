@@ -14,7 +14,7 @@ This is a **research-first skill**. Every invocation re-reads raw sources. No ca
 ## The 5-idea structure (NON-NEGOTIABLE)
 
 The output mix must be:
-- **1-2 ideas anchored on VERIFIED WINNERS** (Agent 4), pattern-matched against `youtube-database/` (status=winner videos) AND `facebook-ads-database/` (status=winner ads). Both are proven-conversion sources.
+- **1-2 ideas anchored on VERIFIED WINNERS** (Agent 4), pattern-matched against `voc/youtube/` (status=winner videos) AND `voc/meta-ads/` (status=winner ads). Both are proven-conversion sources.
 - **3-4 ideas from variety lenses** (Agents 1, 2, 3, 5, 6), surfaced from raw deep-dive on a rotated corpus, hidden pain framework, objection lenses, conversion triggers from raw testimonials, and a fresh wildcard lens.
 - All 5 ideas pass the **Voice Diversity Auditor** (Agent 7) which enforces fresh voices vs. last 3 runs and rejects recycled speakers.
 
@@ -99,12 +99,12 @@ Funnel layer for this run: [TOFU/MOFU/BOFU].
 Read `~/.claude/skills/pb-script/references/hidden-pain-framework.md` first for the 8 hidden problems (HP1-HP8) and detection patterns (compensation clauses, hypothetical distancing, excessive technical detail, apologizing for the goal, repeated reassurance-seeking).
 
 Then read these files for traces of subtext:
-- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 calls, prefer ones from speakers NOT in the recycled-12 list)
-- /Users/air/Desktop/Precision-Brass/voc/raw/research/2026-04-21_deep-psychological-dive_harrisson-ball_19-prospects.md
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/raw/ (sample 6-8 calls, prefer ones from speakers NOT in the recycled-12 list)
+- /Users/air/Desktop/Precision-Brass/voc/synthesis/deep-psychological-dive.md (the 19-prospect deep psychological dive)
 - /Users/air/Desktop/Precision-Brass/context/prospect-psychology.md
 
 Your job:
-1. Pick 1-2 hidden problems (HP1-HP8) that are MOST under-addressed in `youtube-database/index.json` topic_tags.
+1. Pick 1-2 hidden problems (HP1-HP8) that are MOST under-addressed in `voc/youtube/index.json` topic_tags.
 2. Find 3+ verbatim quotes where prospects CIRCLE the pain without naming it. Show the circling.
 3. Propose 1 video idea that NAMES THE UNNAMED PAIN explicitly as its hook.
 4. Show the reframe move (the line that grants permission to feel the wound + offers a new identity).
@@ -127,10 +127,10 @@ Funnel layer for this run: [TOFU/MOFU/BOFU].
 Read `~/.claude/skills/pb-script/references/objection-lenses.md` first for the 8 lenses (OBJ1-OBJ8) and the pre-emption pattern (HOOK / VALIDATION / DISMANTLE / DEMONSTRATION / RESOLUTION).
 
 Then read these files:
-- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 calls, search for HESITATION/PUSHBACK moments specifically)
-- /Users/air/Desktop/Precision-Brass/voc/personas/lost-deals-voice-bank.md
-- /Users/air/Desktop/Precision-Brass/voc/personas/objection-library.md
-- Facebook ad comments where present (`facebook-ads-database/*/comments-top.md`)
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/raw/ (sample 6-8 calls, search for HESITATION/PUSHBACK moments specifically)
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/extracts/lost-deals-voice-bank.md
+- /Users/air/Desktop/Precision-Brass/voc/synthesis/objection-library.md
+- Facebook ad comments where present (`voc/meta-ads/extracts/*/comments-top.md`)
 
 Your job:
 1. Pick 1 objection lens (OBJ1-OBJ8) that is least-recently-used per `voices_used_log.jsonl` (the `lenses` field in last 3 runs).
@@ -154,10 +154,10 @@ You are researching what verifiably converts for Harrison Ball's Precision Brass
 Funnel layer for this run: [TOFU/MOFU/BOFU].
 
 PART 1. YouTube winners
-READ EVERY VIDEO in /Users/air/Desktop/Precision-Brass/youtube-database/ that is marked status=winner in index.json. For each winner: analysis.md, transcript.md, comments-top.md, metadata.json. If empty, note and continue.
+READ EVERY VIDEO in /Users/air/Desktop/Precision-Brass/voc/youtube/ that is marked status=winner in index.json (at voc/youtube/index.json). For each winner folder: raw/<folder>/transcript.md, raw/<folder>/metadata.json, extracts/<folder>/analysis.md, extracts/<folder>/comments-top.md. If empty, note and continue.
 
 PART 2. Facebook winning ads
-READ EVERY AD in /Users/air/Desktop/Precision-Brass/facebook-ads-database/ that is marked status=winner in index.json. For each: analysis.md, creative/copy.md, performance.json, comments-top.md if present, metadata.json. If empty, note and continue.
+READ EVERY AD in /Users/air/Desktop/Precision-Brass/voc/meta-ads/ that is marked status=winner in index.json (at voc/meta-ads/index.json). For each ad folder: raw/<folder>/creative/copy.md, raw/<folder>/performance.json, raw/<folder>/metadata.json, extracts/<folder>/analysis.md, extracts/<folder>/comments-top.md if present. If empty, note and continue.
 
 PART 3. Reference materials (always read)
 - /Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md
@@ -188,11 +188,11 @@ You are detecting CONVERSION TRIGGERS in Harrison Ball's customer corpus. A conv
 Funnel layer for this run: [TOFU/MOFU/BOFU].
 
 Read RAW testimonial files end-to-end (these are CUSTOMERS who completed the program, not prospects):
-- /Users/air/Desktop/Precision-Brass/voc/raw/testimonials/ (all 11 files)
+- /Users/air/Desktop/Precision-Brass/voc/testimonials/raw/ (all 11 files)
 
 Then for additional signal:
-- /Users/air/Desktop/Precision-Brass/voc/quotes/won-deals-quotes.jsonl
-- /Users/air/Desktop/Precision-Brass/voc/quotes/sales-call-outcomes.jsonl
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/extracts/won-deals-quotes.jsonl
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/extracts/sales-call-outcomes.jsonl
 
 Reference the 8-trigger taxonomy in `~/.claude/skills/pb-script/references/conversion-triggers.md` (T1-T8).
 
@@ -225,10 +225,10 @@ Funnel layer for this run: [TOFU/MOFU/BOFU].
 The 12 possible lenses: dental-trigger, isolation-pattern, failed-method-grief, identity-aspiration, age-anxiety, mouthpiece-rabbit-hole, comeback-player-arc, section-leader-redemption, teacher-loyalty-grief, livelihood-vs-love, range-for-others, exhaustion-of-hope.
 
 Read across these files for traces of [LENS_NAME]:
-- /Users/air/Desktop/Precision-Brass/voc/quotes/all-quotes.jsonl
-- /Users/air/Desktop/Precision-Brass/voc/raw/sales-calls/ (sample 6-8 random calls)
-- /Users/air/Desktop/Precision-Brass/voc/raw/email-sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md
-- /Users/air/Desktop/Precision-Brass/voc/personas/harrison-email-voice.md
+- /Users/air/Desktop/Precision-Brass/voc/synthesis/all-quotes.jsonl
+- /Users/air/Desktop/Precision-Brass/voc/sales-calls/raw/ (sample 6-8 random calls)
+- /Users/air/Desktop/Precision-Brass/voc/emails/raw/sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md
+- /Users/air/Desktop/Precision-Brass/voc/emails/extracts/harrison-email-voice.md
 - /Users/air/Desktop/Precision-Brass/context/harrison-profile.md
 
 Find the most NON-OBVIOUS angle on this lens. Not what Harrison already says publicly. Something the data shows is loaded with emotion but Harrison hasn't directly addressed in a video yet.
@@ -236,7 +236,7 @@ Find the most NON-OBVIOUS angle on this lens. Not what Harrison already says pub
 Propose 1 wildcard video idea through this lens. Must:
 - Pass ICP checklist
 - Cite 3+ verbatim quotes with source files
-- Be something NOT covered in `youtube-database/index.json` topic_tags
+- Be something NOT covered in `voc/youtube/index.json` topic_tags
 - Sell identity, not technique
 - Use a fresh primary voice (not in recycled-12 list)
 

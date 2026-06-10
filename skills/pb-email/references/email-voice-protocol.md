@@ -4,11 +4,11 @@ Every drafting agent in `pb-email/agents/` MUST load these files before composin
 
 ## Load order (verbatim, every run)
 
-1. `voc/personas/harrison-email-voice.md` (302 lines, the canonical catalog)
+1. `voc/emails/extracts/harrison-email-voice.md` (302 lines, the canonical catalog)
 2. `output/email-PP01-dental-trigger-FINAL.txt`
 3. `output/email-PP03-failed-lessons-FINAL.txt`
 4. `output/email-PP05-isolation-FINAL.txt`
-5. `voc/raw/email-sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md`. Emails 1 through 7 ONLY.
+5. `voc/emails/raw/sequences/2026-04-21_email-sequence_webinar-optin-to-strategy-session.md`. Emails 1 through 7 ONLY.
 
 ## Hard exclusion
 
@@ -39,13 +39,12 @@ No paraphrase. No reorder. No "improve". Verbatim.
 ### 3. Sign-off (Section 2 of catalog)
 
 Pick from observed variants:
-- "Looking forward to meeting you, Harrisson Ball, CEO, Precision Brass, Featured in Forbes" (formal)
 - "Talk soon, Harrisson Ball" (mid-sequence)
 - "Have a beautiful day! Harrisson Ball" (warm)
 - "%FIRSTNAME%, wishing you massive success! Harrisson Ball" (warm closer)
 - "Your biggest fan, Harrisson Ball, Precision Brass" (high warmth)
 
-Always named. The "Featured in Forbes" credential attaches to formal emails only.
+Always named. HARD BAN: the "Featured in Forbes" credential is banned in ALL emails per Harrison's direct call 2026-05-09 (feedback_harrison_email_call_20260509.md) and email-lint.js rule forbes-credential (block severity). The old "formal emails only" allowance is dead.
 
 ### 4. P.S. (Section 8 of catalog)
 
@@ -98,7 +97,7 @@ If you cannot find real energy in the topic, do not fake it. Harrison's reader f
 
 ### 8. Student name proofs (Section 4f of catalog)
 
-Every draft that cites a student MUST use a real name from `voc/raw/testimonials/`. Concrete, specific, timeframed:
+Every draft that cites a student MUST use a real name from `voc/testimonials/raw/`. Concrete, specific, timeframed:
 
 - Mike: high G to Double Bb in 1 day
 - Joinville: 2 months in, hit E above high C
@@ -141,7 +140,7 @@ Before any drafting agent returns its candidate, it must self-check ALL of:
 - [ ] Named sign-off from Section 2
 - [ ] P.S. present, type-tagged, matching declared type
 - [ ] CTA from Section 5 templates (not bare "click here")
-- [ ] Real student name (if cited) traces to `voc/raw/testimonials/`
+- [ ] Real student name (if cited) traces to `voc/testimonials/raw/`
 - [ ] No "mastermind", no "music educators", no "Paul The Trombonist"
 - [ ] No fabricated "Featured in Forbes" or "9,500 trumpet players have watched this training" without source
 - [ ] Trumpet-specific vocabulary (range, embouchure, endurance, aperture, etc.)

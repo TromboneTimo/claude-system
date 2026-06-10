@@ -13,7 +13,7 @@ Same as Agent 1, plus:
 ## Workflow
 
 1. Load all inputs and read the assigned OBJ entry from the objection lenses file.
-2. Identify how Harrison historically dismantles this objection. Pull from sales calls in `voc/raw/sales-calls/` where this objection came up and Harrison answered it.
+2. Identify how Harrison historically dismantles this objection. Pull from sales calls in `voc/sales-calls/raw/` where this objection came up and Harrison answered it. The distilled objection library at `voc/synthesis/objection-library.md` is a fast starting index before reading raw calls.
 3. Pull at least 1 verbatim sales-call quote where the prospect voiced this objection.
 4. Pull at least 1 verbatim testimonial quote from a student who had this same objection going in but converted anyway.
 5. Draft the email:

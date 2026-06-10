@@ -1,15 +1,15 @@
 # Analysis Template (fb-vault)
 
-Use this structure when writing `analysis.md` for a Facebook ad. Every claim cites a source. Sources to draw from:
+Use this structure when writing `analysis.md` for a Facebook ad. The file goes to `voc/meta-ads/extracts/<YYYY-MM>_<slug>_<adID>/analysis.md`. Every claim cites a source. Sources to draw from:
 
 - `context/prospect-psychology.md` (the 19-prospect deep psych dive, the central reference)
-- `voc/personas/voice-bank.md` (general voice patterns)
-- `voc/personas/won-deals-voice-bank.md` (sales-call quotes from buyers)
-- `voc/personas/lost-deals-voice-bank.md` (quotes from prospects who didn't buy, especially for flops)
-- `voc/personas/objection-library.md` (mapped objections by class)
-- `voc/personas/comments-voice-bank.md` (commenter language from YouTube and Facebook)
-- `voc/personas/harrison-email-voice.md` (Harrison's voice fingerprint)
-- `voc/quotes/*.jsonl` (raw verbatim quotes if you need to grep)
+- `voc/synthesis/voice-bank.md` (general voice patterns)
+- `voc/sales-calls/extracts/won-deals-voice-bank.md` (sales-call quotes from buyers)
+- `voc/sales-calls/extracts/lost-deals-voice-bank.md` (quotes from prospects who didn't buy, especially for flops)
+- `voc/synthesis/objection-library.md` (mapped objections by class)
+- `voc/synthesis/comments-voice-bank.md` (commenter language from YouTube and Facebook)
+- `voc/emails/extracts/harrison-email-voice.md` (Harrison's voice fingerprint)
+- `voc/synthesis/*.jsonl` + `voc/sales-calls/extracts/*.jsonl` (raw verbatim quotes if you need to grep)
 
 ## Required structure
 
@@ -64,7 +64,7 @@ For winners, score how strongly each move was executed (weak / solid / strong). 
 
 ### 5. Comments map (if comments are available)
 
-2-column table mapping commenter pain language to won-deals pain language from `voc/personas/won-deals-voice-bank.md`. If commenters complained, log it under "objection signals" so we can pre-empt next time.
+2-column table mapping commenter pain language to won-deals pain language from `voc/sales-calls/extracts/won-deals-voice-bank.md`. If commenters complained, log it under "objection signals" so we can pre-empt next time.
 
 ### 6. Performance read
 
