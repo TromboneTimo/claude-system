@@ -3,12 +3,12 @@
 Use this structure when writing `analysis.md` for a new video. Every section must cite at least one source file. Sources to draw from:
 
 - `context/prospect-psychology.md` (the 19-prospect deep psych dive, the central reference)
-- `voc/personas/comments-voice-bank.md` (commenter quotes, often video-specific)
-- `voc/personas/won-deals-voice-bank.md` (sales-call quotes from buyers)
-- `voc/personas/lost-deals-voice-bank.md` (quotes from prospects who didn't buy)
-- `voc/personas/objection-library.md` (mapped objections by class)
-- `voc/personas/harrison-email-voice.md` (Harrison's voice fingerprint)
-- `voc/quotes/*.jsonl` (raw verbatim quotes if you need to grep)
+- `voc/synthesis/comments-voice-bank.md` (commenter quotes, often video-specific)
+- `voc/sales-calls/extracts/won-deals-voice-bank.md` (sales-call quotes from buyers)
+- `voc/sales-calls/extracts/lost-deals-voice-bank.md` (quotes from prospects who didn't buy)
+- `voc/synthesis/objection-library.md` (mapped objections by class)
+- `voc/emails/extracts/harrison-email-voice.md` (Harrison's voice fingerprint)
+- `voc/synthesis/*.jsonl` (raw verbatim quotes if you need to grep)
 - `references/converting-video-embouchure-transcript.md` (the proven-converter template, 12 moves)
 
 ## Required structure

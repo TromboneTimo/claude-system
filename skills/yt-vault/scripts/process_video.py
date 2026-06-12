@@ -10,20 +10,21 @@ Usage:
     --status winner \\
     --sales 3 \\
     --slug embouchure-truth \\
-    --out-root /Users/air/Desktop/Precision-Brass/youtube-database \\
+    --out-root /Users/air/Desktop/Precision-Brass/voc/youtube/raw \\
     [--note "manual entry"]
 
-Writes:
+Writes (channel-first layout; --out-root is .../youtube/raw):
   <out-root>/<YYYY-MM>_<slug>_<videoID>/metadata.json
   <out-root>/<YYYY-MM>_<slug>_<videoID>/transcript.md
   <out-root>/<YYYY-MM>_<slug>_<videoID>/comments.json
-  <out-root>/<YYYY-MM>_<slug>_<videoID>/comments-top.md
+  <out-root>/../extracts/<YYYY-MM>_<slug>_<videoID>/comments-top.md
 
 Updates:
-  <out-root>/index.json (appends or updates the row for this video_id)
+  <out-root>/../index.json (channel-level index; appends/updates this video_id)
 
-Does NOT write analysis.md. That is written by Claude (or the user) by reading
-the transcript and citing context/prospect-psychology.md + voc/personas/.
+Does NOT write analysis.md. That is written by Claude (or the user) into
+  <out-root>/../extracts/<YYYY-MM>_<slug>_<videoID>/analysis.md
+by reading the transcript and citing context/prospect-psychology.md + voc/synthesis/.
 See references/analysis-template.md.
 """
 import argparse
@@ -116,8 +117,12 @@ def process_video(args):
     folder_name = f"{yyyymm}_{slug}_{video_id}"
 
     out_root = Path(args.out_root)
+    # channel-first layout: out_root is .../youtube/raw ; raw artifacts land here,
+    # derived comments-top.md goes to .../youtube/extracts, index.json at .../youtube.
     out_dir = out_root / folder_name
+    extracts_dir = out_root.parent / "extracts" / folder_name
     out_dir.mkdir(parents=True, exist_ok=True)
+    extracts_dir.mkdir(parents=True, exist_ok=True)
 
     # ---- metadata.json -------------------------------------------------------
     duration = info.get("duration") or 0
@@ -228,7 +233,7 @@ def process_video(args):
                 "  > " + (r["text"] or "").replace("\n", "\n  > "),
                 "",
             ]
-    (out_dir / "comments-top.md").write_text("\n".join(md_lines))
+    (extracts_dir / "comments-top.md").write_text("\n".join(md_lines))
 
     # ---- transcript.md -------------------------------------------------------
     if args.srt:
@@ -251,7 +256,8 @@ def process_video(args):
             )
 
     # ---- index.json ----------------------------------------------------------
-    index_path = out_root / "index.json"
+    # index lives at the channel level (.../youtube/index.json), one above raw/.
+    index_path = out_root.parent / "index.json"
     if index_path.exists():
         index = json.loads(index_path.read_text())
     else:
@@ -290,7 +296,7 @@ def process_video(args):
     print(f"OK  folder: {out_dir}")
     print(f"OK  metadata.json, comments.json, comments-top.md, transcript.md")
     print(f"OK  index.json updated ({index['total_videos']} videos total)")
-    print(f"NEXT: write {out_dir}/analysis.md citing context/prospect-psychology.md + voc/personas/")
+    print(f"NEXT: write {extracts_dir}/analysis.md citing context/prospect-psychology.md + voc/synthesis/")
 
 
 def main():

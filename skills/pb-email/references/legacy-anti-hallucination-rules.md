@@ -3,7 +3,7 @@
 > **Provenance:** Ported 2026-06-10 from `~/.claude/skills/email/SKILL.md` (the original "/email Precision Brass Email System", deprecated the same day). That skill's data files (`context/voice-bank.md`, `context/voice-spec.md`, `references/harrison-real-voice.md`, the whole `~/Desktop/precision-brass-emails/` project) are DELETED and exist nowhere on disk. This file preserves the rules and name lists that lived only there.
 >
 > **Dead-path map (read before following any old citation below):**
-> - `references/harrison-real-voice.md` and `context/voice-spec.md`: GONE. The modern voice canon is `voc/emails/extracts/harrison-email-voice.md` (Precision-Brass repo) plus pb-email's `references/email-voice-protocol.md`. NOTE: the project memory `feedback_harrison_voice.md` still points at the deleted harrison-real-voice.md / voice-spec.md files; treat its load-order instruction as superseded by the modern load order in pb-email SKILL.md.
+> - `references/harrison-real-voice.md` and `context/voice-spec.md`: GONE. The modern voice canon is `voc/emails/extracts/harrison-email-voice.md` (Precision-Brass repo) plus pb-email's `references/email-voice-protocol.md`. NOTE: the project memory `canon_email_writing.md` still points at the deleted harrison-real-voice.md / voice-spec.md files; treat its load-order instruction as superseded by the modern load order in pb-email SKILL.md.
 > - `context/voice-bank.md`: GONE. Its prospect/student name rosters are preserved in this file (below).
 > - `transcripts/raw/masterclass-webinar-2026.md`: GONE at that path. The masterclass corpus now lives at `voc/masterclass/raw/` (see memory `project_masterclass_corpus.md`).
 > - Original /email SKILL.md is recoverable from `~/.claude` git history.
@@ -43,7 +43,7 @@ If Harrison's own email says "Featured in Forbes" and it can't be verified exter
 
 Always ask on first use: "Is [specific claim] something we can verify, or a placeholder?"
 
-(Note: per the 2026-05-09 Harrison call, the Forbes credential is HARD-BANNED. See memory `feedback_harrison_email_call_20260509.md`.)
+(Note: per the 2026-05-09 Harrison call, the Forbes credential is HARD-BANNED. See memory `canon_email_writing.md`.)
 
 ## Rule 4: "Unusual → Verify" filter
 

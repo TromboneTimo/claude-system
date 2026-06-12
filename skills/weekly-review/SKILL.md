@@ -106,3 +106,15 @@ After generating the report:
 
 ## Output
 Save the report to `~/.claude/weekly-reviews/[date].md`
+
+## Brain lint (Precision Brass second brain, added 2026-06-12)
+
+Lint `Precision-Brass/brain/wiki/` per the Karpathy lint spec in `Precision-Brass/brain/CLAUDE.md`:
+- Orphan pages: pages with no inbound [[wikilinks]] from any other page or index.md.
+- Broken [[wikilinks]]: links whose target page does not exist.
+- Stale facts: pages whose claims contradict `brain/wiki/hot.md` (hot.md wins; flag the page).
+- Gap list: corpora in voc/ with no `brain/wiki/sources/` page, and index.md/log.md entries missing for recent ingests.
+
+## Lesson coverage check (added 2026-06-11, MANDATORY step)
+
+Run `python3 ~/.claude/hooks/router-coverage-check.py`. It lists feedback_*.md files no gate, router entry, skill, or knowledge file references -- i.e. lessons the system can repeat. For the top UNCOVERED files (judge by blast radius): add a `rules-router.json` entry (intent regex + imperative rules), extend an existing gate/lint, or add to the script's ACCEPTED set with a written reason. Target: UNCOVERED trending to zero over weeks, never growing. Per knowledge/enforcement-first-architecture.md: a lesson that nothing injects or enforces is a lesson the system does not have.

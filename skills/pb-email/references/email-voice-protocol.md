@@ -44,7 +44,7 @@ Pick from observed variants:
 - "%FIRSTNAME%, wishing you massive success! Harrisson Ball" (warm closer)
 - "Your biggest fan, Harrisson Ball, Precision Brass" (high warmth)
 
-Always named. HARD BAN: the "Featured in Forbes" credential is banned in ALL emails per Harrison's direct call 2026-05-09 (feedback_harrison_email_call_20260509.md) and email-lint.js rule forbes-credential (block severity). The old "formal emails only" allowance is dead.
+Always named. HARD BAN: the "Featured in Forbes" credential is banned in ALL emails per Harrison's direct call 2026-05-09 (canon_email_writing.md) and email-lint.js rule forbes-credential (block severity). The old "formal emails only" allowance is dead.
 
 ### 4. P.S. (Section 8 of catalog)
 

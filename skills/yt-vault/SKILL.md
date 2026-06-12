@@ -1,11 +1,11 @@
 ---
 name: yt-vault
-description: Ingest a YouTube video into the Precision Brass video database. Pulls metadata, transcript (auto-captions), top 200 comments + replies, and writes a structured analysis citing prospect-psychology.md and voc/personas/ files. Tracks status (winner / flop / unrated), sales attribution, and sales history over time. Use this skill any time Timo (or Harrison) says "store this video", "store this youtube", "add to yt vault", "add to youtube database", "save this video to the database", "ingest this youtube", or pastes a YouTube URL with the words winner, flop, or sales attached. Also trigger when the user says "this video made N sales" with a YouTube URL, "study why this video worked / flopped", or "add to the youtube db". This is the canonical way new videos get into the analysis loop, so always use it instead of trying to handcraft the folder structure.
+description: Ingest a YouTube video into the Precision Brass video database. Pulls metadata, transcript (auto-captions), top 200 comments + replies, and writes a structured analysis citing prospect-psychology.md and voc/synthesis/ files. Tracks status (winner / flop / unrated), sales attribution, and sales history over time. Use this skill any time Timo (or Harrison) says "store this video", "store this youtube", "add to yt vault", "add to youtube database", "save this video to the database", "ingest this youtube", or pastes a YouTube URL with the words winner, flop, or sales attached. Also trigger when the user says "this video made N sales" with a YouTube URL, "study why this video worked / flopped", or "add to the youtube db". This is the canonical way new videos get into the analysis loop, so always use it instead of trying to handcraft the folder structure.
 ---
 
 # yt-vault
 
-Ingest a YouTube video into `Precision-Brass/youtube-database/` so future content scripts can study what worked (winners) and what didn't (flops). Outputs raw transcript, structured comments, metadata, and an analysis grounded in the project's voice-of-customer files.
+Ingest a YouTube video into `Precision-Brass/voc/youtube/raw/` so future content scripts can study what worked (winners) and what didn't (flops). Outputs raw transcript, structured comments, metadata, and an analysis grounded in the project's voice-of-customer files.
 
 ## When to trigger
 
@@ -36,7 +36,7 @@ Optional:
 
 ## What this skill produces
 
-Folder at `Precision-Brass/youtube-database/<YYYY-MM>_<slug>_<videoID>/` with:
+Folder at `Precision-Brass/voc/youtube/raw/<YYYY-MM>_<slug>_<videoID>/` with:
 
 | File | Purpose |
 |---|---|
@@ -44,9 +44,9 @@ Folder at `Precision-Brass/youtube-database/<YYYY-MM>_<slug>_<videoID>/` with:
 | `transcript.md` | Deduped + timestamped auto-caption transcript (medium confidence) |
 | `comments.json` | Top 200 comments + replies, structured (author, likes, replies, pin/uploader flags) |
 | `comments-top.md` | Top 50 by likes, human-readable, with Harrison's replies inline |
-| `analysis.md` | The whole point. 12-move structural breakdown citing `context/prospect-psychology.md` + `voc/personas/`. See `references/analysis-template.md` |
+| `analysis.md` | The whole point. 12-move structural breakdown citing `context/prospect-psychology.md` + `voc/synthesis/`. See `references/analysis-template.md` |
 
-Also updates `Precision-Brass/youtube-database/index.json` (master list).
+Also updates `Precision-Brass/voc/youtube/raw/index.json` (master list).
 
 ## Workflow
 
@@ -87,7 +87,7 @@ python3 /Users/air/.claude/skills/yt-vault/scripts/process_video.py \
   --status winner \
   --sales 3 \
   --slug embouchure-truth \
-  --out-root /Users/air/Desktop/Precision-Brass/youtube-database
+  --out-root /Users/air/Desktop/Precision-Brass/voc/youtube/raw
 ```
 
 Required flags: `--info-json`, `--status`, `--sales`, `--out-root`. `--srt` is optional (skip transcript if not present). `--slug` is optional (auto-derived from title).
@@ -104,20 +104,24 @@ Read `/Users/air/.claude/skills/yt-vault/references/analysis-template.md` for th
 2. TL;DR. 3-5 numbered reasons it worked or flopped, each tied to a structural move + a psych principle
 3. Audience match. Did the ICP show up in comments? Cite specific commenters
 4. Structural moves. For winners, score against the 12 canonical moves (in `references/converting-video-embouchure-transcript.md`). For flops, score which moves are MISSING or BROKEN
-5. Comments map. 2-column table: commenter pain language vs won-deals pain language from `voc/personas/won-deals-voice-bank.md`
+5. Comments map. 2-column table: commenter pain language vs won-deals pain language from `voc/sales-calls/extracts/won-deals-voice-bank.md`
 6. Reproducible pattern checklist. Markdown checkboxes the next script should hit
 7. What we don't know yet (retention curve, attribution mechanism, channel baseline)
 8. How to use this analysis for the next script
 
 Sources you must cite from:
 - `Precision-Brass/context/prospect-psychology.md`
-- `Precision-Brass/voc/personas/comments-voice-bank.md`
-- `Precision-Brass/voc/personas/won-deals-voice-bank.md`
-- `Precision-Brass/voc/personas/lost-deals-voice-bank.md` (especially for flops)
-- `Precision-Brass/voc/personas/objection-library.md` (for credibility / price / time objections)
+- `Precision-Brass/voc/synthesis/comments-voice-bank.md`
+- `Precision-Brass/voc/sales-calls/extracts/won-deals-voice-bank.md`
+- `Precision-Brass/voc/sales-calls/extracts/lost-deals-voice-bank.md` (especially for flops)
+- `Precision-Brass/voc/synthesis/objection-library.md` (for credibility / price / time objections)
 - `Precision-Brass/references/converting-video-embouchure-transcript.md` (the proven-converter 12-move template)
 
-### Step 5. Confirm with Timo
+### Step 5. Update the second brain
+
+After the vault ingest, also update `Precision-Brass/brain/wiki/`: create or update the `brain/wiki/sources/` page for this video (frontmatter schema in `Precision-Brass/brain/CLAUDE.md`: tags, source = the vault analysis.md path, created date, title, summary with status + HYROS revenue, Key takeaways, Relationships with [[wikilinks]]). Then add the video's one-line entry to `brain/wiki/index.md` (Sources section) and a dated entry to `brain/wiki/log.md`. Refresh `brain/wiki/hot.md` if the video changes current state (new winner, new ground-truth number).
+
+### Step 6. Confirm with Timo
 
 Tell Timo:
 - The folder path
@@ -153,6 +157,6 @@ When Timo says "update sales for <URL>" or "re-store this video, it's now N sale
 
 ## Why this skill exists
 
-The vault is the substrate that lets every future video script get smarter. Each entry feeds the script-creation loop in `CLAUDE.md` (Phase 1, Topic Selection). When Harrison says "I want to make a video about endurance," Claude opens `youtube-database/index.json`, finds the existing endurance videos, reads their analyses, and proposes a script that replicates winner moves while avoiding flop traps.
+The vault is the substrate that lets every future video script get smarter. Each entry feeds the script-creation loop in `CLAUDE.md` (Phase 1, Topic Selection). When Harrison says "I want to make a video about endurance," Claude opens `voc/youtube/raw/index.json`, finds the existing endurance videos, reads their analyses, and proposes a script that replicates winner moves while avoiding flop traps.
 
 If the vault is sloppy, every future script is sloppy. So the analysis.md quality bar is high. See `references/analysis-template.md` for the standard.

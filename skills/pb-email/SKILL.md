@@ -9,7 +9,7 @@ description: Email proposal engine for Harrison Ball's Precision Brass business.
 
 Speed is never the priority for this skill. Voice fidelity is. Harrison's email list is small, focused, and high-signal. One off-voice email kills trust faster than ten on-voice ones build it. If a draft does not sound like Harrison wrote it, throw it away and start over. Do not push borderline drafts and "iterate later".
 
-This principle is also stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_ship_right_not_fast.md`.
+This principle is also stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`.
 
 ## What this does
 
@@ -46,6 +46,8 @@ Ask Timo which audience(s) the menu should serve. Multiple OK.
 If Timo doesn't specify, default to `broadcast` and ask if he wants other audiences too.
 
 ## Voice load order (NON-NEGOTIABLE)
+
+Optional Step 0b: `Precision-Brass/brain/wiki/index.md` may be consulted FIRST to locate evidence (students, techniques, objections, winning patterns) before corpus sweeps; follow its [[wikilinks]] to the exact voc/ source instead of bulk-reading corpora.
 
 Before spawning ANY drafting agent, read these files in this exact order. Pass them into each agent prompt as load-once context:
 
@@ -91,11 +93,11 @@ Each parallel agent returns a candidate draft pack (subject + alts, preheader, b
 Auditor enforces (all must pass):
 
 1. **5 distinct primary voices.** Reject candidates whose primary voice has been used in the last 2 runs (read `voc/email_voices_used_log.jsonl`). Allow exceptions if the agent provides a `freshness_override` justification.
-2. **1+ testimonial-anchored draft AND 1+ sales-call-anchored draft.** Per `feedback_quote_sourcing_minimums.md`.
+2. **1+ testimonial-anchored draft AND 1+ sales-call-anchored draft.** Per `canon_working_process.md`.
 3. **Recurring tagline verbatim in every draft.** Grep each body. If missing or paraphrased, send back.
 4. **No template leakage.** Reject drafts containing "Paul The Trombonist", "music educators", "mastermind" (unless explicitly justified), or sequence email 8-12 phrasings.
-5. **No fabricated authority claims.** Reject drafts asserting "Featured in Forbes" or "9,500 trumpet players have watched this training" without source verification, per `feedback_master_lessons.md`.
-6. **Plain-English rationale.** No "the corpus", "the converter", "the voice bank", "the database", "BOFU floor", or similar dev-speak. Per `feedback_no_internal_jargon_in_rationale.md`.
+5. **No fabricated authority claims.** Reject drafts asserting "Featured in Forbes" or "9,500 trumpet players have watched this training" without source verification, per `canon_working_process.md`.
+6. **Plain-English rationale.** No "the corpus", "the converter", "the voice bank", "the database", "BOFU floor", or similar dev-speak. Per `canon_working_process.md`.
 7. **Real student names only.** Every name proof in a draft must trace to a file in `voc/testimonials/raw/`.
 8. **EMAIL DRAFT GATE.** Run `~/.claude/knowledge/email-draft-gate.md` on every final draft (swipe-file pacing read THIS session, Q/A grammar flow, named-technique specificity, no pendulum) and print its 1-line `GATE:` proof block above each draft shown in chat.
 
@@ -129,7 +131,13 @@ Then end with:
 
 ### Step 0 (MANDATORY). Run /pb-email-perf and read its brief before any drafting
 
-Nothing is auto-loaded. Explicitly run `/pb-email-perf` first (the endpoint is live at `api/ac-perf.js`) and read the brief it returns: top 10 by open rate / CTR / reply rate, bottom 5 anti-patterns, destination mix, subject-pattern aggregates. Pass the brief (or its `/tmp/pb-email-perf.json` path) into every drafting agent. Do not spawn any agent before this brief exists.
+Nothing is auto-loaded. Run all three, in this order, before any drafting:
+
+1. `/pb-email-perf` (endpoint live at `api/ac-perf.js`): top 10 by open rate / CTR / reply rate, bottom 5 anti-patterns, destination mix, subject-pattern aggregates.
+2. `python3 scripts/email-perf-quadrant.py` (added 2026-06-11): median-splits every mature send into CLONE WHOLE / CLONE SUBJECT / CLONE BODY / AVOID, plus UNSUB-HOT and BOUNCE hygiene flags. High-open and high-click are separate skills; each draft must state which quadrant its subject pattern and its body shape are borrowed from. MATURING sends (<48h) are excluded; never cite them.
+3. `get_recent_replies` (precision-brass-ac MCP): read the last 2 weeks of real subscriber replies. A reply is the strongest VOC signal there is; reply themes feed hook angles directly (the too-old angle pulls 2-5x the replies of any other -- found 2026-06-11).
+
+Pass all three (or their /tmp paths) into every drafting agent. Do not spawn any agent before these exist.
 
 ### Step 1. Confirm audience(s)
 
@@ -148,11 +156,15 @@ Wait for confirmation.
 
 Read in order (do NOT skip):
 1. `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/MEMORY.md`
-2. `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_master_lessons.md`
-3. `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_harrison_voice.md`
+2. `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`
+3. `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_email_writing.md`
 4. `voc/emails/extracts/harrison-email-voice.md`
 5. `voc/email_voices_used_log.jsonl` (last 3 runs to know which voices to avoid)
 6. `references/email-beat-cloning-method.md` + `references/email-data-driven-patterns.md` (mandatory drafting law + empirical patterns; pass both into every drafting agent)
+7. `voc/emails/raw/losing-emails/ANTI-PATTERNS.md` (9 click-killing patterns mined from the 13 bottom-ranked real sends, 2026-06-11; the AUDITOR CHECKLIST section is a kill-list the voice & diversity auditor enforces on every final draft)
+8. `voc/lessons/extracts/fresh-mechanisms.md` (18 under-used named mechanisms + 77 verbatim lesson quotes mined 2026-06-11 from the 97-session lessons corpus; the FIRST place to look when the angle ledger flags saturation. Lead candidates: Four Points of Contact (0 prior uses, 26 lesson files), Comfort Slide, Hot Water Bottle/compression lineage. Auto-transcript rule applies: verify unusual proper names before shipping.)
+
+LINK RULE (standing order, Timo 2026-06-11): NO YouTube links in any draft -- no videos, no channel. Every master class CTA points at the VSL training-room URL copied VERBATIM from `CANONICAL_MASTERCLASS_URL` in dashboard/lib/email-lint.js (NEVER webinar-registration-pb -- that is the capture page; NEVER with el= added; never copied from an old email). cta_type youtube-watch is retired. Full rules: pb-email-push LINK RULES.
 
 ### Step 3. Pick rotation slots (Bash, before spawning agents)
 

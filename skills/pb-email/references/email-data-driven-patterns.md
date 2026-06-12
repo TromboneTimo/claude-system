@@ -167,3 +167,15 @@ When drafting a subject:
 ## Provenance
 
 Generated 2026-05-17 from `/api/ac?days=3650` (no list filter, all broadcasts) yielding 416 rows. Filter: send_amt > 50, not list-20-only, automation field empty (type_bucket='broadcast'). Composite score computed per row. Median, percentile, and lift figures from Python analysis on the full set. Update this file whenever the rolling 12-month dataset shifts materially (re-run the analysis quarterly, or after any A/B test that disconfirms a rule here).
+
+## 2026-06-11 broadcast-efficiency upgrades (research-applied)
+
+Sources: research cache `2026-05-31_daily-email-vs-weekly_5116e9a0` (Clearout, MailerLite, CodeCrew, Litmus), `2026-05-06_email-marketing-2026-best-practices_23fd6ecc` (SMTP2GO, Email Marketing Heroes, Vertical Response), `2026-05-23_hyros-attribution_bf7fd7b4`. Tooling: `scripts/email-perf-quadrant.py` + `voc/emails/raw/losing-emails/ANTI-PATTERNS.md`.
+
+1. **Every email has a commercial job.** Daily email converts when every send bridges to ONE offer with ONE explicit CTA; value-only dailies train consumption, not buying, and produce high-open/low-click "invisible churn" (the open-trap pattern above is exactly this). One idea, one CTA, always a sell -- soft or hard.
+2. **Quadrants over whole-email cloning.** Subject skill (opens) and body skill (CTR-of-opens) are independent. Borrow each from its own quadrant: CLONE SUBJECT donors for hooks, CLONE BODY donors for structure. Never borrow anything from AVOID (cross-check ANTI-PATTERNS.md).
+3. **Hygiene thresholds (deliverability research):** unsubs > 0.5%/send = UNSUB-HOT (hollywood-bowl hit 0.68%); hard bounces > 1% = BOUNCE; Gmail/Yahoo throttle senders above ~0.3% complaint rate. The quadrant script flags these; a flagged email's pattern is NOT a clean donor even from CLONE WHOLE.
+4. **Front-load the subject's scannable claim.** Apple Mail now AI-summarizes subject lines in preview; the first 4-6 words must carry the hook on their own.
+5. **Engagement segmentation beats frequency.** Research default: full daily cadence to engaged openers (30d), reduced to moderates, win-back-then-suppress past 90d. 5-7 behavioral segments outperform demographic ones. (AC segment build = ops decision, Timo's call -- see SESSION_LOG 2026-06-11.)
+6. **Per-email attribution: SUSPENDED (2026-06-11 evening).** The el=email-<slug> scheme assumed the registration-page link; Timo corrected the destination to the training-room VSL, which carries NO added params (first-touch protection). Until Timo adds a tagged variant to the registry, winner ranking stays clicks-based. The api/hyros.js email-prefix classifier rule stays (it correctly buckets legacy timoemail + any future tagged sends).
+7. **Canonical link registry.** Master class CTA = `CANONICAL_MASTERCLASS_URL` in dashboard/lib/email-lint.js, byte-for-byte. The registration page (webinar-registration-pb) is BANNED in broadcasts (capture page; list is already captured). Lint blocks both wrong-destination and any non-canonical training-room variant.
