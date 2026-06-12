@@ -1,9 +1,12 @@
 ---
 name: pb-script-write
-description: Phase 2 of Harrison Ball's Precision Brass YouTube content engine. Generates a full filming-ready script for a single idea picked from the pb-script menu. Outputs a colorful, scannable HTML doc + PDF (saved to project output AND ~/Downloads/) with the proven 7-beat interleaved structure (Cold Open + Hook, Demo, Apparatus Reveal, Mistake 1 / Mistake 2 / Mistake 3 each woven trap+mistake+test, Funnel). Follows Harrison's voice fingerprint (second-person, "Now,", "right?", repetitions, mid-sentence metaphors) modeled on the $36K embouchure converter. Funnel always points to the embouchure video using the converter's "Hint:" pattern. Use this skill IMMEDIATELY after Timo picks an idea from the pb-script menu (replies with "idea N", "go with #N", "let's do that one", "do the mouthpiece one", or any selection from the menu). Also use whenever Timo says "write the script", "make the script", "draft the script", "phase 2", "/pb-script-write", "now write it", "do it", "let's go on idea X", or names a specific idea title from a recent pb-script run and asks for the script. ALWAYS load the reference files before drafting (`references/example-mouthpieces-script.md`, `references/script-writing-protocol.md`, the project memory file `feedback_script_writing_lessons.md`, and the converter transcript at `Precision-Brass/references/converting-video-embouchure-transcript.md`). Do NOT skip the references. They contain the failure modes that cost 12 iterations on the first script. The skill ships an HTML+PDF deliverable. Not text-only.
+description: Phase 2 of Harrison Ball's Precision Brass YouTube content engine. Generates a full filming-ready script for a single idea picked from the pb-script menu. Outputs a colorful, scannable HTML doc + PDF (saved to project output AND ~/Downloads/) with the proven 7-beat interleaved structure (Cold Open + Hook, Demo, Apparatus Reveal, Mistake 1 / Mistake 2 / Mistake 3 each woven trap+mistake+test, Funnel). Follows Harrison's voice fingerprint (second-person, "Now,", "right?", repetitions, mid-sentence metaphors) modeled on the $36K embouchure converter. Funnel always points to the embouchure video using the converter's "Hint:" pattern. Use this skill IMMEDIATELY after Timo picks an idea from the pb-script menu (replies with "idea N", "go with #N", "let's do that one", "do the mouthpiece one", or any selection from the menu). Also use whenever Timo says "write the script", "make the script", "draft the script", "phase 2", "/pb-script-write", "now write it", "do it", "let's go on idea X", or names a specific idea title from a recent pb-script run and asks for the script. ALWAYS load the reference files before drafting (`references/example-mouthpieces-script.md`, `references/script-writing-protocol.md`, the project memory file `canon_script_writing.md`, and the converter transcript at `Precision-Brass/references/converting-video-embouchure-transcript.md`). Do NOT skip the references. They contain the failure modes that cost 12 iterations on the first script. The skill ships an HTML+PDF deliverable. Not text-only.
 ---
 
 # pb-script-write. Phase 2: Filming-Ready Script Generator
+
+> **Second brain first (2026-06-12):** before any corpus sweep, agents consult `Precision-Brass/brain/wiki/index.md` (then follow links) to LOCATE evidence: students, techniques, objections, proven winners. The wiki routes; voc/ raw files remain the quote source of record. Read `brain/wiki/hot.md` for current business state.
+
 
 ## When to fire
 
@@ -26,8 +29,8 @@ Check for `/Users/air/Desktop/Precision-Brass/voc/scripts/in-progress/<idea_id>/
 1. `references/example-mouthpieces-script.md`. Proven structural template.
 2. `references/script-writing-protocol.md`. Full ruleset. 14 failure modes. Voice fingerprint. Funnel pattern.
 3. `references/funnel-layers.md`. TOFU/MOFU/BOFU layer spec.
-4. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_script_writing_lessons.md`. Project-level failure memory.
-5. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_pb_script_write_master_lessons.md`. **The 7 master lessons from 2026-05-06. Read these or repeat the 15-iteration mistake.**
+4. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_script_writing.md`. Project-level failure memory.
+5. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_script_writing.md`. **The 7 master lessons from 2026-05-06. Read these or repeat the 15-iteration mistake.**
 6. `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md`. Source-of-truth Harrison voice.
 
 ### Precondition B: 6-agent VOC vault sweep (MANDATORY, even on dashboard mode)
@@ -151,7 +154,7 @@ Source: transcripts of Ed Lawrence YouTube videos `s5mkBXsBAF4` and `fhKgYGhLwKs
 
 **Metaphor exception (CRITICAL): if a bullet references a metaphor by short label, the metaphor itself MUST be defined inline the first time it appears in the doc.** Harrison does not have your context. He cannot expand a label he hasn't seen the full version of. Pattern: in the FIRST step that uses the metaphor, write one sentence spelling out what the metaphor is, then in later steps you can use the short label. If the metaphor is in the script header (Backbone metaphor: X), still spell it out in the body the first time it lands.
 
-When in doubt, cut. Harrison improvises better than any draft can write for him. Long bullets kill his voice. Confirmed twice on the 2026-05-06 famous-method-killing-embouchure script. See `feedback_bullet_anchors_are_intent_not_text.md`.
+When in doubt, cut. Harrison improvises better than any draft can write for him. Long bullets kill his voice. Confirmed twice on the 2026-05-06 famous-method-killing-embouchure script. See `canon_script_writing.md`.
 
 ## Voice rules
 
@@ -194,7 +197,7 @@ Then convert to PDF via Chrome headless and save:
 
 1. `/Users/air/Desktop/Precision-Brass/scripts/YYYY-MM-DD_<slug>.{html,pdf}` (CANONICAL ARCHIVE. both HTML and PDF.)
 2. `/Users/air/Desktop/Precision-Brass/output/YYYY-MM-DD_<slug>.{html,pdf}` (working copy. both HTML and PDF.)
-3. `~/Downloads/YYYY-MM-DD_<slug>.pdf` (PDF ONLY. Never copy HTML to Downloads. See `feedback_pdf_only_to_downloads.md`.)
+3. `~/Downloads/YYYY-MM-DD_<slug>.pdf` (PDF ONLY. Never copy HTML to Downloads. See `canon_working_process.md`.)
 
 After saving, append a row to `Precision-Brass/scripts/README.md` index table with date / slug / topic / status.
 

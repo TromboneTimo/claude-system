@@ -5,6 +5,9 @@ description: Phase 1 of Harrison Ball's Precision Brass YouTube content engine. 
 
 # pb-script. Phase 1: Conversion-Trigger Idea Generator
 
+> **Second brain first (2026-06-12):** before any corpus sweep, agents consult `Precision-Brass/brain/wiki/index.md` (then follow links) to LOCATE evidence: students, techniques, objections, proven winners. The wiki routes; voc/ raw files remain the quote source of record. Read `brain/wiki/hot.md` for current business state.
+
+
 ## What this does
 
 Generate 5 YouTube content ideas for Harrison Ball that are anchored in **what verifiably caused his prospects to buy**. Not generic trumpet advice. Not what's trending. Ideas backed by the actual language, fears, identity arcs, and conversion triggers found in Precision Brass's voice-of-customer corpus.
@@ -207,7 +210,7 @@ Each idea must:
 - Identify the primary voice (most heavily quoted speaker, MUST be a customer)
 - Name the trigger by ID (T1-T8)
 - Sell identity, not technique
-- Per `feedback_master_lessons.md` rule 3: do NOT mix prospect language with customer language
+- Per `canon_working_process.md` rule 3: do NOT mix prospect language with customer language
 
 Return: trigger inventory ranked by under-use, then 1 candidate idea.
 ```
@@ -251,8 +254,8 @@ The auditor performs 4 checks on the candidate pool (~9 ideas total: 2+1+1+2+1+1
 
 1. **Voice freshness check**: reject any idea whose primary voice appears in last 2 runs (override allowed if agent flagged a genuinely new sub-pain for that speaker).
 2. **Final-5 voice diversity**: 5 distinct primary voices, 3+ NOT in last 3 runs, 1+ from raw sales call file, 1+ from raw testimonial file.
-3. **Quote-sourcing minimums**: 1+ testimonial quote AND 1+ sales call quote per idea (per `feedback_quote_sourcing_minimums.md`). Harrison-quotes need a `conversion_lens` field.
-4. **Plain-English rationale**: no internal jargon ("converter", "voice bank", "the corpus", invented market claims) (per `feedback_no_internal_jargon_in_rationale.md`).
+3. **Quote-sourcing minimums**: 1+ testimonial quote AND 1+ sales call quote per idea (per `canon_working_process.md`). Harrison-quotes need a `conversion_lens` field.
+4. **Plain-English rationale**: no internal jargon ("converter", "voice bank", "the corpus", invented market claims) (per `canon_working_process.md`).
 
 Then enforce the structure mandate: 1-2 ideas from Agent 4's pool (anchor), 3-4 from Agents 1, 2, 3, 5, 6 (variety). Apply ICP checklist + Domino check + identity check to every survivor.
 
