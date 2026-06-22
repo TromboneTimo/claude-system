@@ -33,7 +33,7 @@ Before proposing a fix or remediation workflow: test the assumption that defines
 Before adding any block to SKILL.md: ask "does this apply to 2+ skills?" If YES, write once in `~/.claude/knowledge/<rule>.md` and reference in 1-2 lines. If NO, inline. SKILL.md target ~60 lines, max 500. Refine canonical, never the references. Full: `~/.claude/knowledge/skill-architecture.md`
 
 ## CLASSIFIER GATE (any code that buckets data into categories)
-Before declaring a categorizer correct (platform inference, content tagging, lead scoring, ad-vs-organic detection, audience segmentation, ANYTHING that buckets rows into labels): sample 5-10 rows per bucket, show the user source data + assigned label, ASK "does each row's bucket match reality?" Mirror tests (writing a Python copy of the JS rule and confirming they agree) prove zero. Two implementations of the same wrong rule will always agree. Always ask the user for the real-world naming convention BEFORE writing the classifier. "PASS" / "verified" / "no issues" requires a human confirmation, not internal consistency. Caught when $269K of paid Meta ads sat in a Facebook organic bucket for 90 minutes after I called the classifier verified. Full: `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_classifier_verification_must_use_ground_truth.md`
+Before declaring a categorizer correct (platform inference, content tagging, lead scoring, ad-vs-organic detection, audience segmentation, ANYTHING that buckets rows into labels): sample 5-10 rows per bucket, show the user source data + assigned label, ASK "does each row's bucket match reality?" Mirror tests (writing a Python copy of the JS rule and confirming they agree) prove zero. Two implementations of the same wrong rule will always agree. Always ask the user for the real-world naming convention BEFORE writing the classifier. "PASS" / "verified" / "no issues" requires a human confirmation, not internal consistency. Caught when $269K of paid Meta ads sat in a Facebook organic bucket for 90 minutes after I called the classifier verified. Full: `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_attribution_analytics.md`
 
 ## CREDENTIAL GATE (any API key, token, password, secret in user message)
 Master credentials file: `~/.claude/credentials/MASTER.md` (gitignored, cross-workspace).
@@ -42,7 +42,7 @@ Trigger: ANY of these patterns in a user message: `sk-...`, `sbp_...`, `sb_secre
 Action on trigger: BEFORE the next tool call that uses the credential, append the value to the appropriate section of `~/.claude/credentials/MASTER.md`. Include service name, auth header format, source notes. If the service is unclear, save anyway with a TODO and ask later. Better an unlabeled key than a lost one.
 After saving, confirm to user with the 4-char prefix only (e.g. "saved sbp_2cd8..."). Never echo the full value.
 Why: 2026-05-06 Timo pasted a Supabase service-role JWT and a Personal Access Token. I used them once and never persisted. Three turns later he had to paste again. He was rightfully furious.
-Full: `~/.claude/credentials/MASTER.md` + `memory/feedback_save_credentials_immediately.md`. Hook enforcement: `~/.claude/hooks/credential-gate.sh` (UserPromptSubmit).
+Full: `~/.claude/credentials/MASTER.md` + `memory/canon_working_process.md`. Hook enforcement: `~/.claude/hooks/credential-gate.sh` (UserPromptSubmit).
 
 ## CACHE GATE (any Perplexity query OR research-driven skill edit)
 Before `llm -m sonar*`, `perplexity-*` MCP calls, OR before editing any SKILL.md based on "what does the literature say":
@@ -57,7 +57,7 @@ On phrases: "check the research", "what do we know about", "is this in the datab
 Run `/research check "<topic>"` BEFORE answering or running any new query. Present cached findings before formulating new ones.
 
 ## BOOT SEQUENCE
-Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > `~/.claude/research/INDEX.md` > project `memory/MEMORY.md`. Load `feedback_master_lessons.md` if exists. Other memory files just-in-time.
+Read in order: `SOUL.md` > `PRIORITIES.md` > `SESSION_LOG.md` > `~/.claude/research/INDEX.md` > project `memory/MEMORY.md`. Load `canon_working_process.md` if exists. Other memory files just-in-time.
 
 ## AUTO-UPDATE (MANDATORY, SILENT)
 After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status changed). Pre-approved. Just do it.
@@ -77,6 +77,7 @@ After ANY substantive work: update `SESSION_LOG.md` + `PRIORITIES.md` (if status
 - Corrections apply to ALL workspaces.
 - Use plain text file references, NOT @imports (@imports embed the whole file every run).
 - 4 meta-rules govern system maintenance: verify-before-done, match-rule-to-layer, YAGNI-new-agents, gates-from-fuckups. Full: `knowledge/system-maintenance-meta-rules.md`
+- Docs advise, gates enforce. Failure -> post-mortem -> gate at the lowest covering layer (DB > hook > lint > injection) -> test the rejection -> THEN write the memory file pointing at the gate. Model-independent by design. Full: `knowledge/enforcement-first-architecture.md`
 
 ## UNIVERSAL RULES
 - ALWAYS Safari. Memory-first (read before writing code).

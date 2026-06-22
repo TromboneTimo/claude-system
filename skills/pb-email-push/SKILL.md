@@ -11,7 +11,7 @@ This skill mirrors `pb-ideas-push` exactly. Timo's draft proposals are the sourc
 
 If tempted to "just push and we will iterate", STOP. Run the preflight enumeration. Asking Timo a clarifying question takes 5 seconds. Recovering from a silent drop takes 30 minutes of trust damage.
 
-Stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_ship_right_not_fast.md`.
+Stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`.
 
 ## What this does
 
@@ -48,7 +48,7 @@ The `email_proposals` table columns:
 | pain_point | 1 line | yes |
 | audience | broadcast / reengagement / webinar-push / discovery-followup | yes |
 | cta_type | discovery-call / strategy-session / training-rewatch / youtube-watch | yes |
-| cta_url | HiRose tracking URL placeholder | yes |
+| cta_url | Master class URL with PER-EMAIL tag (see LINK RULES) | yes |
 | rationale | HTML or plain text rationale (3 sentences plain English) | yes |
 | voc_quotes | Array of `{text, source}`. 1+ testimonial AND 1+ sales call MINIMUM | yes |
 | source_tags | Array of lowercase tags. First tag is the audience | yes |
@@ -57,18 +57,30 @@ The `email_proposals` table columns:
 
 If any required field is missing in the chat draft, ASK Timo before pushing. Never invent.
 
+## LINK RULES (corrected 2026-06-11, evening -- READ EVERY PUSH)
+
+1. **Master class CTA destination = the VSL (training room), NEVER the registration page.** webinar-registration-pb is the email CAPTURE page; the list is already captured. 5 broadcasts shipped to it before Timo caught it (2026-06-11): "It needs to go straight to [the training room], not the registration link."
+2. **Copy the URL from the registry, never type or reuse it.** The single executable source of truth is `CANONICAL_MASTERCLASS_URL` in `dashboard/lib/email-lint.js` (mirrored in memory `project_canonical_links.md`). Read it fresh each push. A URL copied from a previously sent email is NOT authority -- past artifacts carried the wrong link; the registry wins.
+3. **NO el= or any added param on the master class URL** (Timo standing rule: protect HYROS first-touch). Per-email el attribution is SUSPENDED until Timo explicitly adds a tagged variant to the registry.
+4. **NO YouTube links** (standing order 2026-06-11). cta_type youtube-watch is retired.
+5. **Preflight href diff (MANDATORY):** before POST, list every href in the body. Each must be either (a) the registry URL byte-for-byte, or (b) a verified testimonial link from voc/testimonials/raw/. ANY other URL = STOP and ask Timo. Run `node -e "require('<repo>/dashboard/lib/email-lint.js')"` lintEmail on the body; any block = do not push.
+6. **Vary the CTA anchor wording per email** (ANTI-PATTERNS.md: 10 of 11 losers shared the identical bottom anchor).
+
+## LEAN MODE (draft already approved in chat)
+
+If Timo approved the exact draft in this conversation and says "push": still run every gate (dedup, quote sourcing, rhythm check, render), but BATCHED and SILENT. One summary line, then POST. Do NOT spawn the independent judge agent (that is a DRAFT-time gate, not a push-time gate), do not narrate each step, do not re-litigate content. 2026-06-10: "i mostly just wanted you to push." See memory canon_email_shipping.md.
+
 ## ZERO-DROP CONTRACT
 
 Every labeled section in the chat draft MUST land on the dashboard. The `pb-email` output template defines 14 required fields. Run preflight enumeration:
 
-1. **Dedup check FIRST.** GET the current email_proposals table:
+1. **Dedup check FIRST.** GET the current email_proposals table. RLS BLOCKS the anon/publishable key on this table: it returns `[]` silently, NOT an error. Use the SERVICE-ROLE key. It appears on 2+ lines in MASTER.md, so take only the first match:
    ```bash
-   source ~/.claude/secrets/precision-brass.env
-   curl -s "${SUPABASE_URL}/rest/v1/email_proposals?select=id,subject" \
-     -H "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
-     -H "Authorization: Bearer ${SUPABASE_PUBLISHABLE_KEY}"
+   SRK="$(grep -m1 '^SUPABASE_SERVICE_ROLE_KEY=' ~/.claude/credentials/MASTER.md | head -1 | cut -d= -f2 | tr -d '[:space:]')"
+   curl -s "https://iwlernqpwdsjarygoeog.supabase.co/rest/v1/email_proposals?select=id,subject" \
+     -H "apikey: ${SRK}" -H "Authorization: Bearer ${SRK}"
    ```
-   For each draft to push, check id collision OR subject similarity (3+ overlapping non-stopword tokens). DEFAULT: silently skip duplicates per `feedback_skip_dups_silently.md` (standing rule from 2026-04-26). Note skips in preflight summary, then proceed.
+   For each draft to push, check id collision OR subject similarity (3+ overlapping non-stopword tokens). DEFAULT: silently skip duplicates per `canon_email_shipping.md` (standing rule from 2026-04-26). Note skips in preflight summary, then proceed.
 
 2. **Enumerate**. List every labeled section in the draft from chat. Should be: Subject + alts, Preheader, Body, P.S. (with type), CTA (with URL), Audience, Hook angle, Pain point, Rationale, VOC quotes, Source tags.
 
@@ -103,7 +115,7 @@ Every section accounted for. Push? (y to proceed)
 
 If Timo says yes, curl. Otherwise ask what to fix.
 
-## VOC quote sourcing minimums (per `feedback_quote_sourcing_minimums.md`)
+## VOC quote sourcing minimums (per `canon_working_process.md`)
 
 Every `voc_quotes` array MUST include at least:
 1. **One quote from a testimonial** (someone who worked with Harrison and recorded a video testimonial). Source: `voc/testimonials/raw/`.

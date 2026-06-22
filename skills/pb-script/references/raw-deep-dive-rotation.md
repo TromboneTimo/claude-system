@@ -54,7 +54,7 @@ The agent must read its assigned corpus **end-to-end**, not skim. For batched sa
 
 ### testimonials
 - Read all 11 files.
-- Note: testimonials are CUSTOMERS who completed the program, not prospects. Per `feedback_master_lessons.md` rule 3, do NOT mix prospect language with customer language.
+- Note: testimonials are CUSTOMERS who completed the program, not prospects. Per `canon_working_process.md` rule 3, do NOT mix prospect language with customer language.
 - Extract: identity-restoration moments, before/after framings, conversion triggers explicitly named.
 
 ### yt-comments

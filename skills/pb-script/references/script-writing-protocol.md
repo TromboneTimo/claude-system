@@ -66,7 +66,7 @@ The interleaving is non-negotiable. Trap topics, mistakes, and tests must live I
 
 ## Voice cross-reference
 
-When writing locked lines, mimic Harrison's converter video patterns. See `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md` for the source. Voice fingerprint also at `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_harrison_voice.md`.
+When writing locked lines, mimic Harrison's converter video patterns. See `/Users/air/Desktop/Precision-Brass/references/converting-video-embouchure-transcript.md` for the source. Voice fingerprint also at `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_email_writing.md`.
 
 ## Concrete example
 

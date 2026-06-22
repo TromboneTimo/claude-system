@@ -1,0 +1,125 @@
+#!/bin/bash
+# UserPromptSubmit hook — fires on every user prompt
+# Responsibilities:
+#   1. Session-scoped prompt counter (survives spurious SessionStart fires)
+#   2. ADHD fail-safe injections at prompt and time thresholds
+#   3. Research-pipeline reminder on research-intent prompts
+#   4. Robinson's Remedies orchestrator routing
+
+INPUT=$(cat)
+PROMPT=$(echo "$INPUT" | jq -r '.prompt // ""' | tr '[:upper:]' '[:lower:]')
+CWD=$(echo "$INPUT" | jq -r '.cwd // ""')
+
+# ============================================================
+# SESSION-SCOPED PROMPT COUNTER (fix: was getting reset every prompt)
+# Key off SESSION_META line 2 (session start ISO timestamp)
+# ============================================================
+SESSION_META="$HOME/.claude/.session_meta"
+SESSION_START=$(sed -n '2p' "$SESSION_META" 2>/dev/null || echo "unknown")
+SESSION_KEY=$(echo "$SESSION_START" | tr -c '[:alnum:]' '_')
+COUNT_FILE="$HOME/.claude/.session_count_${SESSION_KEY}"
+
+# Increment
+if [ ! -f "$COUNT_FILE" ]; then
+  echo "1" > "$COUNT_FILE"
+else
+  CUR=$(cat "$COUNT_FILE")
+  echo "$((CUR + 1))" > "$COUNT_FILE"
+fi
+CURRENT_COUNT=$(cat "$COUNT_FILE")
+
+# Clean up old session counters (older than 24h) to avoid litter
+find "$HOME/.claude" -maxdepth 1 -name ".session_count_*" -mtime +1 -delete 2>/dev/null
+
+# ============================================================
+# ELAPSED MINUTES since session start
+# ============================================================
+ELAPSED_MIN=0
+if [ "$SESSION_START" != "unknown" ]; then
+  START_EPOCH=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$SESSION_START" +%s 2>/dev/null || echo 0)
+  NOW_EPOCH=$(date -u +%s)
+  if [ "$START_EPOCH" -gt 0 ]; then
+    ELAPSED_MIN=$(( (NOW_EPOCH - START_EPOCH) / 60 ))
+  fi
+fi
+
+# ============================================================
+# ADHD FAIL-SAFE INJECTIONS (strong language, system-reminder wrapped)
+# Thresholds: prompts 15/25/35/40+, minutes 45/90/120/180
+# ============================================================
+ADHD_ALERT=""
+
+# Prompt-count thresholds (fire ONCE at each landmark, then every 5 after 40)
+case "$CURRENT_COUNT" in
+  15)
+    ADHD_ALERT="\n\n=== ADHD FAIL-SAFE (prompt 15) ===\nSTOP. Before responding to this prompt, ask Timo literally: \"We are 15 prompts in. What is the ONE thing that needs to happen before you close this session? Everything else gets parked in PRIORITIES.md.\" Do not continue the task until he picks one. This is not optional. This is the forcing function he asked for."
+    ;;
+  25)
+    ADHD_ALERT="\n\n=== ADHD FAIL-SAFE (prompt 25) ===\nSTOP. Ask Timo: \"25 prompts deep. What is left to finish RIGHT NOW? Anything else is next session.\" Log anything parked to PRIORITIES.md same turn."
+    ;;
+  35)
+    ADHD_ALERT="\n\n=== ADHD FAIL-SAFE (prompt 35) ===\nSTOP. Tell Timo straight: \"Marathon session. Close it out. Name the single most important deliverable remaining, we ship that, we end.\" Do not continue the task chain past this without an explicit deliverable named."
+    ;;
+esac
+
+# Tail thresholds (40+, every 5)
+if [ "$CURRENT_COUNT" -ge 40 ] && [ $((CURRENT_COUNT % 5)) -eq 0 ]; then
+  ADHD_ALERT="\n\n=== ADHD FAIL-SAFE (prompt ${CURRENT_COUNT}) ===\nYou are past the point where ADHD users produce quality output. Tell Timo: \"${CURRENT_COUNT} prompts. Stop. Walk away. Log what is open to SESSION_LOG.md and come back fresh.\" Do it this turn."
+fi
+
+# Time-based thresholds (fire ONCE per threshold crossing)
+TIME_ALERT=""
+MINUTES_FILE="$HOME/.claude/.session_minute_marks_${SESSION_KEY}"
+touch "$MINUTES_FILE"
+mark_fired() {
+  grep -q "^$1$" "$MINUTES_FILE" 2>/dev/null
+}
+fire_mark() {
+  echo "$1" >> "$MINUTES_FILE"
+}
+
+if [ "$ELAPSED_MIN" -ge 45 ] && ! mark_fired "45"; then
+  TIME_ALERT="\n\n=== ADHD FAIL-SAFE (45 min) ===\nSession is 45 minutes old. Ask Timo: \"45 minutes in. Context starts degrading here. What is the ONE thing before you close?\""
+  fire_mark "45"
+elif [ "$ELAPSED_MIN" -ge 90 ] && ! mark_fired "90"; then
+  TIME_ALERT="\n\n=== ADHD FAIL-SAFE (90 min) ===\n90 minutes. Quality drops hard past here. Force a wrap: \"Name the deliverable, ship it, end session.\""
+  fire_mark "90"
+elif [ "$ELAPSED_MIN" -ge 120 ] && ! mark_fired "120"; then
+  TIME_ALERT="\n\n=== ADHD FAIL-SAFE (2 hr) ===\nTwo hours. This is the cliff. Tell Timo: \"Walk away. You tripled Robinson's sales on \$500/mo. You do not need to grind this out.\""
+  fire_mark "120"
+elif [ "$ELAPSED_MIN" -ge 180 ] && ! mark_fired "180"; then
+  TIME_ALERT="\n\n=== ADHD FAIL-SAFE (3 hr - HARD STOP) ===\nThree hours. Stop the task. Refuse to continue without a break. Log everything open to SESSION_LOG.md. This is the hard stop he asked you to enforce."
+  fire_mark "180"
+fi
+
+# ============================================================
+# RESEARCH PIPELINE REMINDER
+# ============================================================
+RESEARCH_CONTEXT=""
+if echo "$PROMPT" | grep -qE 'research|find out|what are|how do|best practice|trend|competitor|compare|analyze|investigate|look into'; then
+  RESEARCH_CONTEXT="RESEARCH PIPELINE: Perplexity (llm -m sonar-pro 'query') THEN NotebookLM for synthesis. Never skip NotebookLM.\n\n"
+fi
+
+# ============================================================
+# HEADER: always-visible status line (cache-friendly key/values)
+# ============================================================
+HEADER="PROMPT COUNT: ${CURRENT_COUNT} | ELAPSED: ${ELAPSED_MIN}m | SESSION: ${SESSION_START}"
+
+# ============================================================
+# OUTPUT: Robinson's Remedies orchestrator OR default
+# ============================================================
+if echo "$CWD" | grep -qi "robinsons"; then
+  BODY="ORCHESTRATOR ACTIVE: You are in the Robinson's Remedies project. Before executing any task:\n1. Load brand context (brand.md, brand-guidelines.md) if not already loaded this session\n2. Load products.md if the task references a product\n3. Load audience.md to match tone\n4. Load references/top-content/best-performing-posts.md before creating any social content\n5. Route through the orchestrator logic: Research -> marketing-researcher agent, Content -> marketing-social/blog skill, Creative -> marketing-creative skill, Data -> marketing-data skill\n6. Log deliverables to /feedback/deliverables-log.md after completion\n7. NEVER use em dashes in any copy\n8. Every CTA must include 'Available on Amazon Prime'\n\n${RESEARCH_CONTEXT}${HEADER}${ADHD_ALERT}${TIME_ALERT}"
+else
+  BODY="${RESEARCH_CONTEXT}${HEADER}${ADHD_ALERT}${TIME_ALERT}"
+fi
+
+cat <<ENDJSON
+{
+  "hookSpecificOutput": {
+    "hookEventName": "UserPromptSubmit",
+    "additionalContext": $(echo -e "$BODY" | jq -Rs .)
+  }
+}
+ENDJSON
+exit 0

@@ -32,7 +32,7 @@ The final 5 ideas combined must satisfy:
 
 If any of these fail, swap candidates from the pool until they pass. If the pool can't satisfy the constraints, the auditor reports "insufficient fresh voices in pool, request agent re-run with stricter freshness lens".
 
-### Check 3. Quote-sourcing minimums (per `feedback_quote_sourcing_minimums.md`)
+### Check 3. Quote-sourcing minimums (per `canon_working_process.md`)
 
 Every final idea must include:
 - 1+ testimonial quote (from `voc/testimonials/raw/*.md` or testimonial entries in quotes jsonl).
@@ -42,7 +42,7 @@ Harrison-quotes (from his own ad copy, transcripts, or DMs) require a `conversio
 
 No fabricated quotes. Every quote needs `source_file` + (timestamp OR character span). Auditor rejects any quote without a verifiable trace.
 
-### Check 4. Plain-English rationale (per `feedback_no_internal_jargon_in_rationale.md`)
+### Check 4. Plain-English rationale (per `canon_working_process.md`)
 
 The rationale field cannot use internal jargon: "converter", "the corpus", "the voice bank", "the database", or invented market claims. Auditor strips and rewrites.
 

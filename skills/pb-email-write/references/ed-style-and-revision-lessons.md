@@ -49,4 +49,4 @@ Email clients strip iframes. Use a centered clickable thumbnail with a CSS play-
 Render the whole email to PNG (headless Chrome; `file://` is blocked in Playwright so serve via `python3 -m http.server`) and READ it before sending.
 
 ## SENDING / SCHEDULING (do not freelance)
-Real list (13, ~4,105 subs) is dashboard-only, human-scheduled. Test sends go to list 20. See `project_ac_test_send_mechanism.md` (set sdate=now via v3 PUT + let the scheduler ship; never delete before send_amt confirms; one mechanism only) and `feedback_verify_send_not_ack.md` (the API's "Message sent" is NOT proof; send_amt is).
+Real list (13, ~4,105 subs) is dashboard-only, human-scheduled. Test sends go to list 20. See `project_ac_test_send_mechanism.md` (set sdate=now via v3 PUT + let the scheduler ship; never delete before send_amt confirms; one mechanism only) and `canon_email_shipping.md` (the API's "Message sent" is NOT proof; send_amt is).

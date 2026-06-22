@@ -11,7 +11,7 @@ Speed is never the priority for this skill. Timo writes proposals carefully. Eac
 
 If I am tempted to "just push and we will iterate," that is the failure mode. STOP and run the preflight enumeration below first. Asking Timo a clarifying question takes 5 seconds. Recovering from a silent drop takes 30 minutes of trust damage and is unacceptable.
 
-This principle is also stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_ship_right_not_fast.md` and loads on every session.
+This principle is also stored in `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md` and loads on every session.
 
 ## What this does
 
@@ -125,7 +125,7 @@ The dashboard splits the rationale at the first `<div class="r-section synthesis
 
 If the proposal includes ANY of these, push ALL of them. Dropping one without explicit Timo approval is a contract violation.
 
-**Plain-language standard for `why` (REQUIRED).** No internal jargon. No "converter", "the corpus", "the voice bank", "the database", "failed-method-grief", "BOFU floor", or similar dev-speak. No hallucinated market-positioning claims like "the X wars" without evidence. Every bullet must answer "what makes a viewer book a strategy call after watching this?" using plain English with concrete evidence (a real student, a real ad, a real testimonial, a real won deal amount). See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_no_internal_jargon_in_rationale.md`.
+**Plain-language standard for `why` (REQUIRED).** No internal jargon. No "converter", "the corpus", "the voice bank", "the database", "failed-method-grief", "BOFU floor", or similar dev-speak. No hallucinated market-positioning claims like "the X wars" without evidence. Every bullet must answer "what makes a viewer book a strategy call after watching this?" using plain English with concrete evidence (a real student, a real ad, a real testimonial, a real won deal amount). See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`.
 
 ```html
 <div class="r-section origin">
@@ -207,7 +207,7 @@ If a quote in the array has Harrison as the speaker (his own ad copy, his own vi
 
 Without the conversion lens, Harrison-quotes are self-citation. Bad example: `"Harrison Ball's own Facebook ad copy. Hook line of currently-performing ads."` Good example: `"Harrison Ball's own Facebook ad copy. The reason this exact framing converts on cold traffic: it gives comeback players permission to stop blaming their own body for damage a teacher caused. That permission is the prerequisite for being open to a new program."`
 
-See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_quote_sourcing_minimums.md`.
+See `~/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`.
 
 ## Workflow
 

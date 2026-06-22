@@ -25,3 +25,20 @@ tools/
 
 # Hooks are local-only (contain tokens in git remote)
 hooks/
+
+# SECRETS - never push to cloud (added 2026-06-22 before first full backup).
+# credentials/MASTER.md holds live API keys/tokens/passwords. Belt-and-suspenders
+# against any secret-shaped file anywhere in the tree.
+credentials/
+secrets/
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/MASTER.md
+**/credentials.json
+**/service-account*.json
+auth-state.json
+**/*.token

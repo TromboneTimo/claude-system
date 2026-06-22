@@ -22,7 +22,7 @@ Across the 18 winning broadcasts, open rates are flat (22-33%) while click rates
 
 ## PHASE 0: PREFLIGHT (checkable, in order)
 
-- [ ] **0.1 Load order** per `feedback_email_voice_load_order.md`: harrison-email-voice.md, the 3 FINAL emails, sequence emails 1-7 ONLY, reader-facing-playbook.md. NEVER load sequence emails 8-12 (Paul template leakage).
+- [ ] **0.1 Load order** per `canon_email_writing.md`: harrison-email-voice.md, the 3 FINAL emails, sequence emails 1-7 ONLY, reader-facing-playbook.md. NEVER load sequence emails 8-12 (Paul template leakage).
 - [ ] **0.2 Angle ledger** runs against the LIVE queue (`python3 scripts/email-angle-ledger.py`). Pick an entry mode, mechanism, proof student, and transition that are NOT at cap.
 - [ ] **0.3 Ask calendar state AND what dated asset exists this week** (live class, replay window, new routine drop). If none exists, FLAG IT: a deadline asset is the proven click engine [EVIDENCE: top 5/7 winners], and the batch is fighting with one hand tied.
 
@@ -40,7 +40,7 @@ Across the 18 winning broadcasts, open rates are flat (22-33%) while click rates
 
 - [ ] **2.1 Speaks to the READER. Never names a student-hero.** [per reader-facing-playbook Section 4]
 - [ ] **2.2 Rotate subject modes** across the batch: asset+deadline, two-fragment gut-punch, fear question, number+timeframe, belief-attack, lowercase DM-style for nudges.
-- [ ] **2.3 Harrison's approved molds stay canon. The banned list stays banned** (per `feedback_harrison_email_call_20260509.md`: no Forbes, Adams routine, hot air, Milosevic).
+- [ ] **2.3 Harrison's approved molds stay canon. The banned list stays banned** (per `canon_email_writing.md`: no Forbes, Adams routine, hot air, Milosevic).
 - [ ] **2.4 Casing split is deliberate**: lowercase = intimate/nudge; Title Case = asset/value.
 - [ ] **2.5 Preheader EXTENDS the open loop, never repeats the subject.**
 
@@ -59,7 +59,7 @@ Across the 18 winning broadcasts, open rates are flat (22-33%) while click rates
 
 - [ ] **4.1 One bridge sentence, then ONE conditional imperative hyperlinked-anchor CTA.** Canonical masterclass wording verbatim ("Come watch the free master class where I talk about this in detail" -> precisionbrass.info/webinar-registration-pb) plus `?el=timoemail` when that rung. No raw URLs ever.
 - [ ] **4.2 Asset CTAs may add the proven secondary book-call link BELOW** the primary. This is the ONLY sanctioned 2-destination shape. The bridge sentence "if what you hear resonates..." is proven verbatim in winners 1/5/6. [EVIDENCE: winner corpus]
-- [ ] **4.3 P.S. lives INSIDE body** (the dashboard drops ps_text at send, per `feedback_email_ps_must_be_in_body.md`), written fresh each time, a second HARDER sell.
+- [ ] **4.3 P.S. lives INSIDE body** (the dashboard drops ps_text at send, per `canon_email_shipping.md`), written fresh each time, a second HARDER sell.
 - [ ] **4.4 Tagline verbatim where the format carries it** (teaching emails yes; 2-line nudges may skip).
 
 ## PHASE 5: BATCH + SHIP

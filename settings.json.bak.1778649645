@@ -1,0 +1,114 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(~/.claude/SESSION_LOG.md)",
+      "Edit(~/.claude/PRIORITIES.md)",
+      "Edit(~/.claude/SOUL.md)",
+      "Edit(~/.claude/RHYTHM.md)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/.claude/projects/**/memory/**)",
+      "Write(~/.claude/SESSION_LOG.md)",
+      "Write(~/.claude/PRIORITIES.md)",
+      "Write(~/.claude/session-archive/**)",
+      "Edit(/Users/air/.claude/SESSION_LOG.md)",
+      "Edit(/Users/air/.claude/PRIORITIES.md)",
+      "Write(/Users/air/.claude/SESSION_LOG.md)",
+      "Write(/Users/air/.claude/PRIORITIES.md)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-boot.sh",
+            "timeout": 10,
+            "statusMessage": "Booting priorities..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/anti-delete.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/cache-check-perplexity.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/dashboard-deploy-gate.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-em-dashes.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-sync.sh",
+            "timeout": 15,
+            "statusMessage": "Syncing to GitHub..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/credential-gate.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "chrome": {
+    "enabled": true
+  },
+  "mcpServers": {
+    "nanobanana-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ycse/nanobanana-mcp"
+      ],
+      "env": {
+        "GOOGLE_AI_API_KEY": "AIzaSyCznPY-tvi1wVaNdjiCwqoCPZDyhDdIRR0",
+        "NANOBANANA_MODEL": "gemini-3.1-flash-image-preview"
+      }
+    }
+  },
+  "theme": "dark-daltonized",
+  "effortLevel": "high"
+}

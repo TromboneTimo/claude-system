@@ -1,0 +1,36 @@
+# Cross-client banned names for proposal-writer Gate 4 + hook enforcement.
+# Format: one client per block. Lines starting with # are comments.
+# Format inside a block:
+#   slug: <folder-slug-used-in-output/proposals/>
+#   names: pipe-separated regex of every variation (case-insensitive)
+# The hook excludes the CURRENT client's names (matched by slug from the file path)
+# and blocks the write if ANY OTHER client's names appear in the content.
+# Whenever a new client gets a proposal, add their block here.
+
+[harrisson-ball]
+slug: harrisson-ball
+names: harrison|harrisson|precision brass|harrison ball|harrisson ball
+
+[robinsons-remedies]
+slug: robinsons-remedies
+names: robinson's remedies|robinsons remedies|robinson remedies|kenny robinson|bette robinson|richard robinson|chopsaver
+
+[otto-cristofoli]
+slug: otto-cristofoli
+names: ottaviano cristofoli|otto cristofoli|cristofoli|japan phil
+
+[victor-alegria]
+slug: victor-alegria
+names: victor alegria
+
+[ilan-morgenstern]
+slug: ilan-morgenstern
+names: ilan morgenstern|morningstar mutes|imbrassworks|ilanmorgenstern\.com|telp|contratelp
+
+[israel-symphony-orchestra]
+slug: israel-symphony-orchestra
+names: israel symphony orchestra
+
+[israel-philharmonic]
+slug: israel-philharmonic
+names: israel philharmonic|israel philharmonic orchestra|ipo

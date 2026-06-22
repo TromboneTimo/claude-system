@@ -1,13 +1,13 @@
 ---
 name: pb-email-write
-description: Phase 2 of Harrison Ball's Precision Brass email engine. Takes ONE approved email idea (status=idea_approved in `email_ideas` table) and expands it into a full ready-to-send draft, then INSERTS it as a proposal in `email_proposals` for Harrison's final review. Mirrors pb-script-write's role in the script flow. The idea contains the angle, audience, hook, pain point, rationale, and VOC quotes; this skill writes the actual subject (plus 2 alts), preheader, full Harrison-voice body (tagline verbatim), proven P.S. type, CTA, and final rationale. Use when Timo says "/pb-email-write <id>", "write the email for idea N", "draft the email Harrison approved", "expand idea X into a proposal", or names a specific approved idea title and asks for the full draft. Hard precondition the source idea must already be `idea_approved` on the dashboard. ALWAYS load the existing pb-email reference files (`email-voice-protocol.md`, `email-output-template.md`, `email-audience-guide.md`, `email-rotation-protocol.md`) and the project memory `feedback_email_voice_load_order.md` before drafting. Show the full draft in chat as plain markdown FIRST and wait for Timo's approval before inserting into Supabase. The chat-draft-before-render rule applies (per `feedback_chat_draft_before_render.md`).
+description: Phase 2 of Harrison Ball's Precision Brass email engine. Takes ONE approved email idea (status=idea_approved in `email_ideas` table) and expands it into a full ready-to-send draft, then INSERTS it as a proposal in `email_proposals` for Harrison's final review. Mirrors pb-script-write's role in the script flow. The idea contains the angle, audience, hook, pain point, rationale, and VOC quotes; this skill writes the actual subject (plus 2 alts), preheader, full Harrison-voice body (tagline verbatim), proven P.S. type, CTA, and final rationale. Use when Timo says "/pb-email-write <id>", "write the email for idea N", "draft the email Harrison approved", "expand idea X into a proposal", or names a specific approved idea title and asks for the full draft. Hard precondition the source idea must already be `idea_approved` on the dashboard. ALWAYS load the existing pb-email reference files (`email-voice-protocol.md`, `email-output-template.md`, `email-audience-guide.md`, `email-rotation-protocol.md`) and the project memory `canon_email_writing.md` before drafting. Show the full draft in chat as plain markdown FIRST and wait for Timo's approval before inserting into Supabase. The chat-draft-before-render rule applies (per `canon_working_process.md`).
 ---
 
 # pb-email-write. Phase 2: Approved-idea to full draft.
 
 ## OPERATING PRINCIPLE
 
-Ship right, never ship fast. Voice fidelity over speed. One off-voice email kills trust faster than ten on-voice ones build it. If the draft doesn't sound like Harrison wrote it, throw it away and rewrite. Do NOT push borderline drafts to the dashboard. (Per `feedback_ship_right_not_fast.md`.)
+Ship right, never ship fast. Voice fidelity over speed. One off-voice email kills trust faster than ten on-voice ones build it. If the draft doesn't sound like Harrison wrote it, throw it away and rewrite. Do NOT push borderline drafts to the dashboard. (Per `canon_working_process.md`.)
 
 ## What this does
 
@@ -43,12 +43,12 @@ Before drafting a single line, READ all of these in this exact order:
 2. `~/.claude/skills/pb-email/references/email-output-template.md`. The draft format. Subject + 2 alts + preheader + body + P.S. + CTA structure.
 3. `~/.claude/skills/pb-email/references/email-audience-guide.md`. Tone differences across broadcast / reengagement / webinar-push / discovery-followup.
 4. `~/.claude/skills/pb-email/references/email-rotation-protocol.md`. Avoid repeating the same hook angle / P.S. type used in the last 2 sends.
-5. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_email_voice_load_order.md`. The non-negotiable load order. Voice catalog + 3 FINAL emails + sequence emails 1-7. NEVER load emails 8-12 (Paul template leakage).
-6. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_ship_right_not_fast.md`. Shipping bar.
-7. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_chat_draft_before_render.md`. Show full draft in chat first; never auto-push to Supabase.
-8. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_zero_drop_ingestion.md`. Every section the idea provides MUST flow into the draft. No silent drops.
-9. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_no_internal_jargon_in_rationale.md`. Plain English rationale only.
-10. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/feedback_quote_sourcing_minimums.md`. Minimum 1 testimonial quote AND 1 sales call quote in the rationale evidence.
+5. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_email_writing.md`. The non-negotiable load order. Voice catalog + 3 FINAL emails + sequence emails 1-7. NEVER load emails 8-12 (Paul template leakage).
+6. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`. Shipping bar.
+7. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`. Show full draft in chat first; never auto-push to Supabase.
+8. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`. Every section the idea provides MUST flow into the draft. No silent drops.
+9. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`. Plain English rationale only.
+10. `/Users/air/.claude/projects/-Users-air-Desktop-Precision-Brass/memory/canon_working_process.md`. Minimum 1 testimonial quote AND 1 sales call quote in the rationale evidence.
 11. `~/.claude/skills/pb-email-write/references/reader-facing-playbook.md`. THE email-writing method (proven, critic-validated 2026-06-09). Non-negotiable: write TO the reader in their scene, never ABOUT a third party they watch; cite a SPECIFIC named Harrison technique from his videos so the reader feels smart (tongue-arch "tar" not "tee", vertical alignment, amisha, 4 points of contact, place-breathe-play, etc.); lead with edge, not soft-cock energy; P.S. lives INSIDE the body. Section 9: VARY THE REFRAME TRANSITION across a batch (never reuse "Here's the truth nobody told you").
 12. `~/.claude/skills/pb-email-write/references/email-doctrine.md`. THE strategy + CTA-economics canon (the WHAT, canonized 2026-06-10 from the 18-winner corpus + 314-email swipe file). Precedence: doctrine wins on strategy/CTA questions, playbook wins on voice questions, most recent dated Timo/Harrison feedback beats both. Decide the CTA rung BEFORE drafting; a deadline-bound free asset is the proven click engine.
 13. `~/.claude/skills/pb-email-write/references/ed-style-and-revision-lessons.md`. The default structure model (Ed-Lawrence scaffold, read-full-source gate, don't-overstate gate, metrics pass, video block). Load with the voice protocol.
@@ -74,8 +74,8 @@ For the picked idea:
    > We help trumpet players unlock their full potential by aligning sound, body, and technique into one effortless system.
 4. **P.S.**. ONE of the 5 proven types: scarcity, timing, urgency, social-pressure, risk-reversal. Pick the one that matches the idea's audience and CTA. Honor `email-rotation-protocol.md`: avoid the P.S. type used in the most recent send for this audience.
 5. **CTA**. Match `cta_type` from the idea (discovery-call / strategy-session / training-rewatch / youtube-watch). HiRose tracking URL placeholder `https://hirose.example/c/REPLACE_TOKEN` until Timo provides the actual link.
-6. **Rationale**. HTML using the same colored-section pattern as `dashboard/scripts.html` (`r-section.concept`, `r-section.wound`, `r-section.why`, `r-section.icp`, `r-section.synthesis`). 5-7 sections. Plain English (no "the corpus", "the voice bank", "the converter"). Per `feedback_no_internal_jargon_in_rationale.md`.
-7. **VOC quotes**. Carry forward the ones from the idea row. Add at most 1 more if it tightens the rationale. Minimum: 1 testimonial + 1 sales call quote (per `feedback_quote_sourcing_minimums.md`).
+6. **Rationale**. HTML using the same colored-section pattern as `dashboard/scripts.html` (`r-section.concept`, `r-section.wound`, `r-section.why`, `r-section.icp`, `r-section.synthesis`). 5-7 sections. Plain English (no "the corpus", "the voice bank", "the converter"). Per `canon_working_process.md`.
+7. **VOC quotes**. Carry forward the ones from the idea row. Add at most 1 more if it tightens the rationale. Minimum: 1 testimonial + 1 sales call quote (per `canon_working_process.md`).
 8. **Source tags**. Carry forward from the idea. Add `phase=write` so we can filter Phase 1 vs Phase 2 origin in analytics.
 
 ## Chat draft gate (NON-NEGOTIABLE)
@@ -87,7 +87,7 @@ Before any DB write or Chrome render or file touch:
 2. Stop. Wait for Timo's explicit approval ("ship it", "push it", "looks good", "approved", "yes proposal it").
 3. Only after explicit approval, INSERT into `email_proposals` and update the source idea.
 
-This is enforced by `feedback_chat_draft_before_render.md`. Two checkpoints: render approval, upload approval.
+This is enforced by `canon_working_process.md`. Two checkpoints: render approval, upload approval.
 
 ## Supabase insert (after Timo approves)
 
@@ -132,7 +132,7 @@ Tell Timo:
 ## Failure modes (read before drafting)
 
 1. Drafting from an idea that wasn't approved. Always check status.
-2. Loading the wrong reference set (emails 8-12 = Paul template leakage). Per `feedback_email_voice_load_order.md`, only load voice catalog + 3 FINAL + sequence 1-7.
+2. Loading the wrong reference set (emails 8-12 = Paul template leakage). Per `canon_email_writing.md`, only load voice catalog + 3 FINAL + sequence 1-7.
 3. Auto-pushing to Supabase without showing the draft in chat first. Always two-checkpoint.
 4. Using "the corpus", "the voice bank", "the converter" in rationale text. Plain English only.
 5. Dropping a section the idea provides (e.g., the idea has 4 VOC quotes, draft proposal has only 2). Zero-drop ingestion.

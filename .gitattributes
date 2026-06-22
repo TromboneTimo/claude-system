@@ -1,0 +1,3 @@
+state/*.jsonl merge=union
+intention-log.jsonl merge=union
+cross-workspace-log.jsonl merge=union

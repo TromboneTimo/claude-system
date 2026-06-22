@@ -102,3 +102,7 @@ Output a summary:
 
 ## Autonomy
 Once started, run all 5 steps without asking permission. Report at the end.
+
+## Lesson coverage check (added 2026-06-11, MANDATORY step)
+
+Run `python3 ~/.claude/hooks/router-coverage-check.py`. It lists feedback_*.md files no gate, router entry, skill, or knowledge file references -- i.e. lessons the system can repeat. For the top UNCOVERED files (judge by blast radius): add a `rules-router.json` entry (intent regex + imperative rules), extend an existing gate/lint, or add to the script's ACCEPTED set with a written reason. Target: UNCOVERED trending to zero over weeks, never growing. Per knowledge/enforcement-first-architecture.md: a lesson that nothing injects or enforces is a lesson the system does not have.

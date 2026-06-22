@@ -304,3 +304,53 @@ Rolling log of sessions. Keeps the last 14 days. Older entries archived to `~/.c
 - [Kenneth Robinson] Provide and update endorser information and assist Betty in website endorser section refinement
 - [Kenneth Robinson] Schedule and participate in recordings/interviews with endorsers at upcoming events (e.g., ITG conference)
 - [Kenneth Robinson] Perform initial test live stream as directed by Tim to leverage video marketing
+
+## 2026-06-07 — Hannah email CTA-less send rescued
+- Campaign 665 / message 680 (Daily Email 1, 4,105 list, 4am 06-08) was scheduled with NO P.S./CTA: P.S.+booking link had been parked in proposal ps_text, which broadcast.html never sends (body only).
+- FIX (verified): backed up msg 680, re-PUT /api/3/messages/680 appending P.S. + real CTA https://www.precisionbrass.info/precision-brass-application-page (the application page from all 18 winning emails; my earlier /apply was a bogus placeholder). Confirmed P.S.+CTA in html AND text, video intact, greeting still %FIRSTNAME%, campaign still status=1, same sdate, send_amt=0. Editing the message in place = the reschedule.
+- Synced Supabase proposal body link to match.
+- ROOT CAUSE hardening (local, NOT deployed): broadcast.html composeBody() folds stray ps_text into body on load.
+- Lesson saved: feedback_fix_the_shipping_artifact_not_the_proxy.md. I had already-written knowledge (feedback_email_wall_of_text_propagation) and narrated a plan instead of executing it.
+
+## 2026-06-07 — broadcast.html preview fidelity + deploy
+- Bug: broadcast Inbox preview stripped the video embed (DOMPurify allowlist had no img/table/style); cream/serif dashboard CSS also leaked in. Real Gmail showed the embed, preview did not.
+- Fix: expanded ALLOWED_TAGS/ATTR (img,table,tr,td,style,src,width,alt...) + render body in an isolated about:blank iframe via document.write (NOT srcdoc, which the default-src 'self' CSP with no frame-src would block on the live site). img-src already allows i.ytimg.com.
+- Deployed to prod (precision-brass-dashboard.vercel.app). Live bundle confirmed (bc-mail-frame, doc.write, composeBody, expanded allowlist all present; HTTP 200). Verified the exact iframe code path renders the video embed under a production-matching CSP via headless Chrome screenshot. Could NOT load the authed live page in-browser (Playwright instance locked by another process).
+- Also live now: composeBody() ps_text fold (root-cause net from the CTA-less send earlier today).
+
+## 2026-06-07 — Found the RIGHT surface: emails.html .email-body (video embed)
+- Earlier broadcast.html fix was the WRONG surface (deprecated; gotoBroadcast routes to /scheduled). Timo still saw cream/serif + no video = emails.html .email-body fingerprint.
+- Real cause: emails.html PB_BODY_TAGS and scheduled.html PREVIEW_TAGS allowlists lacked img/table/style -> video embed stripped. Fixed both; flipped .email-body cream/Georgia -> white/Arial to mirror the inbox.
+- Verified on the ACTUAL emails.html page, authed (magic-link session, /tmp dashboard copy), real proposal data through the page's own DOMPurify: video thumbnail + play button renders, white/Arial, 0 console errors. Read screenshot myself.
+- Deployed prod (gate passed with live evidence). /emails + /scheduled confirmed live (HTTP 200, expanded allowlist, white .email-body).
+- Saved project_email_body_render_surfaces.md.
+
+## 2026-06-08 — Why the email-body fix wasn't live: CONCURRENT DEPLOY CLOBBER
+- Root cause Timo's incognito still showed cream/serif: my earlier prod deploys (broadcast c1o15l73o, emails f6iwgsij6) were CLOBBERED. A concurrent process deployed rkvkzn7zv + 59sp2u1uw AFTER mine and re-aliased prod to a bundle WITHOUT my (uncommitted) changes. Cache-busted curl proved live origin = old (FAF7F2, no allowlist).
+- Fix: COMMITTED the 3 dashboard files to main (a533d79, rebased over concurrent 3649a58 -> confirms active concurrent committer), pushed origin/main, then vercel --prod --force.
+- Verified live: cache-busted curl .email-body = #ffffff/Arial, FAF7F2 gone, allowlist present, age:0; browser computed .email-body = rgb(255,255,255)/Arial; real proposal body via page DOMPurify renders video; 0 console errors.
+- LESSON (reinforces feedback_concurrent_repo_use_worktree): uncommitted dashboard fixes get reverted by the concurrent deployer. COMMIT to main for durability, don't rely on a CLI --prod deploy alone.
+
+## 2026-06-08 — Phantom schedule fixed + queue cleared
+- Deleted 15 approved email_proposals (queue fresh; Hannah scheduled row kept).
+- BUG: api/ac-cancel.js deletes the AC campaign + flips proposal but never releases the email_send_ledger claim. After I cancelled 665, ledger row 51 still claimed list13+2026-06-08T11:00 for dead 665. Dashboard Schedule -> claimSlot saw the stale claim -> "duplicate_prevented", returned dead 665, created NO real campaign. Dashboard showed "scheduled" (phantom); AC had nothing for tomorrow.
+- FIX: deleted stale ledger row 51, called prod /api/ac-send (authed, list 13, 2026-06-08T11:00Z, Hannah body) -> created REAL campaign 666 (msg 683). Verified status=1, sdate tomorrow 4am, send_amt=0, list 13, ONLY campaign for tomorrow, 665 stays 404. Pointed proposal at 666; ledger row 53 = real claim.
+- OPEN: ac-cancel.js should release the ledger claim on cancel (offered to fix). Without it, every cancel->reschedule reuses the dead campaign id.
+
+## 2026-06-08 — Schedule-integrity system fixes shipped (commit a5ddfa4)
+Built + deployed + verified the 3 safeguards so the phantom-schedule class can't recur:
+1. api/ac-cancel.js: cancel now DELETEs the email_send_ledger claim by ac_campaign_id (returns ledger_released). Root-cause prevention.
+2. api/ac.js flagPhantomSchedules(): wired into ?action=reconcile-scheduled; flips any FUTURE status=scheduled proposal with no live AC status=1 campaign to send_failed + Slack BEFORE its send time. Fail-safe on non-404 AC errors.
+3. dashboard/scheduled.html: red badge now 'WON'T SEND' + tooltip covering AC-dropped and phantom cases.
+VERIFIED LIVE: reconcile-scheduled returns phantom_watchdog {future_checked:1, phantom_count:0} -> did NOT false-flag real campaign 666; Hannah stays status=scheduled cid=666; scheduled.html marker live; ac.js new code live (phantom_watchdog only exists in new code). NOT live-tested (to avoid side effects): a positive phantom flip (would Slack-spam) and a real cancel (would delete 666). Logic syntax-checked; ledger DELETE is the same query proven manually on row 51.
+Brain: memory updated (project_ac_cancel_ledger_claim_bug = fix applied; meta-lesson "verify the real object, never the proxy").
+
+## 2026-06-09 — Editable email preview text + reader-facing method institutionalized
+- BUILT editable Preview text (preheader) on BOTH dashboard pages (commit 9258182, deployed + verified live authed):
+  - emails.html (review): #emPreheaderEdit input under subject -> savePreheaderEdit() -> PB_DB.update(preheader). Verified DB round-trip (type -> persist -> clear -> "").
+  - broadcast.html (send): #bcPreheader + live inbox snippet; buildPreheaderHtml() injects a hidden preheader at top of body in BOTH send payloads (test path L558 + real-send L805). Blank field = invisible spacer = blank inbox preview.
+  - Root cause it fixes: broadcast sends body only; preheader was cosmetic/never reached inbox.
+- beware email (e_20260609_beware): CTA -> masterclass webinar (?el=timoemail); removed redundant in-body spacer (body 3266->1935) so the preview field is single source of truth; status=approved (NOT sent; Timo sends from dashboard).
+- REMEMBERED: reader-facing-playbook.md is now a hard-load precondition in pb-email + pb-email-write (+ matching failure-mode/auditor checks). New rules: cite a SPECIFIC named Harrison technique (reader feels smart), vary the reframe transition across a batch, edge over soft-cock.
+- Memory: feedback_email_cite_specific_technique_and_vary_transition.md + project_dashboard_editable_preview_text.md (both indexed in project MEMORY.md).
+- Note: deploy hit a concurrent meta-ads-refresh sync collision; my commit landed clean on origin/main, left the other process's working-tree state untouched (should've used a worktree).
