@@ -1,0 +1,26 @@
+# Memory Index — Robinson's Remedies
+
+- [feedback_master_lessons.md](feedback_master_lessons.md) — **READ FIRST.** 4-rule anti-hallucination protocol from Precision Brass audit (2026-04-12). Auto-transcripts lie, client drafts aren't facts, prospects aren't customers, unusual=verify. Applies to ALL content work.
+- [project_marketing_system.md](project_marketing_system.md) — Complete AI marketing system: 6 skills, 5 SOPs, 2 agents, browser agent, full brand context
+- [feedback_skill_improvement.md](feedback_skill_improvement.md) — Always update skills/SOPs when user gives feedback on outputs
+- [user_calendar_preferences.md](user_calendar_preferences.md) — Always add day-before + day-of reminders to gcalcli events
+- [reference_google_api_credentials.md](reference_google_api_credentials.md) — Google OAuth creds, gcalcli setup, YouTube API access for trombonetimo@gmail.com
+- [user_youtube_preferences.md](user_youtube_preferences.md) — YouTube: never for kids, monetization on, no inappropriate content declarations
+- [user_timezone.md](user_timezone.md) — User is in Japan (JST, UTC+9). Always convert times accordingly.
+- [feedback_exact_filenames.md](feedback_exact_filenames.md) — Match filenames exactly as user says, don't grab similar-sounding files
+- [feedback_no_em_dashes.md](feedback_no_em_dashes.md) — Never use em dashes in copy, user flags them as AI writing
+- [feedback_follow_research_pipeline.md](feedback_follow_research_pipeline.md) — NEVER skip NotebookLM step in research pipeline, even when results seem clear
+- [feedback_schedule_api_workaround.md](feedback_schedule_api_workaround.md) — RemoteTrigger list returns 500, skip to create directly
+- [feedback_think_end_to_end.md](feedback_think_end_to_end.md) — ALWAYS verify full chain works before declaring done. Don't present ideal state as current state.
+- [feedback_presentation_lessons.md](feedback_presentation_lessons.md) — 12 hard-learned rules for building presentations. Read before ANY deck.
+- [user_timo_profile.md](user_timo_profile.md) — Full Timo profile: identity, businesses, ADHD, communication style. READ FIRST.
+- [reference_top_content.md](reference_top_content.md) — Best performing content database at references/top-content/, always read before creating social posts
+- [feedback_use_real_assets.md](feedback_use_real_assets.md) — Always fetch real images/quotes/data from robinsonsremedies.com, never use placeholders
+- [feedback_learn_from_corrections.md](feedback_learn_from_corrections.md) — Apply corrections universally to all similar situations, don't wait to be told twice
+- [feedback_blog_word_count.md](feedback_blog_word_count.md) — Blog posts: 750-1250 words always, overrides SOP's 1500-2500
+- [feedback_listicle_format.md](feedback_listicle_format.md) — Use listicle format ("5 Best X"), never direct comparison ads. RR wins on merit with honest pros/cons for all.
+- [project_harrison_email_system.md](project_harrison_email_system.md) — Build Fathom-powered agentic email system for Harrison (T2, after Hook Book + call analyzer)
+- [project_client_commitments.md](project_client_commitments.md) — All deliverables for Harrison/Sohee/Wilhelm from 2026-04-03 call. CHECK BEFORE CLIENT WORK.
+- [feedback_use_frontend_slides.md](feedback_use_frontend_slides.md) — ALWAYS use frontend-slides skill for presentations. Never the old generic template.
+- [feedback_no_browser_transcripts.md](feedback_no_browser_transcripts.md) — Never use browser agent for transcripts. Use APIs or ask user to provide.
+- [feedback_proactive_saves.md](feedback_proactive_saves.md) — Save feedback IMMEDIATELY in same turn as fix. Never wait to be told. #1 frustration source.

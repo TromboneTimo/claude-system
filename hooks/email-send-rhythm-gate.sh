@@ -52,9 +52,9 @@ if [[ -n "$BODYSCAN" ]]; then
     exit 2
   fi
   if echo "$BODYSCAN" | grep -qiE "https?://(www\.)?(youtube\.com|youtu\.be)/"; then
-    # YouTube policy (Timo 2026-06-13): allowed when Timo wants it. Authorization
-    # is enforced at PUSH time (email-link-gate.sh YT_OK=1). At send time this is
-    # a non-blocking note only, never a hard block (feedback_never_hard_block_user_send).
+    # YouTube policy (Timo 2026-06-24): warn-only everywhere, never a hard block.
+    # The push gate (email-link-gate.sh) also warns-and-allows. At send time this
+    # is a non-blocking note only (feedback_never_hard_block_user_send).
     echo "NOTE: html_body contains a YouTube link. Allowed per Timo; ensure this send was Timo-directed, not auto-added." >&2
   fi
   if echo "$BODYSCAN" | grep -q "training-room1729899474908" && [[ -n "$CANON" ]]; then

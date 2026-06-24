@@ -13,10 +13,14 @@
 #   1. webinar-registration-pb            (banned capture page)
 #   2. a training-room URL that is NOT byte-identical to the canonical
 #      registry entry in dashboard/lib/email-lint.js  (stale params, el=)
-#   3. a YouTube link                     (standing order 2026-06-11)
+# A YouTube link is WARN-ONLY, never a block (Timo 2026-06-24: "it shouldn't
+# block just because it has a YouTube link... I should just be warned. Under no
+# circumstance should you block when I'm looking over it and manually setting
+# it"). The agent-initiative rule -- never add a YouTube link unless Timo asked
+# for one -- is a behavioral rule for the agent, NOT enforced by blocking.
 # Read-only commands (grep/SELECT) are not touched.
 #
-# Bypass (requires Timo's explicit say-so): PB_LINK_GATE=skip
+# Bypass for the remaining hard blocks (Timo's explicit say-so): PB_LINK_GATE=skip
 set -u
 
 INPUT=$(cat)
@@ -93,15 +97,15 @@ if echo "$SCAN" | grep -q "training-room1729899474908" && [[ -n "$CANON" ]]; the
   fi
 fi
 
-# YouTube policy (Timo 2026-06-13): a YouTube link is ALLOWED when Timo
-# explicitly authorizes this send, signalled by the literal token YT_OK=1 in
-# the command. Without it the link is blocked, so a YouTube link can never be
-# added on the agent's own initiative. The token is auditable in transcripts.
+# YouTube policy (Timo 2026-06-24): a YouTube link is WARN-ONLY, never a block.
+# This previously hard-blocked unless a YT_OK=1 token was present, and Timo hit
+# that block without ever being clearly warned ("it was buried deep... under no
+# circumstance should you block when I'm looking over it and manually setting
+# it"). Surface a loud, plain warning and LET IT THROUGH. Never exit non-zero
+# here. Whether a YouTube link belongs on a send is the agent's behavioral call
+# (don't add one unprompted), not this gate's to enforce.
 if echo "$SCAN" | grep -qiE "https?:(\\\\?/){2}(www\.)?(youtube\.com|youtu\.be)"; then
-  if ! echo "$CMD" | grep -q "YT_OK=1"; then
-    echo "EMAIL LINK GATE: payload contains a YouTube link. YouTube is allowed ONLY when Timo explicitly authorizes this send: add YT_OK=1 to the command. Never add a YouTube link on your own initiative (Timo 2026-06-13)." >&2
-    exit 2
-  fi
+  echo "EMAIL LINK GATE [WARNING -- NOT blocking]: this email contains a YouTube link. The default broadcast CTA is the master class; a YouTube link is fine when you intend it. Letting this send through." >&2
 fi
 
 if echo "$SCAN" | grep -qE "(REPLACE_TOKEN|hirose\.example|TODO_LINK|youtube\.example|example\.com/|MASTERCLASS_URL|\bPLACEHOLDER\b)"; then

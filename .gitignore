@@ -15,7 +15,13 @@ file-history/
 ide/
 plans/
 plugins/
-projects/
+# projects/ is runtime state (transcripts, tool-results, todos) -- ignored EXCEPT
+# the per-project memory/ dirs (lessons, canon, project notes; scanned, no secrets)
+# which we DO back up. (2026-06-24)
+projects/*
+!projects/*/
+projects/*/*
+!projects/*/memory/
 sessions/
 shell-snapshots/
 statsig/
@@ -42,3 +48,7 @@ secrets/
 **/service-account*.json
 auth-state.json
 **/*.token
+# Memory files that hold REAL credentials (e.g. Google OAuth GOCSPX secret in
+# reference_google_api_credentials.md). Verified 2026-06-24; never back these up.
+**/*credentials*.md
+**/reference_google_api_credentials.md

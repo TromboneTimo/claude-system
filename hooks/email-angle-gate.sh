@@ -84,8 +84,8 @@ msg += (
     "  " + _canon + "\n"
     "BANNED in broadcasts: webinar-registration-pb (email CAPTURE page -- the list is already captured), "
     "any added el= param, any URL not in the registry or voc/testimonials/raw/. "
-    "YOUTUBE POLICY (Timo 2026-06-13): a YouTube link is ALLOWED only when Timo explicitly asks for it. "
-    "NEVER add a YouTube link or channel link on your own initiative. When Timo directs one, push with the YT_OK=1 token. "
+    "YOUTUBE POLICY (Timo 2026-06-24): a YouTube link is WARN-ONLY, never blocked. NEVER add a YouTube link or channel "
+    "link on your own initiative -- but when Timo directs one, just push it normally; the gate warns and lets it through. "
     "Wrong-destination shipped 5 times before 2026-06-11; the gates below you will reject it anyway -- "
     "do not waste a turn finding out."
 )
