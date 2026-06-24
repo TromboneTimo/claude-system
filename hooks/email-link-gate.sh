@@ -93,8 +93,15 @@ if echo "$SCAN" | grep -q "training-room1729899474908" && [[ -n "$CANON" ]]; the
   fi
 fi
 
+# YouTube policy (Timo 2026-06-13): a YouTube link is ALLOWED when Timo
+# explicitly authorizes this send, signalled by the literal token YT_OK=1 in
+# the command. Without it the link is blocked, so a YouTube link can never be
+# added on the agent's own initiative. The token is auditable in transcripts.
 if echo "$SCAN" | grep -qiE "https?:(\\\\?/){2}(www\.)?(youtube\.com|youtu\.be)"; then
-  fail "payload contains a YouTube link -- banned in broadcasts (standing order 2026-06-11)."
+  if ! echo "$CMD" | grep -q "YT_OK=1"; then
+    echo "EMAIL LINK GATE: payload contains a YouTube link. YouTube is allowed ONLY when Timo explicitly authorizes this send: add YT_OK=1 to the command. Never add a YouTube link on your own initiative (Timo 2026-06-13)." >&2
+    exit 2
+  fi
 fi
 
 if echo "$SCAN" | grep -qE "(REPLACE_TOKEN|hirose\.example|TODO_LINK|youtube\.example|example\.com/|MASTERCLASS_URL|\bPLACEHOLDER\b)"; then
