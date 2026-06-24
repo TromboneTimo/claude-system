@@ -77,6 +77,11 @@ Use TodoWrite to track the phases. Run phases 1-6 automatically; **hard stop at 
    point `lib/config.js` at the NEW Supabase, set ADMIN_EMAILS + LOCKED_ROLE.allow_pages
    (client pages only; admin-only pages excluded); rebrand sidebar/titles/login; keep admin
    nav `display:none` + admin-reveal; bump `?v=` cache-busters. See `references/clone-and-rebrand.md`.
+   **MUST copy `.vercelignore`** (and whitelist it in `.gitignore`): `outputDirectory=dashboard`
+   means `dashboard/setup/*` + `dashboard/scripts/*` are otherwise served PUBLICLY at `/setup/*`
+   and `/scripts/*` (DB schema, setup docs, .env.example, scrape source). `.vercelignore` excludes
+   them from the deploy. Verify post-deploy: `curl <url>/setup/schema.sql` must be 404. (PB + VA
+   shipped exposed in 2026-06.)
 
 6. **Preview deploy**: set Vercel env vars, `vercel link --project <slug>`, deploy a PREVIEW
    (not `--prod`). See `references/deploy-and-verify.md`.
