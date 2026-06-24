@@ -61,6 +61,14 @@ Use TodoWrite to track the phases. Run phases 1-6 automatically; **hard stop at 
    data (content_items, ideas, scripts, email_*, meta_ads). Seed per-client rows where RLS is keyed
    to `auth.uid()`. See `references/schema-and-audit.md`.
 
+3b. **RLS LOCKDOWN (MANDATORY, runs LAST after all DDL).** Apply `Precision-Brass/scripts/enable-rls.sql`
+   to the new project, then run `node Precision-Brass/scripts/check-rls.mjs` and confirm the new ref
+   shows "all RLS-on, no anon grants". This is non-negotiable: backfilled tables are created
+   RLS-OFF by default and `anon` gets full grants, so skipping this ships the client world-open
+   (Supabase advisor "rls_disabled_in_public"; happened on PB + VA 2026-06). Default-deny model:
+   RLS on every table + anon revoked + authenticated opt-in per data table; api_cache/pb_webhook_config
+   stay service-role-only; content_* keep their auth.uid() policies (never blanket them).
+
 4. **Auth accounts**: create the client (restricted) with their password; create each admin
    email and hash-copy its password from PB so Timo's login is identical. Verify md5 match.
    See `references/auth-accounts.md`.
